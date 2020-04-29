@@ -7,12 +7,14 @@ using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
+using System.Text;
 
 namespace Iteracion_1
 {
     public partial class MisArticulos : System.Web.UI.Page
     {
         private SqlConnection con;
+        Encoding unicode = Encoding.Unicode;
         private void connection()
         {
             string conString = ConfigurationManager.ConnectionStrings["grupo2Conn"].ToString();
@@ -55,6 +57,17 @@ namespace Iteracion_1
 
 
         }
+
+        protected void OnRowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                DataRowView dr = (DataRowView)e.Row.DataItem;
+                string resumen = unicode.GetString((byte[])dr["resumen"]);
+                (e.Row.FindControl("resumen") as Label).Text = resumen;
+            }
+        }
+
         public int retornarValorIdArticulo(object sender)
         {
             LinkButton btn = (LinkButton)sender;
@@ -68,6 +81,8 @@ namespace Iteracion_1
         public void lnkEdicion(object sender, EventArgs e)
         {
             int artId = retornarValorIdArticulo(sender);
+            Session["articuloID"] = artId;
+            Response.Redirect("EscritorConArticulo.aspx");
 
         }
 
@@ -92,10 +107,9 @@ namespace Iteracion_1
 
         }
 
-
-
-
-
-
+        protected void btnAgregarArticulo_Click(object sender, EventArgs e)
+        {
+            //Response.Redirect("Escritor.aspx");
+        }
     }
 }

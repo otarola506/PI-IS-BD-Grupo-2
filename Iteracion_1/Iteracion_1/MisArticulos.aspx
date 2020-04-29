@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="MisArticulos.aspx.cs" Inherits="Iteracion_1.MisArticulos" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <br />
-    <asp:GridView ID="tablaArticulos" runat="server" AutoGenerateColumns="false" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" Width="415px" >
+    <asp:GridView ID="tablaArticulos" runat="server" AutoGenerateColumns="false" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" Width="415px" OnRowDataBound ="OnRowDataBound">
         <FooterStyle BackColor="White" ForeColor="#000066" />
         <HeaderStyle BackColor="#006699" Font-Bold="True" ForeColor="White" />
         <PagerStyle BackColor="White" ForeColor="#000066" HorizontalAlign="Left" />
@@ -21,14 +21,14 @@
 
             <asp:TemplateField HeaderText ="Título del articulo">
                 <ItemTemplate>
-                    <asp:Label Text='<%# Eval("titulo")%>' runat="server" />
+                    <asp:Label  ID="titulo" Text='<%# Eval("titulo")%>' runat="server" />
                 </ItemTemplate>
 
             </asp:TemplateField>
 
             <asp:TemplateField HeaderText ="Resumen">
                 <ItemTemplate>
-                    <asp:Label Text='<%# Eval("resumen")%>' runat="server" />
+                    <asp:Label ID="resumen" Text='<%# Eval("resumen")%>' runat="server" />
                 </ItemTemplate>
 
             </asp:TemplateField>
@@ -48,7 +48,7 @@
         </Columns>
     </asp:GridView>
     <br />
-    <asp:Button ID ="btnAgregarArticulo" Text="Crear articulo nuevo" runat="server" />
+    <asp:Button ID ="btnAgregarArticulo" Text="Crear articulo nuevo" runat="server" OnClick="btnAgregarArticulo_Click" />
     <br />
     <asp:Label ID ="lblExito" Text ="" runat ="server" ForeColor ="Green" />
     <br />
