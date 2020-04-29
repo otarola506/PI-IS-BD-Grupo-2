@@ -40,7 +40,7 @@ namespace Iteracion_1
             string temp = "";
 
             while (reader.Read()) {
-                temp += "<h1>"+reader["titulo"].ToString()+" Autor:"+ reader["miembroIdFK"].ToString()+"</h1>";
+                temp += "<h1> <a href='#'>"+reader["titulo"].ToString()+" Autor:"+ reader["miembroIdFK"].ToString()+"</a> </h1>";
                 temp += "<p>"+reader["resumen"].ToString()+"</p>";
                 temp += "<br/>";
                 temp += "<br/>";
