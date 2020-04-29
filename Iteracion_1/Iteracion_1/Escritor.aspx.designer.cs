@@ -49,6 +49,15 @@ namespace Editor {
         protected global::System.Web.UI.WebControls.TextBox txtResumen;
         
         /// <summary>
+        /// Control selectCategorias.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBoxList selectCategorias;
+        
+        /// <summary>
         /// Control lblArticulo.
         /// </summary>
         /// <remarks>
@@ -92,5 +101,14 @@ namespace Editor {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblMensaje;
+        
+        /// <summary>
+        /// Control pruebaCategorias.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label pruebaCategorias;
     }
 }

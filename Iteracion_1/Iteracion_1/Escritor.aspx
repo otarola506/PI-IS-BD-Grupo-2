@@ -61,6 +61,11 @@
 
             </script>
         <br />
+        <strong>Seleccione la categoria a la cual pertenece su articulo:<br />
+        </strong>
+        <asp:CheckBoxList ID="selectCategorias" runat="server" RepeatColumns ="3" style="height: 34px">
+        </asp:CheckBoxList>
+        <br />
         </span>
         <br />
         <strong>
@@ -75,8 +80,12 @@
         <br />
         <br />
         <asp:Label ID="lblMensaje" runat="server"></asp:Label>
+        <br />
         </strong></span>
         <br />
+        <span class="auto-style2"><strong>
+        <asp:Label ID="pruebaCategorias" runat="server"></asp:Label>
+        </strong></span>
         <br />
         <br />
         <br />

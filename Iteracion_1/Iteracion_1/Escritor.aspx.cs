@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SqlClient;
 using System.Text;
+using System.Configuration;
 
 namespace Editor
 {
@@ -17,6 +18,31 @@ namespace Editor
         string conString = "Data Source=172.16.202.24;Initial Catalog=BD_Grupo2;User ID=Grupo2;Password=grupo2.";
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            {
+                //The BindHobbies() method is called up in the page load event.
+                cargarCategorias();
+            }
+        }
+
+        //Create one method "BindHobbies" for populate hobbies from Database
+        public void cargarCategorias()
+        {
+            SqlConnection con = new SqlConnection(conString);
+            con.Open();
+            SqlCommand cmd = new SqlCommand("Recuperar_Categorias", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+           
+            selectCategorias.DataTextField = "nombre";
+            //selectCategorias.DataValueField = "categoriaIdPK";
+            selectCategorias.DataSource = dt;
+            selectCategorias.DataBind();
+            con.Close();
+
+
 
         }
 
@@ -52,6 +78,16 @@ namespace Editor
                     }
                     else
                     {
+                        //Guardo los valores de categoria seleccionados en un string
+                        string categoriasId = "";
+                        foreach(ListItem li in selectCategorias.Items)
+                        {
+                            if (li.Selected) // Si esta seleccionado
+                            {
+                                categoriasId = categoriasId + selectCategorias.Items.IndexOf(li);
+                            }
+                        }
+
                         byte[] bytesText = Seleccionador.FileBytes; 
 
                         using (SqlConnection cn = new SqlConnection(conString))
@@ -69,7 +105,7 @@ namespace Editor
 
 
                         }
-
+                        pruebaCategorias.Text = categoriasId;
                         lblMensaje.Text = "Articulo subido con exito";
                         lblMensaje.ForeColor = System.Drawing.Color.Green;
                     }
@@ -91,6 +127,15 @@ namespace Editor
                     lblMensaje.ForeColor = System.Drawing.Color.Red;
                 }else
                 {
+                    //Guardo los valores de categoria seleccionados en un string
+                    string categoriasId = "";
+                    foreach (ListItem li in selectCategorias.Items)
+                    {
+                        if (li.Selected) // Si esta seleccionado
+                        {
+                            categoriasId = categoriasId + selectCategorias.Items.IndexOf(li);
+                        }
+                    }
                     //Guardamos el contenido de txtArticulo en la base
                     using (SqlConnection cn = new SqlConnection(conString))
                     {
@@ -112,6 +157,7 @@ namespace Editor
 
                     lblMensaje.Text = "Articulo subido con exito";
                     lblMensaje.ForeColor = System.Drawing.Color.Green;
+                    pruebaCategorias.Text = categoriasId;
                 }
 
 
@@ -134,5 +180,7 @@ namespace Editor
         {
             
         }
+
+
     }
 }
