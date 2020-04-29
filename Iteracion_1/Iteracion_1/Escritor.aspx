@@ -17,11 +17,22 @@
     "advlist autolink lists link image charmap print preview anchor",
     "searchreplace visualblocks code fullscreen",
     "insertdatetime media table paste imagetools wordcount"
-  ],
+    ],
+  image_dimensions: false,
+   image_description: false,
+  image_caption: true,
   toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
-  content_css: '//www.tiny.cloud/css/codepen.min.css'
+    content_css: '//www.tiny.cloud/css/codepen.min.css',
+
 });</script>
-    <script>tinymce.init({selector:'#<%=txtResumen.ClientID%>'});</script>
+
+
+
+    <script>tinymce.init({
+    selector: '#<%=txtResumen.ClientID%>'});</script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
 
     <style type="text/css">
         .auto-style1 {
@@ -41,9 +52,16 @@
         <br />
         <span class="auto-style1"><strong>Resumen:</strong></span><br />
         <span class="auto-style1">
-        <asp:TextBox ID="txtResumen" runat="server" Height="35px" Width="50%" OnTextChanged="txtResumen_TextChanged" TextMode="MultiLine"></asp:TextBox>
-        </span>
+        <asp:TextBox ID="txtResumen" runat="server" Height="92px" Width="50%"  OnTextChanged="txtResumen_TextChanged" TextMode="MultiLine" Font-Size="Medium" maxsize="10" ></asp:TextBox>
+            <script>
+                $("txtResumen[maxsize]").each(function () {
+                    $(this).attr('maxlength', $(this).attr('maxsize'));
+                });
+
+
+            </script>
         <br />
+        </span>
         <br />
         <strong>
         <asp:Label ID="lblArticulo" runat="server" CssClass="auto-style1" Text="Articulo:"></asp:Label>
@@ -63,10 +81,8 @@
         <br />
         <br />
         <br />
-        <asp:Label ID="PruebaTirulo" runat="server" Text="----titulo"></asp:Label>
         <br />
         <br />
-        <asp:Label ID="pruebaArticulo" runat="server" Text="----Articulo"></asp:Label>
     </form>
 </body>
 </html>

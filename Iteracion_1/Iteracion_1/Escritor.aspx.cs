@@ -132,7 +132,7 @@ namespace Editor
 
         protected void txtResumen_TextChanged(object sender, EventArgs e)
         {
-
+            
         }
     }
 }
