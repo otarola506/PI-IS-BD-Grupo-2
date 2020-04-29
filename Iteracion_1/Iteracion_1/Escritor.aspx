@@ -84,7 +84,8 @@
         </strong></span>
         <br />
         <span class="auto-style2"><strong>
-        <asp:Label ID="pruebaCategorias" runat="server"></asp:Label>
+        <br />
+        <br />
         </strong></span>
         <br />
         <br />

@@ -78,18 +78,11 @@ namespace Editor
                     }
                     else
                     {
-                        //Guardo los valores de categoria seleccionados en un string
-                        string categoriasId = "";
-                        foreach(ListItem li in selectCategorias.Items)
-                        {
-                            if (li.Selected) // Si esta seleccionado
-                            {
-                                categoriasId = categoriasId + selectCategorias.Items.IndexOf(li);
-                            }
-                        }
+ 
+                    
 
-                        byte[] bytesText = Seleccionador.FileBytes; 
-
+                        byte[] bytesText = Seleccionador.FileBytes;
+                        string artID = "";
                         using (SqlConnection cn = new SqlConnection(conString))
                         {
                             SqlCommand cmd = new SqlCommand("GuardarArticulos", cn);
@@ -100,12 +93,68 @@ namespace Editor
                             cmd.Parameters.Add("@contenido", SqlDbType.VarBinary).Value = bytesText;
                             cn.Open();
                             cmd.ExecuteNonQuery();
-                            txtTitulo.Text = String.Empty;
-                            txtArticulo.Text = String.Empty;
+
+
+                            //obtine el artId
+                            SqlCommand cmd2 = new SqlCommand("Obtener_articuloId", cn);
+                            cmd2.CommandType = CommandType.StoredProcedure;
+                            cmd2.Parameters.Add("@titulo", SqlDbType.VarChar).Value = txtTitulo.Text;
+                            SqlDataReader reader = cmd2.ExecuteReader();
+
+                            if (reader.Read())
+                            {
+                                artID = reader[0].ToString();
+                            }
+
 
 
                         }
-                        pruebaCategorias.Text = categoriasId;
+
+                        //Guardamos las categorias del articulo
+                        using (SqlConnection con = new SqlConnection(conString))
+                        {
+                            string categoriasId = "";
+
+                            foreach (ListItem li in selectCategorias.Items)
+                            {
+                                if (li.Selected) // Si esta seleccionado
+                                {
+                                    //Vamos a recuperar el id del la categoria seleccionada
+                                    SqlCommand cmd3 = new SqlCommand("Obtener_CategoriaID", con);
+                                    cmd3.CommandType = CommandType.StoredProcedure;
+                                    cmd3.Parameters.Add("@nombre", SqlDbType.VarChar).Value = li.Text;
+                                    con.Open();
+                                    SqlDataReader lector = cmd3.ExecuteReader();
+
+                                    string catID = "";
+                                    if (lector.Read())
+                                    {
+                                        catID = lector[0].ToString();
+                                    }
+                                    lector.Close();
+                                    // Parte de crear la tupla e insertarla
+
+                                    SqlCommand cmd4 = new SqlCommand("Guardar_Catergoria_Articulo", con);
+                                    cmd4.CommandType = CommandType.StoredProcedure;
+                                    int art = Int32.Parse(artID);
+                                    int cat = Int32.Parse(catID);
+                                    cmd4.Parameters.Add("@artId", SqlDbType.Int).Value = art;
+                                    cmd4.Parameters.Add("@catId", SqlDbType.Int).Value = cat;
+                                    cmd4.ExecuteNonQuery();
+
+                                    categoriasId = categoriasId + catID; // prueba
+                                                                         //lector.Close();
+                                    con.Close();
+                                }
+                            }
+
+
+                        }
+
+                        txtTitulo.Text = String.Empty;
+                        txtArticulo.Text = String.Empty;
+
+                        //pruebaCategorias.Text = categoriasId;
                         lblMensaje.Text = "Articulo subido con exito";
                         lblMensaje.ForeColor = System.Drawing.Color.Green;
                     }
@@ -127,15 +176,7 @@ namespace Editor
                     lblMensaje.ForeColor = System.Drawing.Color.Red;
                 }else
                 {
-                    //Guardo los valores de categoria seleccionados en un string
-                    string categoriasId = "";
-                    foreach (ListItem li in selectCategorias.Items)
-                    {
-                        if (li.Selected) // Si esta seleccionado
-                        {
-                            categoriasId = categoriasId + selectCategorias.Items.IndexOf(li);
-                        }
-                    }
+                    string artID = "";
                     //Guardamos el contenido de txtArticulo en la base
                     using (SqlConnection cn = new SqlConnection(conString))
                     {
@@ -150,14 +191,73 @@ namespace Editor
                         cn.Open();
                         cmd.ExecuteNonQuery();
                         Response.Write("Datos Cargados Correctamente");
-                        txtTitulo.Text = String.Empty;
-                        txtResumen.Text = String.Empty;
-                        txtArticulo.Text = String.Empty;
+
+
+                        //obtine el artId
+                        SqlCommand cmd2 = new SqlCommand("Obtener_articuloId", cn);
+                        cmd2.CommandType = CommandType.StoredProcedure;
+                        cmd2.Parameters.Add("@titulo", SqlDbType.VarChar).Value = txtTitulo.Text;
+                        SqlDataReader reader = cmd2.ExecuteReader();
+                        
+                        if (reader.Read())
+                        {
+                            artID = reader[0].ToString();
+                        }
+
+
+
                     }
+
+                    //Guardamos las categorias del articulo
+                    using (SqlConnection con = new SqlConnection(conString))
+                    {
+                        string categoriasId = "";
+
+                        foreach (ListItem li in selectCategorias.Items)
+                        {
+                            if (li.Selected) // Si esta seleccionado
+                            {
+                                //Vamos a recuperar el id del la categoria seleccionada
+                                SqlCommand cmd3 = new SqlCommand("Obtener_CategoriaID", con);
+                                cmd3.CommandType = CommandType.StoredProcedure;
+                                cmd3.Parameters.Add("@nombre", SqlDbType.VarChar).Value = li.Text;
+                                con.Open();
+                                SqlDataReader lector = cmd3.ExecuteReader();
+
+                                string catID = "";
+                                if (lector.Read())
+                                {
+                                    catID = lector[0].ToString();
+                                }
+                                lector.Close();
+                                // Parte de crear la tupla e insertarla
+
+                                SqlCommand cmd4 = new SqlCommand("Guardar_Catergoria_Articulo", con);
+                                cmd4.CommandType = CommandType.StoredProcedure;
+                                int art = Int32.Parse(artID);
+                                int cat = Int32.Parse(catID);
+                                cmd4.Parameters.Add("@artId", SqlDbType.Int).Value = art;
+                                cmd4.Parameters.Add("@catId", SqlDbType.Int).Value = cat;
+                                cmd4.ExecuteNonQuery();
+
+                                categoriasId = categoriasId + catID; // prueba
+                                //lector.Close();
+                                con.Close();
+                            }
+                        }
+                        
+                        
+
+                    }
+
+
+                    txtTitulo.Text = String.Empty;
+                    txtResumen.Text = String.Empty;
+                    txtArticulo.Text = String.Empty;
 
                     lblMensaje.Text = "Articulo subido con exito";
                     lblMensaje.ForeColor = System.Drawing.Color.Green;
-                    pruebaCategorias.Text = categoriasId;
+                    
                 }
 
 
@@ -180,6 +280,7 @@ namespace Editor
         {
             
         }
+
 
 
     }
