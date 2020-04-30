@@ -119,17 +119,19 @@ namespace Iteracion_1
                         }
 
                         byte[] bytesText = Seleccionador.FileBytes;
-
+                        int artId = Convert.ToInt32(Session["articuloId"]);
                         connection();
-                        SqlCommand cmd = new SqlCommand("GuardarArticulos", con);
+                        SqlCommand cmd = new SqlCommand("Modificar_Articulo", con);
                         cmd.CommandType = CommandType.StoredProcedure;
                         byte[] bytesTextResumen = unicode.GetBytes(txtResumen.Text);
-                        cmd.Parameters.Add("@titulo", SqlDbType.VarChar).Value = txtTitulo.Text;
-                        cmd.Parameters.Add("@resumen", SqlDbType.VarBinary).Value = bytesTextResumen;
-                        cmd.Parameters.Add("@contenido", SqlDbType.VarBinary).Value = bytesText;
+                        cmd.Parameters.Add("@ID", SqlDbType.Int).Value = artId;
+                        cmd.Parameters.Add("@tituloNuevo", SqlDbType.VarChar).Value = txtTitulo.Text;
+                        cmd.Parameters.Add("@resumenNuevo", SqlDbType.VarBinary).Value = bytesTextResumen;
+                        cmd.Parameters.Add("@contenidoNuevo", SqlDbType.VarBinary).Value = bytesText;
                         con.Open();
                         cmd.ExecuteNonQuery();
                         txtTitulo.Text = String.Empty;
+                        txtResumen.Text = String.Empty;
                         txtArticulo.Text = String.Empty;
 
 
@@ -159,17 +161,19 @@ namespace Iteracion_1
                 {
                     //Guardamos el contenido de txtArticulo en la base
 
+                    byte[] bytesText = Seleccionador.FileBytes;
+                    int artId = Convert.ToInt32(Session["articuloId"]);
                     connection();
-                    SqlCommand cmd = new SqlCommand("GuardarArticulos", con); // Hay que hacer el procedimiento almacenado en la BD de nosotros.
+                    SqlCommand cmd = new SqlCommand("Modificar_Articulo", con);
                     cmd.CommandType = CommandType.StoredProcedure;
-                    byte[] bytesText = unicode.GetBytes(txtArticulo.Text);
+                    string co = txtArticulo.Text;
                     byte[] bytesTextResumen = unicode.GetBytes(txtResumen.Text);
-                    cmd.Parameters.Add("@titulo", SqlDbType.VarChar).Value = txtTitulo.Text;
-                    cmd.Parameters.Add("@resumen", SqlDbType.VarBinary).Value = bytesTextResumen;
-                    cmd.Parameters.Add("@contenido", SqlDbType.VarBinary).Value = bytesText;
+                    cmd.Parameters.Add("@ID", SqlDbType.Int).Value = artId;
+                    cmd.Parameters.Add("@tituloNuevo", SqlDbType.VarChar).Value = txtTitulo.Text;
+                    cmd.Parameters.Add("@resumenNuevo", SqlDbType.VarBinary).Value = bytesTextResumen;
+                    cmd.Parameters.Add("@contenidoNuevo", SqlDbType.VarBinary).Value = bytesText;
                     con.Open();
                     cmd.ExecuteNonQuery();
-                    Response.Write("Datos Cargados Correctamente");
                     txtTitulo.Text = String.Empty;
                     txtResumen.Text = String.Empty;
                     txtArticulo.Text = String.Empty;
