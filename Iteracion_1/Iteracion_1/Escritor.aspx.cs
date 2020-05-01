@@ -46,12 +46,46 @@ namespace Editor
 
         }
 
-        protected void TextBox1_TextChanged(object sender, EventArgs e)
-        {
 
+
+        public void guardarArchivo(SqlConnection cn)
+        {
+            SqlCommand cmd = new SqlCommand("GuardarArticulos", cn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            byte[] bytesTextResumen = unicode.GetBytes(txtResumen.Text);
+            byte[] bytesText = Seleccionador.FileBytes;
+            cmd.Parameters.Add("@titulo", SqlDbType.VarChar).Value = txtTitulo.Text;
+            cmd.Parameters.Add("@resumen", SqlDbType.VarBinary).Value = bytesTextResumen;
+            cmd.Parameters.Add("@contenido", SqlDbType.VarBinary).Value = bytesText;
+            cmd.Parameters.Add("@tipo", SqlDbType.Bit).Value = 1;
+            cn.Open();
+            cmd.ExecuteNonQuery();
         }
 
-
+        public void guardarArticulosTexto(SqlConnection cn)
+        {
+            SqlCommand cmd = new SqlCommand("GuardarArticulos", cn); // Hay que hacer el procedimiento almacenado en la BD de nosotros.
+            cmd.CommandType = CommandType.StoredProcedure;
+            byte[] bytesText = unicode.GetBytes(txtArticulo.Text);
+            byte[] bytesTextResumen = unicode.GetBytes(txtResumen.Text);
+            cmd.Parameters.Add("@titulo", SqlDbType.VarChar).Value = txtTitulo.Text;
+            cmd.Parameters.Add("@resumen", SqlDbType.VarBinary).Value = bytesTextResumen;
+            cmd.Parameters.Add("@contenido", SqlDbType.VarBinary).Value = bytesText;
+            cmd.Parameters.Add("@tipo", SqlDbType.Bit).Value = 0;
+            cn.Open();
+            cmd.ExecuteNonQuery();
+        }
+        
+        public void guardarCategoriaArticulo(SqlConnection con, string catID, string artID)
+        {
+            SqlCommand cmd4 = new SqlCommand("Guardar_Catergoria_Articulo", con);
+            cmd4.CommandType = CommandType.StoredProcedure;
+            int art = Int32.Parse(artID);
+            int cat = Int32.Parse(catID);
+            cmd4.Parameters.Add("@artId", SqlDbType.Int).Value = art;
+            cmd4.Parameters.Add("@catId", SqlDbType.Int).Value = cat;
+            cmd4.ExecuteNonQuery();
+        }
 
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
@@ -81,18 +115,13 @@ namespace Editor
  
                     
 
-                        byte[] bytesText = Seleccionador.FileBytes;
+                        //byte[] bytesText = Seleccionador.FileBytes;
                         string artID = "";
                         using (SqlConnection cn = new SqlConnection(conString))
                         {
-                            SqlCommand cmd = new SqlCommand("GuardarArticulos", cn);
-                            cmd.CommandType = CommandType.StoredProcedure;
-                            byte[] bytesTextResumen = unicode.GetBytes(txtResumen.Text);
-                            cmd.Parameters.Add("@titulo", SqlDbType.VarChar).Value = txtTitulo.Text;
-                            cmd.Parameters.Add("@resumen", SqlDbType.VarBinary).Value = bytesTextResumen;
-                            cmd.Parameters.Add("@contenido", SqlDbType.VarBinary).Value = bytesText;
-                            cn.Open();
-                            cmd.ExecuteNonQuery();
+     
+
+                            guardarArchivo(cn); //revisar
 
 
                             //obtine el artId
@@ -133,14 +162,15 @@ namespace Editor
                                     }
                                     lector.Close();
                                     // Parte de crear la tupla e insertarla
+                                    guardarCategoriaArticulo(con,catID, artID);
 
-                                    SqlCommand cmd4 = new SqlCommand("Guardar_Catergoria_Articulo", con);
-                                    cmd4.CommandType = CommandType.StoredProcedure;
-                                    int art = Int32.Parse(artID);
-                                    int cat = Int32.Parse(catID);
-                                    cmd4.Parameters.Add("@artId", SqlDbType.Int).Value = art;
-                                    cmd4.Parameters.Add("@catId", SqlDbType.Int).Value = cat;
-                                    cmd4.ExecuteNonQuery();
+                                    //SqlCommand cmd4 = new SqlCommand("Guardar_Catergoria_Articulo", con);
+                                    //cmd4.CommandType = CommandType.StoredProcedure;
+                                    //int art = Int32.Parse(artID);
+                                    //int cat = Int32.Parse(catID);
+                                    //cmd4.Parameters.Add("@artId", SqlDbType.Int).Value = art;
+                                    //cmd4.Parameters.Add("@catId", SqlDbType.Int).Value = cat;
+                                    //cmd4.ExecuteNonQuery();
 
                                     categoriasId = categoriasId + catID; // prueba
                                                                          //lector.Close();
@@ -181,15 +211,9 @@ namespace Editor
                     using (SqlConnection cn = new SqlConnection(conString))
                     {
 
-                        SqlCommand cmd = new SqlCommand("GuardarArticulos", cn); // Hay que hacer el procedimiento almacenado en la BD de nosotros.
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        byte[] bytesText = unicode.GetBytes(txtArticulo.Text);
-                        byte[] bytesTextResumen = unicode.GetBytes(txtResumen.Text);
-                        cmd.Parameters.Add("@titulo", SqlDbType.VarChar).Value = txtTitulo.Text;
-                        cmd.Parameters.Add("@resumen", SqlDbType.VarBinary).Value = bytesTextResumen;
-                        cmd.Parameters.Add("@contenido", SqlDbType.VarBinary).Value = bytesText;
-                        cn.Open();
-                        cmd.ExecuteNonQuery();
+
+
+                        guardarArticulosTexto(cn);
                         Response.Write("Datos Cargados Correctamente");
 
 
@@ -231,26 +255,18 @@ namespace Editor
                                 }
                                 lector.Close();
                                 // Parte de crear la tupla e insertarla
+                                guardarCategoriaArticulo(con,catID,artID);
 
-                                SqlCommand cmd4 = new SqlCommand("Guardar_Catergoria_Articulo", con);
-                                cmd4.CommandType = CommandType.StoredProcedure;
-                                int art = Int32.Parse(artID);
-                                int cat = Int32.Parse(catID);
-                                cmd4.Parameters.Add("@artId", SqlDbType.Int).Value = art;
-                                cmd4.Parameters.Add("@catId", SqlDbType.Int).Value = cat;
-                                cmd4.ExecuteNonQuery();
+      
 
                                 categoriasId = categoriasId + catID; // prueba
                                 //lector.Close();
                                 con.Close();
                             }
                         }
-                        
-                        
-
+ 
                     }
-
-
+                    
                     txtTitulo.Text = String.Empty;
                     txtResumen.Text = String.Empty;
                     txtArticulo.Text = String.Empty;
