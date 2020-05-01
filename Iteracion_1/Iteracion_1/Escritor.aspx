@@ -9,7 +9,8 @@
     <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
 
-    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+     <script src="https://cdn.tiny.cloud/1/ppfs7sld936k48b757gwua5p0k1knn5by42zeg00gm61xqwb/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
       <script>tinymce.init({
   selector: '#<%=txtArticulo.ClientID%>',
   height: 400,
@@ -72,7 +73,7 @@
         <asp:Label ID="lblArticulo" runat="server" CssClass="auto-style1" Text="Articulo:"></asp:Label>
         </strong>
         <br />
-        <asp:TextBox ID="txtArticulo" runat="server" OnTextChanged="TextBox1_TextChanged" Height=" 400px" Width="50%" TextMode="MultiLine"></asp:TextBox>
+        <asp:TextBox ID="txtArticulo" runat="server"  Height=" 400px" Width="50%" TextMode="MultiLine"></asp:TextBox>
         <br />
         <br />
         <span class="auto-style2"><strong>Suba un articulo de su computadora:<asp:FileUpload ID="Seleccionador" runat="server" />

@@ -87,8 +87,25 @@ namespace Editor
             cmd4.ExecuteNonQuery();
         }
 
+        public bool checkCategoria()
+        {
+            bool valor = false;
+            foreach (ListItem li in selectCategorias.Items)
+            {
+                if (li.Selected)
+                {
+                    valor = true;
+                }
+            }
+            return valor;
+        }
+
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
+            //revision de categoria 
+             bool categoria_seleccionada = checkCategoria();
+
+
             if (Seleccionador.HasFile && txtArticulo.Text == String.Empty)
             {
                 string extension_del_archivo = System.IO.Path.GetExtension(Seleccionador.FileName);
@@ -110,10 +127,13 @@ namespace Editor
                         lblMensaje.Text = "Por favor ingrese el resumen.";
                         lblMensaje.ForeColor = System.Drawing.Color.Red;
                     }
+                    else if (!categoria_seleccionada)
+                    {
+                        lblMensaje.Text = "Por favor seleccione una categoria .";
+                        lblMensaje.ForeColor = System.Drawing.Color.Red;
+                    }
                     else
                     {
- 
-                    
 
                         //byte[] bytesText = Seleccionador.FileBytes;
                         string artID = "";
@@ -164,13 +184,7 @@ namespace Editor
                                     // Parte de crear la tupla e insertarla
                                     guardarCategoriaArticulo(con,catID, artID);
 
-                                    //SqlCommand cmd4 = new SqlCommand("Guardar_Catergoria_Articulo", con);
-                                    //cmd4.CommandType = CommandType.StoredProcedure;
-                                    //int art = Int32.Parse(artID);
-                                    //int cat = Int32.Parse(catID);
-                                    //cmd4.Parameters.Add("@artId", SqlDbType.Int).Value = art;
-                                    //cmd4.Parameters.Add("@catId", SqlDbType.Int).Value = cat;
-                                    //cmd4.ExecuteNonQuery();
+
 
                                     categoriasId = categoriasId + catID; // prueba
                                                                          //lector.Close();
@@ -204,7 +218,12 @@ namespace Editor
                 {
                     lblMensaje.Text = "Por favor ingrese el resumen.";
                     lblMensaje.ForeColor = System.Drawing.Color.Red;
-                }else
+                }else if (!categoria_seleccionada)
+                {
+                    lblMensaje.Text = "Por favor seleccione una categoria .";
+                    lblMensaje.ForeColor = System.Drawing.Color.Red;
+                }
+                else
                 {
                     string artID = "";
                     //Guardamos el contenido de txtArticulo en la base
