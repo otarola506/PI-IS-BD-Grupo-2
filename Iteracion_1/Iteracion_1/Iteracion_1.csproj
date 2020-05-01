@@ -127,6 +127,7 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="MisArticulos.aspx" />
+    <Content Include="MostrarContenido.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
@@ -201,6 +202,13 @@
     </Compile>
     <Compile Include="MisArticulos.aspx.designer.cs">
       <DependentUpon>MisArticulos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MostrarContenido.aspx.cs">
+      <DependentUpon>MostrarContenido.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MostrarContenido.aspx.designer.cs">
+      <DependentUpon>MostrarContenido.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Site.Master.cs">

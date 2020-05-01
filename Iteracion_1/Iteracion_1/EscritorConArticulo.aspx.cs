@@ -40,18 +40,32 @@ namespace Iteracion_1
             byte[] contenidoByte = new byte[] { };
             byte[] resumenByte = new byte[] { };
             string tituloRetorno = "";
+            Boolean tipoArticulo = false;
             if (reader.Read())
             {
                 tituloRetorno = reader[1].ToString();
                 resumenByte = (byte[])reader[2];
                 contenidoByte = (byte[])reader[4];
+                tipoArticulo = (Boolean)reader[5];
 
             }
-            string resumenString = unicode.GetString(resumenByte);
-            string contenidoString = unicode.GetString(contenidoByte);
-            txtTitulo.Text = tituloRetorno;
-            txtResumen.Text = resumenString;
-            txtArticulo.Text = contenidoString;
+            if (tipoArticulo == false)
+            {
+                string resumenString = unicode.GetString(resumenByte);
+                string contenidoString = unicode.GetString(contenidoByte);
+                txtTitulo.Text = tituloRetorno;
+                txtResumen.Text = resumenString;
+                txtArticulo.Text = contenidoString;
+            }
+            else {
+
+                string resumenString = unicode.GetString(resumenByte);
+                string contenidoString = unicode.GetString(contenidoByte);
+                txtTitulo.Text = tituloRetorno;
+                txtResumen.Text = resumenString;
+
+
+            }
 
 
 
