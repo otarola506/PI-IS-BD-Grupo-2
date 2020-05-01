@@ -25,6 +25,8 @@ namespace Iteracion_1
             if (!IsPostBack)
             {
                 llenarTabla();
+                //Mostrar Mensaje de bienvenida.
+
             }
         }
         void llenarTabla()

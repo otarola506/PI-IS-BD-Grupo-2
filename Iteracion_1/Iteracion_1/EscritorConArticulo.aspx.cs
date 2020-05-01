@@ -159,15 +159,14 @@ namespace Iteracion_1
                 }
                 else
                 {
+                    //Acá no uso seleccionador uso otro
                     //Guardamos el contenido de txtArticulo en la base
-
-                    byte[] bytesText = Seleccionador.FileBytes;
                     int artId = Convert.ToInt32(Session["articuloId"]);
                     connection();
                     SqlCommand cmd = new SqlCommand("Modificar_Articulo", con);
                     cmd.CommandType = CommandType.StoredProcedure;
-                    string co = txtArticulo.Text;
                     byte[] bytesTextResumen = unicode.GetBytes(txtResumen.Text);
+                    byte[] bytesText = unicode.GetBytes(txtArticulo.Text);
                     cmd.Parameters.Add("@ID", SqlDbType.Int).Value = artId;
                     cmd.Parameters.Add("@tituloNuevo", SqlDbType.VarChar).Value = txtTitulo.Text;
                     cmd.Parameters.Add("@resumenNuevo", SqlDbType.VarBinary).Value = bytesTextResumen;
@@ -197,6 +196,11 @@ namespace Iteracion_1
                 lblMensaje.Text = "Por favor escriba una articulo o suba un articulo ya escrito";
                 lblMensaje.ForeColor = System.Drawing.Color.Red;
             }
+        }
+
+        protected void btnVolver_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("MisArticulos.aspx");
         }
     }
 }
