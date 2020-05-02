@@ -63,6 +63,9 @@ namespace Iteracion_1
                 string contenidoString = unicode.GetString(contenidoByte);
                 txtTitulo.Text = tituloRetorno;
                 txtResumen.Text = resumenString;
+                // Mostrar una ventana emergente con dos botones que le opción de escribir o subir uno.
+
+
 
 
             }

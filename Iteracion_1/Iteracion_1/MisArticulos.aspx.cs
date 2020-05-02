@@ -104,27 +104,22 @@ namespace Iteracion_1
 
         public void lnkVerMasArt(object sender, EventArgs e)
         {
+            //connection();
+            //con.Open();
             int artId = retornarValorIdArticulo(sender);
-            SqlCommand cmd = new SqlCommand("RecuperarArticulo", con);
+            /*SqlCommand cmd = new SqlCommand("RecuperarArticulo", con);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.Add("@ID", SqlDbType.Int).Value = artId;
-            SqlDataReader reader = cmd.ExecuteReader();
+            *SqlDataReader reader = cmd.ExecuteReader();
             Boolean tipoArticulo = false;
             if (reader.Read())
             {
                 tipoArticulo = (Boolean)reader[5];
 
-            }
-
-            if (tipoArticulo == false)
-            {
-
-
-            }
-            else {
-
-
-            }
+            }*/
+            Session["articuloID"] = artId;
+            Response.Redirect("MostrarContenido.aspx");
+            
 
         }
 
