@@ -101,24 +101,41 @@ namespace Iteracion_1
             lblExito.Text = "Datos Borrados Correctamente";
 
         }
+       
 
         public void lnkVerMasArt(object sender, EventArgs e)
         {
-            //connection();
-            //con.Open();
+            connection();
+            con.Open();
             int artId = retornarValorIdArticulo(sender);
-            /*SqlCommand cmd = new SqlCommand("RecuperarArticulo", con);
+            SqlCommand cmd = new SqlCommand("RecuperarArticulo", con);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.Add("@ID", SqlDbType.Int).Value = artId;
-            *SqlDataReader reader = cmd.ExecuteReader();
+            SqlDataReader reader = cmd.ExecuteReader();
             Boolean tipoArticulo = false;
             if (reader.Read())
             {
                 tipoArticulo = (Boolean)reader[5];
 
-            }*/
-            Session["articuloID"] = artId;
-            Response.Redirect("MostrarContenido.aspx");
+            }
+            if (tipoArticulo == false)
+            {
+                Session["articuloID"] = artId;
+                Response.Redirect("MostrarContenido.aspx");
+            }
+            else {
+                DataTable dt = new DataTable();
+                dt.Load(reader);
+                string nombre = dt.Rows[0]["titulo"].ToString();
+                byte[] bytesDocumento = (byte[])dt.Rows[0]["contenido"];
+                Response.ClearContent();
+                Response.ContentType = "application-octetstream";
+                Response.AddHeader("Content-Disposition",string.Format("attachment; filename={0}",nombre));
+                Response.AddHeader("Content-Length", bytesDocumento.Length.ToString());
+                Response.BinaryWrite(bytesDocumento);
+                Response.Flush();
+                Response.Close();
+            }
             
 
         }
