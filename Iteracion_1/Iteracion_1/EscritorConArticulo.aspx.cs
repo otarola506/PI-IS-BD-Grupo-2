@@ -58,12 +58,13 @@ namespace Iteracion_1
                 txtArticulo.Text = contenidoString;
             }
             else {
-
+                //Mostrar algo en para ver lo de la edicion.
                 string resumenString = unicode.GetString(resumenByte);
                 string contenidoString = unicode.GetString(contenidoByte);
                 txtTitulo.Text = tituloRetorno;
                 txtResumen.Text = resumenString;
-                // Mostrar una ventana emergente con dos botones que le opción de escribir o subir uno.
+                
+                
 
 
 
@@ -150,9 +151,6 @@ namespace Iteracion_1
                         txtTitulo.Text = String.Empty;
                         txtResumen.Text = String.Empty;
                         txtArticulo.Text = String.Empty;
-
-
-
 
                         lblMensaje.Text = "Articulo subido con exito";
                         lblMensaje.ForeColor = System.Drawing.Color.Green;

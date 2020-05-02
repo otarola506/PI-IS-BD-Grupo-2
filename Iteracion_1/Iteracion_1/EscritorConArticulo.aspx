@@ -57,7 +57,7 @@
         </strong>
         <asp:TextBox ID="txtTitulo" runat="server" Width="469px"></asp:TextBox>
         <br />
-        <span class="auto-style1"><strong>Resumen:<asp:Button ID="btnVolver" runat="server" CssClass="auto-style3" OnClick="btnVolver_Click" Text="Volver a mis Archivos" />
+        <span class="auto-style1"><strong>Resumen:<asp:Button ID="btnVolver" runat="server" CssClass="auto-style3" OnClick="btnVolver_Click" Text="Volver a mis Artículos" />
         </strong></span><br />
         <span class="auto-style1">
         <asp:TextBox ID="txtResumen" runat="server" Height="92px" Width="50%"  TextMode="MultiLine" Font-Size="Medium" maxsize="10" ></asp:TextBox>

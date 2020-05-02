@@ -57,5 +57,10 @@ namespace Iteracion_1
             lblArticulo.Text = contenidoString;
 
         }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("MisArticulos.aspx");
+        }
     }
 }

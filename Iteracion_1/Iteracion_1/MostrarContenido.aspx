@@ -11,6 +11,7 @@
     <p>
         <strong>
         <asp:Label ID="Label3" runat="server" style="width: 92px; height: 16px; position: absolute; left: 16px; top: 169px" Text="Resumen:"></asp:Label>
+        <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" style="width: 164px; height: 26px; position: absolute; left: 658px; top: 106px" Text="Volver a mis Artículos" />
         </strong>
     </p>
     <p>
@@ -36,13 +37,13 @@
     <p>
         &nbsp;</p>
     <p>
-        <asp:Label ID="lblTitulo" runat="server" style="width: 35px; height: 16px; position: absolute; left: 78px; top: 107px"></asp:Label>
-        <asp:Label ID="lblResumen" runat="server" style="width: 35px; height: 16px; position: absolute; left: 112px; top: 169px"></asp:Label>
+        <asp:Label ID="lblTitulo" runat="server" style="width: 501px; height: 16px; position: absolute; left: 78px; top: 107px"></asp:Label>
+        <asp:Label ID="lblResumen" runat="server" style="width: 648px; height: 16px; position: absolute; left: 108px; top: 168px"></asp:Label>
     </p>
     <p>
         &nbsp;</p>
     <p>
-        <asp:Label ID="lblArticulo" runat="server" style="width: 35px; height: 16px; position: absolute; left: 214px; top: 372px"></asp:Label>
+        <asp:Label ID="lblArticulo" runat="server" style="width: 616px; height: 16px; position: absolute; left: 214px; top: 372px"></asp:Label>
     </p>
     <p>
         &nbsp;</p>

@@ -53,10 +53,10 @@
     <br />
     <br />
     
-    <asp:Label ID ="lblFallo" runat ="server" ForeColor ="Red" style="width: 53px; height: 16px; position: absolute; left: 14px; top: 255px" />
+    <asp:Label ID ="lblFallo" runat ="server" ForeColor ="Red" style="width: 53px; height: 16px; position: absolute; left: 536px; top: 175px" />
     
     <br />
-    <asp:Label ID ="lblExito" runat ="server" ForeColor ="Green" style="width: 52px; height: 16px; position: absolute; left: 16px; top: 233px" />
+    <asp:Label ID ="lblExito" runat ="server" ForeColor ="Green" style="width: 51px; height: 15px; position: absolute; left: 535px; top: 144px" />
     <br />
     <br />
     <br />

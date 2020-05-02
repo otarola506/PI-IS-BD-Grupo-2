@@ -112,30 +112,34 @@ namespace Iteracion_1
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.Add("@ID", SqlDbType.Int).Value = artId;
             SqlDataReader reader = cmd.ExecuteReader();
-            Boolean tipoArticulo = false;
-            if (reader.Read())
-            {
-                tipoArticulo = (Boolean)reader[5];
 
-            }
+            Boolean tipoArticulo = false;
+            reader.Read();
+            tipoArticulo = (Boolean)reader[5];
+            reader.Close();
+
             if (tipoArticulo == false)
             {
                 Session["articuloID"] = artId;
                 Response.Redirect("MostrarContenido.aspx");
             }
-            else {
-                DataTable dt = new DataTable();
-                dt.Load(reader);
-                string nombre = dt.Rows[0]["titulo"].ToString();
-                byte[] bytesDocumento = (byte[])dt.Rows[0]["contenido"];
-                Response.ClearContent();
-                Response.ContentType = "application-octetstream";
-                Response.AddHeader("Content-Disposition",string.Format("attachment; filename={0}",nombre));
-                Response.AddHeader("Content-Length", bytesDocumento.Length.ToString());
-                Response.BinaryWrite(bytesDocumento);
+            /*else {
+                reader = cmd.ExecuteReader();
+                reader.Read();
+                string fileName = reader["titulo"].ToString();
+                byte[] contenidoArt = (byte[])reader["contenido"];
+                string extension = reader[6].ToString();
+                Response.Clear();
+                Response.Buffer = true;
+                Response.Charset = "";
+                Response.Cache.SetCacheability(HttpCacheability.NoCache);
+                Response.ContentType = extension;
+                Response.AppendHeader("Content-Disposition", "attachment; filename=" + fileName);
+                Response.BinaryWrite(contenidoArt);
                 Response.Flush();
-                Response.Close();
-            }
+                Response.End();
+
+            }*/
             
 
         }
