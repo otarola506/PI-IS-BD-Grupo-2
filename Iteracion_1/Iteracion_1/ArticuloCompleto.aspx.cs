@@ -22,10 +22,11 @@ namespace Iteracion_1
         }
         protected void Page_Load(object sender, EventArgs e)
         {
+            Page lastPage = (Page)Context.Handler;
             if (!IsPostBack)
             {
-                Page lastPage = (Page)Context.Handler;
                 if ( lastPage is Articulos) {
+                    string hola = "hola";
                     getContenidoArticulo(lastPage);
                 }
             }

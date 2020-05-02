@@ -59,7 +59,7 @@ namespace Iteracion_1
             
             articlesTable.DataSource = dTable;
 
-            articlesTable.Columns[0].Visible = true;
+            articlesTable.Columns[0].Visible = false;
 
             articlesTable.DataBind();
 
@@ -79,7 +79,7 @@ namespace Iteracion_1
         {
             LinkButton btn = (LinkButton)sender;
             GridViewRow gvr = (GridViewRow)btn.NamingContainer;
-            string temp = ((Label)gvr.Cells[0].FindControl("artIdPK")).Text;
+            string temp = ((Label)gvr.Cells[0].FindControl("articuloid")).Text;
             int id = Int32.Parse(temp);
             return id;
         }
