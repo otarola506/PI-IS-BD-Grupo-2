@@ -113,6 +113,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Default.aspx" />
+    <Content Include="EdicionPreg.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -126,6 +127,7 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="MisArticulos.aspx" />
+    <Content Include="PreguntasRecibidas.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
@@ -184,6 +186,13 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="EdicionPreg.aspx.cs">
+      <DependentUpon>EdicionPreg.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EdicionPreg.aspx.designer.cs">
+      <DependentUpon>EdicionPreg.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -193,6 +202,13 @@
     </Compile>
     <Compile Include="MisArticulos.aspx.designer.cs">
       <DependentUpon>MisArticulos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PreguntasRecibidas.aspx.cs">
+      <DependentUpon>PreguntasRecibidas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PreguntasRecibidas.aspx.designer.cs">
+      <DependentUpon>PreguntasRecibidas.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Site.Master.cs">
