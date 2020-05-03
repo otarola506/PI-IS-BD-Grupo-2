@@ -124,6 +124,8 @@ namespace Iteracion_1
                 Response.Redirect("MostrarContenido.aspx");
             }
             /*else {
+             * 
+             * 
                 reader = cmd.ExecuteReader();
                 reader.Read();
                 string fileName = reader["titulo"].ToString();
