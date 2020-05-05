@@ -33,18 +33,27 @@ namespace Iteracion_1
         // Get titulo autor y resumen
         protected void getTituloResumen() {
 
-            string categoria = "";
-            string procedure = "";
             SqlCommand cmd = null;
 
             connection();
             conn.Open();
 
-            if (Session["Categoria"] != null)
+            if (Session["Categoria"] != null || Session["Titulo"] != null)
             {
-                categoria = Session["Categoria"].ToString();
-                cmd = new SqlCommand("RecuperarArtPorNombreCategoria", conn);
-                cmd.Parameters.Add("@nombre", SqlDbType.VarChar).Value = categoria;
+                if (Session["Categoria"] == null && Session["Titulo"] != null) {
+                    cmd = new SqlCommand("RecuperarArtPorTitulo", conn);
+                    cmd.Parameters.Add("@titulo", SqlDbType.VarChar).Value = Session["Titulo"].ToString();
+
+                } else if (Session["Categoria"] != null && Session["Titulo"] == null) {
+                    cmd = new SqlCommand("RecuperarArtPorNombreCategoria", conn);
+                    cmd.Parameters.Add("@nombre", SqlDbType.VarChar).Value = Session["Categoria"].ToString();
+                }
+                else {
+                    cmd = new SqlCommand("RecuperarArtPorAmbos", conn);
+                    cmd.Parameters.Add("@nombre", SqlDbType.VarChar).Value = Session["Categoria"].ToString();
+                    cmd.Parameters.Add("@titulo", SqlDbType.VarChar).Value = Session["Titulo"].ToString();
+                }
+
 
             }
             else {
@@ -69,6 +78,7 @@ namespace Iteracion_1
             articlesTable.DataBind();
 
             Session["Categoria"] = null;
+            Session["Titulo"] = null;
 
         }
 
