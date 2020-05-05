@@ -107,7 +107,6 @@
   <ItemGroup>
     <Content Include="About.aspx" />
     <Content Include="BusquedaTopico.aspx" />
-    <Content Include="ArticuloCompleto.aspx" />
     <Content Include="Articulos.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
@@ -184,13 +183,6 @@
     </Compile>
     <Compile Include="BusquedaTopico.aspx.designer.cs">
       <DependentUpon>BusquedaTopico.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="ArticuloCompleto.aspx.cs">
-      <DependentUpon>ArticuloCompleto.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ArticuloCompleto.aspx.designer.cs">
-      <DependentUpon>ArticuloCompleto.aspx</DependentUpon>
     </Compile>
     <Compile Include="Articulos.aspx.cs">
       <DependentUpon>Articulos.aspx</DependentUpon>
