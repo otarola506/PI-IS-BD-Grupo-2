@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="MisArticulos.aspx.cs" Inherits="Iteracion_1.MisArticulos" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <br />
-    <asp:GridView ID="tablaArticulos" runat="server" AutoGenerateColumns="false" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" Width="415px" OnRowDataBound ="OnRowDataBound" style="height: 127px; position: absolute; left: 16px; top: 93px">
+    <asp:GridView ID="tablaArticulos" runat="server" AutoGenerateColumns="false" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" OnRowDataBound ="OnRowDataBound" style="height: 127px; position: absolute; left: 20px; top: 128px; width: 486px;">
         <FooterStyle BackColor="White" ForeColor="#000066" />
         <HeaderStyle BackColor="#006699" Font-Bold="True" ForeColor="White" />
         <PagerStyle BackColor="White" ForeColor="#000066" HorizontalAlign="Left" />
@@ -49,14 +49,14 @@
     </asp:GridView>
     <br />
     <br />
-    <asp:Button ID ="btnAgregarArticulo" Text="Crear articulo nuevo" runat="server" OnClick="btnAgregarArticulo_Click" style="width: 195px; height: 26px; position: absolute; left: 494px; top: 95px" />
+    <asp:Button ID ="btnAgregarArticulo" Text="Crear articulo nuevo" runat="server" OnClick="btnAgregarArticulo_Click" style="width: 195px; height: 26px; position: absolute; left: 27px; top: 91px" />
     <br />
     <br />
     
-    <asp:Label ID ="lblFallo" runat ="server" ForeColor ="Red" style="width: 53px; height: 16px; position: absolute; left: 536px; top: 175px" />
+    <asp:Label ID ="lblFallo" runat ="server" ForeColor ="Red" style="width: 127px; height: 16px; position: absolute; left: 588px; top: 172px" />
     
     <br />
-    <asp:Label ID ="lblExito" runat ="server" ForeColor ="Green" style="width: 51px; height: 15px; position: absolute; left: 535px; top: 144px" />
+    <asp:Label ID ="lblExito" runat ="server" ForeColor ="Green" style="width: 118px; height: 15px; position: absolute; left: 593px; top: 134px" />
     <br />
     <br />
     <br />

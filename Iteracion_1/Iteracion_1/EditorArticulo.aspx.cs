@@ -36,15 +36,16 @@ namespace Iteracion_1
         {
             int artId = Convert.ToInt32(Session["articuloId"]);
             connection();
-            con.Open();
             SqlCommand cmd = new SqlCommand("RecuperarArticulo", con);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.Add("@ID", SqlDbType.Int).Value = artId;
+            con.Open();
             SqlDataReader reader = cmd.ExecuteReader();
             byte[] contenidoByte = new byte[] { };
             byte[] resumenByte = new byte[] { };
             string tituloRetorno = "";
             Boolean tipoArticulo = false;
+            
             if (reader.Read())
             {
                 tituloRetorno = reader[1].ToString();
@@ -53,6 +54,7 @@ namespace Iteracion_1
                 tipoArticulo = (Boolean)reader[5];
 
             }
+            con.Close();
             if (tipoArticulo == false)
             {
                 string resumenString = unicode.GetString(resumenByte);
@@ -60,35 +62,17 @@ namespace Iteracion_1
                 txtTitulo.Text = tituloRetorno;
                 txtResumen.Text = resumenString;
                 txtArticulo.Text = contenidoString;
-                /*connection();
-                SqlCommand cm = new SqlCommand("Recuperar_Categoria_Articulo", con);
-                cm.CommandType = CommandType.StoredProcedure;
-                cm.Parameters.Add("@ID", SqlDbType.Int).Value = artId;
-                con.Open();
-                SqlDataReader rd = cmd.ExecuteReader();*/
-                    
-                for (int i = 0; i < selectCategorias.Items.Count; i++)
-                {
-                    selectCategorias.Items[i].Selected = true;
-                }
+                eliminarCategoria();
             }
-            else
-            {
-                //Mostrar algo en para ver lo de la edicion.
-                string resumenString = unicode.GetString(resumenByte);
-                string contenidoString = unicode.GetString(contenidoByte);
-                txtTitulo.Text = tituloRetorno;
-                txtResumen.Text = resumenString;
-
-            }
+            
         }
         //Create one method "BindHobbies" for populate hobbies from Database
         public void cargarCategorias()
         {
             connection();
-            con.Open();
             SqlCommand cmd = new SqlCommand("Recuperar_Categorias", con);
             cmd.CommandType = CommandType.StoredProcedure;
+            con.Open();
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();
             da.Fill(dt);
@@ -118,9 +102,19 @@ namespace Iteracion_1
             cmd.Parameters.Add("@contenidoNuevo", SqlDbType.VarBinary).Value = bytesText;
             con.Open();
             cmd.ExecuteNonQuery();
+            con.Close();
            
         }
+        public void eliminarCategoria() {
+            int artId = Convert.ToInt32(Session["articuloId"]);
+            SqlCommand cmd = new SqlCommand("Borrar_Categoria", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@ID", SqlDbType.Int).Value = artId;
+            con.Open();
+            cmd.ExecuteNonQuery();
+            con.Close();
 
+        }
         public void guardarArticulosTexto()
         {
 
@@ -135,6 +129,7 @@ namespace Iteracion_1
             cmd.Parameters.Add("@contenidoNuevo", SqlDbType.VarBinary).Value = bytesText;
             con.Open();
             cmd.ExecuteNonQuery();
+            con.Close();
             
         }
 
@@ -287,9 +282,9 @@ namespace Iteracion_1
                 {
                     string artID = "";
                     //Guardamos el contenido de txtArticulo en  
-
+                    connection();
                     guardarArticulosTexto();
-                    Response.Write("Datos Cargados Correctamente");
+                    
                     
 
 
@@ -298,6 +293,7 @@ namespace Iteracion_1
                     SqlCommand cmd2 = new SqlCommand("Obtener_articuloId", con);
                     cmd2.CommandType = CommandType.StoredProcedure;
                     cmd2.Parameters.Add("@titulo", SqlDbType.VarChar).Value = txtTitulo.Text;
+                    con.Open();
                     SqlDataReader rd = cmd2.ExecuteReader();
 
                     if (rd.Read())
@@ -349,6 +345,7 @@ namespace Iteracion_1
 
                     lblMensaje.Text = "Articulo subido con exito";
                     lblMensaje.ForeColor = System.Drawing.Color.Green;
+                    Response.Redirect("MisArticulos.aspx");
 
                 }
 

@@ -41,6 +41,13 @@
         .auto-style2 {
             font-size: large;
         }
+        .auto-style3 {
+            width: 137px;
+            height: 27px;
+            position: absolute;
+            top: 25px;
+            left: 975px;
+        }
         </style>
 </head>
 <body>
@@ -77,7 +84,7 @@
         <asp:Button ID="btnGuardar" runat="server" OnClick="btnGuardar_Click" Text="Guardar" />
         <br />
         <br />
-        <asp:Label ID="lblMensaje" runat="server"></asp:Label>
+        <asp:Label ID="lblMensaje" runat="server" CssClass="auto-style3"></asp:Label>
         <br />
         </strong></span>
         <br />

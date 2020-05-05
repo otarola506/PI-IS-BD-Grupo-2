@@ -25,7 +25,7 @@ namespace Iteracion_1
             if (!IsPostBack)
             {
                 llenarTabla();
-                //Mostrar Mensaje de bienvenida.
+                
 
             }
         }
@@ -83,8 +83,28 @@ namespace Iteracion_1
         public void lnkEdicion(object sender, EventArgs e)
         {
             int artId = retornarValorIdArticulo(sender);
-            Session["articuloID"] = artId;
-            Response.Redirect("EditorArticulo.aspx");
+            connection();
+            con.Open();
+            SqlCommand cmd = new SqlCommand("RecuperarArticulo", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@ID", SqlDbType.Int).Value = artId;
+            SqlDataReader reader = cmd.ExecuteReader();
+            Boolean tipoArticulo = false;
+            if (reader.Read())
+            {
+                tipoArticulo = (Boolean)reader[5];
+
+            }
+            if (tipoArticulo == false)
+            {
+                Session["articuloID"] = artId;
+                Response.Redirect("EditorArticulo.aspx");
+            }
+            else
+            {
+                Response.Write("<script>alert('No se pueden editar artículos subidos a la pagina')</script>");
+
+            }
 
         }
 
@@ -121,7 +141,7 @@ namespace Iteracion_1
             if (tipoArticulo == false)
             {
                 Session["articuloID"] = artId;
-                Response.Redirect("MostrarContenido.aspx");
+                //Response.Redirect("MostrarContenido.aspx");
             }
             
             
