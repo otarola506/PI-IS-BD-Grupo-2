@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="MisArticulos.aspx.cs" Inherits="Iteracion_1.MisArticulos" %>
+﻿<%@ Page Title="Mis Articulos" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="MisArticulos.aspx.cs" Inherits="Iteracion_1.MisArticulos" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <br />
     <asp:GridView ID="tablaArticulos" runat="server" AutoGenerateColumns="false" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" OnRowDataBound ="OnRowDataBound" style="height: 127px; position: absolute; left: 20px; top: 128px; width: 486px;">
@@ -36,7 +36,7 @@
             <asp:TemplateField>
                 <ItemTemplate>
                     <asp:LinkButton id="lnkEditar" Text="Editar" runat="server" OnClick ="lnkEdicion"/>
-                    <asp:LinkButton id="lnkBorrar" Text="Borrar" runat="server" OnClick ="lnkBorrado"/>
+                    <asp:LinkButton id="lnkBorrar" Text="Borrar" runat="server" OnClick ="lnkBorrado" OnClientClick ="return confirm('¿Esta seguro de eliminar este artículo?')"/>
                     <asp:LinkButton id="lnkVerMas" Text="Ver más" runat="server" OnClick ="lnkVerMasArt"/>
                 </ItemTemplate>
 

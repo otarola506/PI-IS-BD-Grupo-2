@@ -150,7 +150,8 @@ namespace Iteracion_1
 
         protected void btnAgregarArticulo_Click(object sender, EventArgs e)
         {
-            //Response.Redirect("Escritor.aspx");
+            Response.Redirect("Escritor.aspx");
         }
+
     }
 }
