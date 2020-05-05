@@ -1,16 +1,17 @@
+
 CREATE TABLE Miembro(
 	miembroIdPK INTEGER NOT NULL PRIMARY KEY IDENTITY (1,1),
 	userTypeID VARCHAR(20) NULL,
 	nombre VARCHAR(20) NOT NULL
 );
 
-
 CREATE TABLE Articulo(
 	artIdPK INTEGER NOT NULL PRIMARY KEY IDENTITY (1,1),
 	titulo VARCHAR(max) NOT NULL,
-	resumen VARCHAR(max) NOT NULL,
+	resumen VARBINARY(max) NOT NULL,
 	miembroIdFK INTEGER NOT NULL DEFAULT -1,
 	contenido VARBINARY(max) NOT NULL,
+	tipoArt bit NOT NULL
 
 	CONSTRAINT FK_Articulo_Miembro
 		FOREIGN KEY(miembroIdFK) REFERENCES Miembro(miembroIdPK)
@@ -43,6 +44,7 @@ CREATE TABLE Pregunta(
 	pregIdPK INTEGER NOT NULL PRIMARY KEY IDENTITY (1,1),
 	pregunta VARCHAR(max) NOT NULL,
 	miembroIdFK INTEGER DEFAULT -1,
+	frecuente bit NOT NULL,
 
 	CONSTRAINT FK_Pregunta_Miembro
 		FOREIGN KEY(miembroIdFK) REFERENCES Miembro(miembroIdPK)

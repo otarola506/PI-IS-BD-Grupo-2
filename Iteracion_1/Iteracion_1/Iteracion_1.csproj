@@ -106,6 +106,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="About.aspx" />
+    <Content Include="BusquedaTopico.aspx" />
+    <Content Include="ArticuloCompleto.aspx" />
+    <Content Include="Articulos.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -114,6 +117,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Default.aspx" />
     <Content Include="EditorArticulo.aspx" />
+    <Content Include="Escritor.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -174,6 +178,27 @@
       <DependentUpon>About.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="BusquedaTopico.aspx.cs">
+      <DependentUpon>BusquedaTopico.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BusquedaTopico.aspx.designer.cs">
+      <DependentUpon>BusquedaTopico.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ArticuloCompleto.aspx.cs">
+      <DependentUpon>ArticuloCompleto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ArticuloCompleto.aspx.designer.cs">
+      <DependentUpon>ArticuloCompleto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Articulos.aspx.cs">
+      <DependentUpon>Articulos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Articulos.aspx.designer.cs">
+      <DependentUpon>Articulos.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Contact.aspx.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -187,6 +212,13 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Escritor.aspx.cs">
+      <DependentUpon>Escritor.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Escritor.aspx.designer.cs">
+      <DependentUpon>Escritor.aspx</DependentUpon>
     </Compile>
     <Compile Include="EditorArticulo.aspx.cs">
       <DependentUpon>EditorArticulo.aspx</DependentUpon>
