@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Titulo" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ArticuloCompleto.aspx.cs" Inherits="Iteracion_1.ArticuloCompleto" %>
+﻿<%@ Page Title="Articulo Completo" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ArticuloCompleto.aspx.cs" Inherits="Iteracion_1.ArticuloCompleto" %>
 
 <asp:Content ID="articulo" ContentPlaceHolderID="MainContent" runat="server">
     
