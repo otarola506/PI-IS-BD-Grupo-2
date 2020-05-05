@@ -37,7 +37,37 @@ namespace Iteracion_1
             con.Open();
             //SqlConnection cn = new SqlConnection("Data Source=172.16.202.24,1433;Network Library=DBMSSOCN;Initial Catalog=BD_Grupo2;User ID=Grupo2;Password=grupo2.");
             // Ahorita el comando solo pregunta por el ID pero puede preguntar por otras varas más si lo modifican
-            SqlCommand cmd = new SqlCommand("SELECT A.* FROM Articulo A JOIN Art_Categoria AC ON A.artIdPK = AC.artIdFK JOIN Categoria C ON AC.categoriaIdFK = C.categoriaIdPK WHERE  C.nombre ="+ "'"+ DropDownList1.SelectedValue + "'", con);
+            
+            if (TextBox1.Text == String.Empty & DropDownList1.SelectedValue == "null" )
+            {
+                // value = DropDownList1.SelectedValue;               
+                Session["Titulo"] = null;
+                Session["Categoria"] = null;
+
+            }
+            else
+            {
+                if (TextBox1.Text != String.Empty & DropDownList1.SelectedValue == "null")
+                {    //value = TextBox1.Text;            
+                    Session["Titulo"] = TextBox1.Text;
+                    Session["Categoria"] = null;
+                }
+                else
+                {
+                    if (TextBox1.Text == String.Empty & DropDownList1.SelectedValue != "null")
+                    {
+                        Session["Titulo"] = null;
+                        Session["Categoria"] = DropDownList1.SelectedValue;
+                    }
+                    else
+                    {
+                        Session["Titulo"] = TextBox1.Text;
+                        Session["Categoria"] = DropDownList1.SelectedValue;
+                    }
+                }
+            }
+            Response.Redirect("Articulos.aspx");
+           /* SqlCommand cmd = new SqlCommand("SELECT A.* FROM Articulo A JOIN Art_Categoria AC ON A.artIdPK = AC.artIdFK JOIN Categoria C ON AC.categoriaIdFK = C.categoriaIdPK WHERE  C.nombre ="+ "'"+ value + "'", con);
             SqlDataAdapter ad = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();
             ad.Fill(dt);
@@ -46,7 +76,7 @@ namespace Iteracion_1
             con.Close();
             Response.Write("Datos Cargados Correctamente");
             Session["Categoria"] = DropDownList1.SelectedValue;
-            Response.Redirect("Articulos.aspx");
+            Response.Redirect("Articulos.aspx");*/
         }
 
         protected void TextBox1_TextChanged(object sender, EventArgs e)
@@ -54,20 +84,6 @@ namespace Iteracion_1
 
         }
 
-        protected void BusquedaXTitulo_Click(object sender, EventArgs e)
-        {
-            connection();
-            con.Open();
-            SqlCommand cmd = new SqlCommand("SELECT * FROM Articulo WHERE titulo LIKE " + "'%" + TextBox1.Text + "%'", con);
-            SqlDataAdapter ad = new SqlDataAdapter(cmd);
-            DataTable dt = new DataTable();
-            ad.Fill(dt);
-            tabla.DataSource = dt;
-            tabla.DataBind();
-            con.Close();
-            Response.Write("Datos Cargados Correctamente");
-            Session["Titulo"] = TextBox1.Text;
-            Response.Redirect("Articulos.aspx");
-        }
+
     }
 }

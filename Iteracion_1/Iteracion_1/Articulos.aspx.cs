@@ -46,11 +46,11 @@ namespace Iteracion_1
 
                 } else if (Session["Categoria"] != null && Session["Titulo"] == null) {
                     cmd = new SqlCommand("RecuperarArtPorNombreCategoria", conn);
-                    cmd.Parameters.Add("@nombre", SqlDbType.VarChar).Value = Session["Categoria"].ToString();
+                    cmd.Parameters.Add("@Id", SqlDbType.VarChar).Value = Convert.ToInt32(Session["Categoria"]);
                 }
                 else {
                     cmd = new SqlCommand("RecuperarArtPorAmbos", conn);
-                    cmd.Parameters.Add("@nombre", SqlDbType.VarChar).Value = Session["Categoria"].ToString();
+                    cmd.Parameters.Add("@Id", SqlDbType.VarChar).Value = Convert.ToInt32(Session["Categoria"]);
                     cmd.Parameters.Add("@titulo", SqlDbType.VarChar).Value = Session["Titulo"].ToString();
                 }
 
