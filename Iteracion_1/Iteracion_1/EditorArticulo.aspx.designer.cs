@@ -10,7 +10,7 @@
 namespace Iteracion_1 {
     
     
-    public partial class EscritorConArticulo {
+    public partial class EditorArticulo {
         
         /// <summary>
         /// Control form1.
@@ -38,15 +38,6 @@ namespace Iteracion_1 {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtTitulo;
-        
-        /// <summary>
-        /// Control btnVolver.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnVolver;
         
         /// <summary>
         /// Control txtResumen.

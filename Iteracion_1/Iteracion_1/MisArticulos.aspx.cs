@@ -84,7 +84,7 @@ namespace Iteracion_1
         {
             int artId = retornarValorIdArticulo(sender);
             Session["articuloID"] = artId;
-            Response.Redirect("EscritorConArticulo.aspx");
+            Response.Redirect("EditorArticulo.aspx");
 
         }
 
@@ -123,25 +123,7 @@ namespace Iteracion_1
                 Session["articuloID"] = artId;
                 Response.Redirect("MostrarContenido.aspx");
             }
-            /*else {
-             * 
-             * 
-                reader = cmd.ExecuteReader();
-                reader.Read();
-                string fileName = reader["titulo"].ToString();
-                byte[] contenidoArt = (byte[])reader["contenido"];
-                string extension = reader[6].ToString();
-                Response.Clear();
-                Response.Buffer = true;
-                Response.Charset = "";
-                Response.Cache.SetCacheability(HttpCacheability.NoCache);
-                Response.ContentType = extension;
-                Response.AppendHeader("Content-Disposition", "attachment; filename=" + fileName);
-                Response.BinaryWrite(contenidoArt);
-                Response.Flush();
-                Response.End();
-
-            }*/
+            
             
 
         }

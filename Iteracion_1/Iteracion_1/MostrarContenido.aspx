@@ -10,8 +10,8 @@
         &nbsp;</p>
     <p>
         <strong>
-        <asp:Label ID="Label3" runat="server" style="width: 92px; height: 16px; position: absolute; left: 16px; top: 169px" Text="Resumen:"></asp:Label>
-        <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" style="width: 164px; height: 26px; position: absolute; left: 658px; top: 106px" Text="Volver a mis Artículos" />
+        <asp:Label ID="Label3" runat="server" style="width: 92px; height: 16px; position: absolute; left: 15px; top: 185px" Text="Resumen:"></asp:Label>
+        <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" style="width: 164px; height: 26px; position: absolute; left: 765px; top: 109px" Text="Volver a mis Artículos" />
         </strong>
     </p>
     <p>
@@ -37,8 +37,40 @@
     <p>
         &nbsp;</p>
     <p>
+        &nbsp;</p>
+    <p>
+        &nbsp;</p>
+    <p>
+        &nbsp;</p>
+    <p>
+        &nbsp;</p>
+    <p>
+        &nbsp;</p>
+    <p>
+        &nbsp;</p>
+    <p>
+        &nbsp;</p>
+    <p>
+        &nbsp;</p>
+    <p>
+        &nbsp;</p>
+    <p>
+        &nbsp;</p>
+    <p>
+        &nbsp;</p>
+    <p>
+        &nbsp;</p>
+    <p>
+        &nbsp;</p>
+    <p>
+        &nbsp;</p>
+    <p>
+        &nbsp;</p>
+    <p>
+        &nbsp;</p>
+    <p>
         <asp:Label ID="lblTitulo" runat="server" style="width: 501px; height: 16px; position: absolute; left: 78px; top: 107px"></asp:Label>
-        <asp:Label ID="lblResumen" runat="server" style="width: 648px; height: 16px; position: absolute; left: 108px; top: 168px"></asp:Label>
+        <asp:Label ID="lblResumen" runat="server" style="width: 648px; height: 16px; position: absolute; left: 107px; top: 184px"></asp:Label>
     </p>
     <p>
         &nbsp;</p>
