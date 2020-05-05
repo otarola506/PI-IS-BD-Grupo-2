@@ -43,11 +43,12 @@
 <body>
     <form id="form1" runat="server">
         <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-        <asp:Label ID="Label1" runat="server" Text="Preguntas"></asp:Label>
+        <asp:Label ID="Label1" runat="server" Text="Preguntas" style="font-size: xx-large"></asp:Label>
         <asp:HiddenField ID="hfPregID" runat="server" />
         <p>
             <asp:GridView ID="gvPreguntas" runat="server" AutoGenerateColumns="False">
                 <Columns>
+                    <asp:BoundField DataField="miembroIdFK" HeaderText="MiembroID" />
                     <asp:BoundField DataField="pregIdPK" HeaderText="PregID" />
                     <asp:BoundField DataField="pregunta" HeaderText="Preguntas" />
                     <asp:TemplateField>
