@@ -141,7 +141,7 @@ namespace Iteracion_1
             if (tipoArticulo == false)
             {
                 Session["articuloID"] = artId;
-                //Response.Redirect("MostrarContenido.aspx");
+                Response.Redirect("MostrarContenido.aspx");
             }
             
             

@@ -10,51 +10,60 @@
 namespace Iteracion_1 {
     
     
-    public partial class MisArticulos {
+    public partial class MostrarContenido {
         
         /// <summary>
-        /// Control tablaArticulos.
+        /// Control Label1.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView tablaArticulos;
+        protected global::System.Web.UI.WebControls.Label Label1;
         
         /// <summary>
-        /// Control lblArticulo.
+        /// Control lblTitulo.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblArticulo;
+        protected global::System.Web.UI.WebControls.Label lblTitulo;
         
         /// <summary>
-        /// Control btnAgregarArticulo.
+        /// Control resumen.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAgregarArticulo;
+        protected global::System.Web.UI.WebControls.Label resumen;
         
         /// <summary>
-        /// Control lblFallo.
+        /// Control lblResumen.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblFallo;
+        protected global::System.Web.UI.WebControls.Label lblResumen;
         
         /// <summary>
-        /// Control lblExito.
+        /// Control Label2.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblExito;
+        protected global::System.Web.UI.WebControls.Label Label2;
+        
+        /// <summary>
+        /// Control lblContenido.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblContenido;
     }
 }

@@ -47,13 +47,16 @@
 
         </Columns>
     </asp:GridView>
+    <strong>
+    <asp:Label ID="lblArticulo" runat="server" style="font-family: Arial; font-size: 20px; width: 191px; height: 24px; position: absolute; left: 15px; top: 95px" Text="Mis Articulos"></asp:Label>
+    </strong>
     <br />
     <br />
-    <asp:Button ID ="btnAgregarArticulo" Text="Crear articulo nuevo" runat="server" OnClick="btnAgregarArticulo_Click" style="width: 195px; height: 26px; position: absolute; left: 27px; top: 91px" />
+    <asp:Button ID ="btnAgregarArticulo" Text="Crear articulo nuevo" runat="server" OnClick="btnAgregarArticulo_Click" style="width: 195px; height: 26px; position: absolute; left: 300px; top: 92px" />
     <br />
     <br />
     
-    <asp:Label ID ="lblFallo" runat ="server" ForeColor ="Red" style="width: 127px; height: 16px; position: absolute; left: 588px; top: 172px" />
+    <asp:Label ID ="lblFallo" runat ="server" ForeColor ="Red" style="width: 127px; height: 16px; position: absolute; left: 593px; top: 170px" />
     
     <br />
     <asp:Label ID ="lblExito" runat ="server" ForeColor ="Green" style="width: 118px; height: 15px; position: absolute; left: 593px; top: 134px" />
