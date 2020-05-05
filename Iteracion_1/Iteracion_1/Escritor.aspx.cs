@@ -48,7 +48,7 @@ namespace Editor
 
 
 
-        public void guardarArchivo(SqlConnection cn)
+        public void guardarArchivo(SqlConnection cn, string extension_del_archivo)
         {
             SqlCommand cmd = new SqlCommand("GuardarArticulos", cn);
             cmd.CommandType = CommandType.StoredProcedure;
@@ -58,6 +58,7 @@ namespace Editor
             cmd.Parameters.Add("@resumen", SqlDbType.VarBinary).Value = bytesTextResumen;
             cmd.Parameters.Add("@contenido", SqlDbType.VarBinary).Value = bytesText;
             cmd.Parameters.Add("@tipo", SqlDbType.Bit).Value = 1;
+            cmd.Parameters.Add("@extencion", SqlDbType.VarChar).Value = extension_del_archivo;
             cn.Open();
             cmd.ExecuteNonQuery();
         }
@@ -72,6 +73,7 @@ namespace Editor
             cmd.Parameters.Add("@resumen", SqlDbType.VarBinary).Value = bytesTextResumen;
             cmd.Parameters.Add("@contenido", SqlDbType.VarBinary).Value = bytesText;
             cmd.Parameters.Add("@tipo", SqlDbType.Bit).Value = 0;
+            cmd.Parameters.Add("@extencion", SqlDbType.VarChar).Value = null;
             cn.Open();
             cmd.ExecuteNonQuery();
         }
@@ -98,6 +100,8 @@ namespace Editor
                 }
             }
             return valor;
+
+            
         }
 
         protected void btnGuardar_Click(object sender, EventArgs e)
@@ -141,7 +145,7 @@ namespace Editor
                         {
      
 
-                            guardarArchivo(cn); //revisar
+                            guardarArchivo(cn, extension_del_archivo); //revisar
 
 
                             //obtine el artId
@@ -174,6 +178,7 @@ namespace Editor
                                     cmd3.Parameters.Add("@nombre", SqlDbType.VarChar).Value = li.Text;
                                     con.Open();
                                     SqlDataReader lector = cmd3.ExecuteReader();
+                                    
 
                                     string catID = "";
                                     if (lector.Read())
