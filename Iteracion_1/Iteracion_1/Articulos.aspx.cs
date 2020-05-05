@@ -103,7 +103,7 @@ namespace Iteracion_1
 
         public void lnkVerMasArt(object sender, EventArgs e) {
             int idArt = retornarValorIdArticulo(sender);
-            Session["idArt"] = idArt;
+            Session["ArticuloID"] = idArt;
 
             Response.Redirect("ArticuloCompleto.aspx");
         }

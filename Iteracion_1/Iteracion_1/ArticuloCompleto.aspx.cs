@@ -22,60 +22,53 @@ namespace Iteracion_1
         }
         protected void Page_Load(object sender, EventArgs e)
         {
-            Page lastPage = (Page)Context.Handler;
             if (!IsPostBack)
             {
-                if ( lastPage is Articulos) {
-                    string hola = "hola";
-                    getContenidoArticulo(lastPage);
-                }
+                getContenidoArticulo();
             }
 
         }
 
-        private void getContenidoArticulo(Page lastPage)
+        private void getContenidoArticulo()
         {
-            connection();
-            conn.Open();
+            if (Session["ArticuloID"] != null) {
+                int artId = Convert.ToInt32(Session["ArticuloID"]);
 
-            int artId = Convert.ToInt32(Session["idArt"]);
+                connection();
+                conn.Open();
 
-            string commando = "SELECT A.titulo, M.nombre, C.nombre, A.contenido " +
-                               "FROM Articulo A JOIN Art_Categoria AC " +
-                                    "ON A.artIdPK = AC.artIdFK " +
-                               "JOIN dbo.Miembro M " +
-                                    "ON M.miembroIdPK = A.miembroIdFK " +
-                               "JOIN Categoria C " +
-                                    "ON AC.categoriaIdFK = C.categoriaIdPK " +
-                                    "WHERE C.categoriaIdPK ="+ artId;
+                SqlCommand cmd = new SqlCommand("MostrarArticuloCompleto", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add("@ID", SqlDbType.Int).Value = artId;
 
-            SqlCommand cmd = new SqlCommand(commando, conn);
-            cmd.CommandType = CommandType.Text;
+                SqlDataAdapter ad = new SqlDataAdapter(cmd);
+                SqlDataReader reader = cmd.ExecuteReader();
 
-            SqlDataAdapter ad = new SqlDataAdapter(cmd);
-            SqlDataReader reader = cmd.ExecuteReader();
+                byte[] contenidoByte = new byte[] { };
+                string tituloRetorno = "";
+                string categorias = "";
+                string autor = "";
+                if (reader.Read())
+                {
+                    tituloRetorno = reader[0].ToString();
+                    autor = reader[1].ToString();
+                    contenidoByte = (byte[])reader[2];
 
-            byte[] contenidoByte = new byte[] { };
-            string tituloRetorno = "";
-            string categorias = "";
-            string autor = "";
-            if (reader.Read())
-            {
-                tituloRetorno = reader[0].ToString();
-                autor = reader[1].ToString();
-                categorias = reader[2].ToString();
-                contenidoByte = (byte[])reader[4];
+                }
+                string contenidoString = unicode.GetString(contenidoByte);
 
+                if (contenidoString.Length != 0)
+                {
+                    lblTitulo.Text = tituloRetorno;
+                    lblAutor.Text = autor;
+                    lblContenido.Text = contenidoString;
+                    lblCategorias.Text = categorias;
+                }
             }
-            string contenidoString = unicode.GetString(contenidoByte);
+            
 
-            if (contenidoString.Length != 0)
-            {
-                lblTitulo.Text = tituloRetorno;
-                lblAutor.Text = autor;
-                lblContenido.Text = contenidoString;
-                lblCategorias.Text = categorias;
-            }
+
+
 
         }
     }
