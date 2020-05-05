@@ -32,23 +32,28 @@ namespace Iteracion_1
 
         // Get titulo autor y resumen
         protected void getTituloResumen() {
+
+            string categoria = "";
+            string procedure = "";
+            SqlCommand cmd = null;
+
             connection();
             conn.Open();
 
-            //string categoryId = Session["param"];
+            if (Session["Categoria"] != null)
+            {
+                categoria = Session["Categoria"].ToString();
+                cmd = new SqlCommand("RecuperarArtPorNombreCategoria", conn);
+                cmd.Parameters.Add("@nombre", SqlDbType.VarChar).Value = categoria;
 
-            string commando = "SELECT A.artIdPK, A.titulo, M.nombre, A.resumen " +
-                               "FROM Articulo A JOIN Art_Categoria AC " +
-                                    "ON A.artIdPK = AC.artIdFK " +
-                               "JOIN dbo.Miembro M " +
-                                    "ON M.miembroIdPK = A.miembroIdFK " +
-                               "JOIN Categoria C " +
-                                    "ON AC.categoriaIdFK = C.categoriaIdPK " +
-                                    "WHERE C.categoriaIdPK =2";
+            }
+            else {
+                cmd = new SqlCommand("RecuperarArticulosPrincipal", conn);
 
+            }
 
-            SqlCommand cmd = new SqlCommand(commando, conn);
-            cmd.CommandType = CommandType.Text;
+            cmd.CommandType = CommandType.StoredProcedure;
+            
 
             SqlDataAdapter ad = new SqlDataAdapter(cmd);
 
@@ -62,6 +67,8 @@ namespace Iteracion_1
             articlesTable.Columns[0].Visible = false;
 
             articlesTable.DataBind();
+
+            Session["Categoria"] = null;
 
         }
 

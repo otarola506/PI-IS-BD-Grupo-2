@@ -45,8 +45,8 @@ namespace Iteracion_1
             tabla.DataBind();
             con.Close();
             Response.Write("Datos Cargados Correctamente");
-           // Session["Categoria"] = DropDownList1.SelectedValue;
-            //Response.Redirect("Display.aspx");
+            Session["Categoria"] = DropDownList1.SelectedValue;
+            Response.Redirect("Articulos.aspx");
         }
 
         protected void TextBox1_TextChanged(object sender, EventArgs e)
@@ -66,8 +66,8 @@ namespace Iteracion_1
             tabla.DataBind();
             con.Close();
             Response.Write("Datos Cargados Correctamente");
-            // Session["Titulo"] = TextBox1.Text;
-            //Response.Redirect("Display.aspx");
+            Session["Titulo"] = TextBox1.Text;
+            Response.Redirect("Articulos.aspx");
         }
     }
 }
