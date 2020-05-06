@@ -23,7 +23,11 @@ namespace PreguntasWebForms
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack)
+            {
+                string Pregunta = Convert.ToString(Session["Pregunta"]);
+                TxtBoxPN.Text = Pregunta;
+            }
         }
 
         protected void GEButton_OnClick(object sender, EventArgs e)
@@ -40,6 +44,12 @@ namespace PreguntasWebForms
             sqlCmd.Parameters.AddWithValue("@Pregunta", TxtBoxPN.Text.Trim());
             sqlCmd.ExecuteNonQuery();
             con.Close();
+            Response.Write("<script>alert('Pregunta editada con éxito')</script>");
+            Response.Redirect("PreguntasRecibidas.aspx");
+        }
+
+        protected void VolverButton_OnClick(object sender, EventArgs e)
+        {
             Response.Redirect("PreguntasRecibidas.aspx");
         }
     }

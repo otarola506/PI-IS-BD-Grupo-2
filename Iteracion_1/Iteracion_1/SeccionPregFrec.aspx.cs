@@ -36,7 +36,7 @@ namespace Iteracion_1
                 con.Open();
             }*/
             con.Open();
-            SqlDataAdapter sqlDa = new SqlDataAdapter("GetPreguntasFreg", con);
+            SqlDataAdapter sqlDa = new SqlDataAdapter("GetPreguntasFrecuentes", con);
             sqlDa.SelectCommand.CommandType = CommandType.StoredProcedure;
             DataTable dtbl = new DataTable();
             sqlDa.Fill(dtbl);
@@ -54,9 +54,8 @@ namespace Iteracion_1
             }
             SqlCommand sqlCmd = new SqlCommand("AddPregunta", con);
             sqlCmd.CommandType = CommandType.StoredProcedure;
-            int miembroID = 5;
             sqlCmd.Parameters.AddWithValue("@Pregunta", TxtBoxPN.Text.Trim());
-            sqlCmd.Parameters.AddWithValue("@MiembroID", miembroID);
+            sqlCmd.Parameters.AddWithValue("@MiembroID", 0);
             sqlCmd.Parameters.AddWithValue("@Frecuente", 0);
             sqlCmd.ExecuteNonQuery();
             con.Close();
@@ -66,16 +65,32 @@ namespace Iteracion_1
 
         protected void VerRespButton_OnClick(object sender, EventArgs e)
         {
-            int pregID = Convert.ToInt32((sender as Button).CommandArgument);
-            Session["PregID"] = pregID;
+            //int pregID = Convert.ToInt32((sender as Button).CommandArgument);
+            string[] arg = new string[2];
+            arg = (sender as Button).CommandArgument.Split(';') ;
+            Session["PregID"] = arg[0];
+            Session["Pregunta"] = arg[1];
+            //Session["PregID"] = pregID;
             Response.Redirect("RespuestasPreg.aspx");
         }
 
-        protected void RespButton_OnClick(object sender, EventArgs e)
+        protected void EFButton_OnClick(object sender, EventArgs e)
         {
             int pregID = Convert.ToInt32((sender as Button).CommandArgument);
-            Session["PregID"] = pregID;
-            Response.Redirect("AgregarRespuesta.aspx");
+            connection();
+            if (con.State == ConnectionState.Closed)
+            {
+                con.Open();
+            }
+            SqlDataAdapter sqlDa = new SqlDataAdapter("EliminarPreguntaFromPF", con);
+            sqlDa.SelectCommand.CommandType = CommandType.StoredProcedure;
+            sqlDa.SelectCommand.Parameters.AddWithValue("@PregID", pregID);
+            DataTable dtbl = new DataTable();
+            sqlDa.Fill(dtbl);
+            con.Close();
+            FillGridView();
+            Response.Write("<script>alert('Pregunta eliminada de la sección de preguntas frecuentes con éxito')</script>");
         }
+
     }
 }

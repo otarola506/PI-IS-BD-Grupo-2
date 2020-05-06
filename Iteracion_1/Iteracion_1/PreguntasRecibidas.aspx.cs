@@ -36,7 +36,7 @@ namespace PreguntasWebForms
             {
                 con.Open();
             }
-            SqlDataAdapter sqlDa = new SqlDataAdapter("GetTablaPreguntas", con);
+            SqlDataAdapter sqlDa = new SqlDataAdapter("GetPreguntasJOINMiembros", con);
             sqlDa.SelectCommand.CommandType = CommandType.StoredProcedure;
             DataTable dtbl = new DataTable();
             sqlDa.Fill(dtbl);
@@ -47,18 +47,29 @@ namespace PreguntasWebForms
 
         protected void FButton_OnClick(object sender, EventArgs e)
         {
-            int pregID = Convert.ToInt32((sender as Button).CommandArgument);
-            connection();
-            if (con.State == ConnectionState.Closed)
+            string[] arg = new string[2];
+            arg = (sender as Button).CommandArgument.Split(';');
+            int pregID = Convert.ToInt32(arg[0]);
+            bool frecuente = Convert.ToBoolean(arg[1]);
+            if (frecuente == false)
             {
-                con.Open();
+                connection();
+                if (con.State == ConnectionState.Closed)
+                {
+                    con.Open();
+                }
+                SqlDataAdapter sqlDa = new SqlDataAdapter("EditPreguntaToPF", con);
+                sqlDa.SelectCommand.CommandType = CommandType.StoredProcedure;
+                sqlDa.SelectCommand.Parameters.AddWithValue("@PregID", pregID);
+                DataTable dtbl = new DataTable();
+                sqlDa.Fill(dtbl);
+                con.Close();
+                Response.Write("<script>alert('Pregunta agregada a seccion de preguntas frecuentes con éxito')</script>");
             }
-            SqlDataAdapter sqlDa = new SqlDataAdapter("EditPreguntaToPF", con);
-            sqlDa.SelectCommand.CommandType = CommandType.StoredProcedure;
-            sqlDa.SelectCommand.Parameters.AddWithValue("@PregID", pregID);
-            DataTable dtbl = new DataTable();
-            sqlDa.Fill(dtbl);
-            con.Close();
+            else
+            {
+                Response.Write("<script>alert('Esta pregunta ya se encuentra en la sección de preguntas frecuentes')</script>");
+            }
         }
 
         protected void DButton_OnClick(object sender, EventArgs e)
@@ -76,12 +87,15 @@ namespace PreguntasWebForms
             sqlDa.Fill(dtbl);
             con.Close();
             FillGridView();
+            Response.Write("<script>alert('Pregunta eliminada con éxito')</script>");
         }
 
         protected void EButton_OnClick(object sender, EventArgs e)
         {
-            int pregID = Convert.ToInt32((sender as Button).CommandArgument);
-            Session["PregID"] = pregID;
+            string[] arg = new string[2];
+            arg = (sender as Button).CommandArgument.Split(';');
+            Session["PregID"] = arg[0];
+            Session["Pregunta"] = arg[1];
             Response.Redirect("EdicionPreg.aspx");
         }
     }   

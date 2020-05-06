@@ -38,10 +38,15 @@ namespace Iteracion_1
             sqlCmd.CommandType = CommandType.StoredProcedure;
             sqlCmd.Parameters.AddWithValue("@Respuesta", TxtBoxRN.Text.Trim());
             sqlCmd.Parameters.AddWithValue("@PregID", pregID);
-            sqlCmd.Parameters.AddWithValue("@MiembroID", 5);
+            sqlCmd.Parameters.AddWithValue("@MiembroID", 0);
             sqlCmd.ExecuteNonQuery();
             con.Close();
-            Response.Redirect("SeccionPregFrec.aspx");
+            Response.Redirect("RespuestasPreg.aspx");
+        }
+
+        protected void VolverButton_OnClick(object sender, EventArgs e)
+        {
+            Response.Redirect("RespuestasPreg.aspx");
         }
     }
 }

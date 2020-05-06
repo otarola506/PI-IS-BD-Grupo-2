@@ -32,13 +32,15 @@ namespace Iteracion_1
         void FillGridView(object sender, EventArgs e)
         {
             int pregID = Convert.ToInt32(Session["PregID"]);
+            string Pregunta = Convert.ToString(Session["Pregunta"]);
+            PregLabel.Text = Pregunta;
             connection();
             /*if (con.State == ConnectionState.Closed)
             {
                 con.Open();
             }*/
             con.Open();
-            SqlDataAdapter sqlDa = new SqlDataAdapter("GetRespuestas", con);
+            SqlDataAdapter sqlDa = new SqlDataAdapter("GetRespuestasPreg", con);
             sqlDa.SelectCommand.CommandType = CommandType.StoredProcedure;
             sqlDa.SelectCommand.Parameters.AddWithValue("@PregID", pregID);
             DataTable dtbl = new DataTable();

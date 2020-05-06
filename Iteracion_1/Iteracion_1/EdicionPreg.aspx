@@ -22,7 +22,9 @@
                 </tr>
                 <tr>
                     <td>
-                        <asp:Button ID="Button2" runat="server" CommandArgument = '<%# Eval("pregIdPK") %>' OnClick="GEButton_OnClick" Text="Guardar Cambios" />
+                        <asp:Button ID="VolverButton" runat="server" Text="Volver" OnClick="VolverButton_OnClick" Width="125px" />
+                        &nbsp;&nbsp;
+                        <asp:Button ID="Button2" runat="server" CommandArgument = '<%# Eval("pregIdPK") %>' OnClientClick ="return confirm('¿Seguro que desea editar esta pregunta?')" OnClick="GEButton_OnClick" Text="Guardar Cambios" />
                     </td>
                 </tr>
             </table>

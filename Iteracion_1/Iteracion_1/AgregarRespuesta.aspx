@@ -22,6 +22,8 @@
                 </tr>
                 <tr>
                     <td>
+                        <asp:Button ID="VolverButton" runat="server" Text="Volver" OnClick="VolverButton_OnClick" Width="125px" />
+                        &nbsp;&nbsp;
                         <asp:Button ID="GRButton" runat="server" CommandArgument = '<%# Eval("pregIdPK") %>' OnClick="GRButton_OnClick" Text="Añadir respuesta" />
                     </td>
                 </tr>
