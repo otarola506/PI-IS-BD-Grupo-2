@@ -13,15 +13,6 @@ namespace Iteracion_1 {
     public partial class MisArticulos {
         
         /// <summary>
-        /// tablaArticulos control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView tablaArticulos;
-        
-        /// <summary>
         /// lblArticulo control.
         /// </summary>
         /// <remarks>
@@ -40,21 +31,12 @@ namespace Iteracion_1 {
         protected global::System.Web.UI.WebControls.Button btnAgregarArticulo;
         
         /// <summary>
-        /// lblFallo control.
+        /// tablaArticulos control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblFallo;
-        
-        /// <summary>
-        /// lblExito control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblExito;
+        protected global::System.Web.UI.WebControls.GridView tablaArticulos;
     }
 }

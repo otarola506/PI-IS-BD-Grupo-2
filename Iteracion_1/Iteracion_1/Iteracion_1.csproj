@@ -129,6 +129,9 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Imagenes\Button-Add-icon.png" />
+    <Content Include="Imagenes\Pencil-icon.png" />
+    <Content Include="Imagenes\trash-icon.png" />
     <Content Include="MisArticulos.aspx" />
     <Content Include="MostrarContenido.aspx" />
     <Content Include="Scripts\bootstrap.js" />

@@ -72,7 +72,7 @@ namespace Iteracion_1
 
         public int retornarValorIdArticulo(object sender)
         {
-            LinkButton btn = (LinkButton)sender;
+            ImageButton btn = (ImageButton)sender;
             GridViewRow gvr = (GridViewRow)btn.NamingContainer;
             string temp = ((Label)gvr.Cells[0].FindControl("artId")).Text;
             int id = Int32.Parse(temp);
@@ -118,7 +118,7 @@ namespace Iteracion_1
             con.Open();
             cmd.ExecuteNonQuery();
             llenarTabla();
-            lblExito.Text = "Datos Borrados Correctamente";
+            Response.Write("<script>alert('Articulo Borrado con éxito')</script>");
 
         }
        
@@ -153,5 +153,9 @@ namespace Iteracion_1
             Response.Redirect("Editor.aspx");
         }
 
+        protected void tablaArticulos_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

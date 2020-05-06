@@ -1,7 +1,19 @@
 ﻿<%@ Page Title="Mis Articulos" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="MisArticulos.aspx.cs" Inherits="Iteracion_1.MisArticulos" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <br />
-    <asp:GridView ID="tablaArticulos" runat="server" AutoGenerateColumns="false" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" OnRowDataBound ="OnRowDataBound" style="height: 127px; position: absolute; left: 20px; top: 128px; width: 486px;">
+    <strong>
+    <asp:Label ID="lblArticulo" runat="server" style="font-family: Arial; font-size: 20px; width: 191px; height: 24px; position: absolute; left: 15px; top: 95px" Text="Mis Articulos"></asp:Label>
+    </strong>
+    <br />
+    <br />
+    <asp:Button ID ="btnAgregarArticulo" Text="Crear articulo nuevo" runat="server" OnClick="btnAgregarArticulo_Click" style="width: 195px; height: 26px; position: absolute; left: 579px; top: 96px" />
+    <br />
+    <br />
+    
+    <br />
+    <br />
+    
+    <asp:GridView ID="tablaArticulos" runat="server" AutoGenerateColumns="false" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" OnRowDataBound ="OnRowDataBound" style="height: 275px; position: absolute; left: 20px; top: 128px; width: 1046px;" OnSelectedIndexChanged="tablaArticulos_SelectedIndexChanged">
         <FooterStyle BackColor="White" ForeColor="#000066" />
         <HeaderStyle BackColor="#006699" Font-Bold="True" ForeColor="White" />
         <PagerStyle BackColor="White" ForeColor="#000066" HorizontalAlign="Left" />
@@ -35,9 +47,9 @@
 
             <asp:TemplateField>
                 <ItemTemplate>
-                    <asp:LinkButton id="lnkEditar" Text="Editar" runat="server" OnClick ="lnkEdicion"/>
-                    <asp:LinkButton id="lnkBorrar" Text="Borrar" runat="server" OnClick ="lnkBorrado" OnClientClick ="return confirm('¿Esta seguro de eliminar este artículo?')"/>
-                    <asp:LinkButton id="lnkVerMas" Text="Ver más" runat="server" OnClick ="lnkVerMasArt"/>
+                    <asp:ImageButton id="lnkEdicion" ImageUrl="~/Imagenes/Pencil-icon.png" ToolTip= "Editar" runat ="server" OnClick ="lnkEdicion" Height="30px" Width="30px"/>
+                    <asp:ImageButton id="lnkBorrar" ImageUrl="~/Imagenes/trash-icon.png" ToolTip ="Borrar" runat="server" Height="30px" Width="30px" OnClick ="lnkBorrado" OnClientClick ="return confirm('¿Esta seguro de eliminar este artículo?')"/>
+                    <asp:ImageButton id="lnkVerMas" ImageUrl="~/Imagenes/Button-Add-icon.png" ToolTip="Ver más" runat="server" Height="30px" Width="30px" OnClick ="lnkVerMasArt"/>
                 </ItemTemplate>
 
                 
@@ -47,20 +59,7 @@
 
         </Columns>
     </asp:GridView>
-    <strong>
-    <asp:Label ID="lblArticulo" runat="server" style="font-family: Arial; font-size: 20px; width: 191px; height: 24px; position: absolute; left: 15px; top: 95px" Text="Mis Articulos"></asp:Label>
-    </strong>
-    <br />
-    <br />
-    <asp:Button ID ="btnAgregarArticulo" Text="Crear articulo nuevo" runat="server" OnClick="btnAgregarArticulo_Click" style="width: 195px; height: 26px; position: absolute; left: 300px; top: 92px" />
-    <br />
-    <br />
     
-    <asp:Label ID ="lblFallo" runat ="server" ForeColor ="Red" style="width: 127px; height: 16px; position: absolute; left: 593px; top: 170px" />
-    
-    <br />
-    <asp:Label ID ="lblExito" runat ="server" ForeColor ="Green" style="width: 118px; height: 15px; position: absolute; left: 593px; top: 134px" />
-    <br />
     <br />
     <br />
     <br />

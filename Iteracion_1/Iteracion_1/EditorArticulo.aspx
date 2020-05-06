@@ -81,7 +81,7 @@
         <br />
         <br />
         <span class="auto-style2"><strong>Suba un articulo de su computadora:<asp:FileUpload ID="Seleccionador" runat="server" />
-        <asp:Button ID="btnGuardar" runat="server" OnClick="btnGuardar_Click" Text="Guardar" />
+        <asp:Button ID="btnGuardar" runat="server" OnClick="btnGuardar_Click"  OnClientClick ="return confirm('¿Esta seguro que desea guardar este artículo?')" Text="Guardar" />
         <br />
         <br />
         <asp:Label ID="lblMensaje" runat="server" CssClass="auto-style3"></asp:Label>
