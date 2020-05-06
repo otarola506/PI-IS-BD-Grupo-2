@@ -153,5 +153,9 @@ namespace Iteracion_1
             Response.Redirect("Escritor.aspx");
         }
 
+        protected void tablaArticulos_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

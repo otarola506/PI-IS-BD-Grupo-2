@@ -22,15 +22,6 @@ namespace Iteracion_1 {
         protected global::System.Web.UI.WebControls.Label lblArticulo;
         
         /// <summary>
-        /// lblExito control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblExito;
-        
-        /// <summary>
         /// btnAgregarArticulo control.
         /// </summary>
         /// <remarks>
@@ -38,15 +29,6 @@ namespace Iteracion_1 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnAgregarArticulo;
-        
-        /// <summary>
-        /// lblFallo control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblFallo;
         
         /// <summary>
         /// tablaArticulos control.

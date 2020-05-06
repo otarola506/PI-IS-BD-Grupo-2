@@ -5,18 +5,15 @@
     <asp:Label ID="lblArticulo" runat="server" style="font-family: Arial; font-size: 20px; width: 191px; height: 24px; position: absolute; left: 15px; top: 95px" Text="Mis Articulos"></asp:Label>
     </strong>
     <br />
-    <asp:Label ID ="lblExito" runat ="server" ForeColor ="Green" style="width: 118px; height: 15px; position: absolute; left: 1090px; top: 131px" />
     <br />
-    <asp:Button ID ="btnAgregarArticulo" Text="Crear articulo nuevo" runat="server" OnClick="btnAgregarArticulo_Click" style="width: 195px; height: 26px; position: absolute; left: 300px; top: 92px" />
+    <asp:Button ID ="btnAgregarArticulo" Text="Crear articulo nuevo" runat="server" OnClick="btnAgregarArticulo_Click" style="width: 195px; height: 26px; position: absolute; left: 579px; top: 96px" />
     <br />
     <br />
-    
-    <asp:Label ID ="lblFallo" runat ="server" ForeColor ="Red" style="width: 127px; height: 16px; position: absolute; left: 1088px; top: 173px" />
     
     <br />
     <br />
     
-    <asp:GridView ID="tablaArticulos" runat="server" AutoGenerateColumns="false" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" OnRowDataBound ="OnRowDataBound" style="height: 275px; position: absolute; left: 20px; top: 128px; width: 1046px;">
+    <asp:GridView ID="tablaArticulos" runat="server" AutoGenerateColumns="false" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" OnRowDataBound ="OnRowDataBound" style="height: 275px; position: absolute; left: 20px; top: 128px; width: 1046px;" OnSelectedIndexChanged="tablaArticulos_SelectedIndexChanged">
         <FooterStyle BackColor="White" ForeColor="#000066" />
         <HeaderStyle BackColor="#006699" Font-Bold="True" ForeColor="White" />
         <PagerStyle BackColor="White" ForeColor="#000066" HorizontalAlign="Left" />
