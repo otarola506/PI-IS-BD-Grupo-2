@@ -7,7 +7,7 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace Editor {
+namespace Iteracion_1 {
     
     
     public partial class editorTexto {

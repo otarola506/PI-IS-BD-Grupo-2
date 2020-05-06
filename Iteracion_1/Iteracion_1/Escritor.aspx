@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" ValidateRequest="false" CodeBehind="editorTexto.aspx.cs" Inherits="Editor.editorTexto" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" ValidateRequest="false" CodeBehind="editorTexto.aspx.cs" Inherits="Iteracion_1.editorTexto" %>
 
 <!DOCTYPE html>
 

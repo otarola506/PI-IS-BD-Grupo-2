@@ -9,7 +9,7 @@ using System.Data.SqlClient;
 using System.Text;
 using System.Configuration;
 
-namespace Editor
+namespace Iteracion_1
 {
     public partial class editorTexto : System.Web.UI.Page
     {
@@ -73,7 +73,7 @@ namespace Editor
             cmd.Parameters.Add("@resumen", SqlDbType.VarBinary).Value = bytesTextResumen;
             cmd.Parameters.Add("@contenido", SqlDbType.VarBinary).Value = bytesText;
             cmd.Parameters.Add("@tipo", SqlDbType.Bit).Value = 0;
-            cmd.Parameters.Add("@extencion", SqlDbType.VarChar).Value = null;
+            cmd.Parameters.Add("@extencion", SqlDbType.VarChar).Value = "";
             cn.Open();
             cmd.ExecuteNonQuery();
         }
