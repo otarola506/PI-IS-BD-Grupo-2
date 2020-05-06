@@ -114,6 +114,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Default.aspx" />
+    <Content Include="Editor.aspx" />
     <Content Include="EditorArticulo.aspx" />
     <Content Include="Escritor.aspx" />
     <Content Include="favicon.ico" />
@@ -196,6 +197,13 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Editor.aspx.cs">
+      <DependentUpon>Editor.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Editor.aspx.designer.cs">
+      <DependentUpon>Editor.aspx</DependentUpon>
     </Compile>
     <Compile Include="Escritor.aspx.cs">
       <DependentUpon>Escritor.aspx</DependentUpon>
