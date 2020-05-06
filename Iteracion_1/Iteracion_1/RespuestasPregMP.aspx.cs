@@ -61,5 +61,37 @@ namespace Iteracion_1
             Session["PregID"] = pregID;
             Response.Redirect("AgregarRespuestaMP.aspx");
         }
+
+        protected void DButton_OnClick(object sender, EventArgs e)
+        {
+            string[] arg = new string[2];
+            arg = (sender as Button).CommandArgument.Split(';');
+            int pregID = Convert.ToInt32(arg[0]);
+            int respID = Convert.ToInt32(arg[1]);
+            connection();
+            if (con.State == ConnectionState.Closed)
+            {
+                con.Open();
+            }
+            SqlDataAdapter sqlDa = new SqlDataAdapter("EliminarRespuesta", con);
+            sqlDa.SelectCommand.CommandType = CommandType.StoredProcedure;
+            sqlDa.SelectCommand.Parameters.AddWithValue("@RespID", respID);
+            sqlDa.SelectCommand.Parameters.AddWithValue("@PregID", pregID);
+            DataTable dtbl = new DataTable();
+            sqlDa.Fill(dtbl);
+            con.Close();
+            FillGridView(sender,e);
+            Response.Write("<script>alert('Respuesta eliminada con éxito')</script>");
+        }
+
+        protected void EButton_OnClick(object sender, EventArgs e)
+        {
+            string[] arg = new string[3];
+            arg = (sender as Button).CommandArgument.Split(';');
+            Session["PregID"] = arg[0];
+            Session["Respuesta"] = arg[1];
+            Session["RespID"] = arg[2];
+            Response.Redirect("EdicionRespMP.aspx");
+        }
     }
 }

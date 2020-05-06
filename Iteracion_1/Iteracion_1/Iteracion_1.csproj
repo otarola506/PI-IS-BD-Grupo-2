@@ -119,6 +119,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Default.aspx" />
     <Content Include="EdicionPregMP.aspx" />
+    <Content Include="EdicionRespMP.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -206,6 +207,13 @@
     </Compile>
     <Compile Include="EdicionPregMP.aspx.designer.cs">
       <DependentUpon>EdicionPregMP.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EdicionRespMP.aspx.cs">
+      <DependentUpon>EdicionRespMP.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EdicionRespMP.aspx.designer.cs">
+      <DependentUpon>EdicionRespMP.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

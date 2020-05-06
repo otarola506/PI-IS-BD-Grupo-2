@@ -61,6 +61,7 @@ namespace Iteracion_1
             con.Close();
             TxtBoxPN.Text = "";
             FillGridView();
+            Response.Write("<script>alert('Pregunta enviada con éxito')</script>");
         }
 
         protected void VerRespButton_OnClick(object sender, EventArgs e)
