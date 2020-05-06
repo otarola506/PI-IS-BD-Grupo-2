@@ -11,7 +11,7 @@ using System.Configuration;
 
 namespace Iteracion_1
 {
-    public partial class RespuestasPreg : System.Web.UI.Page
+    public partial class RespuestasPregMP : System.Web.UI.Page
     {
         private SqlConnection con;
 
@@ -52,14 +52,14 @@ namespace Iteracion_1
 
         protected void VolverButton_OnClick(object sender, EventArgs e)
         {
-            Response.Redirect("SeccionPregFrec.aspx");
+            Response.Redirect("SeccionPregFrecMP.aspx");
         }
 
         protected void ERButton_OnClick(object sender, EventArgs e)
         {
             int pregID = Convert.ToInt32(Session["PregID"]);
             Session["PregID"] = pregID;
-            Response.Redirect("AgregarRespuesta.aspx");
+            Response.Redirect("AgregarRespuestaMP.aspx");
         }
     }
 }

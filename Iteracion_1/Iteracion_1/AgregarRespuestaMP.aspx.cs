@@ -9,9 +9,9 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
 
-namespace PreguntasWebForms
+namespace Iteracion_1
 {
-    public partial class EdicionPreg : System.Web.UI.Page
+    public partial class AgregarRespuestaMP : System.Web.UI.Page
     {
         private SqlConnection con;
 
@@ -23,14 +23,10 @@ namespace PreguntasWebForms
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
-            {
-                string Pregunta = Convert.ToString(Session["Pregunta"]);
-                TxtBoxPN.Text = Pregunta;
-            }
+
         }
 
-        protected void GEButton_OnClick(object sender, EventArgs e)
+        protected void GRButton_OnClick(object sender, EventArgs e)
         {
             int pregID = Convert.ToInt32(Session["PregID"]);
             connection();
@@ -38,19 +34,19 @@ namespace PreguntasWebForms
             {
                 con.Open();
             }
-            SqlCommand sqlCmd = new SqlCommand("EditPregunta", con);
+            SqlCommand sqlCmd = new SqlCommand("AddRespuesta", con);
             sqlCmd.CommandType = CommandType.StoredProcedure;
+            sqlCmd.Parameters.AddWithValue("@Respuesta", TxtBoxRN.Text.Trim());
             sqlCmd.Parameters.AddWithValue("@PregID", pregID);
-            sqlCmd.Parameters.AddWithValue("@Pregunta", TxtBoxPN.Text.Trim());
+            sqlCmd.Parameters.AddWithValue("@MiembroID", 0);
             sqlCmd.ExecuteNonQuery();
             con.Close();
-            Response.Write("<script>alert('Pregunta editada con éxito')</script>");
-            Response.Redirect("PreguntasRecibidas.aspx");
+            Response.Redirect("RespuestasPregMP.aspx");
         }
 
         protected void VolverButton_OnClick(object sender, EventArgs e)
         {
-            Response.Redirect("PreguntasRecibidas.aspx");
+            Response.Redirect("RespuestasPregMP.aspx");
         }
     }
 }

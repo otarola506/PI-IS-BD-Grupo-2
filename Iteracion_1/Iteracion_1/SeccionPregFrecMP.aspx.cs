@@ -11,7 +11,7 @@ using System.Configuration;
 
 namespace Iteracion_1
 {
-    public partial class SeccionPregFrec : System.Web.UI.Page
+    public partial class SeccionPregFrecMP : System.Web.UI.Page
     {
         private SqlConnection con;
 
@@ -67,11 +67,11 @@ namespace Iteracion_1
         {
             //int pregID = Convert.ToInt32((sender as Button).CommandArgument);
             string[] arg = new string[2];
-            arg = (sender as Button).CommandArgument.Split(';') ;
+            arg = (sender as Button).CommandArgument.Split(';');
             Session["PregID"] = arg[0];
             Session["Pregunta"] = arg[1];
             //Session["PregID"] = pregID;
-            Response.Redirect("RespuestasPreg.aspx");
+            Response.Redirect("RespuestasPregMP.aspx");
         }
 
         protected void EFButton_OnClick(object sender, EventArgs e)
@@ -91,6 +91,5 @@ namespace Iteracion_1
             FillGridView();
             Response.Write("<script>alert('Pregunta eliminada de la sección de preguntas frecuentes con éxito')</script>");
         }
-
     }
 }

@@ -7,37 +7,37 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace PreguntasWebForms {
+namespace Iteracion_1 {
     
     
-    public partial class EdicionPreg {
+    public partial class RespuestasPregMP {
         
         /// <summary>
-        /// Control form1.
+        /// Control PregLabel.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
+        protected global::System.Web.UI.WebControls.Label PregLabel;
         
         /// <summary>
-        /// Control Label2.
+        /// Control Label1.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label2;
+        protected global::System.Web.UI.WebControls.Label Label1;
         
         /// <summary>
-        /// Control TxtBoxPN.
+        /// Control gvRptasPreg.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TxtBoxPN;
+        protected global::System.Web.UI.WebControls.GridView gvRptasPreg;
         
         /// <summary>
         /// Control VolverButton.
@@ -49,12 +49,12 @@ namespace PreguntasWebForms {
         protected global::System.Web.UI.WebControls.Button VolverButton;
         
         /// <summary>
-        /// Control Button2.
+        /// Control ERButton.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button2;
+        protected global::System.Web.UI.WebControls.Button ERButton;
     }
 }

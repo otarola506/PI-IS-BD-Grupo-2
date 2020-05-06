@@ -10,43 +10,25 @@
 namespace Iteracion_1 {
     
     
-    public partial class RespuestasPreg {
+    public partial class AgregarRespuestaMP {
         
         /// <summary>
-        /// Control form1.
+        /// Control Label2.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
+        protected global::System.Web.UI.WebControls.Label Label2;
         
         /// <summary>
-        /// Control PregLabel.
+        /// Control TxtBoxRN.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label PregLabel;
-        
-        /// <summary>
-        /// Control Label1.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label1;
-        
-        /// <summary>
-        /// Control gvRptasPreg.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvRptasPreg;
+        protected global::System.Web.UI.WebControls.TextBox TxtBoxRN;
         
         /// <summary>
         /// Control VolverButton.
@@ -58,12 +40,12 @@ namespace Iteracion_1 {
         protected global::System.Web.UI.WebControls.Button VolverButton;
         
         /// <summary>
-        /// Control ERButton.
+        /// Control GRButton.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ERButton;
+        protected global::System.Web.UI.WebControls.Button GRButton;
     }
 }

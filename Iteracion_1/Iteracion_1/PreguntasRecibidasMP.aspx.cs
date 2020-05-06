@@ -9,9 +9,9 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
 
-namespace PreguntasWebForms
+namespace Iteracion_1
 {
-    public partial class PreguntasRecibidas : System.Web.UI.Page
+    public partial class PreguntasRecibidasMP : System.Web.UI.Page
     {
         private SqlConnection con;
 
@@ -96,7 +96,7 @@ namespace PreguntasWebForms
             arg = (sender as Button).CommandArgument.Split(';');
             Session["PregID"] = arg[0];
             Session["Pregunta"] = arg[1];
-            Response.Redirect("EdicionPreg.aspx");
+            Response.Redirect("EdicionPregMP.aspx");
         }
-    }   
+    }
 }

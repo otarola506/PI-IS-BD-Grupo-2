@@ -110,7 +110,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="About.aspx" />
-    <Content Include="AgregarRespuesta.aspx" />
+    <Content Include="AgregarRespuestaMP.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -118,7 +118,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Default.aspx" />
-    <Content Include="EdicionPreg.aspx" />
+    <Content Include="EdicionPregMP.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -132,8 +132,8 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="MisArticulos.aspx" />
-    <Content Include="PreguntasRecibidas.aspx" />
-    <Content Include="RespuestasPreg.aspx" />
+    <Content Include="PreguntasRecibidasMP.aspx" />
+    <Content Include="RespuestasPregMP.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
@@ -162,7 +162,7 @@
     <Content Include="Scripts\WebForms\WebForms.js" />
     <Content Include="Scripts\WebForms\WebParts.js" />
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
-    <Content Include="SeccionPregFrec.aspx" />
+    <Content Include="SeccionPregFrecMP.aspx" />
     <Content Include="Site.Master" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
@@ -170,12 +170,12 @@
     <Content Include="Site.Mobile.Master" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AgregarRespuesta.aspx.cs">
-      <DependentUpon>AgregarRespuesta.aspx</DependentUpon>
+    <Compile Include="AgregarRespuestaMP.aspx.cs">
+      <DependentUpon>AgregarRespuestaMP.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="AgregarRespuesta.aspx.designer.cs">
-      <DependentUpon>AgregarRespuesta.aspx</DependentUpon>
+    <Compile Include="AgregarRespuestaMP.aspx.designer.cs">
+      <DependentUpon>AgregarRespuestaMP.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="About.aspx.cs">
@@ -200,12 +200,12 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
-    <Compile Include="EdicionPreg.aspx.cs">
-      <DependentUpon>EdicionPreg.aspx</DependentUpon>
+    <Compile Include="EdicionPregMP.aspx.cs">
+      <DependentUpon>EdicionPregMP.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="EdicionPreg.aspx.designer.cs">
-      <DependentUpon>EdicionPreg.aspx</DependentUpon>
+    <Compile Include="EdicionPregMP.aspx.designer.cs">
+      <DependentUpon>EdicionPregMP.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -217,27 +217,27 @@
     <Compile Include="MisArticulos.aspx.designer.cs">
       <DependentUpon>MisArticulos.aspx</DependentUpon>
     </Compile>
-    <Compile Include="PreguntasRecibidas.aspx.cs">
-      <DependentUpon>PreguntasRecibidas.aspx</DependentUpon>
+    <Compile Include="PreguntasRecibidasMP.aspx.cs">
+      <DependentUpon>PreguntasRecibidasMP.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="PreguntasRecibidas.aspx.designer.cs">
-      <DependentUpon>PreguntasRecibidas.aspx</DependentUpon>
+    <Compile Include="PreguntasRecibidasMP.aspx.designer.cs">
+      <DependentUpon>PreguntasRecibidasMP.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RespuestasPreg.aspx.cs">
-      <DependentUpon>RespuestasPreg.aspx</DependentUpon>
+    <Compile Include="RespuestasPregMP.aspx.cs">
+      <DependentUpon>RespuestasPregMP.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="RespuestasPreg.aspx.designer.cs">
-      <DependentUpon>RespuestasPreg.aspx</DependentUpon>
+    <Compile Include="RespuestasPregMP.aspx.designer.cs">
+      <DependentUpon>RespuestasPregMP.aspx</DependentUpon>
     </Compile>
-    <Compile Include="SeccionPregFrec.aspx.cs">
-      <DependentUpon>SeccionPregFrec.aspx</DependentUpon>
+    <Compile Include="SeccionPregFrecMP.aspx.cs">
+      <DependentUpon>SeccionPregFrecMP.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="SeccionPregFrec.aspx.designer.cs">
-      <DependentUpon>SeccionPregFrec.aspx</DependentUpon>
+    <Compile Include="SeccionPregFrecMP.aspx.designer.cs">
+      <DependentUpon>SeccionPregFrecMP.aspx</DependentUpon>
     </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>

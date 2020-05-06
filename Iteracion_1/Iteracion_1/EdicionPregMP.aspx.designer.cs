@@ -10,16 +10,7 @@
 namespace Iteracion_1 {
     
     
-    public partial class AgregarRespuesta {
-        
-        /// <summary>
-        /// Control form1.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
+    public partial class EdicionPregMP {
         
         /// <summary>
         /// Control Label2.
@@ -31,13 +22,13 @@ namespace Iteracion_1 {
         protected global::System.Web.UI.WebControls.Label Label2;
         
         /// <summary>
-        /// Control TxtBoxRN.
+        /// Control TxtBoxPN.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TxtBoxRN;
+        protected global::System.Web.UI.WebControls.TextBox TxtBoxPN;
         
         /// <summary>
         /// Control VolverButton.
@@ -49,12 +40,12 @@ namespace Iteracion_1 {
         protected global::System.Web.UI.WebControls.Button VolverButton;
         
         /// <summary>
-        /// Control GRButton.
+        /// Control Button2.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button GRButton;
+        protected global::System.Web.UI.WebControls.Button Button2;
     }
 }
