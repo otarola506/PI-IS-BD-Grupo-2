@@ -98,7 +98,7 @@ namespace Iteracion_1
             if (tipoArticulo == false)
             {
                 Session["articuloID"] = artId;
-                Response.Redirect("EditorArticulo.aspx");
+                Response.Redirect("EditorArticuloModificado.aspx");
             }
             else
             {
@@ -153,9 +153,6 @@ namespace Iteracion_1
             Response.Redirect("Editor.aspx");
         }
 
-        protected void tablaArticulos_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
+        
     }
 }
