@@ -13,7 +13,15 @@ namespace Iteracion_1
 {
     public partial class Editor : System.Web.UI.Page
     {
+
+        private void connection()
+        {
+            string conString = ConfigurationManager.ConnectionStrings["grupo2Conn"].ToString();
+            con = new SqlConnection(conString);
+        }
+
         string conString = "Data Source=172.16.202.24;Initial Catalog=BD_Grupo2;User ID=Grupo2;Password=grupo2.";
+        private SqlConnection con;
         Encoding unicode = Encoding.Unicode;
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -84,6 +92,17 @@ namespace Iteracion_1
             cmd4.Parameters.Add("@catId", SqlDbType.Int).Value = cat;
             cmd4.ExecuteNonQuery();
         }
+        public void guardarMiembrosAutores(SqlConnection con, string miembroID, string artID)
+        {
+            SqlCommand cmd4 = new SqlCommand("Guardar_Miembro_Articulo", con);
+            cmd4.CommandType = CommandType.StoredProcedure;
+            int art = Int32.Parse(artID);
+            int mie = Int32.Parse(miembroID);
+            cmd4.Parameters.Add("@artId", SqlDbType.Int).Value = art;
+            cmd4.Parameters.Add("@miembroId", SqlDbType.Int).Value = mie;
+            cmd4.ExecuteNonQuery();
+        }
+
         public bool checkCategoria()
         {
             bool valor = false;
@@ -287,6 +306,63 @@ namespace Iteracion_1
 
                     }
 
+
+                    //Parte de guardar autores 
+                    //Separar el string
+                    string autores_no_separados = txtAutores.Text.ToString();
+                    lblprueba.Text = autores_no_separados;
+                    string[] autores = autores_no_separados.Split(',');
+
+                    ////Obtemos el id de cada miembro del arreglo
+                    connection();
+                    con.Open();
+                    foreach (string autor in autores)
+                    {
+                        string miembroID = "";
+                        SqlCommand cmd2 = new SqlCommand("obtenerMiembroID", con);
+                        cmd2.CommandType = CommandType.StoredProcedure;
+                        cmd2.Parameters.Add("@nombre", SqlDbType.VarChar).Value = autor; // le pasamos el valor del string
+                        SqlDataReader reader = cmd2.ExecuteReader();
+
+                        if (reader.Read())
+                        {
+                            miembroID = reader[0].ToString();
+                        }
+                        reader.Close();
+
+                        if (miembroID == "")
+                        {
+                            //El mae metio un nombre de alguien que no pertenece a los miembros
+                            lblMensaje.Text = "Escribio mal el nombre o ingreso un nombre de un miembro que no pertene a la comunidad, solo miembros pueden escribir";
+                            lblMensaje.ForeColor = System.Drawing.Color.Red;
+                        }
+                        else
+                        {
+                            //Se encontro al miembro en la tabla
+                            //usamos el artID para guardar
+                            guardarMiembrosAutores(con,miembroID,artID);
+                            
+
+                        }
+
+
+
+                    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                     txtTitulo.Text = String.Empty;
                     txtResumen.Text = String.Empty;
                     txtArticulo.Text = String.Empty;
@@ -310,6 +386,11 @@ namespace Iteracion_1
                 lblMensaje.Text = "Por favor escriba una articulo o suba un articulo ya escrito";
                 lblMensaje.ForeColor = System.Drawing.Color.Red;
             }
+        }
+
+        protected void btnPrueba_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -57,11 +57,20 @@
     <p>
         <asp:FileUpload ID="Seleccionador" runat="server" />
     </p>
+    <p style="font-size: x-large">
+        <strong>Ingrese los nombres de los miembros autores(separados por una coma):</strong></p>
+    <p style="font-size: x-large">
+        <asp:TextBox ID="txtAutores" runat="server"></asp:TextBox>
+    </p>
+    <p>
+        <asp:Button ID="btnPrueba" runat="server" OnClick="btnPrueba_Click" Text="comprobar" />
+    </p>
     <p>
         <asp:Button ID="btnGuardar" runat="server" Height="41px" Text="Guardar" Width="124px" OnClick="btnGuardar_Click" />
     </p>
     <p>
-        &nbsp;</p>
+        <asp:Label ID="lblprueba" runat="server"></asp:Label>
+    </p>
     <p>
         <asp:Label ID="lblMensaje" runat="server"></asp:Label>
     </p>
