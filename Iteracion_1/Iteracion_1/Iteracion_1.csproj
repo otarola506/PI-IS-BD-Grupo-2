@@ -115,8 +115,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Default.aspx" />
     <Content Include="Editor.aspx" />
-    <Content Include="EditorArticulo.aspx" />
-    <Content Include="Escritor.aspx" />
+    <Content Include="EditorArticuloModificado.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -208,19 +207,12 @@
     <Compile Include="Editor.aspx.designer.cs">
       <DependentUpon>Editor.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Escritor.aspx.cs">
-      <DependentUpon>Escritor.aspx</DependentUpon>
+    <Compile Include="EditorArticuloModificado.aspx.cs">
+      <DependentUpon>EditorArticuloModificado.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Escritor.aspx.designer.cs">
-      <DependentUpon>Escritor.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="EditorArticulo.aspx.cs">
-      <DependentUpon>EditorArticulo.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="EditorArticulo.aspx.designer.cs">
-      <DependentUpon>EditorArticulo.aspx</DependentUpon>
+    <Compile Include="EditorArticuloModificado.aspx.designer.cs">
+      <DependentUpon>EditorArticuloModificado.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

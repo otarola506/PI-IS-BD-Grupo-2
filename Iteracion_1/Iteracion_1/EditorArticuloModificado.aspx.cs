@@ -11,7 +11,7 @@ using System.Configuration;
 
 namespace Iteracion_1
 {
-    public partial class EditorArticulo : System.Web.UI.Page
+    public partial class EditorArticuloModificado : System.Web.UI.Page
     {
         Encoding unicode = Encoding.Unicode;
         private SqlConnection con;
@@ -20,13 +20,13 @@ namespace Iteracion_1
             string conString = ConfigurationManager.ConnectionStrings["grupo2Conn"].ToString();
             con = new SqlConnection(conString);
         }
-        
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                
-                
+
+
                 cargarCategorias();
                 cargarContenidoArticulo();
 
@@ -45,7 +45,7 @@ namespace Iteracion_1
             byte[] resumenByte = new byte[] { };
             string tituloRetorno = "";
             Boolean tipoArticulo = false;
-            
+
             if (reader.Read())
             {
                 tituloRetorno = reader[1].ToString();
@@ -64,7 +64,7 @@ namespace Iteracion_1
                 txtArticulo.Text = contenidoString;
                 eliminarCategoria();
             }
-            
+
         }
         //Create one method "BindHobbies" for populate hobbies from Database
         public void cargarCategorias()
@@ -103,9 +103,10 @@ namespace Iteracion_1
             con.Open();
             cmd.ExecuteNonQuery();
             con.Close();
-           
+
         }
-        public void eliminarCategoria() {
+        public void eliminarCategoria()
+        {
             int artId = Convert.ToInt32(Session["articuloId"]);
             SqlCommand cmd = new SqlCommand("Borrar_Categoria", con);
             cmd.CommandType = CommandType.StoredProcedure;
@@ -130,7 +131,7 @@ namespace Iteracion_1
             con.Open();
             cmd.ExecuteNonQuery();
             con.Close();
-            
+
         }
 
         public void guardarCategoriaArticulo(SqlConnection con, string catID, string artID)
@@ -213,7 +214,7 @@ namespace Iteracion_1
 
 
 
-                        
+
 
                         //Guardamos las categorias del articulo
                         string categoriasId = "";
@@ -241,13 +242,13 @@ namespace Iteracion_1
 
 
                                 categoriasId = categoriasId + catID; // prueba
-                                                                        //lector.Close();
+                                                                     //lector.Close();
                                 con.Close();
                             }
                         }
 
 
-                        
+
 
                         txtTitulo.Text = String.Empty;
                         txtArticulo.Text = String.Empty;
@@ -284,8 +285,8 @@ namespace Iteracion_1
                     //Guardamos el contenido de txtArticulo en  
                     connection();
                     guardarArticulosTexto();
-                    
-                    
+
+
 
 
 
@@ -303,10 +304,10 @@ namespace Iteracion_1
 
 
 
-                    
+
 
                     //Guardamos las categorias del articulo
-                   
+
                     string categoriasId = "";
                     connection();
                     foreach (ListItem li in selectCategorias.Items)
@@ -337,7 +338,7 @@ namespace Iteracion_1
                         }
                     }
 
-                    
+
 
                     txtTitulo.Text = String.Empty;
                     txtResumen.Text = String.Empty;

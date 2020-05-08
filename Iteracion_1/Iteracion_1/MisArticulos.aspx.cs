@@ -98,7 +98,7 @@ namespace Iteracion_1
             if (tipoArticulo == false)
             {
                 Session["articuloID"] = artId;
-                Response.Redirect("EditorArticulo.aspx");
+                Response.Redirect("EditorArticuloModificado.aspx");
             }
             else
             {
@@ -137,14 +137,34 @@ namespace Iteracion_1
             reader.Read();
             tipoArticulo = (Boolean)reader[5];
             reader.Close();
-
             if (tipoArticulo == false)
             {
                 Session["articuloID"] = artId;
                 Response.Redirect("MostrarContenido.aspx");
             }
+            else {
             
-            
+                //Descargar archivo desde base de datos
+                reader = cmd.ExecuteReader();
+                reader.Read();
+                string fileName = reader["titulo"].ToString();
+                byte[] contenidoArt = (byte[])reader["contenido"];
+                string extension = reader[6].ToString();
+                Response.Clear();
+                Response.Buffer = true;
+                Response.Charset = "";
+                Response.Cache.SetCacheability(HttpCacheability.NoCache);
+                Response.ContentType = extension;
+                Response.AppendHeader("Content-Disposition", "attachment; filename=" + fileName);
+                Response.BinaryWrite(contenidoArt);
+                Response.Flush();
+                Response.End();
+
+
+
+            }
+
+
 
         }
 
@@ -153,9 +173,6 @@ namespace Iteracion_1
             Response.Redirect("Editor.aspx");
         }
 
-        protected void tablaArticulos_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
+        
     }
 }
