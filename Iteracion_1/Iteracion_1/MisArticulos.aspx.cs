@@ -33,8 +33,13 @@ namespace Iteracion_1
         {
             connection();
             con.Open();
+            lblArticulo.Text = "Bienvenido a sus Articulos";// Para ejemplificar mostrar de un autor
             DataTable dt = new DataTable();
-            SqlDataAdapter ad = new SqlDataAdapter("Recuperar_ID_Titulo_Resumen", con);
+            SqlDataAdapter ad = new SqlDataAdapter();
+            SqlCommand cmd = new SqlCommand("Recuperar_Articulos_Autor",con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@miembroId", SqlDbType.Int).Value = -1; // En este caso está quemado el valor
+            ad.SelectCommand = cmd;
             ad.Fill(dt);
             tablaArticulos.DataSource = dt;
             tablaArticulos.DataBind();
@@ -149,7 +154,7 @@ namespace Iteracion_1
                 reader.Read();
                 string fileName = reader["titulo"].ToString();
                 byte[] contenidoArt = (byte[])reader["contenido"];
-                string extension = reader[6].ToString();
+                string extension = reader[5].ToString();
                 Response.Clear();
                 Response.Buffer = true;
                 Response.Charset = "";

@@ -2,7 +2,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <br />
     <strong>
-    <asp:Label ID="lblArticulo" runat="server" style="font-family: Arial; font-size: 20px; width: 191px; height: 24px; position: absolute; left: 15px; top: 95px" Text="Mis Articulos"></asp:Label>
+    <asp:Label ID="lblArticulo" runat="server" style="font-family: Arial; font-size: 20px; width: 482px; height: 24px; position: absolute; left: 15px; top: 95px"></asp:Label>
     </strong>
     <br />
     <br />
@@ -13,7 +13,7 @@
     <br />
     <br />
     
-    <asp:GridView ID="tablaArticulos" runat="server" AutoGenerateColumns="false" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" OnRowDataBound ="OnRowDataBound" style="height: 275px; position: absolute; left: 20px; top: 128px; width: 1046px;">
+    <asp:GridView ID="tablaArticulos" runat="server" AutoGenerateColumns="false" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" OnRowDataBound ="OnRowDataBound" style="height: 275px; position: absolute; left: 17px; top: 154px; width: 1208px;">
         <FooterStyle BackColor="White" ForeColor="#000066" />
         <HeaderStyle BackColor="#006699" Font-Bold="True" ForeColor="White" />
         <PagerStyle BackColor="White" ForeColor="#000066" HorizontalAlign="Left" />

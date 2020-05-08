@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" ValidateRequest ="false" AutoEventWireup="true" CodeBehind="EditorArticuloModificado.aspx.cs" Inherits="Iteracion_1.EditorArticuloModificado" %>
+﻿<%@ Page Title="Editor Texto" Language="C#" MasterPageFile="~/Site.Master" ValidateRequest ="false" AutoEventWireup="true" CodeBehind="EditorArticuloModificado.aspx.cs" Inherits="Iteracion_1.EditorArticuloModificado" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server" >
      <script src="https://cdn.tiny.cloud/1/ppfs7sld936k48b757gwua5p0k1knn5by42zeg00gm61xqwb/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 
