@@ -2,7 +2,6 @@ CREATE TABLE Miembro(
 	miembroIdPK INTEGER NOT NULL PRIMARY KEY IDENTITY (-1,1),
 	nombre VARCHAR(50) NOT NULL
 );
-
 CREATE TABLE Articulo(
 	artIdPK INTEGER NOT NULL PRIMARY KEY IDENTITY (1,1),
 	titulo VARCHAR(max) NOT NULL,
@@ -36,29 +35,38 @@ CREATE TABLE Art_Categoria (
 	FOREIGN KEY(artIdFK) REFERENCES Articulo (artIdPK)
 		ON DELETE CASCADE
 );
-
-CREATE TABLE Pregunta(
+CREATE TABLE Pregunta_Frecuente(
 	pregIdPK INTEGER NOT NULL PRIMARY KEY IDENTITY (1,1),
-	pregunta VARCHAR(max) NOT NULL,
 	miembroIdFK INTEGER DEFAULT -1,
-	frecuente bit NOT NULL,
+	pregunta VARCHAR(max) NOT NULL,
+	respuesta VARCHAR(max) NOT NULL,
 
 	CONSTRAINT FK_Pregunta_Miembro
 		FOREIGN KEY(miembroIdFK) REFERENCES Miembro(miembroIdPK)
 			ON DELETE SET DEFAULT
 );
-
-CREATE TABLE Respuesta(
-	repId INTEGER NOT NULL PRIMARY KEY IDENTITY (1,1),
-	respuesta VARCHAR(max) NOT NULL,
-	pregIdFK INTEGER NOT NULL,
-	miembroIdFK INTEGER NOT NULL DEFAULT -1
-
-	CONSTRAINT FK_Respuesta_Pregunta
-		FOREIGN KEY(pregIdFK) REFERENCES Pregunta(pregIdPK)
-			ON DELETE CASCADE,
-
-	CONSTRAINT FK_Respuesta_Miembro
+CREATE TABLE Miembro_Nucleo(
+	miembroIdFK INTEGER  NOT NULL DEFAULT -1,
+	
+	CONSTRAINT FK_Nucleo_Miembro
 		FOREIGN KEY(miembroIdFK) REFERENCES Miembro(miembroIdPK)
-		ON DELETE SET DEFAULT
+			ON DELETE SET DEFAULT
 );
+
+CREATE TABLE Miembro_Articulo(
+	miembroIdFK INTEGER NOT NULL DEFAULT -1,
+	artIdFK INTEGER NOT NULL, 
+
+	CONSTRAINT PK_ArticuloMiembro PRIMARY KEY(miembroIdFK,artIdFK),
+	CONSTRAINT FK_Escribe_Miembro
+		FOREIGN KEY(miembroIdFK) REFERENCES Miembro(miembroIdPK)
+			ON DELETE SET DEFAULT,
+	CONSTRAINT FK_Escribe_Articulo
+		FOREIGN KEY(artIdFK) REFERENCES Articulo(artIdPK)
+			ON DELETE CASCADE
+);
+INSERT INTO Miembro
+VALUES('Anonimo')
+
+INSERT INTO Categoria
+VALUES('No especificada')
