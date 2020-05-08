@@ -92,7 +92,7 @@ namespace Iteracion_1
             Boolean tipoArticulo = false;
             if (reader.Read())
             {
-                tipoArticulo = (Boolean)reader[5];
+                tipoArticulo = (Boolean)reader[4];
 
             }
             if (tipoArticulo == false)
@@ -135,7 +135,7 @@ namespace Iteracion_1
 
             Boolean tipoArticulo = false;
             reader.Read();
-            tipoArticulo = (Boolean)reader[5];
+            tipoArticulo = (Boolean)reader[4];
             reader.Close();
             if (tipoArticulo == false)
             {
