@@ -366,9 +366,5 @@ namespace Iteracion_1
             }
         }
 
-        protected void btnVuelve_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("MisArticulos.aspx");
-        }
     }
 }

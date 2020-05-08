@@ -36,6 +36,36 @@
     <p>
         &nbsp;</p>
     <p>
+        &nbsp;</p>
+    <p>
+        &nbsp;</p>
+    <p>
+        &nbsp;</p>
+    <p>
+        &nbsp;</p>
+    <p>
+        &nbsp;</p>
+    <p>
+        <asp:GridView ID="grCategorias" runat="server" AutoGenerateColumns ="false" style="width: 162px; height: 64px; position: absolute; left: 1223px; top: 106px">
+            <Columns>
+                <asp:TemplateField HeaderText="Categorias del Articulo">
+                    <ItemTemplate>
+                    <asp:Label ID="categoria" Text='<%# Eval("nombre")%>' runat="server" />
+                    </ItemTemplate>
+                </asp:TemplateField>
+
+            </Columns>
+
+
+        </asp:GridView>
+    </p>
+    <p>
+        &nbsp;</p>
+    <p>
+        &nbsp;</p>
+    <p>
+        &nbsp;</p>
+    <p>
     </p>
     <p>
     </p>

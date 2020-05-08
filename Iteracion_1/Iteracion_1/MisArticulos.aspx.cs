@@ -45,8 +45,6 @@ namespace Iteracion_1
             reader.Close();
             ad.SelectCommand = cmd;
             ad.Fill(dt);
-            tablaArticulos.DataSource = dt;
-            tablaArticulos.DataBind();
             if (dt.Rows.Count > 0)
             {
                 tablaArticulos.DataSource = dt;

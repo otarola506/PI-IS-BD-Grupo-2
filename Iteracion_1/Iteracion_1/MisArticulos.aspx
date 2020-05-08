@@ -24,7 +24,7 @@
         <SortedDescendingCellStyle BackColor="#CAC9C9" />
         <SortedDescendingHeaderStyle BackColor="#00547E" />
         <Columns>
-            <asp:TemplateField HeaderText ="Id Artículo">
+            <asp:TemplateField HeaderText = "Id Artículo">
                 <ItemTemplate>
                     <asp:Label ID="artId" Text='<%# Eval("artIdPK")%>' runat="server" />
                 </ItemTemplate>
@@ -52,14 +52,14 @@
                     <asp:ImageButton id="lnkVerMas" ImageUrl="~/Imagenes/Button-Add-icon.png" ToolTip="Ver más" runat="server" Height="30px" Width="30px" OnClick ="lnkVerMasArt"/>
                 </ItemTemplate>
 
-                
-                    
-
             </asp:TemplateField>
 
         </Columns>
     </asp:GridView>
     
+    <br />
+    <br />
+    <br />
     <br />
     <br />
     <br />

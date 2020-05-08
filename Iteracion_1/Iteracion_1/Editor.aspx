@@ -65,7 +65,7 @@
     <p>
         &nbsp;</p>
     <p>
-        <asp:Button ID="btnGuardar" runat="server" Height="41px" Text="Guardar" Width="124px" OnClick="btnGuardar_Click" />
+        <asp:Button ID="btnGuardar" runat="server" Height="41px" Text="Guardar" Width="124px" OnClick="btnGuardar_Click" OnClientClick ="return confirm('¿Está seguro que desea guardar este artículo?')" />
     </p>
     <p>
         <asp:Label ID="lblprueba" runat="server"></asp:Label>

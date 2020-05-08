@@ -29,6 +29,24 @@ namespace Iteracion_1
             con = new SqlConnection(conString);
         }
 
+        private void cargarCategorias()
+        {
+            connection();
+            int artId = Convert.ToInt32(Session["articuloId"]);
+            SqlDataAdapter ad = new SqlDataAdapter();
+            DataTable dt = new DataTable();
+            SqlCommand cmd = new SqlCommand("Mostrar_Categorias_Articulo", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@ID", SqlDbType.Int).Value = artId;
+            con.Open();
+          
+            ad.SelectCommand = cmd;
+            ad.Fill(dt);
+            grCategorias.DataSource = dt;
+            grCategorias.DataBind();
+
+
+        }
         private void cargarContenido()
         {
             connection();
@@ -44,6 +62,8 @@ namespace Iteracion_1
             byte[] bytesContenido = new byte[] { };
             string resumenArt = "";
             string contenidoArt = "";
+
+
             if (reader.Read())
             {
                 tituloArt = reader["titulo"].ToString();
@@ -58,6 +78,7 @@ namespace Iteracion_1
             lblTitulo.Text = tituloArt;
             lblResumen.Text = resumenArt;
             lblContenido.Text = contenidoArt;
+            cargarCategorias();
 
 
         }
