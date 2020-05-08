@@ -1,3 +1,4 @@
+USE BD_Grupo2;
 CREATE TABLE Miembro(
 	miembroIdPK INTEGER NOT NULL PRIMARY KEY IDENTITY (-1,1),
 	nombre VARCHAR(50) NOT NULL
@@ -6,14 +7,9 @@ CREATE TABLE Articulo(
 	artIdPK INTEGER NOT NULL PRIMARY KEY IDENTITY (1,1),
 	titulo VARCHAR(max) NOT NULL,
 	resumen VARBINARY(max) NOT NULL,
-	miembroIdFK INTEGER NOT NULL DEFAULT -1,
 	contenido VARBINARY(max) NOT NULL,
 	tipoArt bit NOT NULL,
 	extn VARCHAR(15)
-
-	CONSTRAINT FK_Articulo_Miembro
-		FOREIGN KEY(miembroIdFK) REFERENCES Miembro(miembroIdPK)
-			ON DELETE SET DEFAULT
 ); 
 
 CREATE TABLE Categoria(
@@ -65,6 +61,10 @@ CREATE TABLE Miembro_Articulo(
 		FOREIGN KEY(artIdFK) REFERENCES Articulo(artIdPK)
 			ON DELETE CASCADE
 );
+
+
+
+
 INSERT INTO Miembro
 VALUES('Anonimo')
 
