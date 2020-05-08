@@ -63,8 +63,7 @@
         <asp:TextBox ID="txtAutores" runat="server"></asp:TextBox>
     </p>
     <p>
-        <asp:Button ID="btnPrueba" runat="server" OnClick="btnPrueba_Click" Text="comprobar" />
-    </p>
+        &nbsp;</p>
     <p>
         <asp:Button ID="btnGuardar" runat="server" Height="41px" Text="Guardar" Width="124px" OnClick="btnGuardar_Click" />
     </p>

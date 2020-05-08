@@ -388,9 +388,6 @@ namespace Iteracion_1
             }
         }
 
-        protected void btnPrueba_Click(object sender, EventArgs e)
-        {
 
-        }
     }
 }
