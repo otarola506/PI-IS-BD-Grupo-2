@@ -1,5 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="RespuestasPregMP.aspx.cs" Inherits="Iteracion_1.RespuestasPregMP" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+    <br />
+    <br />   
     <asp:Label ID="PreguntaLabel" runat="server" Text="Pregunta" style="font-size:xx-large"></asp:Label>
     <br />
     <br />

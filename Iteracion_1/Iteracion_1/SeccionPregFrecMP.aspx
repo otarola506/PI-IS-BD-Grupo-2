@@ -1,7 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="SeccionPregFrecMP.aspx.cs" Inherits="Iteracion_1.SeccionPregFrecMP" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <asp:Label ID="Label1" runat="server" Text="Preguntas Frecuentes" AutoSize="True" style="font-weight: 700; font-size: xx-large"></asp:Label>
-        <asp:GridView ID="gvPregFrec" runat="server" AutoGenerateColumns="False" BackColor="White" BorderColor="#CCCCCC" 
+    <br />
+    <br />   
+    <asp:Label ID="Label1" runat="server" Text="Preguntas Frecuentes" AutoSize="True" style="font-weight: 700; font-size: xx-large"></asp:Label> 
+    <asp:GridView ID="gvPregFrec" runat="server" AutoGenerateColumns="False" BackColor="White" BorderColor="#CCCCCC" 
                       BorderStyle="None" BorderWidth="1px" CellPadding="3" style="margin-right: 0px" >
             <Columns>
                 <asp:BoundField DataField="pregunta" HeaderText="Preguntas frecuentes" />

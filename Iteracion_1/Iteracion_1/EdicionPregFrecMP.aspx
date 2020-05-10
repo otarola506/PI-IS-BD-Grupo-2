@@ -1,5 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="EdicionPregFrecMP.aspx.cs" Inherits="Iteracion_1.EdicionPregFrecMP" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+    <br />
+    <br />   
     <div>
         <asp:Label ID="EditPregFrecLabel" runat="server" Text="Editar pregunta frecuente" style="font-size:xx-large"></asp:Label>
         <table>
