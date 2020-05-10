@@ -7,12 +7,14 @@ using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
+using System.Text;
 
 namespace Iteracion_1
 {
     public partial class MisArticulos : System.Web.UI.Page
     {
         private SqlConnection con;
+        Encoding unicode = Encoding.Unicode;
         private void connection()
         {
             string conString = ConfigurationManager.ConnectionStrings["grupo2Conn"].ToString();
@@ -23,6 +25,8 @@ namespace Iteracion_1
             if (!IsPostBack)
             {
                 llenarTabla();
+                
+
             }
         }
         void llenarTabla()
@@ -30,10 +34,17 @@ namespace Iteracion_1
             connection();
             con.Open();
             DataTable dt = new DataTable();
-            SqlDataAdapter ad = new SqlDataAdapter("Recuperar_ID_Titulo_Resumen", con);
+            SqlDataAdapter ad = new SqlDataAdapter();
+            SqlCommand cmd = new SqlCommand("Recuperar_Articulos_Autor",con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@miembroId", SqlDbType.Int).Value = 0; // En este caso está quemado el valor
+            SqlDataReader reader = cmd.ExecuteReader();
+            reader.Read();
+            string nombre = reader[3].ToString();
+            lblArticulo.Text = "Bienvenido a sus artículos, " + nombre;
+            reader.Close();
+            ad.SelectCommand = cmd;
             ad.Fill(dt);
-            tablaArticulos.DataSource = dt;
-            tablaArticulos.DataBind();
             if (dt.Rows.Count > 0)
             {
                 tablaArticulos.DataSource = dt;
@@ -55,9 +66,20 @@ namespace Iteracion_1
 
 
         }
+
+        protected void OnRowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                DataRowView dr = (DataRowView)e.Row.DataItem;
+                string resumen = unicode.GetString((byte[])dr["resumen"]);
+                (e.Row.FindControl("resumen") as Label).Text = resumen;
+            }
+        }
+
         public int retornarValorIdArticulo(object sender)
         {
-            LinkButton btn = (LinkButton)sender;
+            ImageButton btn = (ImageButton)sender;
             GridViewRow gvr = (GridViewRow)btn.NamingContainer;
             string temp = ((Label)gvr.Cells[0].FindControl("artId")).Text;
             int id = Int32.Parse(temp);
@@ -68,6 +90,28 @@ namespace Iteracion_1
         public void lnkEdicion(object sender, EventArgs e)
         {
             int artId = retornarValorIdArticulo(sender);
+            connection();
+            con.Open();
+            SqlCommand cmd = new SqlCommand("RecuperarArticulo", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@ID", SqlDbType.Int).Value = artId;
+            SqlDataReader reader = cmd.ExecuteReader();
+            Boolean tipoArticulo = false;
+            if (reader.Read())
+            {
+                tipoArticulo = (Boolean)reader[4];
+
+            }
+            if (tipoArticulo == false)
+            {
+                Session["articuloID"] = artId;
+                Response.Redirect("EditorArticuloModificado.aspx");
+            }
+            else
+            {
+                Response.Write("<script>alert('No se pueden editar artículos subidos a la pagina')</script>");
+
+            }
 
         }
 
@@ -81,21 +125,61 @@ namespace Iteracion_1
             con.Open();
             cmd.ExecuteNonQuery();
             llenarTabla();
-            lblExito.Text = "Datos Borrados Correctamente";
+            Response.Write("<script>alert('Articulo Borrado con éxito')</script>");
 
         }
+       
 
         public void lnkVerMasArt(object sender, EventArgs e)
         {
+            connection();
+            con.Open();
             int artId = retornarValorIdArticulo(sender);
+            SqlCommand cmd = new SqlCommand("RecuperarArticulo", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@ID", SqlDbType.Int).Value = artId;
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            Boolean tipoArticulo = false;
+            reader.Read();
+            tipoArticulo = (Boolean)reader[4];
+            reader.Close();
+            if (tipoArticulo == false)
+            {
+                Session["articuloID"] = artId;
+                Response.Redirect("MostrarContenido.aspx");
+            }
+            else {
+            
+                //Descargar archivo desde base de datos
+                reader = cmd.ExecuteReader();
+                reader.Read();
+                string fileName = reader["titulo"].ToString();
+                byte[] contenidoArt = (byte[])reader["contenido"];
+                string extension = reader[5].ToString();
+                Response.Clear();
+                Response.Buffer = true;
+                Response.Charset = "";
+                Response.Cache.SetCacheability(HttpCacheability.NoCache);
+                Response.ContentType = extension;
+                Response.AppendHeader("Content-Disposition", "attachment; filename=" + fileName);
+                Response.BinaryWrite(contenidoArt);
+                Response.Flush();
+                Response.End();
+
+
+
+            }
+
 
 
         }
 
+        protected void btnAgregarArticulo_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Editor.aspx");
+        }
 
-
-
-
-
+        
     }
 }
