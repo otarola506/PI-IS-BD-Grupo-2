@@ -14,10 +14,12 @@
     </asp:PlaceHolder>
 
     <webopt:bundlereference runat="server" path="~/Content/css" />
+
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link href="Content/custom.css" rel="stylesheet" type="text/css" />
 
 </head>
-<body>
+<body id="masterBody">
     <form runat="server">
         <asp:ScriptManager runat="server">
             <Scripts>
@@ -39,7 +41,7 @@
             </Scripts>
         </asp:ScriptManager>
 
-        <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar navbar-inverse" >
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -50,18 +52,19 @@
                     </button>
                 </div>
                 <div class="navbar-collapse collapse">
+                    
                     <ul class="nav navbar-nav">
                         <li><a runat="server" href="~/MisArticulos">Mis Articulos</a></li>
                         <li><a runat="server" href="~/Articulos">Todos Articulos</a></li>
                         <li><a runat="server" href="~/SeccionPregFrecMP">Preguntas Frecuentes</a></li>
                         <li><a runat="server" href="~/AgregarPregFrecMP">Agregar Pregunta Frecuente</a></li>
-                        <li>
+                        <li id="busqueda">
                             <asp:DropDownList AppendDataBoundItems="true" ID="DropDownList" runat="server" DataSourceID="SqlDataSource1" DataTextField="nombre" DataValueField="categoriaIdPK" style="top: 1vmax; left:1vmax; right:1vmax; position: relative;">
                             <asp:ListItem Text="Categoria"  Value="null" Selected="true"></asp:ListItem>
                             </asp:DropDownList>
                             <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:BD_Grupo2ConnectionString %>" SelectCommand="SELECT * FROM [Categoria] ORDER BY [nombre]"></asp:SqlDataSource>
                         </li>
-                        <li>
+                        <li id="busquedaTexto">
                             <asp:TextBox ID="TextBox1" runat="server" style="top: 1vmax; left:1vmax; right:1vmax; position: relative;"></asp:TextBox>
                         </li>
                         <li>
@@ -76,7 +79,7 @@
             </asp:ContentPlaceHolder>
             <hr />
             <footer>
-                <p>&copy; <%: DateTime.Now.Year %> - Mi aplicación ASP.NET</p>
+                <p>&copy; <%: DateTime.Now.Year %> - Proyecto PI</p>
             </footer>
         </div>
 

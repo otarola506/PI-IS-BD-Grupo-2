@@ -1,7 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="AgregarPregFrecMP.aspx.cs" Inherits="Iteracion_1.AgregarPregFrecMP" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <br />
-    <br />   
     <div>
         <asp:Label ID="AddPregFrecLabel" runat="server" Text="Agregar pregunta frecuente" style="font-size:xx-large"></asp:Label>
         <table>

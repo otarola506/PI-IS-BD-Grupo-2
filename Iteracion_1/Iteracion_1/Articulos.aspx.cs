@@ -35,7 +35,7 @@ namespace Iteracion_1
 
             SqlCommand cmd = null;
 
-            string buscando = "<strong>Mostrando articulos ";
+            string buscando = "<h1><strong>Mostrando articulos ";
 
             connection();
             conn.Open();
@@ -43,17 +43,19 @@ namespace Iteracion_1
             if (Session["Categoria"] != null || Session["Titulo"] != null)
             {
                 if (Session["Categoria"] == null && Session["Titulo"] != null) { // Buscando por titulo
-                    buscando += "con titulo</strong>: "+ Session["Titulo"].ToString();
+                    buscando += "con titulo</strong> '" + Session["Titulo"].ToString()+"'</h1>";
+
                     cmd = new SqlCommand("RecuperarArtPorTitulo", conn);
                     cmd.Parameters.Add("@titulo", SqlDbType.VarChar).Value = Session["Titulo"].ToString();
 
                 } else if (Session["Categoria"] != null && Session["Titulo"] == null) { //Buscando por categoria
-                    buscando += "de la categoria</strong>: "+ Session["Categoria"].ToString();
+                    buscando += "de la categoria</strong> '" + Session["nombreCategoria"].ToString()+"'</h1>";
+
                     cmd = new SqlCommand("RecuperarArtPorNombreCategoria", conn);
                     cmd.Parameters.Add("@Id", SqlDbType.VarChar).Value = Convert.ToInt32(Session["Categoria"]);
                 }
                 else {
-                    buscando += "titulo "+ Session["Titulo"].ToString() +" de la categoria: "+ Session["Categoria"].ToString() +"</strong>";
+                    buscando += "con titulo</strong> '" + Session["Titulo"].ToString() + "'<strong> de la categoria</strong> '" + Session["nombreCategoria"].ToString()+"'</h1>";
                     cmd = new SqlCommand("RecuperarArtPorAmbos", conn);
                     cmd.Parameters.Add("@Id", SqlDbType.VarChar).Value = Convert.ToInt32(Session["Categoria"]);
                     cmd.Parameters.Add("@titulo", SqlDbType.VarChar).Value = Session["Titulo"].ToString();
@@ -62,25 +64,32 @@ namespace Iteracion_1
 
             }
             else {
-                buscando = "<strong>Mostrando todos los artículos</strong>";
+                buscando = "<h1><strong>Mostrando todos los artículos</strong></h1>";
                 cmd = new SqlCommand("RecuperarArticulosPrincipal", conn);
 
             }
-            buscandoLiteral.Text = buscando;
+            
 
-            cmd.CommandType = CommandType.StoredProcedure;         
+            cmd.CommandType = CommandType.StoredProcedure;
 
             SqlDataAdapter ad = new SqlDataAdapter(cmd);
 
             DataTable dTable = new DataTable();
-
             ad.Fill(dTable);
 
-            articlesTable.DataSource = dTable;
+            if (dTable.Rows.Count != 0)
+            {
+                articlesTable.DataSource = dTable;
+                articlesTable.Columns[0].Visible = false;
+                articlesTable.DataBind();
+                buscandoLiteral.Text = buscando;
+            }
+            else
+            {
+                buscandoLiteral.Text = "<h1> <strong>No se encontraron resultados</strong></h1>";
+            }
 
-            articlesTable.Columns[0].Visible = false;
-
-            articlesTable.DataBind();
+            
 
             buscando = "";
             Session["Categoria"] = null;

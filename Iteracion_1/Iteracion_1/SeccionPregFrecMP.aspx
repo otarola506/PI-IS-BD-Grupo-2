@@ -1,7 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="SeccionPregFrecMP.aspx.cs" Inherits="Iteracion_1.SeccionPregFrecMP" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <br />
-    <br />   
+ 
     <asp:Label ID="Label1" runat="server" Text="Preguntas Frecuentes" AutoSize="True" style="font-weight: 700; font-size: xx-large"></asp:Label> 
     <asp:GridView ID="gvPregFrec" runat="server" AutoGenerateColumns="False" BackColor="White" BorderColor="#CCCCCC" 
                       BorderStyle="None" BorderWidth="1px" CellPadding="3" style="margin-right: 0px" >
@@ -26,6 +25,7 @@
             <SortedDescendingCellStyle BackColor="#CAC9C9" />
             <SortedDescendingHeaderStyle BackColor="#00547E" />
         </asp:GridView>
+    <br />
     <p style="height: 41px; font-size: large;">
         Nota: Si tiene alguna pregunta que no se encuentre en esta sección, puede emitirla en el siguiente espacio. Si su pregunta es frecuente se añadirá a la sección.</p>
     <div>

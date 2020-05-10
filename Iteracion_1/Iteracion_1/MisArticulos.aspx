@@ -1,19 +1,17 @@
 ﻿<%@ Page Title="Mis Articulos" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="MisArticulos.aspx.cs" Inherits="Iteracion_1.MisArticulos" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+
+    <div>
+        <strong>
+        <asp:Label ID="lblArticulo" runat="server" style="font-family: Arial; font-size: 20px; position: relative;"></asp:Label>
+        </strong>
+        <br />
+        <asp:Button ID ="btnAgregarArticulo" Text="Crear articulo nuevo" runat="server" OnClick="btnAgregarArticulo_Click" style="position: relative;" />
+        <br />
+    </div>
     <br />
-    <strong>
-    <asp:Label ID="lblArticulo" runat="server" style="font-family: Arial; font-size: 20px; width: 482px; height: 24px; position: absolute; left: 15px; top: 95px"></asp:Label>
-    </strong>
-    <br />
-    <br />
-    <asp:Button ID ="btnAgregarArticulo" Text="Crear articulo nuevo" runat="server" OnClick="btnAgregarArticulo_Click" style="width: 195px; height: 26px; position: absolute; left: 579px; top: 96px" />
-    <br />
-    <br />
-    
-    <br />
-    <br />
-    
-    <asp:GridView ID="tablaArticulos" runat="server" AutoGenerateColumns="false" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" OnRowDataBound ="OnRowDataBound" style="height: 275px; position: absolute; left: 17px; top: 154px; width: 1208px;">
+    <div>
+        <asp:GridView ID="tablaArticulos" runat="server" AutoGenerateColumns="false" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" OnRowDataBound ="OnRowDataBound" style="position: relative;">
         <FooterStyle BackColor="White" ForeColor="#000066" />
         <HeaderStyle BackColor="#006699" Font-Bold="True" ForeColor="White" />
         <PagerStyle BackColor="White" ForeColor="#000066" HorizontalAlign="Left" />
@@ -56,22 +54,6 @@
 
         </Columns>
     </asp:GridView>
+    </div>
     
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <p>
-    </p>
 </asp:Content>

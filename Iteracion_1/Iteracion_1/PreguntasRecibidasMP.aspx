@@ -1,7 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="PreguntasRecibidasMP.aspx.cs" Inherits="Iteracion_1.PreguntasRecibidasMP" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <br />
-    <br />   
+
     <asp:Label ID="Label1" runat="server" Text="Preguntas Recibidas" style="font-size: xx-large"></asp:Label>
     <asp:HiddenField ID="hfPregID" runat="server" />
     <p>

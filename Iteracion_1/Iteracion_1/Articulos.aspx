@@ -2,12 +2,13 @@
 
 <asp:Content ID="articulos" ContentPlaceHolderID="MainContent" runat="server">
     
-    <div id="articles">
-        <br />
-        <br />
-        <asp:Literal ID="buscandoLiteral" runat="server"></asp:Literal>
 
-        <asp:GridView ID="articlesTable" runat="server" Height="350px" Width="630px" AutoGenerateColumns="false" CellPadding="3" BorderStyle="None" BorderWidth="1px" OnRowDataBound="OnRowDataBound">
+
+    <div id="articles">
+        <asp:Literal ID="buscandoLiteral" runat="server"></asp:Literal>
+        <br />
+
+        <asp:GridView ID="articlesTable" runat="server" AutoGenerateColumns="false" CellPadding="5" BorderStyle="None" BorderWidth="5px" OnRowDataBound="OnRowDataBound">
             <Columns>
                 <asp:TemplateField HeaderText="ID">
                     <ItemTemplate>
