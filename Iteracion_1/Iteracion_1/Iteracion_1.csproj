@@ -110,7 +110,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="About.aspx" />
-    <Content Include="AgregarRespuestaMP.aspx" />
+    <Content Include="AgregarPregFrecMP.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -118,8 +118,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Default.aspx" />
-    <Content Include="EdicionPregMP.aspx" />
-    <Content Include="EdicionRespMP.aspx" />
+    <Content Include="EdicionPregFrecMP.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -171,12 +170,12 @@
     <Content Include="Site.Mobile.Master" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AgregarRespuestaMP.aspx.cs">
-      <DependentUpon>AgregarRespuestaMP.aspx</DependentUpon>
+    <Compile Include="AgregarPregFrecMP.aspx.cs">
+      <DependentUpon>AgregarPregFrecMP.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="AgregarRespuestaMP.aspx.designer.cs">
-      <DependentUpon>AgregarRespuestaMP.aspx</DependentUpon>
+    <Compile Include="AgregarPregFrecMP.aspx.designer.cs">
+      <DependentUpon>AgregarPregFrecMP.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="About.aspx.cs">
@@ -201,19 +200,12 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
-    <Compile Include="EdicionPregMP.aspx.cs">
-      <DependentUpon>EdicionPregMP.aspx</DependentUpon>
+    <Compile Include="EdicionPregFrecMP.aspx.cs">
+      <DependentUpon>EdicionPregFrecMP.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="EdicionPregMP.aspx.designer.cs">
-      <DependentUpon>EdicionPregMP.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="EdicionRespMP.aspx.cs">
-      <DependentUpon>EdicionRespMP.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="EdicionRespMP.aspx.designer.cs">
-      <DependentUpon>EdicionRespMP.aspx</DependentUpon>
+    <Compile Include="EdicionPregFrecMP.aspx.designer.cs">
+      <DependentUpon>EdicionPregFrecMP.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

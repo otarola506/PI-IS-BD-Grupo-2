@@ -10,25 +10,52 @@
 namespace Iteracion_1 {
     
     
-    public partial class EdicionRespMP {
+    public partial class AgregarPregFrecMP {
         
         /// <summary>
-        /// Control Label2.
+        /// Control AddPregFrecLabel.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label2;
+        protected global::System.Web.UI.WebControls.Label AddPregFrecLabel;
         
         /// <summary>
-        /// Control TxtBoxRN.
+        /// Control PregLabel.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TxtBoxRN;
+        protected global::System.Web.UI.WebControls.Label PregLabel;
+        
+        /// <summary>
+        /// Control TxtBoxP.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TxtBoxP;
+        
+        /// <summary>
+        /// Control RespLabel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label RespLabel;
+        
+        /// <summary>
+        /// Control TxtBoxR.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TxtBoxR;
         
         /// <summary>
         /// Control VolverButton.
@@ -40,12 +67,12 @@ namespace Iteracion_1 {
         protected global::System.Web.UI.WebControls.Button VolverButton;
         
         /// <summary>
-        /// Control Button2.
+        /// Control GRButton.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button2;
+        protected global::System.Web.UI.WebControls.Button GRButton;
     }
 }

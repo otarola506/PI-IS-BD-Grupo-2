@@ -11,7 +11,7 @@ using System.Configuration;
 
 namespace Iteracion_1
 {
-    public partial class EdicionRespMP : System.Web.UI.Page
+    public partial class EdicionPregFrecMP : System.Web.UI.Page
     {
         private SqlConnection con;
 
@@ -25,28 +25,29 @@ namespace Iteracion_1
         {
             if (!IsPostBack)
             {
-                string Pregunta = Convert.ToString(Session["Respuesta"]);
-                TxtBoxRN.Text = Pregunta;
+                string pregunta = Convert.ToString(Session["Pregunta_RespuestasPreg"]);
+                TxtBoxP.Text = pregunta;
+                string respuesta = Convert.ToString(Session["Respuesta_RespuestasPreg"]);
+                TxtBoxR.Text = respuesta;
             }
         }
 
-        protected void GEButton_OnClick(object sender, EventArgs e)
+        protected void GCButton_OnClick(object sender, EventArgs e)
         {
-            int pregID = Convert.ToInt32(Session["PregID"]);
-            int respID = Convert.ToInt32(Session["RespID"]);
+            int pregID = Convert.ToInt32(Session["PregID_RespuestasPreg"]);
             connection();
             if (con.State == ConnectionState.Closed)
             {
                 con.Open();
             }
-            SqlCommand sqlCmd = new SqlCommand("EditarRespuesta", con);
+            SqlCommand sqlCmd = new SqlCommand("EditarPreguntaFrecuente", con);
             sqlCmd.CommandType = CommandType.StoredProcedure;
-            sqlCmd.Parameters.AddWithValue("@Respuesta", TxtBoxRN.Text.Trim());
+            sqlCmd.Parameters.AddWithValue("@Pregunta", TxtBoxP.Text.Trim());
+            sqlCmd.Parameters.AddWithValue("@Respuesta", TxtBoxR.Text.Trim());
             sqlCmd.Parameters.AddWithValue("@PregID", pregID);
-            sqlCmd.Parameters.AddWithValue("@RespID", respID);
             sqlCmd.ExecuteNonQuery();
             con.Close();
-            Response.Redirect("RespuestasPregMP.aspx");
+            Response.Redirect("SeccionPregFrecMP.aspx");
             Response.Write("<script>alert('Respuesta editada con éxito')</script>");
         }
 

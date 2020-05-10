@@ -13,6 +13,15 @@ namespace Iteracion_1 {
     public partial class RespuestasPregMP {
         
         /// <summary>
+        /// Control PreguntaLabel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label PreguntaLabel;
+        
+        /// <summary>
         /// Control PregLabel.
         /// </summary>
         /// <remarks>
@@ -22,22 +31,22 @@ namespace Iteracion_1 {
         protected global::System.Web.UI.WebControls.Label PregLabel;
         
         /// <summary>
-        /// Control Label1.
+        /// Control RespuestaLabel.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label1;
+        protected global::System.Web.UI.WebControls.Label RespuestaLabel;
         
         /// <summary>
-        /// Control gvRptasPreg.
+        /// Control RespLabel.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvRptasPreg;
+        protected global::System.Web.UI.WebControls.Label RespLabel;
         
         /// <summary>
         /// Control VolverButton.
@@ -49,12 +58,12 @@ namespace Iteracion_1 {
         protected global::System.Web.UI.WebControls.Button VolverButton;
         
         /// <summary>
-        /// Control ERButton.
+        /// Control EditarButton.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ERButton;
+        protected global::System.Web.UI.WebControls.Button EditarButton;
     }
 }

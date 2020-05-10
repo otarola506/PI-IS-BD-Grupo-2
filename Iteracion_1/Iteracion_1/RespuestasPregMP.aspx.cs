@@ -25,29 +25,16 @@ namespace Iteracion_1
         {
             if (!IsPostBack)
             {
-                FillGridView(sender, e);
+                FillLabels(sender, e);
             }
         }
 
-        void FillGridView(object sender, EventArgs e)
+        void FillLabels(object sender, EventArgs e)
         {
-            int pregID = Convert.ToInt32(Session["PregID"]);
-            string Pregunta = Convert.ToString(Session["Pregunta"]);
-            PregLabel.Text = Pregunta;
-            connection();
-            /*if (con.State == ConnectionState.Closed)
-            {
-                con.Open();
-            }*/
-            con.Open();
-            SqlDataAdapter sqlDa = new SqlDataAdapter("GetRespuestasPreg", con);
-            sqlDa.SelectCommand.CommandType = CommandType.StoredProcedure;
-            sqlDa.SelectCommand.Parameters.AddWithValue("@PregID", pregID);
-            DataTable dtbl = new DataTable();
-            sqlDa.Fill(dtbl);
-            con.Close();
-            gvRptasPreg.DataSource = dtbl;
-            gvRptasPreg.DataBind();
+            string pregunta = Convert.ToString(Session["Pregunta_SeccionPregFrec"]);
+            string respuesta = Convert.ToString(Session["Respuesta_SeccionPregFrec"]);
+            PregLabel.Text = pregunta;
+            RespLabel.Text = respuesta;
         }
 
         protected void VolverButton_OnClick(object sender, EventArgs e)
@@ -55,43 +42,14 @@ namespace Iteracion_1
             Response.Redirect("SeccionPregFrecMP.aspx");
         }
 
-        protected void ERButton_OnClick(object sender, EventArgs e)
+        protected void EditarButton_OnClick(object sender, EventArgs e)
         {
-            int pregID = Convert.ToInt32(Session["PregID"]);
-            Session["PregID"] = pregID;
-            Response.Redirect("AgregarRespuestaMP.aspx");
-        }
+            //La verdad no se si sea necesario volver a llenar los Session
+            Session["PregID_RespuestasPreg"] = Session["PregID_SeccionPregFrec"];
+            Session["Pregunta_RespuestasPreg"] = Session["Pregunta_SeccionPregFrec"];
+            Session["Respuesta_RespuestasPreg"] = Session["Respuesta_SeccionPregFrec"];
 
-        protected void DButton_OnClick(object sender, EventArgs e)
-        {
-            string[] arg = new string[2];
-            arg = (sender as Button).CommandArgument.Split(';');
-            int pregID = Convert.ToInt32(arg[0]);
-            int respID = Convert.ToInt32(arg[1]);
-            connection();
-            if (con.State == ConnectionState.Closed)
-            {
-                con.Open();
-            }
-            SqlDataAdapter sqlDa = new SqlDataAdapter("EliminarRespuesta", con);
-            sqlDa.SelectCommand.CommandType = CommandType.StoredProcedure;
-            sqlDa.SelectCommand.Parameters.AddWithValue("@RespID", respID);
-            sqlDa.SelectCommand.Parameters.AddWithValue("@PregID", pregID);
-            DataTable dtbl = new DataTable();
-            sqlDa.Fill(dtbl);
-            con.Close();
-            FillGridView(sender,e);
-            Response.Write("<script>alert('Respuesta eliminada con éxito')</script>");
-        }
-
-        protected void EButton_OnClick(object sender, EventArgs e)
-        {
-            string[] arg = new string[3];
-            arg = (sender as Button).CommandArgument.Split(';');
-            Session["PregID"] = arg[0];
-            Session["Respuesta"] = arg[1];
-            Session["RespID"] = arg[2];
-            Response.Redirect("EdicionRespMP.aspx");
+            Response.Redirect("EdicionPregFrecMP.aspx");
         }
     }
 }

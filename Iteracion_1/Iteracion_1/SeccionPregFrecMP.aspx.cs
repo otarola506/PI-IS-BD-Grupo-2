@@ -13,6 +13,7 @@ namespace Iteracion_1
 {
     public partial class SeccionPregFrecMP : System.Web.UI.Page
     {
+        SqlConnection sqlCon = new SqlConnection(@"Data Source=DESKTOP-0UBMGQL; Database=PregRepDB; Integrated Security=true;");
         private SqlConnection con;
 
         private void connection()
@@ -31,12 +32,11 @@ namespace Iteracion_1
         void FillGridView()
         {
             connection();
-            /*if (con.State == ConnectionState.Closed)
+            if (con.State == ConnectionState.Closed)
             {
                 con.Open();
-            }*/
-            con.Open();
-            SqlDataAdapter sqlDa = new SqlDataAdapter("GetPreguntasFrecuentes", con);
+            }
+            SqlDataAdapter sqlDa = new SqlDataAdapter("RecuperarPreguntasFrecuentes", con);
             sqlDa.SelectCommand.CommandType = CommandType.StoredProcedure;
             DataTable dtbl = new DataTable();
             sqlDa.Fill(dtbl);
@@ -47,18 +47,15 @@ namespace Iteracion_1
 
         protected void EnviarPregButton_OnClick(object sender, EventArgs e)
         {
-            connection();
-            if (con.State == ConnectionState.Closed)
+            if (sqlCon.State == ConnectionState.Closed)
             {
-                con.Open();
+                sqlCon.Open();
             }
-            SqlCommand sqlCmd = new SqlCommand("AddPregunta", con);
+            SqlCommand sqlCmd = new SqlCommand("AddPreguntaR", sqlCon);
             sqlCmd.CommandType = CommandType.StoredProcedure;
             sqlCmd.Parameters.AddWithValue("@Pregunta", TxtBoxPN.Text.Trim());
-            sqlCmd.Parameters.AddWithValue("@MiembroID", 0);
-            sqlCmd.Parameters.AddWithValue("@Frecuente", 0);
             sqlCmd.ExecuteNonQuery();
-            con.Close();
+            sqlCon.Close();
             TxtBoxPN.Text = "";
             FillGridView();
             Response.Write("<script>alert('Pregunta enviada con éxito')</script>");
@@ -66,16 +63,15 @@ namespace Iteracion_1
 
         protected void VerRespButton_OnClick(object sender, EventArgs e)
         {
-            //int pregID = Convert.ToInt32((sender as Button).CommandArgument);
-            string[] arg = new string[2];
+            string[] arg = new string[3];
             arg = (sender as Button).CommandArgument.Split(';');
-            Session["PregID"] = arg[0];
-            Session["Pregunta"] = arg[1];
-            //Session["PregID"] = pregID;
+            Session["PregID_SeccionPregFrec"] = arg[0];
+            Session["Pregunta_SeccionPregFrec"] = arg[1];
+            Session["Respuesta_SeccionPregFrec"] = arg[2];
             Response.Redirect("RespuestasPregMP.aspx");
         }
 
-        protected void EFButton_OnClick(object sender, EventArgs e)
+        protected void BorrarPFButton_OnClick(object sender, EventArgs e)
         {
             int pregID = Convert.ToInt32((sender as Button).CommandArgument);
             connection();
@@ -83,14 +79,13 @@ namespace Iteracion_1
             {
                 con.Open();
             }
-            SqlDataAdapter sqlDa = new SqlDataAdapter("EliminarPreguntaFromPF", con);
-            sqlDa.SelectCommand.CommandType = CommandType.StoredProcedure;
-            sqlDa.SelectCommand.Parameters.AddWithValue("@PregID", pregID);
-            DataTable dtbl = new DataTable();
-            sqlDa.Fill(dtbl);
+            SqlCommand sqlCmd = new SqlCommand("BorrarPreguntaFrecuente", con);
+            sqlCmd.CommandType = CommandType.StoredProcedure;
+            sqlCmd.Parameters.AddWithValue("@PregID",pregID);
+            sqlCmd.ExecuteNonQuery();
             con.Close();
             FillGridView();
-            Response.Write("<script>alert('Pregunta eliminada de la sección de preguntas frecuentes con éxito')</script>");
-        }
+            Response.Write("<script>alert('Pregunta frecuente eliminada con éxito')</script>");
+        }   
     }
 }

@@ -1,15 +1,16 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="SeccionPregFrecMP.aspx.cs" Inherits="Iteracion_1.SeccionPregFrecMP" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <asp:Label ID="Label1" runat="server" Text="Preguntas Frecuentes" AutoSize="True" style="font-weight: 700; font-size: xx-large"></asp:Label>
-    <p>
-        <asp:GridView ID="gvPregFrec" runat="server" AutoGenerateColumns="False" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" style="margin-right: 0px" >
+        <asp:GridView ID="gvPregFrec" runat="server" AutoGenerateColumns="False" BackColor="White" BorderColor="#CCCCCC" 
+                      BorderStyle="None" BorderWidth="1px" CellPadding="3" style="margin-right: 0px" >
             <Columns>
-                <asp:BoundField DataField="nombre" HeaderText="Miembro" />
-                <asp:BoundField DataField="pregunta" HeaderText="Preguntas Frecuentes" />
+                <asp:BoundField DataField="pregunta" HeaderText="Preguntas frecuentes" />
                 <asp:TemplateField>
                     <ItemTemplate>
-                        <asp:Button ID="VerRespButton" runat="server" CommandArgument = '<%# Eval("pregIdPK") + ";" + Eval("pregunta")  %>' OnClick="VerRespButton_OnClick" Text="Ver respuestas" />
-                        <asp:Button ID="EFButton" runat="server" CommandArgument = '<%# Eval("pregIdPK") %>' OnClientClick ="return confirm('¿Seguro de que desea eliminar esta pregunta de la sección de preguntas frecuentes?')" OnClick="EFButton_OnClick" Text="Eliminar de Frecuentes" />
+                        <br />
+                        <br />
+                        <asp:Button ID="VerRespButton" runat="server" CommandArgument = '<%# Eval("pregIdPK") + ";" + Eval("pregunta") + ";" + Eval("respuesta") %>' OnClick="VerRespButton_OnClick" Text="Ver respuesta" />
+                        <asp:Button ID="BorrarPFButton" runat="server" CommandArgument = '<%# Eval("pregIdPK") %>' OnClientClick ="return confirm('¿Seguro que desea eliminar esta pregunta?')"  OnClick="BorrarPFButton_OnClick" Text="Borrar" />
                     </ItemTemplate>                       
                 </asp:TemplateField>                                
             </Columns>
@@ -23,7 +24,6 @@
             <SortedDescendingCellStyle BackColor="#CAC9C9" />
             <SortedDescendingHeaderStyle BackColor="#00547E" />
         </asp:GridView>
-    </p>
     <p style="height: 41px; font-size: large;">
         Nota: Si tiene alguna pregunta que no se encuentre en esta sección, puede emitirla en el siguiente espacio. Si su pregunta es frecuente se añadirá a la sección.</p>
     <div>
@@ -38,8 +38,8 @@
                 </td>
             </tr>
             <tr>
-                <td>
-                    <asp:Button ID="EnviarPregButton" runat="server"  Text="Enviar Pregunta" style="margin-top: 4px" OnClick="EnviarPregButton_OnClick" />
+                <td style="height: 45px">
+                    <asp:Button ID="EnviarPregButton" runat="server"  Text="Enviar Pregunta" style="margin-top: 4px" OnClientClick ="return confirm('¿Seguro que desea enviar esta pregunta?')" OnClick="EnviarPregButton_OnClick" />
                 </td>
             </tr>
         </table>
