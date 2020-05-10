@@ -13,6 +13,15 @@ namespace Iteracion_1 {
     public partial class Articulos {
         
         /// <summary>
+        /// buscandoLiteral control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal buscandoLiteral;
+        
+        /// <summary>
         /// articlesTable control.
         /// </summary>
         /// <remarks>

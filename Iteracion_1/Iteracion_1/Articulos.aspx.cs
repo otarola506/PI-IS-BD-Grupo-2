@@ -35,20 +35,25 @@ namespace Iteracion_1
 
             SqlCommand cmd = null;
 
+            string buscando = "<strong>Mostrando articulos ";
+
             connection();
             conn.Open();
 
             if (Session["Categoria"] != null || Session["Titulo"] != null)
             {
-                if (Session["Categoria"] == null && Session["Titulo"] != null) {
+                if (Session["Categoria"] == null && Session["Titulo"] != null) { // Buscando por titulo
+                    buscando += "con titulo</strong>: "+ Session["Titulo"].ToString();
                     cmd = new SqlCommand("RecuperarArtPorTitulo", conn);
                     cmd.Parameters.Add("@titulo", SqlDbType.VarChar).Value = Session["Titulo"].ToString();
 
-                } else if (Session["Categoria"] != null && Session["Titulo"] == null) {
+                } else if (Session["Categoria"] != null && Session["Titulo"] == null) { //Buscando por categoria
+                    buscando += "de la categoria</strong>: "+ Session["Categoria"].ToString();
                     cmd = new SqlCommand("RecuperarArtPorNombreCategoria", conn);
                     cmd.Parameters.Add("@Id", SqlDbType.VarChar).Value = Convert.ToInt32(Session["Categoria"]);
                 }
                 else {
+                    buscando += "titulo "+ Session["Titulo"].ToString() +" de la categoria: "+ Session["Categoria"].ToString() +"</strong>";
                     cmd = new SqlCommand("RecuperarArtPorAmbos", conn);
                     cmd.Parameters.Add("@Id", SqlDbType.VarChar).Value = Convert.ToInt32(Session["Categoria"]);
                     cmd.Parameters.Add("@titulo", SqlDbType.VarChar).Value = Session["Titulo"].ToString();
@@ -57,12 +62,13 @@ namespace Iteracion_1
 
             }
             else {
+                buscando = "<strong>Mostrando todos los artículos</strong>";
                 cmd = new SqlCommand("RecuperarArticulosPrincipal", conn);
 
             }
+            buscandoLiteral.Text = buscando;
 
-            cmd.CommandType = CommandType.StoredProcedure;
-            
+            cmd.CommandType = CommandType.StoredProcedure;         
 
             SqlDataAdapter ad = new SqlDataAdapter(cmd);
 
@@ -70,13 +76,13 @@ namespace Iteracion_1
 
             ad.Fill(dTable);
 
-            
             articlesTable.DataSource = dTable;
 
             articlesTable.Columns[0].Visible = false;
 
             articlesTable.DataBind();
 
+            buscando = "";
             Session["Categoria"] = null;
             Session["Titulo"] = null;
 
