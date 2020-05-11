@@ -121,6 +121,7 @@
     <Content Include="EdicionPregFrecMP.aspx" />
     <Content Include="Editor.aspx" />
     <Content Include="EditorArticuloModificado.aspx" />
+    <Content Include="EditorResumen.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -221,6 +222,13 @@
     </Compile>
     <Compile Include="EditorArticuloModificado.aspx.designer.cs">
       <DependentUpon>EditorArticuloModificado.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EditorResumen.aspx.cs">
+      <DependentUpon>EditorResumen.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EditorResumen.aspx.designer.cs">
+      <DependentUpon>EditorResumen.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
