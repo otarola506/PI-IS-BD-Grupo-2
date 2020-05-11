@@ -28,7 +28,7 @@
                 </asp:TemplateField>
                 <asp:TemplateField>
                     <ItemTemplate>
-                        <asp:LinkButton id="lnkVerMas" Text="Ver más" OnClick="lnkVerMasArt" runat="server"></asp:LinkButton>
+                        <asp:ImageButton id="lnkVerMas" ImageUrl="~/Imagenes/Button-Add-icon.png" ToolTip="Ver más" runat="server" Height="30px" Width="30px" OnClick ="lnkVerMasArt"/>
                     </ItemTemplate>
                 </asp:TemplateField>
             </Columns>

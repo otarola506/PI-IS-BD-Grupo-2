@@ -58,11 +58,12 @@ namespace Iteracion_1
             cmd.Parameters.Add("@articuloId", SqlDbType.Int).Value = artId;
             SqlDataAdapter ad = new SqlDataAdapter(cmd);
             SqlDataReader reader = cmd.ExecuteReader();
-
+            
             while (reader.Read())
             {
-                temp += reader["nombre"]+" ";
+                temp += reader["nombre"]+ "<br/>";
             }
+
             con.Close();
 
             lblAutores.Text = temp;

@@ -109,18 +109,49 @@ namespace Iteracion_1
 
         private int retornarValorIdArticulo(object sender)
         {
-            LinkButton btn = (LinkButton)sender;
+            ImageButton btn = (ImageButton)sender;
             GridViewRow gvr = (GridViewRow)btn.NamingContainer;
             string temp = ((Label)gvr.Cells[0].FindControl("articuloid")).Text;
             int id = Int32.Parse(temp);
             return id;
         }
 
-        public void lnkVerMasArt(object sender, EventArgs e) {
-            int idArt = retornarValorIdArticulo(sender);
-            Session["articuloId"] = idArt;
+        public void lnkVerMasArt(object sender, EventArgs e)
+        {
+            connection();
+            conn.Open();
+            int artId = retornarValorIdArticulo(sender);
+            SqlCommand cmd = new SqlCommand("RecuperarArticulo", conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@ID", SqlDbType.Int).Value = artId;
+            SqlDataReader reader = cmd.ExecuteReader();
 
-            Response.Redirect("MostrarContenido.aspx");
+            Boolean tipoArticulo = false;
+            reader.Read();
+            tipoArticulo = (Boolean)reader[4];
+            reader.Close();
+            if (tipoArticulo == false)
+            {
+                Session["articuloID"] = artId;
+                Response.Redirect("MostrarContenido.aspx");
+            }
+            else   //Descargar archivo desde base de datos
+            {
+                reader = cmd.ExecuteReader();
+                reader.Read();
+                string fileName = reader["titulo"].ToString();
+                byte[] contenidoArt = (byte[])reader["contenido"];
+                string extension = reader[5].ToString();
+                Response.Clear();
+                Response.Buffer = true;
+                Response.Charset = "";
+                Response.Cache.SetCacheability(HttpCacheability.NoCache);
+                Response.ContentType = extension;
+                Response.AppendHeader("Content-Disposition", "attachment; filename=" + fileName);
+                Response.BinaryWrite(contenidoArt);
+                Response.Flush();
+                Response.End();
+            }
         }
 
     }
