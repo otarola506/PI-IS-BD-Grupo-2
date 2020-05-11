@@ -31,6 +31,24 @@ namespace Iteracion_1 {
         protected global::System.Web.UI.WebControls.Label lblTitulo;
         
         /// <summary>
+        /// Label3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label3;
+        
+        /// <summary>
+        /// lblAutores control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblAutores;
+        
+        /// <summary>
         /// resumen control.
         /// </summary>
         /// <remarks>

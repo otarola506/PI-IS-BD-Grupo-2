@@ -44,9 +44,30 @@ namespace Iteracion_1
             ad.Fill(dt);
             grCategorias.DataSource = dt;
             grCategorias.DataBind();
-
-
         }
+
+        private void cargarAutores()
+        {
+            int artId = Convert.ToInt32(Session["articuloId"]);
+            string temp = "";
+
+            connection();
+            con.Open();
+            SqlCommand cmd = new SqlCommand("Mostrar_Autores_Articulo", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@articuloId", SqlDbType.Int).Value = artId;
+            SqlDataAdapter ad = new SqlDataAdapter(cmd);
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            while (reader.Read())
+            {
+                temp += reader["nombre"]+" ";
+            }
+            con.Close();
+
+            lblAutores.Text = temp;
+        }
+
         private void cargarContenido()
         {
             connection();
@@ -69,18 +90,16 @@ namespace Iteracion_1
                 tituloArt = reader["titulo"].ToString();
                 bytesResumen = (byte[])reader["resumen"];
                 bytesContenido = (byte[])reader["contenido"];
-
-
-
             }
+
             resumenArt = unicode.GetString(bytesResumen);
             contenidoArt = unicode.GetString(bytesContenido);
             lblTitulo.Text = tituloArt;
             lblResumen.Text = resumenArt;
             lblContenido.Text = contenidoArt;
+
             cargarCategorias();
-
-
+            cargarAutores();
         }
     }
 }

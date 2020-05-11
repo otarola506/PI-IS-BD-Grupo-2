@@ -4,9 +4,17 @@
         <br />
         <asp:Label ID="Label1" runat="server" style="font-family: Arial; font-weight: bold; font-size: 16pt" Text="Titulo"></asp:Label>
     </p>
+
     <p>
         <asp:Label ID="lblTitulo" runat="server" style="width: 35px; height: 16px; left: 15px; top: 143px; font-family: Arial; font-size: 14pt"></asp:Label>
     </p>
+
+    <p>
+        <asp:Label ID="Label3" runat="server" style="font-family: Arial; font-weight: bold; font-size: 16pt" Text="Autor(es)"></asp:Label>
+        <br />
+        <asp:Label ID="lblAutores" runat="server" style="width: 35px; height: 16px; left: 15px; top: 143px; font-family: Arial; font-size: 14pt"></asp:Label>
+    </p>
+
     <p>
         <asp:Label ID="resumen" runat="server" style="font-family: Arial; font-weight: bold; font-size: 16pt" Text="Resumen"></asp:Label>
         <asp:GridView ID="grCategorias" runat="server" AutoGenerateColumns ="false" style="width: 162px; height: 64px; position: absolute; left: 813px; top: 115px">
