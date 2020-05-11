@@ -10,51 +10,69 @@
 namespace Iteracion_1 {
     
     
-    public partial class SiteMaster {
+    public partial class EdicionPregFrecMP {
         
         /// <summary>
-        /// Control DropDownList.
+        /// Control EditPregFrecLabel.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownList;
+        protected global::System.Web.UI.WebControls.Label EditPregFrecLabel;
         
         /// <summary>
-        /// Control SqlDataSource1.
+        /// Control PregLabel.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource1;
+        protected global::System.Web.UI.WebControls.Label PregLabel;
         
         /// <summary>
-        /// Control TextBox1.
+        /// Control TxtBoxP.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox1;
+        protected global::System.Web.UI.WebControls.TextBox TxtBoxP;
         
         /// <summary>
-        /// Control Btn_ConsultaXTopico.
+        /// Control RespLabel.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Btn_ConsultaXTopico;
+        protected global::System.Web.UI.WebControls.Label RespLabel;
         
         /// <summary>
-        /// Control MainContent.
+        /// Control TxtBoxR.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder MainContent;
+        protected global::System.Web.UI.WebControls.TextBox TxtBoxR;
+        
+        /// <summary>
+        /// Control VolverButton.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button VolverButton;
+        
+        /// <summary>
+        /// Control GCButton.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button GCButton;
     }
 }
