@@ -118,6 +118,41 @@ namespace Iteracion_1
 
         }
 
+        public bool checkAutores()
+        {
+            bool valor = true;
+            //Separar el string
+            string autores_no_separados = txtAutores.Text.ToString();
+            lblprueba.Text = autores_no_separados;
+            string[] autores = autores_no_separados.Split(',');
+            connection();
+            con.Open();
+            foreach (string autor in autores)
+            {
+                string miembroID = "";
+                SqlCommand cmd2 = new SqlCommand("obtenerMiembroID", con);
+                cmd2.CommandType = CommandType.StoredProcedure;
+                cmd2.Parameters.Add("@nombre", SqlDbType.VarChar).Value = autor; // le pasamos el valor del string
+                SqlDataReader reader = cmd2.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    miembroID = reader[0].ToString();
+                }
+                reader.Close();
+
+                if (miembroID == "")
+                {
+                    //El mae metio un nombre de alguien que no pertenece a los miembros
+                    valor = false;
+                    break;
+                }
+
+            }
+            con.Close();
+            return valor;
+        }
+
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
             //revision de categoria 
@@ -149,6 +184,11 @@ namespace Iteracion_1
                     else if (!categoria_seleccionada)
                     {
                         lblMensaje.Text = "Por favor seleccione una categoria .";
+                        lblMensaje.ForeColor = System.Drawing.Color.Red;
+                    }
+                    else if (!checkAutores())
+                    {
+                        lblMensaje.Text = "Escribio mal el nombre o ingreso un nombre de un miembro que no pertene a la comunidad, solo miembros pueden escribir";
                         lblMensaje.ForeColor = System.Drawing.Color.Red;
                     }
                     else
@@ -238,21 +278,10 @@ namespace Iteracion_1
                             }
                             reader.Close();
 
-                            if (miembroID == "")
-                            {
-                                //El mae metio un nombre de alguien que no pertenece a los miembros
-                                lblMensaje.Text = "Escribio mal el nombre o ingreso un nombre de un miembro que no pertene a la comunidad, solo miembros pueden escribir";
-                                lblMensaje.ForeColor = System.Drawing.Color.Red;
-                            }
-                            else
-                            {
-                                //Se encontro al miembro en la tabla
-                                //usamos el artID para guardar
-                                guardarMiembrosAutores(con, miembroID, artID);
 
-                            }
-
-
+                            //Se encontro al miembro en la tabla
+                            //usamos el artID para guardar
+                            guardarMiembrosAutores(con, miembroID, artID);
 
                         }
 
@@ -263,6 +292,7 @@ namespace Iteracion_1
                         //pruebaCategorias.Text = categoriasId;
                         lblMensaje.Text = "Articulo subido con exito";
                         lblMensaje.ForeColor = System.Drawing.Color.Green;
+                        Response.Redirect("MisArticulos.aspx");
                     }
 
                 }
@@ -284,6 +314,11 @@ namespace Iteracion_1
                 else if (!categoria_seleccionada)
                 {
                     lblMensaje.Text = "Por favor seleccione una categoria .";
+                    lblMensaje.ForeColor = System.Drawing.Color.Red;
+                }
+                else if (!checkAutores())
+                {
+                    lblMensaje.Text = "Escribio mal el nombre o ingreso un nombre de un miembro que no pertene a la comunidad, solo miembros pueden escribir";
                     lblMensaje.ForeColor = System.Drawing.Color.Red;
                 }
                 else
@@ -373,21 +408,9 @@ namespace Iteracion_1
                         }
                         reader.Close();
 
-                        if (miembroID == "")
-                        {
-                            //El mae metio un nombre de alguien que no pertenece a los miembros
-                            lblMensaje.Text = "Escribio mal el nombre o ingreso un nombre de un miembro que no pertene a la comunidad, solo miembros pueden escribir";
-                            lblMensaje.ForeColor = System.Drawing.Color.Red;
-                        }
-                        else
-                        {
-                            //Se encontro al miembro en la tabla
-                            //usamos el artID para guardar
-                            guardarMiembrosAutores(con,miembroID,artID);
-
-                        }
-
-
+                        //Se encontro al miembro en la tabla
+                        //usamos el artID para guardar
+                        guardarMiembrosAutores(con,miembroID,artID);
 
                     }
 
@@ -397,6 +420,7 @@ namespace Iteracion_1
 
                     lblMensaje.Text = "Articulo subido con exito";
                     lblMensaje.ForeColor = System.Drawing.Color.Green;
+                    Response.Redirect("MisArticulos.aspx");
 
                 }
 
