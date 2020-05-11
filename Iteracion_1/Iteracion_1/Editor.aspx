@@ -1,23 +1,56 @@
 ﻿<%@ Page Title="EditorTexto" Language="C#" MasterPageFile="~/Site.Master" ValidateRequest="false" AutoEventWireup="true" CodeBehind="Editor.aspx.cs" Inherits="Iteracion_1.Editor" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <script src="https://cdn.tiny.cloud/1/ppfs7sld936k48b757gwua5p0k1knn5by42zeg00gm61xqwb/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-    <script>tinymce.init({
-  selector: '#<%=txtArticulo.ClientID%>',
-  height: 400,
-  plugins: [
-    "advlist autolink lists link image charmap print preview anchor",
-    "searchreplace visualblocks code fullscreen",
-    "insertdatetime media table paste imagetools wordcount"
-    ],
-  image_dimensions: false,
-   image_description: false,
-  image_caption: true,
-  toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
-    content_css: '//www.tiny.cloud/css/codepen.min.css',
 
-});</script>
-        <script>tinymce.init({
-    selector: '#<%=txtResumen.ClientID%>'});</script>
+   <script>tinymce.init({ selector: '#<%=txtResumen.ClientID%>'});</script>
+    <script type="text/javascript" src="tinymce/tinymce.min.js"></script>
+    <script>
+        tinymce.init({
+            selector: '#<%=txtArticulo.ClientID%>',
+            content_css: '//www.tiny.cloud/css/codepen.min.css',
+            plugins:
+                [
+                "advlist autolink lists link image charmap print preview anchor",
+                "searchreplace visualblocks code fullscreen",
+                "insertdatetime media table paste imagetools wordcount", "image code"
+                ],
+           toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent  | undo redo | link image | code",
+          image_dimensions: false,
+          image_description: false,
+          image_caption: true,
+          // enable title field in the Image dialog
+          image_title: true, 
+          // enable automatic uploads of images represented by blob or data URIs
+          automatic_uploads: true,
+          // add custom filepicker only to Image dialog
+          file_picker_types: 'image',
+          file_picker_callback: function(cb, value, meta) {
+            var input = document.createElement('input');
+            input.setAttribute('type', 'file');
+            input.setAttribute('accept', 'image/*');
+
+            input.onchange = function() {
+              var file = this.files[0];
+              var reader = new FileReader();
+      
+              reader.onload = function () {
+                var id = 'blobid' + (new Date()).getTime();
+                var blobCache =  tinymce.activeEditor.editorUpload.blobCache;
+                var base64 = reader.result.split(',')[1];
+                var blobInfo = blobCache.create(id, file, base64);
+                blobCache.add(blobInfo);
+
+                // call the callback and populate the Title field with the file name
+                cb(blobInfo.blobUri(), { title: file.name });
+              };
+              reader.readAsDataURL(file);
+            };
+    
+            input.click();
+          }
+        });
+</script>
+
 
     <p>
         <br />
