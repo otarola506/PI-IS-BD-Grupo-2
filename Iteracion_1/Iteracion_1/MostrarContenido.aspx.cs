@@ -31,19 +31,23 @@ namespace Iteracion_1
 
         private void cargarCategorias()
         {
+            string temp = "";
             connection();
+            con.Open();
             int artId = Convert.ToInt32(Session["articuloId"]);
             SqlDataAdapter ad = new SqlDataAdapter();
-            DataTable dt = new DataTable();
             SqlCommand cmd = new SqlCommand("Mostrar_Categorias_Articulo", con);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.Add("@ID", SqlDbType.Int).Value = artId;
-            con.Open();
-          
-            ad.SelectCommand = cmd;
-            ad.Fill(dt);
-            grCategorias.DataSource = dt;
-            grCategorias.DataBind();
+            SqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                temp += reader["nombre"] + "<br/>";
+            }
+
+            con.Close();
+
+            lblCategoria.Text = temp;
         }
 
         private void cargarAutores()
@@ -101,6 +105,7 @@ namespace Iteracion_1
 
             cargarCategorias();
             cargarAutores();
+
         }
     }
 }

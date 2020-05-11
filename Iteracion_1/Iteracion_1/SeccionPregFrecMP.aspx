@@ -26,6 +26,8 @@
             <SortedDescendingHeaderStyle BackColor="#00547E" />
         </asp:GridView>
     <br />
+
+    <!--
     <p style="height: 41px; font-size: large;">
         Nota: Si tiene alguna pregunta que no se encuentre en esta sección, puede emitirla en el siguiente espacio. Si su pregunta es frecuente se añadirá a la sección.</p>
     <div>
@@ -46,4 +48,5 @@
             </tr>
         </table>
     </div>
+    -->
 </asp:Content>

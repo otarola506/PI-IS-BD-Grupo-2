@@ -58,15 +58,6 @@ namespace Iteracion_1 {
         protected global::System.Web.UI.WebControls.Label resumen;
         
         /// <summary>
-        /// grCategorias control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView grCategorias;
-        
-        /// <summary>
         /// lblResumen control.
         /// </summary>
         /// <remarks>
@@ -92,5 +83,23 @@ namespace Iteracion_1 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblContenido;
+        
+        /// <summary>
+        /// lblCategorias control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblCategorias;
+        
+        /// <summary>
+        /// lblCategoria control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblCategoria;
     }
 }

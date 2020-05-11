@@ -26,7 +26,6 @@ namespace Iteracion_1
             {
                 llenarTabla();
                 
-
             }
         }
         void llenarTabla()
@@ -49,6 +48,7 @@ namespace Iteracion_1
             {
                 tablaArticulos.DataSource = dt;
                 tablaArticulos.DataBind();
+                tablaArticulos.Columns[0].Visible = false;
 
             }
             else
@@ -61,6 +61,7 @@ namespace Iteracion_1
                 tablaArticulos.Rows[0].Cells[0].ColumnSpan = dt.Columns.Count;
                 tablaArticulos.Rows[0].Cells[0].Text = "No se han encontrado datos.";
                 tablaArticulos.Rows[0].Cells[0].HorizontalAlign = HorizontalAlign.Center;
+                
 
             }
 
