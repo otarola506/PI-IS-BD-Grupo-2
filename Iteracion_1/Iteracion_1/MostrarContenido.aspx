@@ -17,16 +17,6 @@
 
     <p>
         <asp:Label ID="resumen" runat="server" style="font-family: Arial; font-weight: bold; font-size: 16pt" Text="Resumen"></asp:Label>
-        <asp:GridView ID="grCategorias" runat="server" AutoGenerateColumns ="false" style="width: 162px; height: 64px; position: absolute; left: 813px; top: 115px">
-            <Columns>
-                <asp:TemplateField HeaderText="Categorias del Articulo">
-                    <ItemTemplate>
-                    <asp:Label ID="categoria" Text='<%# Eval("nombre")%>' runat="server" />
-                    </ItemTemplate>
-                </asp:TemplateField>
-
-            </Columns>
-        </asp:GridView>
     </p>
     <p>
         <asp:Label ID="lblResumen" runat="server" style="font-family: Arial; font-size: 14pt"></asp:Label>
@@ -54,9 +44,11 @@
     <p>
         &nbsp;</p>
     <p>
-        &nbsp;</p>
+        <asp:Label ID="lblCategorias" runat="server" style="font-size: 16pt; font-family: Arial; font-weight: bold" Text="Categorias"></asp:Label>
+    </p>
     <p>
-        &nbsp;</p>
+        <asp:Label ID="lblCategoria" runat="server" style="font-family: Arial; font-size: 14pt"></asp:Label>
+    </p>
     <p>
         &nbsp;</p>
     <p>
