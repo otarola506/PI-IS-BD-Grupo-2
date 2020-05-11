@@ -34,10 +34,17 @@ namespace Iteracion_1
             connection();
             con.Open();
             DataTable dt = new DataTable();
-            SqlDataAdapter ad = new SqlDataAdapter("Recuperar_ID_Titulo_Resumen", con);
+            SqlDataAdapter ad = new SqlDataAdapter();
+            SqlCommand cmd = new SqlCommand("Recuperar_Articulos_Autor",con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@miembroId", SqlDbType.Int).Value = 0; // En este caso está quemado el valor
+            SqlDataReader reader = cmd.ExecuteReader();
+            reader.Read();
+            string nombre = reader[3].ToString();
+            lblArticulo.Text = "Bienvenido a sus artículos, " + nombre;
+            reader.Close();
+            ad.SelectCommand = cmd;
             ad.Fill(dt);
-            tablaArticulos.DataSource = dt;
-            tablaArticulos.DataBind();
             if (dt.Rows.Count > 0)
             {
                 tablaArticulos.DataSource = dt;
@@ -92,7 +99,7 @@ namespace Iteracion_1
             Boolean tipoArticulo = false;
             if (reader.Read())
             {
-                tipoArticulo = (Boolean)reader[5];
+                tipoArticulo = (Boolean)reader[4];
 
             }
             if (tipoArticulo == false)
@@ -102,7 +109,8 @@ namespace Iteracion_1
             }
             else
             {
-                Response.Write("<script>alert('No se pueden editar artículos subidos a la pagina')</script>");
+                Session["articuloID"] = artId;
+                Response.Redirect("EditorResumen.aspx");
 
             }
 
@@ -135,7 +143,7 @@ namespace Iteracion_1
 
             Boolean tipoArticulo = false;
             reader.Read();
-            tipoArticulo = (Boolean)reader[5];
+            tipoArticulo = (Boolean)reader[4];
             reader.Close();
             if (tipoArticulo == false)
             {
@@ -149,7 +157,7 @@ namespace Iteracion_1
                 reader.Read();
                 string fileName = reader["titulo"].ToString();
                 byte[] contenidoArt = (byte[])reader["contenido"];
-                string extension = reader[6].ToString();
+                string extension = reader[5].ToString();
                 Response.Clear();
                 Response.Buffer = true;
                 Response.Charset = "";

@@ -10,87 +10,69 @@
 namespace Iteracion_1 {
     
     
-    public partial class MostrarContenido {
+    public partial class AgregarPregFrecMP {
         
         /// <summary>
-        /// Label1 control.
+        /// AddPregFrecLabel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label1;
+        protected global::System.Web.UI.WebControls.Label AddPregFrecLabel;
         
         /// <summary>
-        /// lblTitulo control.
+        /// PregLabel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTitulo;
+        protected global::System.Web.UI.WebControls.Label PregLabel;
         
         /// <summary>
-        /// Label3 control.
+        /// TxtBoxP control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label3;
+        protected global::System.Web.UI.WebControls.TextBox TxtBoxP;
         
         /// <summary>
-        /// lblAutores control.
+        /// RespLabel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblAutores;
+        protected global::System.Web.UI.WebControls.Label RespLabel;
         
         /// <summary>
-        /// resumen control.
+        /// TxtBoxR control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label resumen;
+        protected global::System.Web.UI.WebControls.TextBox TxtBoxR;
         
         /// <summary>
-        /// grCategorias control.
+        /// VolverButton control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView grCategorias;
+        protected global::System.Web.UI.WebControls.Button VolverButton;
         
         /// <summary>
-        /// lblResumen control.
+        /// GRButton control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblResumen;
-        
-        /// <summary>
-        /// Label2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label2;
-        
-        /// <summary>
-        /// lblContenido control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblContenido;
+        protected global::System.Web.UI.WebControls.Button GRButton;
     }
 }

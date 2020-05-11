@@ -51,9 +51,12 @@ namespace Iteracion_1
                     {
                         Session["Titulo"] = TextBox1.Text;
                         Session["Categoria"] = DropDownList.SelectedValue;
+                        
                     }
                 }
             }
+
+            Session["nombreCategoria"] = DropDownList.SelectedItem.Text;
             Response.Redirect("Articulos.aspx");
         }
 

@@ -50,8 +50,8 @@ namespace Iteracion_1
             {
                 tituloRetorno = reader[1].ToString();
                 resumenByte = (byte[])reader[2];
-                contenidoByte = (byte[])reader[4];
-                tipoArticulo = (Boolean)reader[5];
+                contenidoByte = (byte[])reader[3];
+                tipoArticulo = (Boolean)reader[4];
 
             }
             con.Close();
@@ -89,7 +89,7 @@ namespace Iteracion_1
 
 
 
-        public void guardarArchivo()
+        public void ModificarArchivo()
         {
             byte[] bytesText = Seleccionador.FileBytes;
             int artId = Convert.ToInt32(Session["articuloId"]);
@@ -116,7 +116,7 @@ namespace Iteracion_1
             con.Close();
 
         }
-        public void guardarArticulosTexto()
+        public void ModificarArticulosTexto()
         {
 
             int artId = Convert.ToInt32(Session["articuloId"]);
@@ -198,7 +198,7 @@ namespace Iteracion_1
 
 
                         connection();
-                        guardarArchivo(); //revisar
+                        ModificarArchivo(); //revisar
 
 
                         //obtine el artId
@@ -284,7 +284,7 @@ namespace Iteracion_1
                     string artID = "";
                     //Guardamos el contenido de txtArticulo en  
                     connection();
-                    guardarArticulosTexto();
+                    ModificarArticulosTexto();
 
 
 
@@ -366,9 +366,5 @@ namespace Iteracion_1
             }
         }
 
-        protected void btnVuelve_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("MisArticulos.aspx");
-        }
     }
 }

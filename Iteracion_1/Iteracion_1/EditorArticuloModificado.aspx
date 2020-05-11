@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" ValidateRequest ="false" AutoEventWireup="true" CodeBehind="EditorArticuloModificado.aspx.cs" Inherits="Iteracion_1.EditorArticuloModificado" %>
+﻿<%@ Page Title="Editor Texto" Language="C#" MasterPageFile="~/Site.Master" ValidateRequest ="false" AutoEventWireup="true" CodeBehind="EditorArticuloModificado.aspx.cs" Inherits="Iteracion_1.EditorArticuloModificado" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server" >
      <script src="https://cdn.tiny.cloud/1/ppfs7sld936k48b757gwua5p0k1knn5by42zeg00gm61xqwb/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 
@@ -70,7 +70,7 @@
         <br />
         <br />
         <span class="auto-style2"><strong>Suba un articulo de su computadora:<asp:FileUpload ID="Seleccionador" runat="server" />
-        <asp:Button ID="btnGuardar" runat="server" OnClick="btnGuardar_Click"  OnClientClick ="return confirm('¿Esta seguro que desea guardar este artículo?')" Text="Guardar" />
+        <asp:Button ID="btnGuardar" runat="server" OnClick="btnGuardar_Click"  OnClientClick ="return confirm('¿Está seguro que desea guardar este artículo?')" Text="Guardar" />
         <br />
         <br />
         <asp:Label ID="lblMensaje" runat="server" CssClass="auto-style3"></asp:Label>

@@ -44,6 +44,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AjaxControlToolkit, Version=19.1.0.0, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Documents\ASP.NET AJAX Control Toolkit\Bin\AjaxControlToolkit.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System" />
@@ -105,17 +109,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="About.aspx" />
+    <Content Include="AgregarPregFrecMP.aspx" />
     <Content Include="Articulos.aspx" />
-    <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\custom.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Default.aspx" />
+    <Content Include="EdicionPregFrecMP.aspx" />
     <Content Include="Editor.aspx" />
     <Content Include="EditorArticuloModificado.aspx" />
+    <Content Include="EditorResumen.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -132,6 +138,8 @@
     <Content Include="Imagenes\Pencil-icon.png" />
     <Content Include="Imagenes\trash-icon.png" />
     <Content Include="MisArticulos.aspx" />
+    <Content Include="PreguntasRecibidasMP.aspx" />
+    <Content Include="RespuestasPregMP.aspx" />
     <Content Include="MostrarContenido.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -161,6 +169,7 @@
     <Content Include="Scripts\WebForms\WebForms.js" />
     <Content Include="Scripts\WebForms\WebParts.js" />
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
+    <Content Include="SeccionPregFrecMP.aspx" />
     <Content Include="Site.Master" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config">
@@ -170,14 +179,14 @@
     <Content Include="Site.Mobile.Master" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Start\BundleConfig.cs" />
-    <Compile Include="About.aspx.cs">
-      <DependentUpon>About.aspx</DependentUpon>
+    <Compile Include="AgregarPregFrecMP.aspx.cs">
+      <DependentUpon>AgregarPregFrecMP.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="About.aspx.designer.cs">
-      <DependentUpon>About.aspx</DependentUpon>
+    <Compile Include="AgregarPregFrecMP.aspx.designer.cs">
+      <DependentUpon>AgregarPregFrecMP.aspx</DependentUpon>
     </Compile>
+    <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Articulos.aspx.cs">
       <DependentUpon>Articulos.aspx</DependentUpon>
@@ -186,19 +195,19 @@
     <Compile Include="Articulos.aspx.designer.cs">
       <DependentUpon>Articulos.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Contact.aspx.cs">
-      <DependentUpon>Contact.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Contact.aspx.designer.cs">
-      <DependentUpon>Contact.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EdicionPregFrecMP.aspx.cs">
+      <DependentUpon>EdicionPregFrecMP.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EdicionPregFrecMP.aspx.designer.cs">
+      <DependentUpon>EdicionPregFrecMP.aspx</DependentUpon>
     </Compile>
     <Compile Include="Editor.aspx.cs">
       <DependentUpon>Editor.aspx</DependentUpon>
@@ -214,6 +223,13 @@
     <Compile Include="EditorArticuloModificado.aspx.designer.cs">
       <DependentUpon>EditorArticuloModificado.aspx</DependentUpon>
     </Compile>
+    <Compile Include="EditorResumen.aspx.cs">
+      <DependentUpon>EditorResumen.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EditorResumen.aspx.designer.cs">
+      <DependentUpon>EditorResumen.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -224,6 +240,13 @@
     <Compile Include="MisArticulos.aspx.designer.cs">
       <DependentUpon>MisArticulos.aspx</DependentUpon>
     </Compile>
+    <Compile Include="PreguntasRecibidasMP.aspx.cs">
+      <DependentUpon>PreguntasRecibidasMP.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PreguntasRecibidasMP.aspx.designer.cs">
+      <DependentUpon>PreguntasRecibidasMP.aspx</DependentUpon>
+    </Compile>
     <Compile Include="MostrarContenido.aspx.cs">
       <DependentUpon>MostrarContenido.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -232,6 +255,20 @@
       <DependentUpon>MostrarContenido.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RespuestasPregMP.aspx.cs">
+      <DependentUpon>RespuestasPregMP.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RespuestasPregMP.aspx.designer.cs">
+      <DependentUpon>RespuestasPregMP.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SeccionPregFrecMP.aspx.cs">
+      <DependentUpon>SeccionPregFrecMP.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SeccionPregFrecMP.aspx.designer.cs">
+      <DependentUpon>SeccionPregFrecMP.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
