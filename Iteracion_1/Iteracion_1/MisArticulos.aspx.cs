@@ -109,7 +109,8 @@ namespace Iteracion_1
             }
             else
             {
-                Response.Write("<script>alert('No se pueden editar artículos subidos a la pagina')</script>");
+                Session["articuloID"] = artId;
+                Response.Redirect("EditorResumen.aspx");
 
             }
 
