@@ -26,7 +26,6 @@ namespace Iteracion_1
             {
                 llenarTabla();
                 
-
             }
         }
         void llenarTabla()
