@@ -1,7 +1,9 @@
 USE BD_Grupo2;
 CREATE TABLE Miembro(
 	miembroIdPK INTEGER NOT NULL PRIMARY KEY IDENTITY (-1,1),
-	nombre VARCHAR(50) NOT NULL
+	nombre VARCHAR(50) NOT NULL,
+	pesoMiembro INTEGER,
+	correo VARCHAR(50)
 );
 CREATE TABLE Articulo(
 	artIdPK INTEGER NOT NULL PRIMARY KEY IDENTITY (1,1),
@@ -9,7 +11,9 @@ CREATE TABLE Articulo(
 	resumen VARBINARY(max) NOT NULL,
 	contenido VARBINARY(max) NOT NULL,
 	tipoArt bit NOT NULL,
-	extn VARCHAR(15)
+	extn VARCHAR(15),
+	estado INTEGER,
+	puntuacion INTEGER
 ); 
 
 CREATE TABLE Categoria(
