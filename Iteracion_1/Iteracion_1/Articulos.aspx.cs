@@ -126,11 +126,11 @@ namespace Iteracion_1
             cmd.Parameters.Add("@ID", SqlDbType.Int).Value = artId;
             SqlDataReader reader = cmd.ExecuteReader();
 
-            Boolean tipoArticulo = false;
+            String tipoArticulo = "";
             reader.Read();
-            tipoArticulo = (Boolean)reader[4];
+            tipoArticulo = (String)reader[7];
             reader.Close();
-            if (tipoArticulo == false)
+            if (tipoArticulo == "corto")
             {
                 Session["articuloID"] = artId;
                 Response.Redirect("MostrarContenido.aspx");
