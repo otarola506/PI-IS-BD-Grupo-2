@@ -1,34 +1,33 @@
 USE BD_Grupo2;
 
 CREATE TABLE Miembro(
-	miembroIdPK INTEGER NOT NULL PRIMARY KEY IDENTITY (1,1),
+	nombreUsuarioPK VARCHAR(50) NOT NULL PRIMARY KEY,
 	nombre VARCHAR(50) NOT NULL,
-	pesoMiembro INTEGER,
-	nombreUsuario VARCHAR(50)
+	pesoMiembro INTEGER,	
 );
 
 CREATE TABLE Nucleo(
-	miembroIdFK INTEGER NOT NULL PRIMARY KEY,
-	tipo INTEGER NOT NULL,
+	nombreUsuarioFK VARCHAR(50) NOT NULL PRIMARY KEY,
+	tipo VARCHAR(50) NOT NULL,
 
 	CONSTRAINT FK_Nucleo_Miembro
-		FOREIGN KEY(miembroIdFK) REFERENCES Miembro(miembroIdPK)
+		FOREIGN KEY(nombreUsuarioFK) REFERENCES Miembro(nombreUsuarioPK)
 			ON DELETE CASCADE
 );
 
 CREATE TABLE Perfil(
 	perfilIdPK INTEGER NOT NULL IDENTITY (1,1),
-	miembroIdFK INTEGER NOT NULL,
+	nombreUsuarioFK VARCHAR(50) NOT NULL,
 	informacionLaboral VARCHAR(MAX),
 	informacionBiografica VARCHAR(MAX),
 	telefono VARCHAR(20),
 	correo VARCHAR(20),
 	merito FLOAT
 
-	CONSTRAINT PK_PerfilMiembro PRIMARY KEY(perfilIdPK,miembroIdFK)
+	CONSTRAINT PK_PerfilMiembro PRIMARY KEY(perfilIdPK,nombreUsuarioFK)
 
 	CONSTRAINT FK_Perfil_Miembro
-		FOREIGN KEY(miembroIdFK) REFERENCES Miembro(miembroIdPK)
+		FOREIGN KEY(nombreUsuarioFK) REFERENCES Miembro(nombreUsuarioPK)
 			ON DELETE CASCADE
 );
 
@@ -40,18 +39,18 @@ CREATE TABLE Articulo(
 	contenido VARBINARY(max) NOT NULL,
 	puntuacion INTEGER,
 	visitas INTEGER,
-	estado INTEGER,
-	tipoArt bit NOT NULL
+	estado VARCHAR(20),
+	tipoArt VARCHAR(10) NOT NULL
 
 ); 
 
 CREATE TABLE Miembro_Articulo(
-	miembroIdFK INTEGER NOT NULL,
+	nombreUsuarioFK NOT NULL,
 	artIdFK INTEGER NOT NULL, 
 
-	CONSTRAINT PK_ArticuloMiembro PRIMARY KEY(miembroIdFK,artIdFK),
+	CONSTRAINT PK_ArticuloMiembro PRIMARY KEY(nombreUsuarioFK,artIdFK),
 	CONSTRAINT FK_Escribe_Miembro
-		FOREIGN KEY(miembroIdFK) REFERENCES Miembro(miembroIdPK)
+		FOREIGN KEY(nombreUsuarioFK) REFERENCES Miembro(nombreUsuarioPK)
 			ON DELETE CASCADE,
 	CONSTRAINT FK_Escribe_Articulo
 		FOREIGN KEY(artIdFK) REFERENCES Articulo(artIdPK)
@@ -80,12 +79,12 @@ CREATE TABLE Art_Categoria (
 
 CREATE TABLE Pregunta_Frecuente(
 	pregIdPK INTEGER NOT NULL PRIMARY KEY IDENTITY (1,1),
-	miembroIdFK INTEGER DEFAULT -1,
+	nombreUsuarioFK VARCHAR(50) DEFAULT -1,
 	pregunta VARCHAR(max) NOT NULL,
 	respuesta VARCHAR(max) NOT NULL,
 
 	CONSTRAINT FK_Pregunta_Miembro
-		FOREIGN KEY(miembroIdFK) REFERENCES Miembro(miembroIdPK)
+		FOREIGN KEY(nombreUsuarioFK) REFERENCES Miembro(nombreUsuarioPK)
 			ON DELETE SET DEFAULT
 );
 
