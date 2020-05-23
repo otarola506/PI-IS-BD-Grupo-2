@@ -44,18 +44,18 @@ namespace Iteracion_1
             byte[] contenidoByte = new byte[] { };
             byte[] resumenByte = new byte[] { };
             string tituloRetorno = "";
-            Boolean tipoArticulo = false;
+            string tipoArticulo = "";
 
             if (reader.Read())
             {
                 tituloRetorno = reader[1].ToString();
                 resumenByte = (byte[])reader[2];
                 contenidoByte = (byte[])reader[3];
-                tipoArticulo = (Boolean)reader[4];
+                tipoArticulo = reader[7].ToString();
 
             }
             con.Close();
-            if (tipoArticulo == false)
+            if (string.Compare(tipoArticulo, "corto") == 0)
             {
                 string resumenString = unicode.GetString(resumenByte);
                 string contenidoString = unicode.GetString(contenidoByte);
@@ -66,7 +66,6 @@ namespace Iteracion_1
             }
 
         }
-        //Create one method "BindHobbies" for populate hobbies from Database
         public void cargarCategorias()
         {
             connection();
