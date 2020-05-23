@@ -297,7 +297,7 @@ namespace Iteracion_1
                         //pruebaCategorias.Text = categoriasId;
                         lblMensaje.Text = "Articulo subido con exito";
                         lblMensaje.ForeColor = System.Drawing.Color.Green;
-                        //Response.Redirect("MisArticulos.aspx");
+                        Response.Redirect("MisArticulos.aspx");
                     }
 
                 }
@@ -425,7 +425,7 @@ namespace Iteracion_1
 
                     lblMensaje.Text = "Articulo subido con exito";
                     lblMensaje.ForeColor = System.Drawing.Color.Green;
-                    //Response.Redirect("MisArticulos.aspx");
+                    Response.Redirect("MisArticulos.aspx");
 
                 }
 
