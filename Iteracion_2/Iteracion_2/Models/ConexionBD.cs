@@ -15,7 +15,7 @@ namespace Iteracion_2.Models
         private SqlConnection con;
         public void connection()
         {
-            string conString = @"Server=172.16.202.75;Database=BD_B78451;persist security info=True;MultipleActiveResultSets=True;User ID=B78451;Password=contra";
+            string conString = @"Server=172.16.202.75;Database=BD_Grupo2;persist security info=True;MultipleActiveResultSets=True;User ID=Grupo2;Password=grupo2.";
             con = new SqlConnection(conString);
 
         }
@@ -52,7 +52,7 @@ namespace Iteracion_2.Models
             while (reader.Read())
             {
                 miembroID = reader[0].ToString(); // para cada autor ocupo que guarde el merito en puntaje
-                asignarPuntajeInicial(miembroID, puntuacion);
+                asignarPuntajeInicialMiembro(miembroID, puntuacion);
             }
             reader.Close();
             con.Close();
@@ -60,14 +60,14 @@ namespace Iteracion_2.Models
         }
 
         //Metodo que se encarga de asignarle el puntaje inicial al autor que se le pasa por parametro
-        public void asignarPuntajeInicial(string miembroID, float puntuacion)
+        public void asignarPuntajeInicialMiembro(string miembroID, float puntuacion)
         {
             //Se llama al proc que guarda el puntaje en el perfil de la persona, en este momento se guarda en una base de prueba 
             //con.Open();
             SqlCommand cmd = new SqlCommand("ingresarPuntuacionAutor", con);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.Add("@puntuacion", SqlDbType.Float).Value = puntuacion;
-            cmd.Parameters.Add("@miembroID", SqlDbType.Int).Value = miembroID;
+            cmd.Parameters.Add("@miembroID", SqlDbType.VarChar).Value = miembroID;
             cmd.ExecuteNonQuery();
             //con.Close();
 
@@ -78,7 +78,7 @@ namespace Iteracion_2.Models
         public void asignarMeritoPuntuacionInicial(int artID)
         {
             string aceptado = revisarEstadoArticulo(artID);
-            if (aceptado == "1")
+            if (aceptado == "aceptado")
             {
                 //Obtenemos la puntacion del articulo
                 con.Open();
