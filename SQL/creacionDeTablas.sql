@@ -45,7 +45,7 @@ CREATE TABLE Articulo(
 ); 
 
 CREATE TABLE Miembro_Articulo(
-	nombreUsuarioFK NOT NULL,
+	nombreUsuarioFK VARCHAR(50) NOT NULL,
 	artIdFK INTEGER NOT NULL, 
 
 	CONSTRAINT PK_ArticuloMiembro PRIMARY KEY(nombreUsuarioFK,artIdFK),
