@@ -54,6 +54,9 @@ namespace Iteracion_1
         {
             int artId = Convert.ToInt32(Session["articuloId"]);
             string temp = "";
+            string[] autores = new string[5];
+
+
 
             connection();
             con.Open();
@@ -62,13 +65,35 @@ namespace Iteracion_1
             cmd.Parameters.Add("@articuloId", SqlDbType.Int).Value = artId;
             SqlDataAdapter ad = new SqlDataAdapter(cmd);
             SqlDataReader reader = cmd.ExecuteReader();
-            
+
+            int cuenta = 0;
             while (reader.Read())
             {
-                temp += reader["nombre"]+ "<br/>";
+                temp += reader["nombre"] + "<br/>";
+                //Guardo los nombres de los autores 
+                string nombreAutor = reader["nombre"].ToString();
+                autores[cuenta] = nombreAutor;
+                cuenta++;
             }
 
             con.Close();
+
+
+            if (cuenta != 0)
+            {
+                for (int i = 0; i < autores.Length; i++)
+                {
+                    if (!(autores[i] == null))
+                    {
+                        aumentarMeritoAutor(autores[i]);
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+            }
+
 
             lblAutores.Text = temp;
         }
@@ -88,13 +113,19 @@ namespace Iteracion_1
             byte[] bytesContenido = new byte[] { };
             string resumenArt = "";
             string contenidoArt = "";
-
+            // Debo de agregar lo de las visitas y puntuacion
+            string visitas = "";
+            string puntuacion =  "";
+            
 
             if (reader.Read())
             {
                 tituloArt = reader["titulo"].ToString();
                 bytesResumen = (byte[])reader["resumen"];
                 bytesContenido = (byte[])reader["contenido"];
+                // Debo de agregar lo de las visitas y puntuacion
+                visitas = reader["visitas"].ToString();
+                puntuacion = reader["puntuacion"].ToString();
             }
 
             resumenArt = unicode.GetString(bytesResumen);
@@ -102,10 +133,58 @@ namespace Iteracion_1
             lblTitulo.Text = tituloArt;
             lblResumen.Text = resumenArt;
             lblContenido.Text = contenidoArt;
+            // Debo de agregar lo de las visitas y puntuacion
+            lblPuntuacion.Text = puntuacion;
+            lblvisitas.Text = visitas;
 
             cargarCategorias();
             cargarAutores();
 
+            //Hacer un metodo que aumente la visitas del articulo
+            aumentarVisitas();
+
+
         }
+
+        public void aumentarVisitas()
+        {
+            //usando el artID aumentamos el valor de las visitas
+            int artId = Convert.ToInt32(Session["articuloId"]);
+            // Ocupo un proc para aumentar el valor de las visitas
+            SqlCommand cmd = new SqlCommand("IncrementarVisitas", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@artID", SqlDbType.Int).Value = artId;
+            con.Open();
+            cmd.ExecuteNonQuery();
+
+        }
+
+        public void aumentarMeritoAutor( string nombreAutor)
+        {
+            string nombreUsuario = "";
+
+            //con el nombre del autor buscamos su nombre de usuario
+            SqlCommand cmd0 = new SqlCommand("RetornarNombreUsuario", con);
+            cmd0.CommandType = CommandType.StoredProcedure;
+            cmd0.Parameters.Add("@nombreM", SqlDbType.VarChar).Value = nombreAutor;
+            con.Open();
+            SqlDataAdapter ad = new SqlDataAdapter(cmd0);
+            SqlDataReader reader = cmd0.ExecuteReader();
+            if (reader.Read())
+            {
+                nombreUsuario = reader[0].ToString();
+            }
+            con.Close();
+
+            // Ocupo un proc para aumentar el valor del merito del autor
+            SqlCommand cmd = new SqlCommand("AumentarMeritoAutor", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@nombreUsuario", SqlDbType.VarChar).Value = nombreUsuario;
+            cmd.Parameters.Add("@aumento", SqlDbType.Int).Value = 1;
+            con.Open();
+            cmd.ExecuteNonQuery();
+            con.Close();
+        }
+
     }
 }

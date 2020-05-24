@@ -3,6 +3,7 @@
     <p>
         <br />
         <asp:Label ID="Label1" runat="server" style="font-family: Arial; font-weight: bold; font-size: 16pt" Text="Titulo"></asp:Label>
+    &nbsp;
     </p>
 
     <p>
@@ -13,6 +14,13 @@
         <asp:Label ID="Label3" runat="server" style="font-family: Arial; font-weight: bold; font-size: 16pt" Text="Autor(es)"></asp:Label>
         <br />
         <asp:Label ID="lblAutores" runat="server" style="width: 35px; height: 16px; left: 15px; top: 143px; font-family: Arial; font-size: 14pt"></asp:Label>
+    </p>
+    <p style="height: 28px">
+        <strong><span style="font-size: large">Numero de visitas :</span></strong><asp:Label ID="lblvisitas" runat="server"></asp:Label>
+    </p>
+    <p style="height: 28px; font-size: large">
+        <strong>Puntuacion :<asp:Label ID="lblPuntuacion" runat="server"></asp:Label>
+        </strong>
     </p>
 
     <p>
