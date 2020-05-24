@@ -14,6 +14,7 @@ namespace Iteracion_1
     {
         Encoding unicode = Encoding.Unicode;
         private SqlConnection con;
+        string[] autores = new string[5];
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -54,7 +55,7 @@ namespace Iteracion_1
         {
             int artId = Convert.ToInt32(Session["articuloId"]);
             string temp = "";
-            string[] autores = new string[5];
+            
 
 
 
@@ -79,13 +80,13 @@ namespace Iteracion_1
             con.Close();
 
 
-            if (cuenta != 0)
+            if (cuenta != 0 )
             {
                 for (int i = 0; i < autores.Length; i++)
                 {
                     if (!(autores[i] == null))
                     {
-                        aumentarMeritoAutor(autores[i]);
+                        aumentarMeritoAutor(autores[i], 1, con); // aumentamos en 1 el merito
                     }
                     else
                     {
@@ -101,7 +102,7 @@ namespace Iteracion_1
         private void cargarContenido()
         {
             connection();
-            
+
             int artId = Convert.ToInt32(Session["articuloId"]);
             SqlCommand cmd = new SqlCommand("RecuperarArticulo", con);
             cmd.CommandType = CommandType.StoredProcedure;
@@ -115,8 +116,8 @@ namespace Iteracion_1
             string contenidoArt = "";
             // Debo de agregar lo de las visitas y puntuacion
             string visitas = "";
-            string puntuacion =  "";
-            
+            string puntuacion = "";
+
 
             if (reader.Read())
             {
@@ -159,9 +160,38 @@ namespace Iteracion_1
 
         }
 
-        public void aumentarMeritoAutor( string nombreAutor)
+
+        public void cargarAutores(int diferencia)
+        {
+            int artId = Convert.ToInt32(Session["articuloId"]);
+            string temp = "";
+
+            connection();
+            con.Open();
+            SqlCommand cmd = new SqlCommand("Mostrar_Autores_Articulo", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@articuloId", SqlDbType.Int).Value = artId;
+            SqlDataAdapter ad = new SqlDataAdapter(cmd);
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            int cuenta = 0;
+            while (reader.Read())
+            {
+                //temp += reader["nombre"] + "<br/>";
+                //Guardo los nombres de los autores 
+                string nombreAutor = reader["nombre"].ToString();
+                autores[cuenta] = nombreAutor;
+                cuenta++;
+            }
+
+            con.Close();
+        }
+
+        public void aumentarMeritoAutor(string nombreAutor, int aumento, SqlConnection con)
         {
             string nombreUsuario = "";
+
+            
 
             //con el nombre del autor buscamos su nombre de usuario
             SqlCommand cmd0 = new SqlCommand("RetornarNombreUsuario", con);
@@ -176,15 +206,111 @@ namespace Iteracion_1
             }
             con.Close();
 
-            // Ocupo un proc para aumentar el valor del merito del autor
-            SqlCommand cmd = new SqlCommand("AumentarMeritoAutor", con);
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.Add("@nombreUsuario", SqlDbType.VarChar).Value = nombreUsuario;
-            cmd.Parameters.Add("@aumento", SqlDbType.Int).Value = 1;
-            con.Open();
-            cmd.ExecuteNonQuery();
-            con.Close();
+            //  proc para modificar el valor del merito del autor
+
+            if (aumento > 0)
+            {
+                SqlCommand cmd = new SqlCommand("AumentarMeritoAutor", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add("@nombreUsuario", SqlDbType.VarChar).Value = nombreUsuario;
+                cmd.Parameters.Add("@aumento", SqlDbType.Int).Value = aumento;
+                con.Open();
+                cmd.ExecuteNonQuery();
+                con.Close();
+            }else if (aumento < 0)
+            {
+                aumento = aumento * -1;
+                SqlCommand cmd = new SqlCommand("DisminuirMeritoAutor", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add("@nombreUsuario", SqlDbType.VarChar).Value = nombreUsuario;
+                cmd.Parameters.Add("@aumento", SqlDbType.Int).Value = aumento;
+                con.Open();
+                cmd.ExecuteNonQuery();
+                con.Close();
+            }
+
         }
 
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            //Ocupo modificar la puntuacion del articulo y los meritos de los autores
+            cargarAutores(20);
+            //primero revisar que opcion se selecciono
+            if (opVotos.SelectedValue == "0")
+            {
+                //No voto
+                lblMensaje.Text = "No selecciono ninguna de las opciones, por favor vuelva a intentarlo";
+                lblMensaje.ForeColor = System.Drawing.Color.Red;
+                //Revisar si vale la pena hacer algo
+
+            }
+            else if (opVotos.SelectedValue == "1")
+            {
+                //Sumamos un punto
+                modificarPuntuacionArticulo(1);
+                for (int i = 0;i < autores.Length; i++)
+                {
+                    if (autores[i] != null)
+                    {
+                        aumentarMeritoAutor(autores[i], 1,con);
+                    }
+                }
+
+                lblMensaje.Text = "Voto enviado con exito, gracias por participar.";
+                lblMensaje.ForeColor = System.Drawing.Color.Green;
+            }
+            else if (opVotos.SelectedValue == "2")
+            {
+                //Restamos un punto
+                modificarPuntuacionArticulo(-1);
+                
+                for (int i = 0; i < autores.Length; i++)
+                {
+                    string a = autores[i];
+                    if (autores[i] != null)
+                    {
+                        aumentarMeritoAutor(autores[i], -1,con);
+                    }
+                }
+
+                lblMensaje.Text = "Voto enviado con exito, gracias por participar.";
+                lblMensaje.ForeColor = System.Drawing.Color.Green;
+            }
+            
+
+            //modificar el valor de los autores 
+        }
+        
+
+        public void modificarPuntuacionArticulo(int valorModificar)
+        {
+            connection();
+            //usando el artID modificamos el valor de la puntuacion
+            int artId = Convert.ToInt32(Session["articuloId"]);
+            if (valorModificar == 1)
+            {
+                SqlCommand cmd = new SqlCommand("ModificarPuntuacion", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add("@artID", SqlDbType.Int).Value = artId;
+                cmd.Parameters.Add("@valor", SqlDbType.Int).Value = valorModificar;
+                con.Open();
+                cmd.ExecuteNonQuery();
+                con.Close();
+
+
+            }
+            else if (valorModificar == -1)
+            {
+                valorModificar = valorModificar * -1;
+                SqlCommand cmd = new SqlCommand("DisminuirPuntuacion", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add("@artID", SqlDbType.Int).Value = artId;
+                cmd.Parameters.Add("@valor", SqlDbType.Int).Value = valorModificar;
+                con.Open();
+                cmd.ExecuteNonQuery();
+                con.Close();
+            }
+
+        }
     }
 }

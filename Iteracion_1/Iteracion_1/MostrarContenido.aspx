@@ -57,6 +57,19 @@
     <p>
         <asp:Label ID="lblCategoria" runat="server" style="font-family: Arial; font-size: 14pt"></asp:Label>
     </p>
+    <p style="font-size: large">
+        <strong>¿Que opina del articulo?</strong></p>
+    <p style="font-size: large">
+        <asp:DropDownList ID="opVotos" runat="server">
+            <asp:ListItem Value="0">No votar</asp:ListItem>
+            <asp:ListItem Value="1">Me gustó</asp:ListItem>
+            <asp:ListItem Value="2">No me gustó</asp:ListItem>
+        </asp:DropDownList>
+        <asp:Button ID="btnEnviar" runat="server" OnClick="Button1_Click" Text="Enviar" />
+    </p>
+    <p style="font-size: large">
+        <asp:Label ID="lblMensaje" runat="server"></asp:Label>
+    </p>
     <p>
         &nbsp;</p>
     <p>
