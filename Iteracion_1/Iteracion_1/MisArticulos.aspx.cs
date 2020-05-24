@@ -36,7 +36,7 @@ namespace Iteracion_1
             SqlDataAdapter ad = new SqlDataAdapter();
             SqlCommand cmd = new SqlCommand("Recuperar_Articulos_Autor",con);
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.Add("@miembroId", SqlDbType.Int).Value = 0; // En este caso está quemado el valor
+            cmd.Parameters.Add("@userName", SqlDbType.VarChar).Value = "otarola506"; // En este caso está quemado el nombre de usuario
             SqlDataReader reader = cmd.ExecuteReader();
             reader.Read();
             string nombre = reader[3].ToString();
@@ -97,13 +97,13 @@ namespace Iteracion_1
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.Add("@ID", SqlDbType.Int).Value = artId;
             SqlDataReader reader = cmd.ExecuteReader();
-            Boolean tipoArticulo = false;
+            string tipoArticulo = "";
             if (reader.Read())
             {
-                tipoArticulo = (Boolean)reader[4];
+                tipoArticulo = reader[7].ToString();
 
             }
-            if (tipoArticulo == false)
+            if (string.Compare(tipoArticulo, "corto") == 0)
             {
                 Session["articuloID"] = artId;
                 Response.Redirect("EditorArticuloModificado.aspx");
@@ -142,11 +142,11 @@ namespace Iteracion_1
             cmd.Parameters.Add("@ID", SqlDbType.Int).Value = artId;
             SqlDataReader reader = cmd.ExecuteReader();
 
-            Boolean tipoArticulo = false;
+            string tipoArticulo = "";
             reader.Read();
-            tipoArticulo = (Boolean)reader[4];
+            tipoArticulo = reader[7].ToString();
             reader.Close();
-            if (tipoArticulo == false)
+            if (string.Compare(tipoArticulo,"corto") == 0)
             {
                 Session["articuloID"] = artId;
                 Response.Redirect("MostrarContenido.aspx");

@@ -20,7 +20,7 @@ namespace Iteracion_1
             con = new SqlConnection(conString);
         }
 
-        string conString = "Data Source=172.16.202.24;Initial Catalog=BD_Grupo2;User ID=Grupo2;Password=grupo2.";
+        string conString = "Data Source=172.16.202.75;Initial Catalog=BD_Grupo2;User ID= grupo2;Password=grupo2.";
         private SqlConnection con;
         Encoding unicode = Encoding.Unicode;
         protected void Page_Load(object sender, EventArgs e)
@@ -62,8 +62,11 @@ namespace Iteracion_1
             cmd.Parameters.Add("@titulo", SqlDbType.VarChar).Value = txtTitulo.Text;
             cmd.Parameters.Add("@resumen", SqlDbType.VarBinary).Value = bytesTextResumen;
             cmd.Parameters.Add("@contenido", SqlDbType.VarBinary).Value = bytesText;
-            cmd.Parameters.Add("@tipo", SqlDbType.Bit).Value = 1;
-            cmd.Parameters.Add("@extencion", SqlDbType.VarChar).Value = extension_del_archivo;
+            cmd.Parameters.Add("@puntuacion", SqlDbType.Float).Value = 0.0;
+            cmd.Parameters.Add("@visitas", SqlDbType.Int).Value = 0;
+            cmd.Parameters.Add("@estado", SqlDbType.VarChar).Value = "progreso";
+            cmd.Parameters.Add("@tipoArt", SqlDbType.VarChar).Value = "largo";
+            //cmd.Parameters.Add("@extencion", SqlDbType.VarChar).Value = extension_del_archivo;
             cn.Open();
             cmd.ExecuteNonQuery();
         }
@@ -77,8 +80,10 @@ namespace Iteracion_1
             cmd.Parameters.Add("@titulo", SqlDbType.VarChar).Value = txtTitulo.Text;
             cmd.Parameters.Add("@resumen", SqlDbType.VarBinary).Value = bytesTextResumen;
             cmd.Parameters.Add("@contenido", SqlDbType.VarBinary).Value = bytesText;
-            cmd.Parameters.Add("@tipo", SqlDbType.Bit).Value = 0;
-            cmd.Parameters.Add("@extencion", SqlDbType.VarChar).Value = "";
+            cmd.Parameters.Add("@puntuacion", SqlDbType.Float).Value = 0.0;
+            cmd.Parameters.Add("@visitas", SqlDbType.Int).Value = 0;
+            cmd.Parameters.Add("@estado", SqlDbType.VarChar).Value = "progreso";
+            cmd.Parameters.Add("@tipoArt", SqlDbType.VarChar).Value = "corto";
             cn.Open();
             cmd.ExecuteNonQuery();
         }
@@ -97,9 +102,9 @@ namespace Iteracion_1
             SqlCommand cmd4 = new SqlCommand("Guardar_Miembro_Articulo", con);
             cmd4.CommandType = CommandType.StoredProcedure;
             int art = Int32.Parse(artID);
-            int mie = Int32.Parse(miembroID);
+            //int mie = Int32.Parse(miembroID);
             cmd4.Parameters.Add("@artId", SqlDbType.Int).Value = art;
-            cmd4.Parameters.Add("@miembroId", SqlDbType.Int).Value = mie;
+            cmd4.Parameters.Add("@miembroId", SqlDbType.VarChar).Value = miembroID;
             cmd4.ExecuteNonQuery();
         }
 

@@ -36,7 +36,7 @@ namespace Iteracion_1
             con.Open();
             int artId = Convert.ToInt32(Session["articuloId"]);
             SqlDataAdapter ad = new SqlDataAdapter();
-            SqlCommand cmd = new SqlCommand("Mostrar_Categorias_Articulo", con);
+            SqlCommand cmd = new SqlCommand("Mostrar_Categoria_Articulo", con);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.Add("@ID", SqlDbType.Int).Value = artId;
             SqlDataReader reader = cmd.ExecuteReader();
