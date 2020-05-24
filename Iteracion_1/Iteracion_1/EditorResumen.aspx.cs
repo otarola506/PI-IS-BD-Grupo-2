@@ -38,16 +38,18 @@ namespace Iteracion_1
             con.Open();
             SqlDataReader reader = cmd.ExecuteReader();
             byte[] resumenByte = new byte[] { };
-
+            string titulo = "";
             if (reader.Read())
             {
+
                 resumenByte = (byte[])reader[2];
-                
+                titulo = reader[1].ToString();
 
             }
             con.Close();
-           
+
             string resumenString = unicode.GetString(resumenByte);
+            txtTitulo.Text = titulo;
             txtResumen.Text = resumenString;
 
 
@@ -57,10 +59,11 @@ namespace Iteracion_1
         {
             connection();
             int artId = Convert.ToInt32(Session["articuloId"]);
-            SqlCommand cmd = new SqlCommand("Modificar_Resumen", con);
+            SqlCommand cmd = new SqlCommand("Modificar_Titulo_Resumen", con);
             cmd.CommandType = CommandType.StoredProcedure;
             byte[] bytesTextResumen = unicode.GetBytes(txtResumen.Text);
             cmd.Parameters.Add("@ID", SqlDbType.Int).Value = artId;
+            cmd.Parameters.Add("tituloNuevo", SqlDbType.VarChar).Value = txtTitulo.Text;
             cmd.Parameters.Add("@resumenNuevo", SqlDbType.VarBinary).Value = bytesTextResumen;
             con.Open();
             cmd.ExecuteNonQuery();
@@ -79,5 +82,7 @@ namespace Iteracion_1
                 txtError.Text = "Escriba un resumen porfavor";
             }
         }
+
+        
     }
 }

@@ -29,15 +29,18 @@
         </style>
 </head>
         <br />
-        <span class="auto-style1"><strong>Resumen:</strong></span><br />
+        <span class="auto-style1"><strong>Titulo</strong></span><strong><span class="auto-style1">:</span></strong><br />
         <span class="auto-style1">
-        <asp:TextBox ID="txtResumen" runat="server" Height="92px" Width="50%"   TextMode="MultiLine" Font-Size="Medium" maxsize="10" ></asp:TextBox>
             <script>
                 $("txtResumen[maxsize]").each(function () {
                     $(this).attr('maxlength', $(this).attr('maxsize'));
                 });
             </script>
+        <asp:TextBox ID="txtTitulo" runat="server"  Width="459px"></asp:TextBox>
         <br />
+     <strong>Resumen:</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <br />
+        <asp:TextBox ID="txtResumen" runat="server" Height="92px" Width="50%"   TextMode="MultiLine" Font-Size="Medium" maxsize="10" ></asp:TextBox>
         <strong><br />
         </strong><span class="auto-style2"><strong>
         <asp:Button ID="btnGuardar" runat="server" OnClick="btnGuardar_Click"  OnClientClick ="return confirm('¿Está seguro que desea guardar este resumen?')" Text="Guardar" />
