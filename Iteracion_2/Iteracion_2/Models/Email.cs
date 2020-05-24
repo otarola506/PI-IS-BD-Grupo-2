@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -20,6 +22,7 @@ namespace Iteracion_2.Models
         public string To { get; set; }
         public string Subject { get; set; }
         public string Body { get; set; }
+        public IFormFile archivo { get; set; }
 
         // Esto se hace en el model perfil o miembro para recuperar correos por el momento esto es solo para pruebas
         public IEnumerable<string> recuperarCorreos() {

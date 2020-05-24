@@ -18,8 +18,8 @@ namespace Iteracion_2.Pages
 
         public  async Task OnPost() {
            await controlador.enviarCorreo(sendMail);
+            
            ViewData["Message"] = "El correo ha sido enviado a " + sendMail.To;
-
         }
 
     }

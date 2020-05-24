@@ -3,16 +3,19 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Net;
 using System.Net.Mail;
 using System.IO;
 using System.Net.Mime;
 using System.Text;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 
 namespace Iteracion_2.Controllers
 {
     public class EmailController
     {
+        [HttpPost]
         public async Task enviarCorreo(Email em) {
             string to = em.To;
             string subject = em.Subject;
@@ -26,6 +29,13 @@ namespace Iteracion_2.Controllers
             imgview.LinkedResources.Add(lr);
             mm.AlternateViews.Add(imgview);
             mm.Body = lr.ContentId;
+            if (em.archivo != null)
+            {
+                var ms = new MemoryStream();
+                em.archivo.CopyTo(ms);
+                var fileBytes = ms.ToArray();
+                mm.Attachments.Add(new Attachment(new MemoryStream(fileBytes),em.archivo.FileName));
+            }
             mm.IsBodyHtml = true;
             mm.From = new MailAddress("comunidadshieldship@gmail.com");
             SmtpClient smtp = new SmtpClient("smtp.gmail.com");
