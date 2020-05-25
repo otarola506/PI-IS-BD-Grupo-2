@@ -21,7 +21,6 @@ namespace Iteracion_2.Models
             List<string> informacionPersonal = new List<string>();
             SqlDataReader reader = this.RetornarDatosDeUsuario(nombreUsuario, "RetornarDatosPerfil");
 
-
             while (reader.Read()) {
 
                 for (int index = 0; index < 7; index++) {
@@ -81,8 +80,25 @@ namespace Iteracion_2.Models
             cmd.Parameters.Add("@userName", SqlDbType.VarChar).Value = nombreUsuario;
             SqlDataReader reader = cmd.ExecuteReader();
 
-
             return reader;
+        }
+
+        public void GuardarDatosPerfil(string nombreUsuario, string[] informacionActualizada)
+        {
+            Connection();
+            con.Open();
+
+            SqlCommand cmd = new SqlCommand("GuardarDatosPerfil", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@nombreUsuario", SqlDbType.VarChar).Value = nombreUsuario;
+            cmd.Parameters.Add("@informacionLaboral", SqlDbType.VarChar).Value = informacionActualizada[0];
+            cmd.Parameters.Add("@informacionBiografica", SqlDbType.VarChar).Value = informacionActualizada[1];
+            cmd.Parameters.Add("@telefono", SqlDbType.VarChar).Value = informacionActualizada[2];
+            cmd.Parameters.Add("@correo", SqlDbType.VarChar).Value = informacionActualizada[3];
+
+            cmd.ExecuteNonQuery();
+
+            con.Close();
         }
     }
 }

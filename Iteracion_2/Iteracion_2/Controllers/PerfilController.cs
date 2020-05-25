@@ -21,5 +21,13 @@ namespace Iteracion_2.Controllers
 
             return perfilModel.RetornarArticulosMiembro(nombreUsuario);
         }
+
+        public void GuardarDatosPerfil(string nombreUsuario, string[] informacionActualizada)
+        {
+            perfilModel = new PerfilModel();
+
+            perfilModel.GuardarDatosPerfil(nombreUsuario, informacionActualizada);
+
+        }
     }
 }
