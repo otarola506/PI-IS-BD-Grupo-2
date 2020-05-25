@@ -10,7 +10,6 @@
 
     <label for="Dest">Destinatario</label><br />
     <input type="text" asp-for="sendMail.To" placeholder="Escriba el correo" style="width:300px" /><br />
-
     <label for="Asunto">Asunto</label> <br />
 
     <input type="text" asp-for="sendMail.Subject" placeholder="Escriba el asunto" style="width:300px" /><br />
@@ -19,7 +18,7 @@
 
     <textarea asp-for="sendMail.Body" id="txtContenido" cols="50" rows="20" placeholder="Digite el contenido aquí"></textarea><br />
     <label for="Adjuntar Archivo">Adjuntar Archivo</label><br />
-    <input type ="file" asp-for="sendMail.archivo" /><br />
+    <input type="file" asp-for="sendMail.archivo" /><br />
     <input type="submit" class="btn-success" value="Enviar Correo" /><br />
     @ViewData["Message"]
 

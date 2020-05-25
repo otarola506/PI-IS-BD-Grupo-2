@@ -15,12 +15,22 @@ namespace Iteracion_2.Pages
         public EmailController controlador { get; set; }
         [BindProperty]
         public Email sendMail { get; set; } 
+        [BindProperty]
+        public Perfil perf { get; set; }
 
+        public List<string> mostrarDatos;
+        /*public async Task OnGet()
+        {
+            await mostrarDatos = Task.Run(() => controlador.recuperarCorreos(perf));
+
+        }*/
         public  async Task OnPost() {
            await controlador.enviarCorreo(sendMail);
             
            ViewData["Message"] = "El correo ha sido enviado a " + sendMail.To;
         }
+
+
 
     }
 }

@@ -15,6 +15,12 @@ namespace Iteracion_2.Controllers
 {
     public class EmailController
     {
+
+        public List<string> recuperarCorreos(Perfil perf)
+        {
+            return perf.recuperarCorreos();
+
+        }
         [HttpPost]
         public async Task enviarCorreo(Email em) {
             string to = em.To;
