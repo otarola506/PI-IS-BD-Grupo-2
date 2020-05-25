@@ -53,7 +53,7 @@ namespace Iteracion_1
 
         }
 
-        public void guardarArchivo(SqlConnection cn, string extension_del_archivo)
+        public void guardarArchivoProgreso(SqlConnection cn, string extension_del_archivo)
         {
             SqlCommand cmd = new SqlCommand("GuardarArticulos", cn);
             cmd.CommandType = CommandType.StoredProcedure;
@@ -71,7 +71,7 @@ namespace Iteracion_1
             cmd.ExecuteNonQuery();
         }
 
-        public void guardarArticulosTexto(SqlConnection cn)
+        public void guardarArticulosTextoProgreso(SqlConnection cn)
         {
             SqlCommand cmd = new SqlCommand("GuardarArticulos", cn); // Hay que hacer el procedimiento almacenado en la BD de nosotros.
             cmd.CommandType = CommandType.StoredProcedure;
@@ -158,7 +158,7 @@ namespace Iteracion_1
             return valor;
         }
 
-        protected void btnGuardar_Click(object sender, EventArgs e)
+        protected void btnProgreso_Click(object sender, EventArgs e)
         {
             //revision de categoria 
             bool categoria_seleccionada = checkCategoria();
@@ -205,7 +205,7 @@ namespace Iteracion_1
                         {
 
 
-                            guardarArchivo(cn, extension_del_archivo); //revisar
+                            guardarArchivoProgreso(cn, extension_del_archivo); //revisar
 
 
                             //obtine el artId
@@ -335,7 +335,7 @@ namespace Iteracion_1
                         
 
                         //PONER EL IF PARA VER SI SE MODIFICA Y SE GUARDA 
-                        guardarArticulosTexto(cn);
+                        guardarArticulosTextoProgreso(cn);
                         
                         Response.Write("Datos Cargados Correctamente");
 
@@ -445,6 +445,9 @@ namespace Iteracion_1
             }
         }
 
+        protected void btnGuardar_Click(object sender, EventArgs e)
+        {
 
+        }
     }
 }
