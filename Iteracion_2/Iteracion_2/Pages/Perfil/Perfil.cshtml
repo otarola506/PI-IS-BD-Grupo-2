@@ -1,0 +1,71 @@
+﻿@page
+@model Iteracion_2.Pages.PerfilModel
+@{
+    ViewData["Title"] = "Perfil";
+}
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../css/custom.css">
+    <script src="https://kit.fontawesome.com/8dbd1c7c50.js" crossorigin="anonymous"></script>
+</head>
+
+    <body>
+
+        <div class="row">
+            <div class="col-lg-3 col-lg-offset-0" id="columna-izquierda">
+                <div class="foto-perfil">
+                    <img src="https://i.ya-webdesign.com/images/happy-stick-figure-png-2.png" />
+                    <div class="caption"><br>@Model.informacionPersonal[0]</div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-lg-offset-1" id="columna-derecha">
+                <div class="inf-laboral">
+                    <h1> <strong>Información Laboral</strong> </h1>
+                    <p>
+                        @Model.informacionPersonal[2]
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-lg-offset-1" id="columna-derecha">
+                <div class="inf-biografica">
+                    <h1> <strong>Información Biográfica</strong> </h1>
+                    <p>
+                        @Model.informacionPersonal[3]
+                    </p>
+                </div>
+            </div>
+        </div>   
+        
+        <div class="row" id="segunda-fila">
+            <div class="col-lg-3 col-lg-offset-0" id="columna-izquierda2">
+                <div class="contacto">
+                    <h3>Contacto</h3>
+                    <ul>
+                        <li><i class="fas fa-phone-volume"></i> @Model.informacionPersonal[4]</li>
+                        <li><i class="fas fa-envelope-open"></i> @Model.informacionPersonal[5]</li>
+                    </ul>
+                </div>
+
+                <div class="peso">
+                    <h3>Peso en la comunidad</h3>
+                    <ul>
+                        <li>Miembro @Model.informacionPersonal[1]</li>
+                    </ul>
+                </div>
+
+                <div class="merito">
+                    <h3>Merito: @Model.informacionPersonal[6]</h3>
+                </div>
+            </div>
+
+        </div>
+
+    </body>
+</html>
+
+
+

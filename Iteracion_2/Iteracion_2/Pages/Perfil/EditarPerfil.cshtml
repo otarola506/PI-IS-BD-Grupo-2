@@ -1,0 +1,81 @@
+﻿@page
+@model Iteracion_2.Pages.Perfil.EditarPerfilModel
+@{
+    ViewData["Title"] = "EditarPerfil";
+}
+
+
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    </head>
+
+    <body>
+        <div class="container bootstrap snippets">
+            <div class="row">
+                <div class="col-xs-12 col-sm-9">
+                    <form class="form-horizontal">
+                        <div class="panel panel-default">
+                            <div class="panel-body text-center">
+                                <img src="https://i.imgur.com/a6RuoHe.png" class="img-circle profile-avatar" alt="User avatar">
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">Información del Usuario</h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Nombre de usuario</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" value="usuario" readonly>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Información Laboral</label>
+                                    <div class="col-sm-10">
+                                        <textarea rows="3" id="info-laboral" class="form-control"></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Información Biográfica</label>
+                                    <div class="col-sm-10">
+                                        <textarea rows="3" id="info-biografica" class="form-control"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">Información de Contacto</h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Número de Teléfono</label>
+                                    <div class="col-sm-10">
+                                        <input type="tel" id="telefono" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Correo electrónico</label>
+                                    <div class="col-sm-10">
+                                        <input type="tel" id="correo" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="form-group">
+                        <div class="col-sm-10 col-sm-offset-0">
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                            <button type="reset" class="btn btn-default">Cancelar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+
