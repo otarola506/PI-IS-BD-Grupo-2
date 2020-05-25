@@ -13,12 +13,7 @@ namespace Iteracion_2.Models
 {
     public class Email
     {
-        private SqlConnection con;
-        private void connection()
-        {
-            string conString = ConfigurationManager.ConnectionStrings["conexionECCI"].ToString();
-            con = new SqlConnection(conString);
-        }
+        // Definir un método recuperar correos que haga el envío de correos con los atributos que tengo.
         public string To { get; set; }
         public string Subject { get; set; }
         public string Body { get; set; }

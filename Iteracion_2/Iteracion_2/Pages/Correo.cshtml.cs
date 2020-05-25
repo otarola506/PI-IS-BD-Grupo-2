@@ -11,6 +11,8 @@ namespace Iteracion_2.Pages
 {
     public class CorreoModel : PageModel
     {
+        //Aca se llaman a los name de los form para pasarselos al controlador por medio de parametros
+        //En el caso de recuperar los correos necesito hacer un on get que llame al método del controlador
         [BindProperty]
         public EmailController controlador { get; set; }
         [BindProperty]
@@ -18,12 +20,9 @@ namespace Iteracion_2.Pages
         [BindProperty]
         public Perfil perf { get; set; }
 
+        
         public List<string> mostrarDatos;
-        /*public async Task OnGet()
-        {
-            await mostrarDatos = Task.Run(() => controlador.recuperarCorreos(perf));
-
-        }*/
+       
         public  async Task OnPost() {
            await controlador.enviarCorreo(sendMail);
             

@@ -15,6 +15,7 @@ namespace Iteracion_2.Controllers
 {
     public class EmailController
     {
+        
 
         public List<string> recuperarCorreos(Perfil perf)
         {
@@ -22,6 +23,7 @@ namespace Iteracion_2.Controllers
 
         }
         [HttpPost]
+        // Esta logica se tiene que ir de aqui para definirla en el modelo, acá crear un método que solo pase los datos de la vista al modelo
         public async Task enviarCorreo(Email em) {
             string to = em.To;
             string subject = em.Subject;
