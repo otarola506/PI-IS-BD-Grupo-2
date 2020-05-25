@@ -13,7 +13,7 @@ namespace Iteracion_2.Pages
         private PerfilController perfilController { set; get; }
 
         public string[] informacionPersonal { get; private set; }
-        public string[] articulosUsuario { get; private set; }
+        public List<List<string>> articulosUsuario { get; private set; }
         public IActionResult OnGet()
         {
             perfilController = new PerfilController();

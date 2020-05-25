@@ -66,9 +66,9 @@
                 <div class="articulos-publicados">
                     <h1> <strong>Artículos</strong> </h1>
                     <ul>
-                        @for (int index = 0; index < Model.articulosUsuario.Length; index++)
+                        @for (int index = 0; index < Model.articulosUsuario.Count; index++)
                         {
-                            <li> <a href="#espacio-articulo">@Model.articulosUsuario[index]</a> </li>
+                            <li> <a href="#@Model.articulosUsuario[index][0]">@Model.articulosUsuario[index][1]</a> </li>
                         }
                     </ul>
 

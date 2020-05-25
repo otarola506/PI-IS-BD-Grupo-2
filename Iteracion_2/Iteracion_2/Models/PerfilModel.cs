@@ -56,21 +56,20 @@ namespace Iteracion_2.Models
             return informacionPersonal.ToArray(); 
         }
 
-        public string[] RetornarArticulosMiembro(string nombreUsuario)
+        public List<List<string>> RetornarArticulosMiembro(string nombreUsuario)
         {
-            List<string> informacionPersonal = new List<string>();
+            List<List<string>> informacionPersonal = new List<List<string>>();
             SqlDataReader reader = this.RetornarDatosDeUsuario(nombreUsuario, "Recuperar_Articulos_Autor");
 
 
             while (reader.Read())
-            {
-                //reader[1] = titulo del artículo de nombreUsuario
-                informacionPersonal.Add(reader[1].ToString()); 
+            { 
+                informacionPersonal.Add(new List<string> { reader[0].ToString(), reader[1].ToString() });
             }
 
             con.Close();
 
-            return informacionPersonal.ToArray();
+            return informacionPersonal;
         }
 
         private SqlDataReader RetornarDatosDeUsuario(string nombreUsuario, string procedimiento) {
