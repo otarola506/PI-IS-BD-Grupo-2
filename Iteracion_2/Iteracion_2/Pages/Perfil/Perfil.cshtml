@@ -62,6 +62,19 @@
                 </div>
             </div>
 
+            <div class="col-lg-5 col-lg-offset-1" id="espacio-articulo">
+                <div class="articulos-publicados">
+                    <h1> <strong>Artículos</strong> </h1>
+                    <ul>
+                        @for (int index = 0; index < Model.articulosUsuario.Length; index++)
+                        {
+                            <li> <a href="#espacio-articulo">@Model.articulosUsuario[index]</a> </li>
+                        }
+                    </ul>
+
+                </div>
+            </div>
+
         </div>
 
     </body>

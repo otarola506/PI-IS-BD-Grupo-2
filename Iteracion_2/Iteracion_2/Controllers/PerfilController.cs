@@ -14,5 +14,12 @@ namespace Iteracion_2.Controllers
 
             return perfilModel.RetornarDatosPerfil(nombreUsuario);
         }
+
+        public string[] RetornarArticulosMiembro(string nombreUsuario)
+        {
+            perfilModel = new PerfilModel();
+
+            return perfilModel.RetornarArticulosMiembro(nombreUsuario);
+        }
     }
 }

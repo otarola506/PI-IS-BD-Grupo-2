@@ -18,14 +18,9 @@ namespace Iteracion_2.Models
 
         public string[] RetornarDatosPerfil(string nombreUsuario)
         {
-            Connection();
-            con.Open();
             List<string> informacionPersonal = new List<string>();
+            SqlDataReader reader = this.RetornarDatosDeUsuario(nombreUsuario, "RetornarDatosPerfil");
 
-            SqlCommand cmd = new SqlCommand("RetornarDatosPerfil", con);
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.Add("@nombreUsuario", SqlDbType.VarChar).Value = nombreUsuario;
-            SqlDataReader reader = cmd.ExecuteReader();
 
             while (reader.Read()) {
 
@@ -59,6 +54,36 @@ namespace Iteracion_2.Models
             con.Close();
 
             return informacionPersonal.ToArray(); 
+        }
+
+        public string[] RetornarArticulosMiembro(string nombreUsuario)
+        {
+            List<string> informacionPersonal = new List<string>();
+            SqlDataReader reader = this.RetornarDatosDeUsuario(nombreUsuario, "Recuperar_Articulos_Autor");
+
+
+            while (reader.Read())
+            {
+                //reader[1] = titulo del artículo de nombreUsuario
+                informacionPersonal.Add(reader[1].ToString()); 
+            }
+
+            con.Close();
+
+            return informacionPersonal.ToArray();
+        }
+
+        private SqlDataReader RetornarDatosDeUsuario(string nombreUsuario, string procedimiento) {
+            Connection();
+            con.Open();
+
+            SqlCommand cmd = new SqlCommand(procedimiento, con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@userName", SqlDbType.VarChar).Value = nombreUsuario;
+            SqlDataReader reader = cmd.ExecuteReader();
+
+
+            return reader;
         }
     }
 }

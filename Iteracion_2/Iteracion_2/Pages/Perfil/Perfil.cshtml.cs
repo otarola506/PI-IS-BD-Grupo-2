@@ -13,11 +13,14 @@ namespace Iteracion_2.Pages
         private PerfilController perfilController { set; get; }
 
         public string[] informacionPersonal { get; private set; }
+        public string[] articulosUsuario { get; private set; }
         public IActionResult OnGet()
         {
             perfilController = new PerfilController();
 
-            informacionPersonal = perfilController.RetornarDatosPerfil("otarola506"); //tengo que agarrarlo de algun lado, aun no sé de donde
+            informacionPersonal = perfilController.RetornarDatosPerfil("otarola506");
+
+            articulosUsuario = perfilController.RetornarArticulosMiembro("otarola506");
 
             return Page();
         }
