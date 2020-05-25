@@ -1,0 +1,19 @@
+﻿.foto-perfil .caption {
+    text-align: center;
+}
+
+img {
+    height: 230px;
+    border: 1px solid black;
+    border-radius: 50%;
+    display: block;
+}
+
+#segunda-fila {
+    margin-top: 2vmax;
+    text-decoration: none;
+}
+
+body {
+    font-size: 20px;
+}
