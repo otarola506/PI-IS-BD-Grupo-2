@@ -21,10 +21,17 @@ namespace Iteracion_2.Pages.Perfil
 
             informacionPersonal = perfilController.RetornarDatosPerfil("otarola506");
 
+            object temp;
+            TempData.TryGetValue("resultado", out temp);
+
+            if (temp != null) {
+                Message = (string)temp;
+            }
+            
             return Page();
         }
 
-        public void OnPost()
+        public IActionResult OnPostSave()
         {
             perfilController = new PerfilController();
 
@@ -37,7 +44,9 @@ namespace Iteracion_2.Pages.Perfil
 
             perfilController.GuardarDatosPerfil("otarola506", informacionActualizada);
 
-            Message = "Información actualizada exitosamente";
+            TempData["resultado"] = "Información actualizada exitosamente";
+
+            return new RedirectToPageResult("EditarPerfil");
 
         }
     }
