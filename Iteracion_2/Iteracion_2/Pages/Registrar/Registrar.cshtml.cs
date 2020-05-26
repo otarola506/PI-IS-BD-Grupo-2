@@ -13,20 +13,25 @@ namespace Iteracion_2.Pages
         private MiembroController miembroController { set; get; }
 
         public string Message { get; set; }
-        public void OnPost()
+        public IActionResult OnPost()
         {
             miembroController = new MiembroController();
             string nuevo_nombreUsuario = Request.Form["inputUsername"];
             string nuevo_nombre = Request.Form["inputName"];
             int peso = 0;
+            
 
-         
             if (!miembroController.crearCuenta(nuevo_nombreUsuario, nuevo_nombre, peso)) {
                 ViewData["username"] = "Este nombre usuario ya existe";
+                return Page();
             }
             else
             {
                 ViewData["valid"] = "Cuenta creada con exito";
+                //ViewData["nombreUsuario"] = nuevo_nombreUsuario;
+                //ViewData["nuevo_nombre"] = nuevo_nombre;
+                return RedirectToPage("/Index");//redirigir a la pagina de Ivan
+                //, new { nombreUsuario = nuevo_nombreUsuario, nombre = nuevo_nombre }
             }
         }
 
