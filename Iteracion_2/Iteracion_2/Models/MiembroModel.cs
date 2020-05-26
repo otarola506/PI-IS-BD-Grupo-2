@@ -30,7 +30,24 @@ namespace Iteracion_2.Models
 
         public Boolean verificarNombreUsuario(string nombreUsuario)
         {
-            return true;
+            Connection();
+            con.Open();
+            string verificacion = "";
+            bool Existe = false;
+            SqlCommand cmd = new SqlCommand("VerificarNombreUsuario", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@nombreUsuario", SqlDbType.VarChar).Value = nombreUsuario;
+            SqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                verificacion = reader[0].ToString();
+            }
+
+            if (verificacion.Equals("1")) {
+                Existe = true;
+            }
+
+            return Existe;
         }
     }
 }

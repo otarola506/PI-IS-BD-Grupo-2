@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Iteracion_2.Models
 {
-    public class PerfilesModel
+    public class PerfilModel
     {
     }
 }

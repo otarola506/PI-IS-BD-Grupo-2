@@ -19,9 +19,15 @@ namespace Iteracion_2.Pages
             string nuevo_nombreUsuario = Request.Form["inputUsername"];
             string nuevo_nombre = Request.Form["inputName"];
             int peso = 0;
-            miembroController.crearCuenta(nuevo_nombreUsuario , nuevo_nombre , peso);
 
-            Message = "Cuenta creada exitosamente";
+         
+            if (!miembroController.crearCuenta(nuevo_nombreUsuario, nuevo_nombre, peso)) {
+                ViewData["username"] = "Este nombre usuario ya existe";
+            }
+            else
+            {
+                ViewData["valid"] = "Cuenta creada con exito";
+            }
         }
 
       

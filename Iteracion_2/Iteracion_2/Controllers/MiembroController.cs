@@ -10,10 +10,24 @@ namespace Iteracion_2.Controllers
     {
         private MiembroModel miembroModel { set; get; }
 
-        public void crearCuenta(string nombreUsuario, string nombre, int peso)
+        public bool crearCuenta(string nombreUsuario, string nombre, int peso)
         {
             miembroModel = new MiembroModel();
-            miembroModel.crearCuenta(nombreUsuario, nombre, peso);
+            if (!miembroModel.verificarNombreUsuario(nombreUsuario))
+            {
+                miembroModel.crearCuenta(nombreUsuario, nombre, peso);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
+
+        public bool validarNombreUsuario(string nombreUsuario) {
+            miembroModel = new MiembroModel();
+            return miembroModel.verificarNombreUsuario(nombreUsuario);     
         }
     }
 }
