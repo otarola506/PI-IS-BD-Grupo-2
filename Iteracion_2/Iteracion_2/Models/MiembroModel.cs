@@ -28,6 +28,22 @@ namespace Iteracion_2.Models
             con.Close();
         }
 
+        public void crearPerfil(string nombreUsuario, string info,float merito)
+        {
+            Connection();
+            con.Open();
+            SqlCommand cmd = new SqlCommand("CrearPerfil", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@nombreUsuarioFK", SqlDbType.VarChar).Value = nombreUsuario;
+            cmd.Parameters.Add("@infoLaboral", SqlDbType.VarChar).Value = info;
+            cmd.Parameters.Add("@infoBiografico", SqlDbType.VarChar).Value = info;
+            cmd.Parameters.Add("@telefono", SqlDbType.VarChar).Value = info;
+            cmd.Parameters.Add("@correo", SqlDbType.VarChar).Value = info;
+            cmd.Parameters.Add("@merito", SqlDbType.VarChar).Value = merito;
+            cmd.ExecuteNonQuery();
+            con.Close();
+        }
+
         public Boolean verificarNombreUsuario(string nombreUsuario)
         {
             Connection();

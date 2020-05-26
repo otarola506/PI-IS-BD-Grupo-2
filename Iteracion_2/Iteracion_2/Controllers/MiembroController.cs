@@ -29,5 +29,11 @@ namespace Iteracion_2.Controllers
             miembroModel = new MiembroModel();
             return miembroModel.verificarNombreUsuario(nombreUsuario);     
         }
+
+        public void crearPerfil(string nombreUsuario, string info, float merito)
+        {
+            miembroModel = new MiembroModel();
+            miembroModel.crearPerfil(nombreUsuario,info,merito);
+        }
     }
 }

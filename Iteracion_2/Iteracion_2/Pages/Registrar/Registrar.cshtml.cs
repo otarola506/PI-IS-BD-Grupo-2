@@ -13,6 +13,8 @@ namespace Iteracion_2.Pages
         private MiembroController miembroController { set; get; }
 
         public string Message { get; set; }
+
+
         public IActionResult OnPost()
         {
             miembroController = new MiembroController();
@@ -27,11 +29,8 @@ namespace Iteracion_2.Pages
             }
             else
             {
-                ViewData["valid"] = "Cuenta creada con exito";
-                //ViewData["nombreUsuario"] = nuevo_nombreUsuario;
-                //ViewData["nuevo_nombre"] = nuevo_nombre;
-                return RedirectToPage("/Index");//redirigir a la pagina de Ivan
-                //, new { nombreUsuario = nuevo_nombreUsuario, nombre = nuevo_nombre }
+                miembroController.crearPerfil(nuevo_nombreUsuario, "edite", 0);
+                return RedirectToPage("/Perfil/Perfil",new { userName = nuevo_nombreUsuario});
             }
         }
 
