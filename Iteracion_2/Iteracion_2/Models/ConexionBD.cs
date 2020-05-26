@@ -41,28 +41,28 @@ namespace Iteracion_2.Models
             return valor;
         }
 
-        public string retornarAutoresControlador(int artId, float puntuacion)
+        public void modificarMeritoAutores(int artId, float puntuacion)
         {
             con.Open();
             string miembroID = "";
             SqlCommand cmd2 = new SqlCommand("RecuperarAutores", con);
             cmd2.CommandType = CommandType.StoredProcedure;
-            cmd2.Parameters.Add("@artID", SqlDbType.Int).Value = artId; // le pasamos el valor del string
+            cmd2.Parameters.Add("@artID", SqlDbType.Int).Value = artId; 
             SqlDataReader reader = cmd2.ExecuteReader();
             while (reader.Read())
             {
-                miembroID = reader[0].ToString(); // para cada autor ocupo que guarde el merito en puntaje
-                asignarPuntajeInicialMiembro(miembroID, puntuacion);
+                miembroID = reader[0].ToString(); // Guardo el valor del nombre de usuario
+                asignarPuntajeInicialMiembro(miembroID, puntuacion);// para cada autor ocupo que guarde el merito en puntaje
             }
             reader.Close();
             con.Close();
-            return miembroID;
+            
         }
 
         //Metodo que se encarga de asignarle el puntaje inicial al autor que se le pasa por parametro
         public void asignarPuntajeInicialMiembro(string miembroID, float puntuacion)
         {
-            //Se llama al proc que guarda el puntaje en el perfil de la persona, en este momento se guarda en una base de prueba 
+            //Se llama al proc que guarda el puntaje en el perfil de la persona
             //con.Open();
             SqlCommand cmd = new SqlCommand("ingresarPuntuacionAutor", con);
             cmd.CommandType = CommandType.StoredProcedure;
@@ -77,8 +77,8 @@ namespace Iteracion_2.Models
         //Metodo que primero revisa si el artID esta aprobado, luego obtiene la puntuacion del articulo y lo asigna
         public void asignarMeritoPuntuacionInicial(int artID)
         {
-            string aceptado = revisarEstadoArticulo(artID);
-            if (aceptado == "aceptado")
+            string estado = revisarEstadoArticulo(artID);
+            if (estado == "aceptado")// Para futuras historias poner otros estados
             {
                 //Obtenemos la puntacion del articulo
                 con.Open();
@@ -98,10 +98,10 @@ namespace Iteracion_2.Models
                 float valor = (float)Convert.ToDouble(puntuacion);
 
                 //obtemos los autores y asignamos 
-                retornarAutoresControlador(artID, valor);
+                modificarMeritoAutores(artID, valor);
 
 
-                int a = 8;
+                
 
             }
 
