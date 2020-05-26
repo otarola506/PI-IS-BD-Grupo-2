@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Iteracion_2</title>
+    <title>Shieldship | @ViewData["Title"]</title>
 
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
@@ -17,7 +17,7 @@
     </environment>
 </head>
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
+    <nav class="navbar navbar-inverse">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -25,8 +25,9 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
                 </button>
-                <a asp-page="/Index" class="navbar-brand">Iteracion_2</a>
+                <a asp-page="/Index" class="navbar-brand">𝕾𝖍𝖎𝖊𝖑𝖉𝖘𝖍𝖎𝖕</a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -35,8 +36,18 @@
                     <li><a asp-page="/Contact">Contact</a></li>
                     <li><a asp-page="Registrar/Registrar">Crear Perfil</a></li>
                 </ul>
-                <partial name="_LoginPartial" />
+                
+                <div class="dropdown topnav navbar-right">
+                    <div class="navbar-nav"> Usuario </div>
+                    <div class="dropdown-content">
+                        <ul class="nav">
+                            <li><a asp-page="/Perfil/Perfil">Perfil</a></li>
+                            <li><a asp-page="/Perfil/EditarPerfil">Editar Perfil</a></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
+
         </div>
     </nav>
 
@@ -46,7 +57,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; 2020 - Iteracion_2</p>
+            <p>&copy; 2020 - Shieldship</p>
         </footer>
     </div>
 
@@ -70,6 +81,18 @@
         </script>
         <script src="~/js/site.min.js" asp-append-version="true"></script>
     </environment>
+
+    <script>
+        /* Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon */
+        function myFunction() {
+            var x = document.getElementById("myTopnav");
+            if (x.className === "topnav") {
+                x.className += " responsive";
+            } else {
+                x.className = "topnav";
+            }
+        }
+    </script>
 
     @RenderSection("Scripts", required: false)
 </body>
