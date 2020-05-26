@@ -13,16 +13,23 @@ namespace Iteracion_2.Pages
         private PerfilController perfilController { set; get; }
 
         public string[] informacionPersonal { get; private set; }
+
+        [TempData]
+        public string UsuarioActual { get; set; }
         public List<List<string>> articulosUsuario { get; private set; }
-        public IActionResult OnGet()
+        public IActionResult OnGet(string Usuario)
         {
-            perfilController = new PerfilController();
+            if (this.UsuarioActual != null || Usuario != null) {
+                this.UsuarioActual = Usuario;
+                perfilController = new PerfilController();
 
-            informacionPersonal = perfilController.RetornarDatosPerfil("otarola506");
+                informacionPersonal = perfilController.RetornarDatosPerfil((this.UsuarioActual != null) ? this.UsuarioActual : Usuario);
 
-            articulosUsuario = perfilController.RetornarArticulosMiembro("otarola506");
+                articulosUsuario = perfilController.RetornarArticulosMiembro((this.UsuarioActual != null) ? this.UsuarioActual : Usuario);
 
-            return Page();
+                return Page();
+            }
+            return RedirectToPage("/Registrar/Registrar");
         }
     }
 }

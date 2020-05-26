@@ -30,10 +30,14 @@ namespace Iteracion_2.Pages
             else
             {
                 miembroController.crearPerfil(nuevo_nombreUsuario, "edite", 0);
-                return RedirectToPage("/Perfil/Perfil",new { userName = nuevo_nombreUsuario});
+                return RedirectToPage("/Perfil/Perfil",new { Usuario = nuevo_nombreUsuario});
             }
         }
 
+        public IActionResult OnGet() {
+            ViewData["username"] = "Registrese para ver perfil";
+            return Page();
+        }
       
     }
 }

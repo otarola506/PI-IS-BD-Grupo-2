@@ -15,26 +15,35 @@ namespace Iteracion_2.Pages.Perfil
         public string Message { get; set; }
         public string[] informacionPersonal { get; private set; }
 
-        public IActionResult OnGet()
+        [TempData]
+        public string UsuarioActual { get; set; }
+
+        public IActionResult OnGet(string Usuario)
         {
-            perfilController = new PerfilController();
+            if (this.UsuarioActual != null || Usuario != null) {
+                perfilController = new PerfilController();
 
-            informacionPersonal = perfilController.RetornarDatosPerfil("otarola506");
+                informacionPersonal = perfilController.RetornarDatosPerfil( (this.UsuarioActual != null)?this.UsuarioActual:Usuario);
 
-            object temp;
-            TempData.TryGetValue("resultado", out temp);
+                object temp;
+                TempData.TryGetValue("resultado", out temp);
 
-            if (temp != null) {
-                Message = (string)temp;
+                if (temp != null)
+                {
+                    Message = (string)temp;
+                }
+
+                return Page();
             }
-            
-            return Page();
+            return RedirectToPage("/Registrar/Registrar");
+
         }
 
         public IActionResult OnPostSave()
         {
             perfilController = new PerfilController();
 
+            this.UsuarioActual = Request.Form["usuario-actual"].ToString();
             string informacionLaboral= Request.Form["laboral"].ToString();
             string informacionBiografica = Request.Form["biografica"].ToString();
             string telefono = Request.Form["telefono"].ToString();
@@ -42,12 +51,11 @@ namespace Iteracion_2.Pages.Perfil
 
             string[] informacionActualizada = new string[] { informacionLaboral, informacionBiografica, telefono, correo };
 
-            perfilController.GuardarDatosPerfil("otarola506", informacionActualizada);
+            perfilController.GuardarDatosPerfil(UsuarioActual, informacionActualizada);
 
             TempData["resultado"] = "Información actualizada exitosamente";
 
-            return new RedirectToPageResult("EditarPerfil");
-
+            return RedirectToPage("/Perfil/EditarPerfil", new { Usuario = this.UsuarioActual });
         }
     }
 }
