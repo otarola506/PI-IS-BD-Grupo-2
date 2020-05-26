@@ -17,7 +17,7 @@ namespace Iteracion_2.Models
     public class Email
     {
 
-        public async Task envioCorreo(string destinatario, string asunto, string contenido,IFormFile archivo) {
+        public async Task enviarCorreo(string destinatario, string asunto, string contenido,IFormFile archivo) {
             
             MailMessage mm = new MailMessage();
             mm.To.Add(destinatario);

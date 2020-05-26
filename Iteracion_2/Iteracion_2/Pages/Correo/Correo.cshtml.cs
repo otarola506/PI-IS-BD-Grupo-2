@@ -15,7 +15,6 @@ namespace Iteracion_2.Pages.Correo
         //Aca se llaman a los name de los form para pasarselos al controlador por medio de parametros
         //En el caso de recuperar los correos necesito hacer un on get que llame al método del controlador
         public EmailController controlador { get; set; }
-        
         public List<string> mostrarDatos;
 
         public async Task OnPost()
@@ -28,6 +27,14 @@ namespace Iteracion_2.Pages.Correo
             await controlador.enviarCorreo(destinatario,asunto,contenido,archivo);
 
             ViewData["Message"] = "El correo ha sido enviado a " + destinatario;
+        }
+
+        public IActionResult OnGet() {
+            controlador = new EmailController();
+            mostrarDatos = controlador.recuperarCorreos();
+            return Page();
+
+
         }
 
     }

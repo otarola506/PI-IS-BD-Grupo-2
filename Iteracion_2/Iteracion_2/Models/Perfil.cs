@@ -11,21 +11,7 @@ namespace Iteracion_2.Models
 {
     public class Perfil
     {
-        [Key]
-        public int perfilIdPK { get; set; }
-        public string nombreUsuarioFK { get; set; }
-
-        public string informacionLaboral { get; set; }
-
-        public string informacionBiografica { get; set; }
-
-        public string telefono { get; set; }
-
-        public string correo { get; set; }
-
-        public float merito { get; set; }
-
-
+        
         private SqlConnection con;
         private void connection()
         {

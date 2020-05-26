@@ -13,13 +13,18 @@ namespace Iteracion_2.Controllers
     public class EmailController
     {
         public Email sendMail { get; set; }
+        public Perfil perf { get; set; }
         
-        // Esta logica se tiene que ir de aqui para definirla en el modelo, acá crear un método que solo pase los datos de la vista al modelo
         public async Task enviarCorreo(string destinatario, string asunto, string contenido,IFormFile archivo) {
             sendMail = new Email();
-            await sendMail.envioCorreo(destinatario,asunto,contenido,archivo);
+            await sendMail.enviarCorreo(destinatario,asunto,contenido,archivo);
             
 
+        }
+
+        public List<string> recuperarCorreos() {
+            perf = new Perfil();
+            return perf.recuperarCorreos();
         }
     }
 }
