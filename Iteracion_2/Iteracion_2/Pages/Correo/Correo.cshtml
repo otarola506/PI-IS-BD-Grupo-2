@@ -1,5 +1,5 @@
 ﻿@page
-@model Iteracion_2.Pages.CorreoModel
+@model Iteracion_2.Pages.Correo.CorreoModel
 @{
     ViewData["Title"] = "Correo";
 }
@@ -9,10 +9,10 @@
 <form method="post" enctype="multipart/form-data">
 
     <label for="Dest">Destinatario</label><br />
-    <input name="destinatario " type="text" placeholder="Escriba el correo" style="width:300px" /><br />
+    <input name="destinatario" type="text" placeholder="Escriba el correo" style="width:300px" /><br />
     <label for="Asunto">Asunto</label> <br />
 
-    <input type="text" name="destinatario" placeholder="Escriba el asunto" style="width:300px" /><br />
+    <input type="text" name="asunto" placeholder="Escriba el asunto" style="width:300px" /><br />
 
     <label for="Contenido">Contenido</label><br />
 
@@ -31,6 +31,6 @@
             selector: '#txtContenido'
         });
     </script>
-     }
+}
 
 
