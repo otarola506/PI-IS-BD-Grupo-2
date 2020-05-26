@@ -11,16 +11,16 @@ namespace Iteracion_2.Models
 {
     public class Perfil
     {
-        
+
         private SqlConnection con;
-        private void connection()
+        public void Connection()
         {
-            string conString = ConfigurationManager.ConnectionStrings["conexionECCI"].ToString();
+            string conString = @"Server=172.16.202.75;Database=BD_Grupo2;persist security info=True;MultipleActiveResultSets=True;User ID=Grupo2;Password=grupo2.";
             con = new SqlConnection(conString);
         }
         public List<string> recuperarCorreos()
         {
-            connection();
+            Connection();
             con.Open();
             SqlCommand cmd = new SqlCommand("Recuperar_Correos", con);
             cmd.CommandType = CommandType.StoredProcedure;

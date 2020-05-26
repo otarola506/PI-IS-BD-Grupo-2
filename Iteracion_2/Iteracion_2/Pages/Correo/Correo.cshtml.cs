@@ -20,13 +20,21 @@ namespace Iteracion_2.Pages.Correo
         public async Task OnPost()
         {
             controlador = new EmailController();
-            string destinatario = Request.Form["destinatario"];
+            string destinatarioCorreo = "";
+            string destinatarioGeneral = Request.Form["destinatarioGeneral"];
+            string destinatarioDropDown = Request.Form["correoMiembro"];
+            if (destinatarioGeneral == "") {
+                destinatarioCorreo = destinatarioDropDown;
+            }
+            else {
+                destinatarioCorreo = destinatarioGeneral;
+            }
             string asunto = Request.Form["asunto"];
             string contenido = Request.Form["contenido"];
             IFormFile archivo = Request.Form.Files["archivo"];
-            await controlador.enviarCorreo(destinatario,asunto,contenido,archivo);
+            await controlador.enviarCorreo(destinatarioCorreo,asunto,contenido,archivo);
 
-            ViewData["Message"] = "El correo ha sido enviado a " + destinatario;
+            ViewData["Message"] = "El correo ha sido enviado a " + destinatarioCorreo;
         }
 
         public IActionResult OnGet() {
