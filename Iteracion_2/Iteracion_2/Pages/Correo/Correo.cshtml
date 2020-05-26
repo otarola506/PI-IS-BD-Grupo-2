@@ -8,16 +8,15 @@
 <hr />
 <form method="post" enctype="multipart/form-data">
 
-    <label for="Dest">Digite el destinatario que usted desee</label><br />
-    <input name="destinatarioGeneral" type="text" placeholder="Escriba el correo" style="width:300px" /><br />
-    <label for="DRP"> o escoja entre los correos de los miembros de la pagina</label><br />
-    <select id="selectCorreos" name="correoMiembro" style="width:250px">
-        @for (int index = 0; index < Model.mostrarDatos.Count; index++)
-        {
+    
+    <label for="DRP">Destinatario</label><br />
+    <input  name ="correoMiembro" type="text" list="correo" placeholder="Digite el correo aquí" style="width:300px" />
+    <datalist id="correo">
+        @for (int index =0;index<Model.mostrarDatos.Count;index++) {
             <option>@Model.mostrarDatos[index]</option>
         }
 
-    </select> <br />
+    </datalist><br/>
     <label for="Asunto">Asunto</label> <br />
 
     <input type="text" name="asunto" placeholder="Escriba el asunto" style="width:300px" /><br />
