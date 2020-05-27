@@ -27,7 +27,7 @@ namespace Iteracion_2.Pages.Correo
             IFormFile archivo = Request.Form.Files["archivo"];
             await controlador.enviarCorreo(destinatarioCorreo,asunto,contenido,archivo);
 
-            ViewData["Message"] = "El correo ha sido enviado a " + destinatarioCorreo;
+            TempData["resultado"] = "El correo ha sido enviado a " + destinatarioCorreo;
             return new RedirectToPageResult("Correo");
         }
 
