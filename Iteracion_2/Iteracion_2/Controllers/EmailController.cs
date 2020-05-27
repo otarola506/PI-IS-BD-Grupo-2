@@ -13,7 +13,7 @@ namespace Iteracion_2.Controllers
     public class EmailController
     {
         public Email sendMail { get; set; }
-        public Perfil perf { get; set; }
+        public PerfilModel perf { get; set; }
         
         public async Task enviarCorreo(string destinatario, string asunto, string contenido,IFormFile archivo) {
             sendMail = new Email();
@@ -23,7 +23,7 @@ namespace Iteracion_2.Controllers
         }
 
         public List<string> recuperarCorreos() {
-            perf = new Perfil();
+            perf = new PerfilModel();
             return perf.recuperarCorreos();
         }
     }
