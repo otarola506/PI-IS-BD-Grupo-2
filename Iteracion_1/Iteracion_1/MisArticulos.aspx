@@ -43,6 +43,13 @@
 
             </asp:TemplateField>
 
+            <asp:TemplateField HeaderText ="Estado">
+                <ItemTemplate>
+                    <asp:Label ID="estadoArt" Text='<%# Eval("estado")%>' runat="server" />
+                </ItemTemplate>
+
+            </asp:TemplateField>
+
             <asp:TemplateField>
                 <ItemTemplate>
                     <asp:ImageButton id="lnkEdicion" ImageUrl="~/Imagenes/Pencil-icon.png" ToolTip= "Editar" runat ="server" OnClick ="lnkEdicion" Height="30px" Width="30px"/>
