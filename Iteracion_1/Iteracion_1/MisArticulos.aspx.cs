@@ -39,7 +39,7 @@ namespace Iteracion_1
             cmd.Parameters.Add("@userName", SqlDbType.VarChar).Value = "otarola506"; // En este caso está quemado el nombre de usuario
             SqlDataReader reader = cmd.ExecuteReader();
             reader.Read();
-            string nombre = reader[3].ToString();
+            string nombre = reader[4].ToString();
             lblArticulo.Text = "Bienvenido a sus artículos, " + nombre;
             reader.Close();
             ad.SelectCommand = cmd;
@@ -98,21 +98,29 @@ namespace Iteracion_1
             cmd.Parameters.Add("@ID", SqlDbType.Int).Value = artId;
             SqlDataReader reader = cmd.ExecuteReader();
             string tipoArticulo = "";
+            string estado = "";
             if (reader.Read())
             {
                 tipoArticulo = reader[7].ToString();
+                estado = reader[6].ToString();
 
             }
-            if (string.Compare(tipoArticulo, "corto") == 0)
+            if (string.Compare(estado,"revision") == 0)
             {
-                Session["articuloID"] = artId;
-                Response.Redirect("EditorArticuloModificado.aspx");
+                Response.Write("<script>alert('Este artículo se encuentra en revisión por lo tanto no puede ser editado.')</script>");
             }
             else
             {
-                Session["articuloID"] = artId;
-                Response.Redirect("EditorResumen.aspx");
-
+                if (string.Compare(tipoArticulo, "corto") == 0)
+                {
+                    Session["articuloID"] = artId;
+                    Response.Redirect("EditorArticuloModificado.aspx");
+                }
+                else
+                {
+                    Session["articuloID"] = artId;
+                    Response.Redirect("EditorResumen.aspx");
+                }
             }
 
         }

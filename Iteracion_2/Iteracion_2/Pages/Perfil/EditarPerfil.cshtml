@@ -1,0 +1,102 @@
+﻿@page
+@model Iteracion_2.Pages.Perfil.EditarPerfilModel
+@{
+    ViewData["Title"] = "EditarPerfil";
+}
+
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../css/editarPerfil.css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="row" id="primera-fila">
+        <div class="col-lg-4" id="regresar-perfil">
+            <a href="Perfil?Usuario=@Model.UsuarioActual">&larr; Regresar al perfil</a>
+        </div>
+        <div class="col-lg-5 col-lg-offset-0" id="mensaje-respuesta">
+            @if (Model.Message != null)
+            {
+                <h4> @Model.Message</h4>
+            }
+        </div>
+    </div>
+
+
+
+    <div class="container bootstrap snippets">
+        <div class="row">
+            <div class="col-xs-12 col-sm-9">
+                <form asp-page-handler="save" class="form-horizontal" method="post">
+                    <div class="panel panel-default">
+                        <div class="panel-body text-center">
+                            <img src="https://i.imgur.com/a6RuoHe.png" class="img-circle profile-avatar" alt="User avatar">
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">Información del Usuario</h4>
+                        </div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Nombre de usuario</label>
+                                <div class="col-sm-10">
+                                    <input name="usuario-actual" type="text" class="form-control" value="@Model.UsuarioActual" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Información Laboral</label>
+                                <div class="col-sm-10">
+                                    <textarea rows="3" id="info-laboral" class="form-control" name="laboral">@Model.informacionPersonal[2]</textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Información Biográfica</label>
+                                <div class="col-sm-10">
+                                    <textarea rows="3" id="info-biografica" name="biografica" class="form-control">@Model.informacionPersonal[3]</textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">Información de Contacto</h4>
+                        </div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Número de Teléfono</label>
+                                <div class="col-sm-10">
+                                    <input type="tel" id="telefono" class="form-control" name="telefono" value="@Model.informacionPersonal[4]">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Correo electrónico</label>
+                                <div class="col-sm-10">
+                                    <input type="tel" id="correo" class="form-control" name="correo" value="@Model.informacionPersonal[5]">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-10 col-sm-offset-0">
+                            <input type="submit" class="btn-success" value="Guardar" /><br />
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+    <div class="row" id="ultima-fila">
+        <div class="col-lg-4" id="regresar-perfil">
+            <a href="Perfil?Usuario=@Model.UsuarioActual">&larr; Regresar al perfil</a>
+        </div>
+    </div>
+</body>
+</html>
+

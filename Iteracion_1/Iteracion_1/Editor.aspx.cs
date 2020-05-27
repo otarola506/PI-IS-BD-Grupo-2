@@ -53,7 +53,7 @@ namespace Iteracion_1
 
         }
 
-        public void guardarArchivo(SqlConnection cn, string extension_del_archivo)
+        public void guardarArchivo(SqlConnection cn, string estadoAlGuardar)
         {
             SqlCommand cmd = new SqlCommand("GuardarArticulos", cn);
             cmd.CommandType = CommandType.StoredProcedure;
@@ -64,14 +64,14 @@ namespace Iteracion_1
             cmd.Parameters.Add("@contenido", SqlDbType.VarBinary).Value = bytesText;
             cmd.Parameters.Add("@puntuacion", SqlDbType.Float).Value = 0.0;
             cmd.Parameters.Add("@visitas", SqlDbType.Int).Value = 0;
-            cmd.Parameters.Add("@estado", SqlDbType.VarChar).Value = "progreso";
+            cmd.Parameters.Add("@estado", SqlDbType.VarChar).Value = estadoAlGuardar;
             cmd.Parameters.Add("@tipoArt", SqlDbType.VarChar).Value = "largo";
             //cmd.Parameters.Add("@extencion", SqlDbType.VarChar).Value = extension_del_archivo;
             cn.Open();
             cmd.ExecuteNonQuery();
         }
 
-        public void guardarArticulosTexto(SqlConnection cn)
+        public void guardarArticulosTexto(SqlConnection cn, string estadoAlGuardar)
         {
             SqlCommand cmd = new SqlCommand("GuardarArticulos", cn); // Hay que hacer el procedimiento almacenado en la BD de nosotros.
             cmd.CommandType = CommandType.StoredProcedure;
@@ -82,7 +82,7 @@ namespace Iteracion_1
             cmd.Parameters.Add("@contenido", SqlDbType.VarBinary).Value = bytesText;
             cmd.Parameters.Add("@puntuacion", SqlDbType.Float).Value = 0.0;
             cmd.Parameters.Add("@visitas", SqlDbType.Int).Value = 0;
-            cmd.Parameters.Add("@estado", SqlDbType.VarChar).Value = "progreso";
+            cmd.Parameters.Add("@estado", SqlDbType.VarChar).Value = estadoAlGuardar;
             cmd.Parameters.Add("@tipoArt", SqlDbType.VarChar).Value = "corto";
             cn.Open();
             cmd.ExecuteNonQuery();
@@ -158,7 +158,7 @@ namespace Iteracion_1
             return valor;
         }
 
-        protected void btnGuardar_Click(object sender, EventArgs e)
+        public void procesoGuardado (string estadoAlGuardar)
         {
             //revision de categoria 
             bool categoria_seleccionada = checkCategoria();
@@ -205,7 +205,7 @@ namespace Iteracion_1
                         {
 
 
-                            guardarArchivo(cn, extension_del_archivo); //revisar
+                            guardarArchivo(cn, estadoAlGuardar); //revisar
 
 
                             //obtine el artId
@@ -332,10 +332,10 @@ namespace Iteracion_1
                     //Guardamos el contenido de txtArticulo en la base
                     using (SqlConnection cn = new SqlConnection(conString))
                     {
-                        
+
 
                         //PONER EL IF PARA VER SI SE MODIFICA Y SE GUARDA 
-                        guardarArticulosTexto(cn);
+                        guardarArticulosTexto(cn, estadoAlGuardar);
                         
                         Response.Write("Datos Cargados Correctamente");
 
@@ -445,6 +445,14 @@ namespace Iteracion_1
             }
         }
 
+        protected void btnProgreso_Click(object sender, EventArgs e)
+        {
+            procesoGuardado("progreso");
+        }
 
+        protected void btnRevision_Click(object sender, EventArgs e)
+        {
+            procesoGuardado("revision");
+        }
     }
 }
