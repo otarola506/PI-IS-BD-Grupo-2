@@ -21,7 +21,16 @@ namespace Iteracion_2.Pages
             string nuevo_nombreUsuario = Request.Form["inputUsername"];
             string nuevo_nombre = Request.Form["inputName"];
             int peso = 0;
-            
+
+            if (nuevo_nombreUsuario.Equals("")) {
+                ViewData["username"] = "No digito un nombre usuario";
+                return Page();
+            }
+
+            if (nuevo_nombre.Equals("")) {
+                ViewData["username"] = "No digito su nombre";
+                return Page();
+            }
 
             if (!miembroController.crearCuenta(nuevo_nombreUsuario, nuevo_nombre, peso)) {
                 ViewData["username"] = "Este nombre usuario ya existe";
