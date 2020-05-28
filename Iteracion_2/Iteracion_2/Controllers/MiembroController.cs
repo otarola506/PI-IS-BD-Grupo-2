@@ -8,14 +8,14 @@ namespace Iteracion_2.Controllers
 {
     public class MiembroController
     {
-        private MiembroModel miembroModel { set; get; }
+        private MiembroModel MiembroModel { set; get; }
 
         public bool crearCuenta(string nombreUsuario, string nombre, int peso)
         {
-            miembroModel = new MiembroModel();
-            if (!miembroModel.verificarNombreUsuario(nombreUsuario))
+            MiembroModel = new MiembroModel();
+            if (!MiembroModel.verificarNombreUsuario(nombreUsuario))
             {
-                miembroModel.crearCuenta(nombreUsuario, nombre, peso);
+                MiembroModel.crearCuenta(nombreUsuario, nombre, peso);
                 return true;
             }
             else
@@ -26,14 +26,21 @@ namespace Iteracion_2.Controllers
         }
 
         public bool validarNombreUsuario(string nombreUsuario) {
-            miembroModel = new MiembroModel();
-            return miembroModel.verificarNombreUsuario(nombreUsuario);     
+            MiembroModel = new MiembroModel();
+            return MiembroModel.verificarNombreUsuario(nombreUsuario);     
         }
 
         public void crearPerfil(string nombreUsuario, string info, float merito)
         {
-            miembroModel = new MiembroModel();
-            miembroModel.crearPerfil(nombreUsuario,info,merito);
+            MiembroModel = new MiembroModel();
+            MiembroModel.crearPerfil(nombreUsuario,info,merito);
         }
+
+        public List<List<string>> RetornarMiembros() {
+            MiembroModel = new MiembroModel();
+
+            return MiembroModel.RetornarMiembros();
+        }
+
     }
 }
