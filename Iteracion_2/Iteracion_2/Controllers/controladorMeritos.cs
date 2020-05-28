@@ -9,7 +9,7 @@ namespace Iteracion_2.Controllers
     public class controladorMeritos
     {
         //tenemos que llamar a los modelos 
-        ConexionBD conexion { set; get; }
+        MeritoModel conexion { set; get; }
 
 
         //Agarro lo que me manda la vista y lo paso al modelo
@@ -18,7 +18,7 @@ namespace Iteracion_2.Controllers
         {
             string valor_a_vista = "";
             //Lamamos para que se cree la conexion
-            conexion = new ConexionBD();
+            conexion = new MeritoModel();
             conexion.connection();
             valor_a_vista = conexion.revisarEstadoArticulo(artID);
             return valor_a_vista;

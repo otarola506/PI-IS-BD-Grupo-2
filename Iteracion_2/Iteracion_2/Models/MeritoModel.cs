@@ -10,7 +10,7 @@ using System.Globalization;
 
 namespace Iteracion_2.Models
 {
-    public class ConexionBD
+    public class MeritoModel
     {
         private SqlConnection con;
         public void connection()
