@@ -81,6 +81,7 @@ namespace Iteracion_2.Models
             if (estado == "aceptado")// Para futuras historias poner otros estados
             {
                 //Obtenemos la puntacion del articulo
+
                 con.Open();
                 string puntuacion = "";
                 SqlCommand cmd = new SqlCommand("RecuperarPuntuacionArticulo", con);
@@ -109,7 +110,69 @@ namespace Iteracion_2.Models
 
         }
 
+        public void DegradarPeso(string nombreUsuario)
+        {
+            //Primero ocupo obtener el peso actual del usuario
 
+            int peso = ObtenerPeso(nombreUsuario);
+            if (peso == 3)
+            {
+                // Se le asigna el peso de 0
+                ModificarPeso(nombreUsuario,0);
+                int a = 8;
+
+
+            }else if (peso == 5)
+            {
+                //Se le asigna el peso de 3
+                ModificarPeso(nombreUsuario,3);
+
+            }// Si ya tiene 0 en peso no se le hace nada 
+
+
+            //
+        }
+
+        public void ModificarPeso(string NombreUsuario,int nuevoPeso)
+        {
+            // Este metodo se puede utilizar para subir de rango o para bajar de rango(Peso)
+            connection();
+            con.Open();
+            SqlCommand cmd = new SqlCommand("ModificarPeso", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@nombreUsuario", SqlDbType.VarChar).Value = NombreUsuario;
+            cmd.Parameters.Add("@peso", SqlDbType.Int).Value = nuevoPeso;
+            cmd.ExecuteNonQuery();
+            con.Close();
+
+        }
+
+
+        public int ObtenerPeso(string NombreUsuario)
+        {
+            connection();
+            int PesoMiembro = 0;
+            con.Open();
+            SqlCommand cmd = new SqlCommand("RecuperarPesoMiembro", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@NombreUsuario", SqlDbType.VarChar).Value = NombreUsuario;
+            SqlDataReader reader = cmd.ExecuteReader();
+            string Auxiliar = "";
+            if (reader.Read())
+            {
+                Auxiliar = reader[0].ToString();
+            }
+           
+
+            PesoMiembro = Convert.ToInt32(Auxiliar);
+           
+            reader.Close();
+            con.Close();
+
+
+
+            return PesoMiembro;
+        }
 
     }
 }

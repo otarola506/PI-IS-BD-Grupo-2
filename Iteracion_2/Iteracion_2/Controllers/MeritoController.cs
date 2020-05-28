@@ -6,10 +6,10 @@ using Iteracion_2.Models;
 
 namespace Iteracion_2.Controllers
 {
-    public class controladorMeritos
+    public class MeritoController
     {
         //tenemos que llamar a los modelos 
-        MeritoModel conexion { set; get; }
+        MeritoModel meritoModel { set; get; }
 
 
         //Agarro lo que me manda la vista y lo paso al modelo
@@ -18,9 +18,9 @@ namespace Iteracion_2.Controllers
         {
             string valor_a_vista = "";
             //Lamamos para que se cree la conexion
-            conexion = new MeritoModel();
-            conexion.connection();
-            valor_a_vista = conexion.revisarEstadoArticulo(artID);
+            meritoModel = new MeritoModel();
+            meritoModel.connection();
+            valor_a_vista = meritoModel.revisarEstadoArticulo(artID);
             return valor_a_vista;
         }
 
@@ -33,6 +33,16 @@ namespace Iteracion_2.Controllers
             //conexion.asignarMeritoPuntuacionInicial(artID);
 
             return idAutor_a_vista;
+        }
+
+
+        public void DegradarMiembros( string nombreUsuario)
+        {
+            
+            meritoModel = new MeritoModel();
+            meritoModel.DegradarPeso(nombreUsuario);
+
+            
         }
 
 
