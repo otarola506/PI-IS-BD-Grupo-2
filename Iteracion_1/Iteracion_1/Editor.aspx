@@ -65,10 +65,11 @@
         <asp:TextBox ID="txtAutores" runat="server"></asp:TextBox>
     </p>
     <p>
-        &nbsp;</p>
-    <p>
-        <asp:Button ID="btnGuardar" runat="server" Height="41px" Text="Guardar" Width="124px" OnClick="btnGuardar_Click" OnClientClick ="return confirm('¿Está seguro que desea guardar este artículo?')" />
+        <asp:Button ID="btnGuardar" runat="server" Height="41px" Text="Enviar a revisión" Width="124px" OnClick="btnGuardar_Click" OnClientClick ="return confirm('¿Está seguro que desea guardar este artículo?')" />
+        <asp:Button ID="btnProgreso" runat="server" Height="41px" OnClick="btnProgreso_Click" Text="Guardar artículo en progreso" Width="217px" />
     </p>
+    <p>
+        &nbsp;</p>
     <p>
         <asp:Label ID="lblprueba" runat="server"></asp:Label>
     </p>

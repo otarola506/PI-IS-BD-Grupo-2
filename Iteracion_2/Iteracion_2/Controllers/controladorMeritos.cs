@@ -28,9 +28,9 @@ namespace Iteracion_2.Controllers
         public string asignarPuntajeInicial(int artID)
         {
             string idAutor_a_vista = "";
-            conexion = new ConexionBD();
-            conexion.connection();
-            conexion.asignarMeritoPuntuacionInicial(artID);
+            //conexion = new ConexionBD();
+            //conexion.connection();
+            //conexion.asignarMeritoPuntuacionInicial(artID);
 
             return idAutor_a_vista;
         }
