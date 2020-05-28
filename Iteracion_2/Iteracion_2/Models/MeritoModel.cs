@@ -119,18 +119,44 @@ namespace Iteracion_2.Models
             {
                 // Se le asigna el peso de 0
                 ModificarPeso(nombreUsuario,0);
-                int a = 8;
+                ModificarMeritoPeso(3,0,nombreUsuario);
 
 
             }else if (peso == 5)
             {
                 //Se le asigna el peso de 3
                 ModificarPeso(nombreUsuario,3);
+                ModificarMeritoPeso(5, 3, nombreUsuario);
 
             }// Si ya tiene 0 en peso no se le hace nada 
 
 
             //
+        }
+
+        public void ModificarMeritoPeso(int pesoActual,int pesoNuevo ,string NombreUsuario)
+        {
+            connection();
+
+            // Se resta el actual 
+            con.Open();
+            SqlCommand cmd = new SqlCommand("DisminuirMeritoAutor", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@nombreUsuario", SqlDbType.VarChar).Value = NombreUsuario;
+            cmd.Parameters.Add("@aumento", SqlDbType.Int).Value = pesoActual;
+            cmd.ExecuteNonQuery();
+
+            con.Close();
+
+            //Se suma el nuevo
+            con.Open();
+            SqlCommand cmd1 = new SqlCommand("AumentarMeritoAutor", con);
+            cmd1.CommandType = CommandType.StoredProcedure;
+            cmd1.Parameters.Add("@nombreUsuario", SqlDbType.VarChar).Value = NombreUsuario;
+            cmd1.Parameters.Add("@aumento", SqlDbType.Int).Value = pesoNuevo;
+            cmd1.ExecuteNonQuery();
+            con.Close();
+
         }
 
         public void ModificarPeso(string NombreUsuario,int nuevoPeso)

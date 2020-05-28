@@ -27,7 +27,6 @@ namespace Iteracion_2.Pages
         {
             ControladorMerito = new MeritoController();
             ControladorMerito.DegradarMiembros(NombreUsuario);
-            int a = 87;
             MensajePrueba = "LLegue hasta aqui";
 
         }
