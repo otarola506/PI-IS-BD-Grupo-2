@@ -1,0 +1,12 @@
+﻿#primera-fila{
+    margin-bottom: 2vmax;
+}
+
+#regresar-perfil > a {
+    font-size: 20px;
+}
+
+#mensaje-respuesta {
+    color: green;
+    text-align: center;
+}

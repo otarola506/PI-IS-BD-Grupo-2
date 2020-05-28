@@ -1,0 +1,27 @@
+﻿@page
+@model Iteracion_2.Pages.RegistrarModel
+@{
+    ViewData["Title"] = "Registrar";
+}
+
+<h2>Registrarse</h2>
+<label for="inputName"> @ViewData["valid"] </label>
+
+<form method="post">
+    <div class="form-group">
+        <label for="inputName">Nombre Completo</label>
+        <input type="text" class="form-control" name="inputName" placeholder="John Sm...">
+    </div>
+
+    <div class="form-group">
+        <label for="inputUsername">Nombre de Usuario</label>
+        <input type="text" class="form-control" name="inputUsername" placeholder="Das_348">
+    </div>
+    <label for="inputName" style ="color:red;"> @ViewData["username"] </label>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <button type="submit" class="btn btn-primary">Registrarse</button>
+            <button type="reset" class="btn btn-primary">Limpiar</button>
+        </div>
+</form>
+    </div>

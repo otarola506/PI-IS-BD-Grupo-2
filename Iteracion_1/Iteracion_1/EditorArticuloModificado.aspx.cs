@@ -104,6 +104,24 @@ namespace Iteracion_1
             con.Close();
 
         }
+
+        public void ModificarArchivoRevision()
+        {
+            byte[] bytesText = Seleccionador.FileBytes;
+            int artId = Convert.ToInt32(Session["articuloId"]);
+            SqlCommand cmd = new SqlCommand("Modificar_Articulo_Y_Revision", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            byte[] bytesTextResumen = unicode.GetBytes(txtResumen.Text);
+            cmd.Parameters.Add("@ID", SqlDbType.Int).Value = artId;
+            cmd.Parameters.Add("@tituloNuevo", SqlDbType.VarChar).Value = txtTitulo.Text;
+            cmd.Parameters.Add("@resumenNuevo", SqlDbType.VarBinary).Value = bytesTextResumen;
+            cmd.Parameters.Add("@contenidoNuevo", SqlDbType.VarBinary).Value = bytesText;
+            cmd.Parameters.Add("@estadoNuevo", SqlDbType.VarChar).Value = "revision";
+            con.Open();
+            cmd.ExecuteNonQuery();
+            con.Close();
+        }
+
         public void eliminarCategoria()
         {
             int artId = Convert.ToInt32(Session["articuloId"]);
@@ -117,7 +135,6 @@ namespace Iteracion_1
         }
         public void ModificarArticulosTexto()
         {
-
             int artId = Convert.ToInt32(Session["articuloId"]);
             SqlCommand cmd = new SqlCommand("Modificar_Articulo", con);
             cmd.CommandType = CommandType.StoredProcedure;
@@ -130,7 +147,23 @@ namespace Iteracion_1
             con.Open();
             cmd.ExecuteNonQuery();
             con.Close();
+        }
 
+        public void ModificarArticulosTextoRevision()
+        {
+            int artId = Convert.ToInt32(Session["articuloId"]);
+            SqlCommand cmd = new SqlCommand("Modificar_Articulo_Y_Revision", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            byte[] bytesTextResumen = unicode.GetBytes(txtResumen.Text);
+            byte[] bytesText = unicode.GetBytes(txtArticulo.Text);
+            cmd.Parameters.Add("@ID", SqlDbType.Int).Value = artId;
+            cmd.Parameters.Add("@tituloNuevo", SqlDbType.VarChar).Value = txtTitulo.Text;
+            cmd.Parameters.Add("@resumenNuevo", SqlDbType.VarBinary).Value = bytesTextResumen;
+            cmd.Parameters.Add("@contenidoNuevo", SqlDbType.VarBinary).Value = bytesText;
+            cmd.Parameters.Add("@estadoNuevo", SqlDbType.VarChar).Value = "revision";
+            con.Open();
+            cmd.ExecuteNonQuery();
+            con.Close();
         }
 
         public void guardarCategoriaArticulo(SqlConnection con, string catID, string artID)
@@ -157,7 +190,7 @@ namespace Iteracion_1
             return valor;
         }
 
-        protected void btnGuardar_Click(object sender, EventArgs e)
+        protected void procesoGuardar(bool enviarRevision)
         {
             //revision de categoria 
             bool categoria_seleccionada = checkCategoria();
@@ -197,9 +230,15 @@ namespace Iteracion_1
 
 
                         connection();
-                        ModificarArchivo(); //revisar
-
-
+                        if (enviarRevision)
+                        {
+                            ModificarArchivoRevision();
+                        }
+                        else
+                        {
+                            ModificarArchivo(); //revisar
+                        }
+                        
                         //obtine el artId
                         SqlCommand cmd2 = new SqlCommand("Obtener_articuloId", con);
                         cmd2.CommandType = CommandType.StoredProcedure;
@@ -283,12 +322,16 @@ namespace Iteracion_1
                     string artID = "";
                     //Guardamos el contenido de txtArticulo en  
                     connection();
-                    ModificarArticulosTexto();
-
-
-
-
-
+                    if (enviarRevision)
+                    {
+                        ModificarArticulosTextoRevision();
+                    }
+                    else
+                    {
+                        ModificarArticulosTexto();
+                    }
+               
+                                                                          
                     //obtine el artId
                     SqlCommand cmd2 = new SqlCommand("Obtener_articuloId", con);
                     cmd2.CommandType = CommandType.StoredProcedure;
@@ -365,5 +408,15 @@ namespace Iteracion_1
             }
         }
 
+        protected void btnGuardar_Click(object sender, EventArgs e)
+        {
+            procesoGuardar(false);
+        }
+
+        protected void btnRevision_Click(object sender, EventArgs e)
+        {
+            procesoGuardar(true);
+        }
+        
     }
 }
