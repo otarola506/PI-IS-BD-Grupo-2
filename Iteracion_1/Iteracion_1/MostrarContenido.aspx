@@ -4,6 +4,7 @@
         <br />
         <asp:Label ID="Label1" runat="server" style="font-family: Arial; font-weight: bold; font-size: 16pt" Text="Titulo"></asp:Label>
     &nbsp;
+        <asp:Label ID="lblMensaje" runat="server"></asp:Label>
     </p>
 
     <p>
@@ -68,8 +69,7 @@
         <asp:Button ID="btnEnviar" runat="server" OnClick="Button1_Click" Text="Enviar" />
     </p>
     <p style="font-size: large">
-        <asp:Label ID="lblMensaje" runat="server"></asp:Label>
-    </p>
+        &nbsp;</p>
     <p>
         &nbsp;</p>
     <p>
