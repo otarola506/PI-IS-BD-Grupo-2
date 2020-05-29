@@ -1,0 +1,50 @@
+﻿@page
+@model Iteracion_2.Pages.Correo.CorreoModel
+@{
+    ViewData["Title"] = "Correo";
+}
+
+<h1 class="display-4">Correo</h1>
+<hr />
+<div class="col-lg-5 col-lg-offset-0" id="mensaje-respuesta">
+    @if (Model.Message != null)
+    {
+        <h4 style="color:green"> @Model.Message</h4>
+    }
+</div><br />
+<br />
+<form method="post" enctype="multipart/form-data">
+    <br />
+    <label for="DRP">Destinatario</label><br />
+    <input name="correoMiembro" type="email" list="correo" pattern="^[a-zA-Z0-9._+-]+&#64;[a-zA-Z0-9.-]+\.[a-zA-Z]{2,9}$" placeholder="Digite el correo aquí" style="width:300px" />
+    <datalist id="correo">
+        @for (int index = 0; index < Model.mostrarDatos.Count; index++)
+        {
+            <option>@Model.mostrarDatos[index]</option>
+        }
+
+    </datalist><br />
+    <label for="Asunto">Asunto</label> <br />
+
+    <input type="text" name="asunto" placeholder="Escriba el asunto" style="width:300px" /><br />
+
+    <label for="Contenido">Contenido</label><br />
+
+    <textarea name="contenido" id="txtContenido" cols="50" rows="20" placeholder="Digite el contenido aquí"></textarea><br />
+    <label for="Adjuntar Archivo">Adjuntar Archivo</label><br />
+    <input type="file" name="archivo" /><br />
+    <input type="submit" class="btn-success" value="Enviar Correo" /><br />
+
+
+</form>
+@section Scripts
+    {
+    <script src="https://cdn.tiny.cloud/1/ppfs7sld936k48b757gwua5p0k1knn5by42zeg00gm61xqwb/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+        tinymce.init({
+            selector: '#txtContenido'
+        });
+    </script>
+}
+
+
