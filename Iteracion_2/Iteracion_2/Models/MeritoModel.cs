@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using System.Configuration;
 using System.Data;
 using System.Globalization;
+using System.Net.Mail;
+using System.Net.Mime;
 
 namespace Iteracion_2.Models
 {
@@ -120,6 +122,7 @@ namespace Iteracion_2.Models
                 // Se le asigna el peso de 0
                 ModificarPeso(nombreUsuario,0);
                 ModificarMeritoPeso(3,0,nombreUsuario);
+                NotificarMiembro(nombreUsuario,3,0);
 
 
             }else if (peso == 5)
@@ -127,12 +130,94 @@ namespace Iteracion_2.Models
                 //Se le asigna el peso de 3
                 ModificarPeso(nombreUsuario,3);
                 ModificarMeritoPeso(5, 3, nombreUsuario);
+                NotificarMiembro(nombreUsuario, 5, 3);
 
             }// Si ya tiene 0 en peso no se le hace nada 
 
-
-            //
         }
+
+        public void NotificarMiembro(string NombreUsuario, int pesoActual, int pesoNuevo)
+        {
+            string correoOrigen = "comunidadshieldship@gmail.com";
+            string contraseña = "BASESdatos176";
+            //Ocupo recuperar el correo del destinatario
+            connection();
+            string correoDestinatario = "";
+            con.Open();
+            SqlCommand cmd = new SqlCommand("ObtenerCorreo", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@NombreUsuario", SqlDbType.VarChar).Value = NombreUsuario;
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            if (reader.Read())
+            {
+                correoDestinatario = reader[0].ToString();
+            }
+
+            reader.Close();
+            con.Close();
+
+
+            MailMessage objMensaje = new MailMessage(correoOrigen, correoDestinatario,
+                "Informacion sobre peso en la comunidad", "Su peso en la comunidad ha sido bajado de " + pesoActual + "a: " + pesoNuevo);
+
+            SmtpClient objSmptClient = new SmtpClient("smtp.gmail.com");
+            objSmptClient.EnableSsl = true;
+            objSmptClient.UseDefaultCredentials = false;
+            //objSmptClient.Host = "smpt.gmail.com"
+            objSmptClient.Port = 587;
+            objSmptClient.Credentials = new System.Net.NetworkCredential(correoOrigen,contraseña);
+            objSmptClient.Send(objMensaje);
+            objSmptClient.Dispose();
+
+
+        }
+
+
+        public async Task enviarSolicitud( string Usuario, int pesoActual, int pesoNuevo)
+        {
+            //Primero ocupo encontrar el correo del miembro
+            connection();
+            string correoDestinatario = "";
+            con.Open();
+            SqlCommand cmd = new SqlCommand("ObtenerCorreo", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@NombreUsuario", SqlDbType.VarChar).Value = NombreUsuario;
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            if (reader.Read())
+            {
+                correoDestinatario = reader[0].ToString();
+            }
+
+            reader.Close();
+            con.Close();
+
+
+
+
+
+
+            MailMessage mm = new MailMessage();
+            mm.To.Add(correoDestinatario);
+            mm.Subject = "Degradacion de peso en la comunidad " ;
+            AlternateView imgview = AlternateView.CreateAlternateViewFromString("Su peso en la comunidad ha sido bajado de " + pesoActual + "a: " + pesoNuevo + "<br/><img src=cid:imgpath height=200 width=400>", null, "text/html");
+            LinkedResource lr = new LinkedResource(@"Images/shieldship.jpg", MediaTypeNames.Image.Jpeg);
+            lr.ContentId = "imgpath";
+            imgview.LinkedResources.Add(lr);
+            mm.AlternateViews.Add(imgview);
+            mm.Body = lr.ContentId;
+            mm.IsBodyHtml = false;
+            mm.From = new MailAddress("comunidadshieldship@gmail.com");
+            SmtpClient smtp = new SmtpClient("smtp.gmail.com");
+            smtp.Port = 587;
+            smtp.UseDefaultCredentials = true;
+            smtp.EnableSsl = true;
+            smtp.Credentials = new System.Net.NetworkCredential("comunidadshieldship@gmail.com", "BASESdatos176");
+            await smtp.SendMailAsync(mm);
+        }
+
+
 
         public void ModificarMeritoPeso(int pesoActual,int pesoNuevo ,string NombreUsuario)
         {
