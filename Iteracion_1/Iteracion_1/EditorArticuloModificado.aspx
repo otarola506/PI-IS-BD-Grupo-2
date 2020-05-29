@@ -82,10 +82,10 @@
         <br />
         <br />
         </strong></span>
+        
+        <strong>
+        <asp:Label ID="TituloObsLbl" runat="server" Text="" CssClass="auto-style1" style="width:300px;"> </asp:Label>
+        </strong>
         <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
+        <asp:label ID="ObsTextLbl" runat="server" CssClass="auto-style1" Text="" ></asp:label>
 </asp:Content>

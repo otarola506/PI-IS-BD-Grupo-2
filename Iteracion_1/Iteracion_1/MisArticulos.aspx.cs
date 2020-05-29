@@ -114,6 +114,7 @@ namespace Iteracion_1
                 if (string.Compare(tipoArticulo, "corto") == 0)
                 {
                     Session["articuloID"] = artId;
+                    Session["estadoArt"] = estado;
                     Response.Redirect("EditorArticuloModificado.aspx");
                 }
                 else

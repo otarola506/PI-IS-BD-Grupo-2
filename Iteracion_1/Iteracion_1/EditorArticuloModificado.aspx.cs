@@ -25,11 +25,18 @@ namespace Iteracion_1
         {
             if (!IsPostBack)
             {
-
-
+                string estado = Convert.ToString(Session["estadoArt"]);
                 cargarCategorias();
                 cargarContenidoArticulo();
-
+                if (string.Compare(estado, "cambios") == 0)
+                {
+                    TituloObsLbl.Text = "Observaciones sobre el artículo y cuestiones a corregir:";
+                    ObsTextLbl.Text = "Lorem ipsum dolor sit amet consectetur adipiscing elit elementum eros, ante fermentum imperdiet massa dictum " +
+                                    "eu tortor mi class tincidunt, platea laoreet lacinia erat nibh facilisi diam inceptos. Ornare gravida nibh pretium a " +
+                                    "at eros leo condimentum, hac montes litora et venenatis ultrices malesuada aliquam, placerat tellus lacus turpis nisl " +
+                                    "volutpat aenean. Bibendum molestie taciti turpis nullam vestibulum vitae eget, non ante sapien nascetur accumsan quam varius " +
+                                    "dictumst, nisi fusce leo sodales facilisis dapibus hendrerit, nibh diam metus in mi tempus.";
+                }
             }
         }
         private void cargarContenidoArticulo()
