@@ -40,10 +40,15 @@
         <br />
      <strong>Resumen:</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <br />
-        <asp:TextBox ID="txtResumen" runat="server" Height="92px" Width="50%"   TextMode="MultiLine" Font-Size="Medium" maxsize="10" ></asp:TextBox>
+        <asp:TextBox ID="txtResumen" runat="server" Height="158px" Width="50%"   TextMode="MultiLine" Font-Size="Medium" maxsize="10" ></asp:TextBox>
         <strong><br />
         </strong><span class="auto-style2"><strong>
-        <asp:Button ID="btnGuardar" runat="server" OnClick="btnGuardar_Click"  OnClientClick ="return confirm('¿Está seguro que desea guardar este resumen?')" Text="Guardar" />
+        <asp:Button ID="btnGuardar" runat="server" OnClick="btnGuardar_Click"  OnClientClick ="return confirm('¿Está seguro que desea guardar este resumen?')" Text="Someter a Revision" />
+        <asp:Button ID="btnDescargar" runat="server" Text="Descargar" OnClick="btnDescargar_Click" style="height: 40px" />
+     <br />
+     Subir archivo nuevamente:<br />
+     <asp:FileUpload ID="subirArchivo" runat="server" Width="513px" />
+     <br />
         </strong></span>
         </span><span class="auto-style2"><strong>
         <br />
