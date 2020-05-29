@@ -7,47 +7,26 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-
-    <style type="text/css">
-        .auto-style1 {
-            font-size: x-large;
-        }
-        .auto-style2 {
-            font-size: large;
-        }
-        .auto-style3 {
-            width: 137px;
-            height: 27px;
-            position: absolute;
-            top: 25px;
-            left: 975px;
-        }
-        .auto-style4 {
-            font-family: Arial;
-            color: #FF0000;
-        }
-        </style>
-</head>
         <br />
-        <span class="auto-style1"><strong>Titulo</strong></span><strong><span class="auto-style1">:</span></strong><br />
+        <span class="auto-style1" style="font-size: large"><strong>Título</strong></span><strong><span class="auto-style1">:</span></strong><br />
         <span class="auto-style1">
             <script>
                 $("txtResumen[maxsize]").each(function () {
                     $(this).attr('maxlength', $(this).attr('maxsize'));
                 });
             </script>
-        <asp:TextBox ID="txtTitulo" runat="server"  Width="1000px" Height="29px"></asp:TextBox>
+        <asp:TextBox ID="txtTitulo" runat="server"  Width="1088px" Height="23px" CssClass="auto-style6" style="margin-bottom: 24px" ></asp:TextBox>
         <br />
-     <strong>Resumen:</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+     <strong><span style="font-size: large">Resumen:</span></strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <br />
-        <asp:TextBox ID="txtResumen" runat="server" Height="158px" Width="50%"   TextMode="MultiLine" Font-Size="Medium" maxsize="10" ></asp:TextBox>
+        <asp:TextBox ID="txtResumen" runat="server" Height="266px" Width="61%"   TextMode="MultiLine" Font-Size="Medium" maxsize="10" CssClass="panel-group" ></asp:TextBox>
         <strong><br />
         </strong><span class="auto-style2"><strong>
-        <asp:Button ID="btnGuardar" runat="server" OnClick="btnGuardar_Click"  OnClientClick ="return confirm('¿Está seguro enviar a revisión este artículo?')" Text="Someter a Revision" />
-        <asp:Button ID="btnDescargar" runat="server" Text="Descargar" OnClick="btnDescargar_Click" style="height: 40px" />
      <br />
-     Subir archivo nuevamente:<br />
-     <asp:FileUpload ID="subirArchivo" runat="server" Width="513px" />
+     <span style="font-size: large">Subir archivo nuevamente:</span><br />
+     <asp:FileUpload ID="subirArchivo" runat="server" Width="527px" style="margin-bottom: 30px" />
+        <asp:Button ID="btnGuardar" runat="server" OnClick="btnGuardar_Click"  OnClientClick ="return confirm('¿Está seguro enviar a revisión este artículo?')" Text="Someter a Revision" CssClass="panel-group" />
+        <asp:Button ID="btnDescargar" runat="server" Text="Descargar" OnClick="btnDescargar_Click" CssClass="auto-style5" style="margin-bottom: 19px" />
      <br />
         </strong></span>
         </span><span class="auto-style2"><strong>

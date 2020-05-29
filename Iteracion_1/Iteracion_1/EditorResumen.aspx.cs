@@ -67,6 +67,7 @@ namespace Iteracion_1
             cmd.Parameters.Add("@resumenNuevo", SqlDbType.VarBinary).Value = bytesTextResumen;
             cmd.Parameters.Add("@contenidoNuevo", SqlDbType.VarBinary).Value = bytesContenido;
             cmd.Parameters.Add("@estadoNuevo", SqlDbType.VarChar).Value = "revision";
+            cmd.Parameters.Add("@nombreArch", SqlDbType.VarChar).Value = subirArchivo.FileName;
             con.Open();
             cmd.ExecuteNonQuery();
             con.Close();
@@ -102,7 +103,6 @@ namespace Iteracion_1
             }
         }
 
-        //Procedimiento modificar articulos largos
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
             if (txtResumen.Text != String.Empty || txtError.Text != String.Empty)
@@ -125,23 +125,22 @@ namespace Iteracion_1
             cmd.Parameters.Add("@ID", SqlDbType.Int).Value = artId;
             con.Open();
             SqlDataReader reader = cmd.ExecuteReader();
-
-            //Descargar archivo desde base de datos
-            reader = cmd.ExecuteReader();
             reader.Read();
-            string fileName = reader["titulo"].ToString();
+            //Descargar archivo desde base de datos
+            
+            string fileName = reader["nombreArchivo"].ToString();
             byte[] contenidoArt = (byte[])reader["contenido"];
-            //string extension = reader[5].ToString();
             Response.Clear();
             Response.Buffer = true;
             Response.Charset = "";
             Response.Cache.SetCacheability(HttpCacheability.NoCache);
-            //Response.ContentType = extension;
-            Response.AppendHeader("Content-Disposition", "attachment; filename=" + fileName);
+            Response.AppendHeader("Content-Disposition", "attachment; filename=\"" + fileName + "\"");
             Response.BinaryWrite(contenidoArt);
             Response.Flush();
             Response.End();
 
         }
+
+        
     }
 }

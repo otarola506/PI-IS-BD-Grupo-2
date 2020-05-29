@@ -31,6 +31,15 @@ namespace Iteracion_1 {
         protected global::System.Web.UI.WebControls.TextBox txtResumen;
         
         /// <summary>
+        /// subirArchivo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload subirArchivo;
+        
+        /// <summary>
         /// btnGuardar control.
         /// </summary>
         /// <remarks>
@@ -47,15 +56,6 @@ namespace Iteracion_1 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnDescargar;
-        
-        /// <summary>
-        /// subirArchivo control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload subirArchivo;
         
         /// <summary>
         /// txtError control.
