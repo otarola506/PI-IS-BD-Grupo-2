@@ -136,45 +136,10 @@ namespace Iteracion_2.Models
 
         }
 
-        public void NotificarMiembro(string NombreUsuario, int pesoActual, int pesoNuevo)
-        {
-            string correoOrigen = "comunidadshieldship@gmail.com";
-            string contraseña = "BASESdatos176";
-            //Ocupo recuperar el correo del destinatario
-            connection();
-            string correoDestinatario = "";
-            con.Open();
-            SqlCommand cmd = new SqlCommand("ObtenerCorreo", con);
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.Add("@NombreUsuario", SqlDbType.VarChar).Value = NombreUsuario;
-            SqlDataReader reader = cmd.ExecuteReader();
-
-            if (reader.Read())
-            {
-                correoDestinatario = reader[0].ToString();
-            }
-
-            reader.Close();
-            con.Close();
+        
 
 
-            MailMessage objMensaje = new MailMessage(correoOrigen, correoDestinatario,
-                "Informacion sobre peso en la comunidad", "Su peso en la comunidad ha sido bajado de " + pesoActual + "a: " + pesoNuevo);
-
-            SmtpClient objSmptClient = new SmtpClient("smtp.gmail.com");
-            objSmptClient.EnableSsl = true;
-            objSmptClient.UseDefaultCredentials = false;
-            //objSmptClient.Host = "smpt.gmail.com"
-            objSmptClient.Port = 587;
-            objSmptClient.Credentials = new System.Net.NetworkCredential(correoOrigen,contraseña);
-            objSmptClient.Send(objMensaje);
-            objSmptClient.Dispose();
-
-
-        }
-
-
-        public async Task enviarSolicitud( string Usuario, int pesoActual, int pesoNuevo)
+        public void NotificarMiembro( string Usuario, int pesoActual, int pesoNuevo)
         {
             //Primero ocupo encontrar el correo del miembro
             connection();
@@ -182,7 +147,7 @@ namespace Iteracion_2.Models
             con.Open();
             SqlCommand cmd = new SqlCommand("ObtenerCorreo", con);
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.Add("@NombreUsuario", SqlDbType.VarChar).Value = NombreUsuario;
+            cmd.Parameters.Add("@NombreUsuario", SqlDbType.VarChar).Value = Usuario;
             SqlDataReader reader = cmd.ExecuteReader();
 
             if (reader.Read())
@@ -214,7 +179,7 @@ namespace Iteracion_2.Models
             smtp.UseDefaultCredentials = true;
             smtp.EnableSsl = true;
             smtp.Credentials = new System.Net.NetworkCredential("comunidadshieldship@gmail.com", "BASESdatos176");
-            await smtp.SendMailAsync(mm);
+             smtp.SendMailAsync(mm);
         }
 
 
