@@ -18,6 +18,9 @@
                 <div class="foto-perfil">
                     <img src="https://i.ya-webdesign.com/images/happy-stick-figure-png-2.png" />
                     <div class="caption"><br>@Model.informacionPersonal[0]</div>
+                    <form asp-page-handler="send" method="post">
+                        <button type="submit" class="btn btn-primary">Solicitar promocion de rango</button>
+                    </form>
                 </div>
             </div>
 
@@ -40,9 +43,7 @@
             </div>
 
             <div class="col-lg-2 col-lg-offset-4" id="columna-derecha">
-                <form asp-page-handler="send" method="post">
-                    <button type="submit" class="btn btn-primary">Solicitar promocion de rango</button>
-                </form>
+
             </div>
 
 

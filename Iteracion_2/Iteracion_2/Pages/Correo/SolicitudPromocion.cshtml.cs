@@ -14,6 +14,9 @@ namespace Iteracion_2.Pages.Correo
 
         public string UsuarioNombre { get; set; }
 
+        [TempData]
+        public string UsuarioActual { get; set; }
+
         public IActionResult OnGet(string Username)
         {
             this.UsuarioNombre = Username;
@@ -28,7 +31,9 @@ namespace Iteracion_2.Pages.Correo
             if (controlador.verificarCorreo(username))
             {
                 await controlador.enviarSolicitud(contenido, username);
-                return RedirectToPage("/Perfil/Perfil", new { Usuario = username });
+                this.UsuarioActual = username;
+                ViewData["username"] = "Su correo ha sido enviado satisfactoriamente";
+                return RedirectToPage("/Correo/SolicitudPromocion", new { Username = username });
             }
             else
             {
