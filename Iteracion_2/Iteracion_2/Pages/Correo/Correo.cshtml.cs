@@ -16,6 +16,7 @@ namespace Iteracion_2.Pages.Correo
         //En el caso de recuperar los correos necesito hacer un on get que llame al método del controlador
         public EmailController controlador { get; set; }
         public List<string> mostrarDatos;
+        public string Message;
 
         public async Task<IActionResult> OnPost()
         {
@@ -34,6 +35,13 @@ namespace Iteracion_2.Pages.Correo
         public IActionResult OnGet() {
             controlador = new EmailController();
             mostrarDatos = controlador.recuperarCorreos();
+            object temp;
+            TempData.TryGetValue("resultado", out temp);
+
+            if (temp != null)
+            {
+                Message = (string)temp;
+            }
             return Page();
 
 
