@@ -36,14 +36,14 @@
                     $(this).attr('maxlength', $(this).attr('maxsize'));
                 });
             </script>
-        <asp:TextBox ID="txtTitulo" runat="server"  Width="459px"></asp:TextBox>
+        <asp:TextBox ID="txtTitulo" runat="server"  Width="1000px" Height="29px"></asp:TextBox>
         <br />
      <strong>Resumen:</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <br />
         <asp:TextBox ID="txtResumen" runat="server" Height="158px" Width="50%"   TextMode="MultiLine" Font-Size="Medium" maxsize="10" ></asp:TextBox>
         <strong><br />
         </strong><span class="auto-style2"><strong>
-        <asp:Button ID="btnGuardar" runat="server" OnClick="btnGuardar_Click"  OnClientClick ="return confirm('¿Está seguro que desea guardar este resumen?')" Text="Someter a Revision" />
+        <asp:Button ID="btnGuardar" runat="server" OnClick="btnGuardar_Click"  OnClientClick ="return confirm('¿Está seguro enviar a revisión este artículo?')" Text="Someter a Revision" />
         <asp:Button ID="btnDescargar" runat="server" Text="Descargar" OnClick="btnDescargar_Click" style="height: 40px" />
      <br />
      Subir archivo nuevamente:<br />
