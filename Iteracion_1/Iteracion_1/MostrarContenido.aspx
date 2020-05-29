@@ -1,10 +1,12 @@
 ﻿<%@ Page Title="Contenido Articulo" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="MostrarContenido.aspx.cs" Inherits="Iteracion_1.MostrarContenido" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <p>
+    <p class="text-center">
         <br />
-        <asp:Label ID="Label1" runat="server" style="font-family: Arial; font-weight: bold; font-size: 16pt" Text="Titulo"></asp:Label>
     &nbsp;
-        <asp:Label ID="lblMensaje" runat="server"></asp:Label>
+        <asp:Label ID="lblMensaje" runat="server" Font-Size="X-Large"></asp:Label>
+    </p>
+    <p>
+        <asp:Label ID="Label1" runat="server" style="font-family: Arial; font-weight: bold; font-size: 16pt" Text="Titulo"></asp:Label>
     </p>
 
     <p>
