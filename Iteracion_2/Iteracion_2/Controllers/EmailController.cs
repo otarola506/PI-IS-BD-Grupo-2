@@ -22,9 +22,27 @@ namespace Iteracion_2.Controllers
 
         }
 
+        public bool verificarCorreo(string Usuario)
+        {
+            perf = new PerfilModel();
+            return perf.verificarCorreo(Usuario);
+
+        }
+
+        public async Task enviarSolicitud(string contenido, string Usuario)
+        {
+            sendMail = new Email();
+            await sendMail.enviarSolicitud(contenido, Usuario);
+        }
+
         public List<string> recuperarCorreos() {
             perf = new PerfilModel();
             return perf.recuperarCorreos();
+        }
+
+        public string obtenerCorreo(string Usuario) {
+            perf = new PerfilModel();
+            return perf.obtenerCorreo(Usuario);
         }
     }
 }

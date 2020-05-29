@@ -6,18 +6,26 @@
 
 <h2>SolicitudPromocion</h2>
 
+<h3>Bienvenido @Model.UsuarioNombre</h3>
+
 <div>
     <form method="post" enctype="multipart/form-data">
         <div class="form-group">
             <label for="inputName">Destinatario</label>
-            <input type="text" class="form-control" value="Coordinador@gmail.com " name="destinatario" readonly>
+            <input type="text" class="form-control" value="comunidadshieldship@gmail.com" name="destinatario" readonly>
         </div>
 
         <div class="form-group">
             <label for="inputUsername">Asunto</label>
             <input type="text" class="form-control" value="Solicitud de promocion de rango" name="asunto" readonly>
         </div>
-        <label for="inputName" style="color:red;"> @ViewData["username"] </label>
+
+
+        <div class="form-group">
+            <label for="FromUsername">De</label>
+            <input type="text" class="form-control" value=@Model.UsuarioNombre name="envia" readonly>
+        </div>
+
 
         <div class="form-group">
             <label for="comment">Motivo</label>
@@ -29,7 +37,9 @@
                 <button type="submit" class="btn btn-primary">Enviar solicitud</button>
                 <button type="reset" class="btn btn-primary">Limpiar</button>
             </div>
-        <div />
+            <div />
+
+            <label for="inputName" style="color:red;"> @ViewData["username"] </label>
 
     </form>
 </div>

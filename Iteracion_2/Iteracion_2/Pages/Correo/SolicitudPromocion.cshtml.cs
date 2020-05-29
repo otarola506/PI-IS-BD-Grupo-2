@@ -11,20 +11,31 @@ namespace Iteracion_2.Pages.Correo
     public class SolicitudPromocionModel : PageModel
     {
         public EmailController controlador { get; set; }
+
+        public string UsuarioNombre { get; set; }
+
+        public IActionResult OnGet(string Username)
+        {
+            this.UsuarioNombre = Username;
+            return Page();
+        }
         public async Task<IActionResult> OnPost()
         {
             controlador = new EmailController();
-            string destinatarioCorreo = Request.Form["destinatario"];
-
-            string asunto = Request.Form["asunto"];
             string contenido = Request.Form["contenido"];
+            string username = Request.Form["envia"];
+            //If si tiene correo 
+            if (controlador.verificarCorreo(username))
+            {
+                await controlador.enviarSolicitud(contenido, username);
+                return RedirectToPage("/Perfil/Perfil", new { Usuario = username });
+            }
+            else
+            {
+                ViewData["username"] = "No tiene un correo disponible";
+                return Page();
+            }
             //await controlador.enviarCorreo(destinatarioCorreo, asunto, contenido, archivo);
-
-            TempData["resultado"] = "El correo ha sido enviado a " + destinatarioCorreo;
-            return new RedirectToPageResult("Correo");
-        }
-        public void OnGet()
-        {
 
         }
     }
