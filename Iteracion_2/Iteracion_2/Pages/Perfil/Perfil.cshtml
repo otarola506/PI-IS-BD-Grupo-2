@@ -73,19 +73,21 @@
                 </div>
             </div>
 
-            <div class="col-lg-5 col-lg-offset-3" id="espacio-articulo">
-                <div class="articulos-publicados">
-                    <h1> Artículos </h1>
-                    <ul>
-                        @for (int index = 0; index < Model.articulosUsuario.Count; index++)
-                        {
-                            <li> <a href="#@Model.articulosUsuario[index][0]">@Model.articulosUsuario[index][1]</a> </li>
-                        }
-                    </ul>
+            @if (Model.articulosUsuario.Count > 0)
+            {
+                <div class="col-lg-5 col-lg-offset-3" id="espacio-articulo">
+                    <div class="articulos-publicados">
+                        <h1> Artículos </h1>
+                        <ul>
+                            @for (int index = 0; index < Model.articulosUsuario.Count; index++)
+                            {
+                                <li> <a href="#@Model.articulosUsuario[index][0]">@Model.articulosUsuario[index][1]</a> </li>
+                            }
+                        </ul>
 
+                    </div>
                 </div>
-            </div>
-
+            }
         </div>
 
     </body>

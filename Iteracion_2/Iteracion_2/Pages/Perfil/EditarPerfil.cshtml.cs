@@ -5,30 +5,27 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Iteracion_2.Controllers;
+using Microsoft.AspNetCore.Http;
 
 namespace Iteracion_2.Pages.Perfil
 {
     public class EditarPerfilModel : PageModel
     {
+        const string SessionKeyUsuario = "UsuarioActual";
         private PerfilController perfilController { set; get; }
 
         public string Message { get; set; }
-        public string[] informacionPersonal { get; private set; }
+        public string[] InformacionPersonal { get; private set; }
 
-        [TempData]
         public string UsuarioActual { get; set; }
 
-        public IActionResult OnGet(string Usuario)
+        public IActionResult OnGet()
         {
-            if (this.UsuarioActual != null || Usuario != null) {
+            UsuarioActual = HttpContext.Session.GetString(SessionKeyUsuario);
+            if (UsuarioActual != null) {
                 perfilController = new PerfilController();
 
-                if(Usuario != null)
-                {
-                    this.UsuarioActual = Usuario;
-                }
-
-                informacionPersonal = perfilController.RetornarDatosPerfil( (UsuarioActual != null)?this.UsuarioActual:Usuario);
+                InformacionPersonal = perfilController.RetornarDatosPerfil(UsuarioActual);
 
                 TempData.TryGetValue("resultado", out object temp);
 
@@ -45,9 +42,9 @@ namespace Iteracion_2.Pages.Perfil
 
         public IActionResult OnPostSave()
         {
+            UsuarioActual = HttpContext.Session.GetString(SessionKeyUsuario);
             perfilController = new PerfilController();
 
-            this.UsuarioActual = Request.Form["usuario-actual"].ToString();
             string nombre = Request.Form["nombre-completo"].ToString();
             string informacionLaboral= Request.Form["laboral"].ToString();
             string informacionBiografica = Request.Form["biografica"].ToString();
@@ -60,7 +57,7 @@ namespace Iteracion_2.Pages.Perfil
 
             TempData["resultado"] = "Información actualizada exitosamente";
 
-            return RedirectToPage("/Perfil/EditarPerfil", new { Usuario = this.UsuarioActual });
+            return RedirectToPage("/Perfil/EditarPerfil");
         }
     }
 }

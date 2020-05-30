@@ -5,27 +5,29 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Iteracion_2.Controllers;
+using Microsoft.AspNetCore.Http;
 
 namespace Iteracion_2.Pages
 {
     public class PerfilModel : PageModel
     {
+        const string SessionKeyUsuario = "UsuarioActual";
         private PerfilController perfilController { set; get; }
 
         public string[] informacionPersonal { get; private set; }
 
-        [TempData]
         public string UsuarioActual { get; set; }
         public List<List<string>> articulosUsuario { get; private set; }
-        public IActionResult OnGet(string Usuario)
+        public IActionResult OnGet(string UsuarioURL)
         {
-            if (this.UsuarioActual != null || Usuario != null) {
-                this.UsuarioActual = Usuario;
+            UsuarioActual = HttpContext.Session.GetString(SessionKeyUsuario);
+            if (UsuarioActual != null)
+            {
                 perfilController = new PerfilController();
 
-                informacionPersonal = perfilController.RetornarDatosPerfil((this.UsuarioActual != null) ? this.UsuarioActual : Usuario);
+                informacionPersonal = perfilController.RetornarDatosPerfil(UsuarioURL ?? UsuarioActual);
 
-                articulosUsuario = perfilController.RetornarArticulosMiembro((this.UsuarioActual != null) ? this.UsuarioActual : Usuario);
+                articulosUsuario = perfilController.RetornarArticulosMiembro(UsuarioURL ?? UsuarioActual);
 
                 return Page();
             }
