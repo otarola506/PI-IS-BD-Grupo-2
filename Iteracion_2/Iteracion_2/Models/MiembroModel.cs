@@ -83,6 +83,7 @@ namespace Iteracion_2.Models
                                             reader[1].ToString(), // nombre
                                             reader[2].ToString(), // correo
                                             reader[3].ToString(), // merito 
+                                            reader[4].ToString(), // peso 
                                         });
             }
 

@@ -21,7 +21,7 @@ namespace Iteracion_2.Pages
         public IActionResult OnGet(string UsuarioURL)
         {
             UsuarioActual = HttpContext.Session.GetString(SessionKeyUsuario);
-            if (UsuarioActual != null)
+            if (UsuarioActual != null || UsuarioURL != null)
             {
                 perfilController = new PerfilController();
 
