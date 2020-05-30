@@ -55,11 +55,16 @@
                 <div class="navbar-collapse collapse">
                     
                     <ul class="nav navbar-nav">
-                        <li><a runat="server" href="~/Default">Inicio</a></li>
+                        <li><a runat="server" href="https://localhost:44338/">𝕾𝖍𝖎𝖊𝖑𝖉𝖘𝖍𝖎𝖕</a></li>
                         <li><a runat="server" href="~/MisArticulos">Mis Articulos</a></li>
                         <li><a runat="server" href="~/Articulos">Todos Articulos</a></li>
                         <li><a runat="server" href="~/SeccionPregFrecMP">Preguntas Frecuentes</a></li>
                         <li><a runat="server" href="~/AgregarPregFrecMP">Agregar Pregunta Frecuente</a></li>
+                        <li><a runat="server" href="https://localhost:44338/Miembros/Miembros">Miembros</a></li>
+                        <li><a runat="server" href="https://localhost:44338/Correo/Correo">Correo</a></li>
+                        <li><a runat="server" href="https://localhost:44338/Registrar/Registrar">Crear Perfil</a></li>
+                        
+
                         <li id="busqueda">
                             <asp:DropDownList AppendDataBoundItems="true" ID="DropDownList" runat="server" DataSourceID="SqlDataSource1" DataTextField="nombre" DataValueField="categoriaIdPK" style="top: 1vmax; left:1vmax; right:1vmax; position: relative;">
                             <asp:ListItem Text="Categoria"  Value="null" Selected="true"></asp:ListItem>
@@ -73,6 +78,16 @@
                             <asp:Button ID="Btn_ConsultaXTopico" runat="server" OnClick="Button1_Click" style="top: 1vmax; left:1vmax; right:1vmax; position: relative;" Text="Consultar" />
                         </li>
                     </ul>
+                    <div class="dropdown topnav navbar-right">
+                    <div class="navbar-nav"> Usuario </div>
+                    <div class="dropdown-content">
+                        <ul class="nav">
+                            <li><a runat="server" href="https://localhost:44338/Perfil/Perfil">Perfil</a></li>
+                            <li><a runat="server" href="https://localhost:44338/Perfil/EditarPerfil">Editar Perfil</a></li>
+                        </ul>
+                    </div>
+                </div>
+
                 </div>
             </div>
         </div>
