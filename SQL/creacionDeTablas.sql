@@ -89,3 +89,15 @@ CREATE TABLE Pregunta_Frecuente(
 			ON DELETE SET DEFAULT
 );
 
+CREATE TABLE Correcion(
+	correcionIdPK INTEGER NOT NULL IDENTITY(1,1),
+	artIdFK	      INTEGER NOT NULL,	
+	comentarios   VARCHAR(MAX),
+	
+	CONSTRAINT PK_Correcion PRIMARY KEY(correcionIdPK,artIdFK)
+	CONSTRAINT FK_Correcion_Articulo
+		FOREIGN KEY(artIdFK) REFERENCES Articulo (artIdPK)
+			ON DELETE CASCADE
+);
+
+
