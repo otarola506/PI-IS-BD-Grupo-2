@@ -14,14 +14,14 @@
     <body>
 
         <div class="row">
-            <div class="col-lg-4 col-lg-offset-0" id="columna-izquierda">
+            <div class="col-lg-3" id="columna-izquierda">
                 <div class="foto-perfil">
                     <img src="https://i.ya-webdesign.com/images/happy-stick-figure-png-2.png" />
                     <div class="caption"><br>@Model.informacionPersonal[0]</div>
                 </div>
             </div>
 
-            <div class="col-lg-3 col-lg-offset-0" id="columna-derecha">
+            <div class="col-lg-4 col-lg-offset-0" id="columna-derecha">
                 <div class="inf-laboral">
                     <h1> <strong>Información Laboral</strong> </h1>
                     <p>
@@ -30,7 +30,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-3 col-lg-offset-1" id="columna-derecha">
+            <div class="col-lg-4 col-lg-offset-0" id="columna-derecha">
                 <div class="inf-biografica">
                     <h1> <strong>Información Biográfica</strong> </h1>
                     <p>
@@ -46,7 +46,9 @@
                     <h3>Contacto</h3>
                     <ul>
                         <li><i class="fas fa-phone-volume"></i> @Model.informacionPersonal[4]</li>
-                        <li><i class="fas fa-envelope-open"></i> @Model.informacionPersonal[5]</li>
+                        <li>
+                            <span><i class="fas fa-envelope-open"></i> @Model.informacionPersonal[5]</span>    
+                        </li>
                     </ul>
                 </div>
 
@@ -62,7 +64,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-5 col-lg-offset-0" id="espacio-articulo">
+            <div class="col-lg-5 col-lg-offset-3" id="espacio-articulo">
                 <div class="articulos-publicados">
                     <h1> Artículos </h1>
                     <ul>
