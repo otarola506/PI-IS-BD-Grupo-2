@@ -239,8 +239,8 @@ namespace Iteracion_1
             if (opVotos.SelectedValue == "0")
             {
                 //No voto
-                lblMensaje.Text = "No selecciono ninguna de las opciones, por favor vuelva a intentarlo";
-                lblMensaje.ForeColor = System.Drawing.Color.Red;
+                //lblMensaje.Text = "No selecciono ninguna de las opciones, por favor vuelva a intentarlo";
+                //lblMensaje.ForeColor = System.Drawing.Color.Red;
                 //Revisar si vale la pena hacer algo
 
             }

@@ -121,6 +121,45 @@ namespace Iteracion_2.Models
             return results;
 
         }
+
+        public bool verificarCorreo(string Usuario)
+        {
+            Connection();
+            con.Open();
+            string verificacion = "";
+            bool Existe = true;
+            SqlCommand cmd = new SqlCommand("ObtenerCorreo", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@nombreUsuario", SqlDbType.VarChar).Value = Usuario;
+            SqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                verificacion = reader[0].ToString();
+            }
+
+            if (verificacion.Equals(""))
+            {
+                Existe = false;
+            }
+
+            return Existe;
+        }
+
+        public string obtenerCorreo(string Usuario)
+        {
+            Connection();
+            con.Open();
+            string correo = "";
+            SqlCommand cmd = new SqlCommand("ObtenerCorreo", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@nombreUsuario", SqlDbType.VarChar).Value = Usuario;
+            SqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                correo = reader[0].ToString();
+            }
+            return correo;
+        }
     }
 }
 

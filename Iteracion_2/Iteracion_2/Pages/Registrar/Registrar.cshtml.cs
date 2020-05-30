@@ -13,7 +13,8 @@ namespace Iteracion_2.Pages
         private MiembroController miembroController { set; get; }
 
         public string Message { get; set; }
-
+        [TempData]
+        public string UsuarioActual { get; set; }
 
         public IActionResult OnPost()
         {
@@ -38,8 +39,9 @@ namespace Iteracion_2.Pages
             }
             else
             {
-                miembroController.crearPerfil(nuevo_nombreUsuario, "edite", 0);
-                return RedirectToPage("/Perfil/Perfil",new { Usuario = nuevo_nombreUsuario});
+                UsuarioActual = nuevo_nombreUsuario;
+                miembroController.crearPerfil(nuevo_nombreUsuario, " ", 0);
+                return RedirectToPage("/Perfil/EditarPerfil",new { Usuario = nuevo_nombreUsuario});
             }
         }
 

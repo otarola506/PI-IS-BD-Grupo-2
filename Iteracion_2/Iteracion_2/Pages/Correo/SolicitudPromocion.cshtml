@@ -1,0 +1,46 @@
+﻿@page
+@model Iteracion_2.Pages.Correo.SolicitudPromocionModel
+@{
+    ViewData["Title"] = "SolicitudPromocion";
+}
+
+<h2>Solicitar Promocion de Rango</h2>
+
+
+<a href="/Perfil/Perfil?Usuario=@Model.UsuarioNombre">&larr; Regresar al perfil</a>
+
+<div>
+    <form method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="inputName">Destinatario</label>
+            <input type="text" class="form-control" value="comunidadshieldship@gmail.com" name="destinatario" readonly>
+        </div>
+
+        <div class="form-group">
+            <label for="inputUsername">Asunto</label>
+            <input type="text" class="form-control" value="Solicitud de promocion de rango" name="asunto" readonly>
+        </div>
+
+
+        <div class="form-group">
+            <label for="FromUsername">De</label>
+            <input type="text" class="form-control" value=@Model.UsuarioNombre name="envia" readonly>
+        </div>
+
+
+        <div class="form-group">
+            <label for="comment">Motivo</label>
+            <textarea class="form-control" rows="5" name="contenido" id="txtContenido" placeholder="Digite el motivo"></textarea>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <button type="submit" class="btn btn-primary">Enviar solicitud</button>
+                <button type="reset" class="btn btn-primary">Limpiar</button>
+            </div>
+            <div />
+
+            <label for="inputName" style="color:green;"> @ViewData["username"] </label>
+
+    </form>
+</div>

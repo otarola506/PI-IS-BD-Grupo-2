@@ -12,12 +12,16 @@
     <link rel="stylesheet" href="~/css/lista-miembros.css">
     <script src="https://kit.fontawesome.com/8dbd1c7c50.js" crossorigin="anonymous"></script>
 </head>
-    <body>
-        <h1>Miembros de la comunidad</h1>
-
-        <ul class="user-profiles-list-basic">
-            @for (int index = 0; index < Model.MiembrosComunidad.Count; index++)
-            {
+<body>
+    <h1>Miembros de la comunidad</h1>
+    <form asp-page-handler="modificar" method="post">
+        <input type="text" asp-for="@Model.NombreUsuario"></input>
+        <button class="btn btn-default">Degradar</button>
+        <h3 class="clearfix">@Model.Mensaje</h3>
+    </form>
+    <ul class="user-profiles-list-basic">
+        @for (int index = 0; index < Model.MiembrosComunidad.Count; index++)
+        {
             <li>
                 <a href="~/Perfil/Perfil?Usuario=@Model.MiembrosComunidad[index][0]" class="user-avatar">
                     <img src="~/Images/imagen-perfil-recortada.png" width="80" alt="Profile of @Model.MiembrosComunidad[index][1]" />
@@ -29,12 +33,10 @@
                     <span>Méritos: <i>@Model.MiembrosComunidad[index][3]</i></span>
                 </p>
             </li>
-            }
-        </ul>
+        }
+    </ul>
 
-        <ul>
-            
-        </ul>
-    </body>
+    <ul></ul>
+</body>
 </html>
 

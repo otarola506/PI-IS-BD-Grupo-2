@@ -1,0 +1,14 @@
+﻿@page
+@model Iteracion_2.Pages.pruebaDegradarModel
+@{
+    ViewData["Title"] = "pruebaDegradar";
+}
+
+<h2>pruebaDegradar</h2>
+
+<form asp-page-handler="modificar" method="post">
+    <textarea asp-for="@Model.NombreUsuario"></textarea>
+    <button class="btn btn-default">Degradar</button>
+    <h3 class="clearfix">@Model.MensajePrueba</h3>
+</form>
+

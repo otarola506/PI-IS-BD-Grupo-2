@@ -114,6 +114,7 @@ namespace Iteracion_1
                 if (string.Compare(tipoArticulo, "corto") == 0)
                 {
                     Session["articuloID"] = artId;
+                    Session["estadoArt"] = estado;
                     Response.Redirect("EditorArticuloModificado.aspx");
                 }
                 else
@@ -160,19 +161,16 @@ namespace Iteracion_1
                 Response.Redirect("MostrarContenido.aspx");
             }
             else {
-            
                 //Descargar archivo desde base de datos
                 reader = cmd.ExecuteReader();
                 reader.Read();
-                string fileName = reader["titulo"].ToString();
+                string fileName = reader["nombreArchivo"].ToString();
                 byte[] contenidoArt = (byte[])reader["contenido"];
-                string extension = reader[5].ToString();
                 Response.Clear();
                 Response.Buffer = true;
                 Response.Charset = "";
                 Response.Cache.SetCacheability(HttpCacheability.NoCache);
-                Response.ContentType = extension;
-                Response.AppendHeader("Content-Disposition", "attachment; filename=" + fileName);
+                Response.AppendHeader("Content-Disposition", "attachment; filename=\"" + fileName + "\"");
                 Response.BinaryWrite(contenidoArt);
                 Response.Flush();
                 Response.End();
