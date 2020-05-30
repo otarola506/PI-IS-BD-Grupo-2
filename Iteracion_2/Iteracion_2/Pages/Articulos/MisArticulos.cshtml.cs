@@ -8,10 +8,10 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Iteracion_2.Pages.Articulos
 {
-    public class MisArchivosModel : PageModel
+    public class MisArticulosModel : PageModel
     {
         private const string Location = "http://localhost:51359/MisArticulos";
-        Encoding unicode = Encoding.Unicode;
+        
         public void OnGet()
         {
             Response.Redirect(Location);
