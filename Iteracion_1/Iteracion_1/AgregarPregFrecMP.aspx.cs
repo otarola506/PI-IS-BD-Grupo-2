@@ -43,7 +43,7 @@ namespace Iteracion_1
                 sqlCmd.CommandType = CommandType.StoredProcedure;
                 sqlCmd.Parameters.AddWithValue("@Pregunta", TxtBoxP.Text.Trim());
                 sqlCmd.Parameters.AddWithValue("@Respuesta", TxtBoxR.Text.Trim());
-                sqlCmd.Parameters.AddWithValue("@MiembroID", -1);
+                sqlCmd.Parameters.AddWithValue("@Username","Coordinador" );
                 sqlCmd.ExecuteNonQuery();
                 con.Close();
                 Response.Write("<script>alert('Pregunta agregada a seccion de preguntas frecuentes con éxito')</script>");
