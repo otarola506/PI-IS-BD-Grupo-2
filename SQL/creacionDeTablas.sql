@@ -92,7 +92,7 @@ CREATE TABLE Pregunta_Frecuente(
 CREATE TABLE Correcion(
 	correcionIdPK INTEGER NOT NULL IDENTITY(1,1),
 	artIdFK	      INTEGER NOT NULL,	
-	comentarios   VARCHAR(MAX),
+	comentarios   VARCHAR(MAX) NOT NULL,
 	
 	CONSTRAINT PK_Correcion PRIMARY KEY(correcionIdPK,artIdFK)
 	CONSTRAINT FK_Correcion_Articulo
