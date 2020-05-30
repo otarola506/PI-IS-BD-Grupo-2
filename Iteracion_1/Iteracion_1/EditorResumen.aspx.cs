@@ -110,6 +110,7 @@ namespace Iteracion_1
 
             }
             else {
+                largo = true;
                 modificarTituloResumen(artId);
             }
             return largo;
@@ -127,7 +128,7 @@ namespace Iteracion_1
 
             }
             else {
-                txtError.Text = "Escriba un resumen y un título porfavor";
+                txtError.Text = "Escriba título y un resumen porfavor";
             }
         }
 

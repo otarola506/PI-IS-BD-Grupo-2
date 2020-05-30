@@ -1,12 +1,12 @@
 ﻿<%@ Page Title="Mis Articulos" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="MisArticulos.aspx.cs" Inherits="Iteracion_1.MisArticulos" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
-    <div>
+    <div style="height: 41px">
         <strong>
         <asp:Label ID="lblArticulo" runat="server" style="font-family: Arial; font-size: 20px; position: relative;"></asp:Label>
         </strong>
         <br />
-        <asp:Button ID ="btnAgregarArticulo" Text="Crear articulo nuevo" runat="server" OnClick="btnAgregarArticulo_Click" style="position: relative;" />
+        <asp:Button ID ="btnAgregarArticulo" Text="Crear articulo nuevo" runat="server" OnClick="btnAgregarArticulo_Click" CssClass="buttonClass" style="position: relative;" />
         <br />
     </div>
     <br />
