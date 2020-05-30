@@ -112,9 +112,11 @@ namespace Iteracion_2.Models
 
         }
 
-        public void DegradarPeso(string nombreUsuario)
+        public string DegradarPeso(string nombreUsuario)
         {
             //Primero ocupo obtener el peso actual del usuario
+            string mensaje = "";
+
 
             int peso = ObtenerPeso(nombreUsuario);
             if (peso == 3)
@@ -123,7 +125,7 @@ namespace Iteracion_2.Models
                 ModificarPeso(nombreUsuario,0);
                 ModificarMeritoPeso(3,0,nombreUsuario);
                 NotificarMiembro(nombreUsuario,3,0);
-
+                mensaje = "La operacion fue realizada con exito.";
 
             }else if (peso == 5)
             {
@@ -131,8 +133,21 @@ namespace Iteracion_2.Models
                 ModificarPeso(nombreUsuario,3);
                 ModificarMeritoPeso(5, 3, nombreUsuario);
                 NotificarMiembro(nombreUsuario, 5, 3);
+                mensaje = "La operacion fue realizada con exito.";
 
-            }// Si ya tiene 0 en peso no se le hace nada 
+            }
+            else if (peso == 100)
+            {
+                // El mae metio algo que no era 
+                mensaje = "El nombre que ingreso es incorrecto.";
+
+            }else if (peso == 0)
+            {
+                mensaje = "Este miembro tiene el peso mas bajo, no se puede bajar mas.";
+            }
+
+
+            return mensaje;
 
         }
 
@@ -239,9 +254,17 @@ namespace Iteracion_2.Models
             {
                 Auxiliar = reader[0].ToString();
             }
-           
 
-            PesoMiembro = Convert.ToInt32(Auxiliar);
+            if (Auxiliar != "")
+            {
+                PesoMiembro = Convert.ToInt32(Auxiliar);
+            }
+            else
+            {
+                PesoMiembro = 100;
+            }
+
+            
            
             reader.Close();
             con.Close();

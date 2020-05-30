@@ -36,11 +36,12 @@ namespace Iteracion_2.Controllers
         }
 
 
-        public void DegradarMiembros( string nombreUsuario)
+        public string DegradarMiembros( string nombreUsuario)
         {
             
             meritoModel = new MeritoModel();
-            meritoModel.DegradarPeso(nombreUsuario);
+            string mensaje = "";
+            return mensaje =  meritoModel.DegradarPeso(nombreUsuario);
 
             
         }
