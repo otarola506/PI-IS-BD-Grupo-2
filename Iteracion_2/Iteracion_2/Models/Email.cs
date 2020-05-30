@@ -44,9 +44,28 @@ namespace Iteracion_2.Models
             smtp.Credentials = new System.Net.NetworkCredential("comunidadshieldship@gmail.com", "BASESdatos176");
             await smtp.SendMailAsync(mm);
 
+        }
 
+        public async Task enviarSolicitud(string contenido,string Usuario)
+        {
 
-
+            MailMessage mm = new MailMessage();
+            mm.To.Add("comunidadshieldship@gmail.com");
+            mm.Subject = "Solicitud de promocion de rango de " + Usuario;
+            AlternateView imgview = AlternateView.CreateAlternateViewFromString(contenido + "<br/><img src=cid:imgpath height=200 width=400>", null, "text/html");
+            LinkedResource lr = new LinkedResource(@"Images/shieldship.jpg", MediaTypeNames.Image.Jpeg);
+            lr.ContentId = "imgpath";
+            imgview.LinkedResources.Add(lr);
+            mm.AlternateViews.Add(imgview);
+            mm.Body = lr.ContentId;
+            mm.IsBodyHtml = false;
+            mm.From = new MailAddress("comunidadshieldship@gmail.com");
+            SmtpClient smtp = new SmtpClient("smtp.gmail.com");
+            smtp.Port = 587;
+            smtp.UseDefaultCredentials = true;
+            smtp.EnableSsl = true;
+            smtp.Credentials = new System.Net.NetworkCredential("comunidadshieldship@gmail.com", "BASESdatos176");
+            await smtp.SendMailAsync(mm);
         }
 
     }
