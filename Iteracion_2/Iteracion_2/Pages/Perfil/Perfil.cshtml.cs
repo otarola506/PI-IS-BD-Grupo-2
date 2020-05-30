@@ -31,5 +31,11 @@ namespace Iteracion_2.Pages
             }
             return RedirectToPage("/Registrar/Registrar");
         }
+
+        public IActionResult OnPostSend()
+        {
+            string nombreUsuario = this.UsuarioActual;
+            return RedirectToPage("/Correo/SolicitudPromocion", new { Username = nombreUsuario });
+        }
     }
 }

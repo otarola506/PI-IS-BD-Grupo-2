@@ -65,5 +65,30 @@ namespace Iteracion_2.Models
 
             return Existe;
         }
+
+        public List<List<string>> RetornarMiembros() {
+            List<List<string>> miembrosComunidad = new List<List<string>>();
+
+            Connection();
+            con.Open();
+
+            SqlCommand cmd = new SqlCommand("RecuperarTodosUsuarios", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            while (reader.Read()) {
+                miembrosComunidad.Add(new List<string>
+                                        {
+                                            reader[0].ToString(), // nombreUsuarioPK
+                                            reader[1].ToString(), // nombre
+                                            reader[2].ToString(), // correo
+                                            reader[3].ToString(), // merito 
+                                        });
+            }
+
+            con.Close();
+
+            return miembrosComunidad;
+        }
     }
 }
