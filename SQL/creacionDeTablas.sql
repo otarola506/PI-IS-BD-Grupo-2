@@ -40,7 +40,8 @@ CREATE TABLE Articulo(
 	puntuacion INTEGER,
 	visitas INTEGER,
 	estado VARCHAR(20),
-	tipoArt VARCHAR(10) NOT NULL
+	tipoArt VARCHAR(10) NOT NULL,
+	nombreArchivo VARCHAR(50) NULL
 
 ); 
 
