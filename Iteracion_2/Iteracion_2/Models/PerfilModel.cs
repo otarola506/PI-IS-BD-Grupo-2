@@ -95,10 +95,11 @@ namespace Iteracion_2.Models
             SqlCommand cmd = new SqlCommand("GuardarDatosPerfil", con);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.Add("@nombreUsuario", SqlDbType.VarChar).Value = nombreUsuario;
-            cmd.Parameters.Add("@informacionLaboral", SqlDbType.VarChar).Value = informacionActualizada[0];
-            cmd.Parameters.Add("@informacionBiografica", SqlDbType.VarChar).Value = informacionActualizada[1];
-            cmd.Parameters.Add("@telefono", SqlDbType.VarChar).Value = informacionActualizada[2];
-            cmd.Parameters.Add("@correo", SqlDbType.VarChar).Value = informacionActualizada[3];
+            cmd.Parameters.Add("@nombre", SqlDbType.VarChar).Value = informacionActualizada[0];
+            cmd.Parameters.Add("@informacionLaboral", SqlDbType.VarChar).Value = informacionActualizada[1];
+            cmd.Parameters.Add("@informacionBiografica", SqlDbType.VarChar).Value = informacionActualizada[2];
+            cmd.Parameters.Add("@telefono", SqlDbType.VarChar).Value = informacionActualizada[3];
+            cmd.Parameters.Add("@correo", SqlDbType.VarChar).Value = informacionActualizada[4];
 
             cmd.ExecuteNonQuery();
 

@@ -23,10 +23,14 @@ namespace Iteracion_2.Pages.Perfil
             if (this.UsuarioActual != null || Usuario != null) {
                 perfilController = new PerfilController();
 
-                informacionPersonal = perfilController.RetornarDatosPerfil( (this.UsuarioActual != null)?this.UsuarioActual:Usuario);
+                if(Usuario != null)
+                {
+                    this.UsuarioActual = Usuario;
+                }
 
-                object temp;
-                TempData.TryGetValue("resultado", out temp);
+                informacionPersonal = perfilController.RetornarDatosPerfil( (UsuarioActual != null)?this.UsuarioActual:Usuario);
+
+                TempData.TryGetValue("resultado", out object temp);
 
                 if (temp != null)
                 {
@@ -44,12 +48,13 @@ namespace Iteracion_2.Pages.Perfil
             perfilController = new PerfilController();
 
             this.UsuarioActual = Request.Form["usuario-actual"].ToString();
+            string nombre = Request.Form["nombre-completo"].ToString();
             string informacionLaboral= Request.Form["laboral"].ToString();
             string informacionBiografica = Request.Form["biografica"].ToString();
             string telefono = Request.Form["telefono"].ToString();
             string correo = Request.Form["correo"].ToString();
 
-            string[] informacionActualizada = new string[] { informacionLaboral, informacionBiografica, telefono, correo };
+            string[] informacionActualizada = new string[] { nombre, informacionLaboral, informacionBiografica, telefono, correo };
 
             perfilController.GuardarDatosPerfil(UsuarioActual, informacionActualizada);
 
