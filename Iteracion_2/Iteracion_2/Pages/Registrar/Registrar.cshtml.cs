@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Iteracion_2.Controllers;
+using Microsoft.AspNetCore.Http;
 
 namespace Iteracion_2.Pages
 {
@@ -13,8 +14,6 @@ namespace Iteracion_2.Pages
         private MiembroController miembroController { set; get; }
 
         public string Message { get; set; }
-        [TempData]
-        public string UsuarioActual { get; set; }
 
         public IActionResult OnPost()
         {
@@ -39,9 +38,10 @@ namespace Iteracion_2.Pages
             }
             else
             {
-                UsuarioActual = nuevo_nombreUsuario;
-                miembroController.crearPerfil(nuevo_nombreUsuario, " ", 0);
-                return RedirectToPage("/Perfil/EditarPerfil",new { Usuario = nuevo_nombreUsuario});
+                HttpContext.Session.SetString("UsuarioActual", nuevo_nombreUsuario);
+                miembroController.crearPerfil(nuevo_nombreUsuario, "", 0);
+
+                return RedirectToPage("/Perfil/EditarPerfil");
             }
         }
 
