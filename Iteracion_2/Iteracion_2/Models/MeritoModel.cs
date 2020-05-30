@@ -166,7 +166,8 @@ namespace Iteracion_2.Models
             MailMessage mm = new MailMessage();
             mm.To.Add(correoDestinatario);
             mm.Subject = "Degradacion de peso en la comunidad " ;
-            AlternateView imgview = AlternateView.CreateAlternateViewFromString("Su peso en la comunidad ha sido bajado de " + pesoActual + "a: " + pesoNuevo + "<br/><img src=cid:imgpath height=200 width=400>", null, "text/html");
+            AlternateView imgview = AlternateView.CreateAlternateViewFromString("Su peso en la comunidad ha sido bajado de " + pesoActual + " a: " + pesoNuevo +". Esto afectara el merito de su perfil." 
+                + "<br/><br/><br/><br/><img src=cid:imgpath height=200 width=400>", null, "text/html");
             LinkedResource lr = new LinkedResource(@"Images/shieldship.jpg", MediaTypeNames.Image.Jpeg);
             lr.ContentId = "imgpath";
             imgview.LinkedResources.Add(lr);
