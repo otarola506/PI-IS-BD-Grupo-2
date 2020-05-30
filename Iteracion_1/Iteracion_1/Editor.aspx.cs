@@ -59,6 +59,7 @@ namespace Iteracion_1
             cmd.CommandType = CommandType.StoredProcedure;
             byte[] bytesTextResumen = unicode.GetBytes(txtResumen.Text);
             byte[] bytesText = Seleccionador.FileBytes;
+            string nombreArch = Seleccionador.FileName;
             cmd.Parameters.Add("@titulo", SqlDbType.VarChar).Value = txtTitulo.Text;
             cmd.Parameters.Add("@resumen", SqlDbType.VarBinary).Value = bytesTextResumen;
             cmd.Parameters.Add("@contenido", SqlDbType.VarBinary).Value = bytesText;
@@ -66,7 +67,7 @@ namespace Iteracion_1
             cmd.Parameters.Add("@visitas", SqlDbType.Int).Value = 0;
             cmd.Parameters.Add("@estado", SqlDbType.VarChar).Value = estadoAlGuardar;
             cmd.Parameters.Add("@tipoArt", SqlDbType.VarChar).Value = "largo";
-            //cmd.Parameters.Add("@extencion", SqlDbType.VarChar).Value = extension_del_archivo;
+            cmd.Parameters.Add("@nombreArchivo", SqlDbType.VarChar).Value = nombreArch;
             cn.Open();
             cmd.ExecuteNonQuery();
         }
@@ -84,6 +85,7 @@ namespace Iteracion_1
             cmd.Parameters.Add("@visitas", SqlDbType.Int).Value = 0;
             cmd.Parameters.Add("@estado", SqlDbType.VarChar).Value = estadoAlGuardar;
             cmd.Parameters.Add("@tipoArt", SqlDbType.VarChar).Value = "corto";
+            cmd.Parameters.Add("@nombreArchivo", SqlDbType.VarChar).Value = "nulo";
             cn.Open();
             cmd.ExecuteNonQuery();
         }

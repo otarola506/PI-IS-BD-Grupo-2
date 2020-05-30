@@ -1,4 +1,8 @@
-﻿.user-profiles-list-basic {
+﻿.titulo {
+    text-align: center;
+}
+
+.user-profiles-list-basic {
     line-height: 1;
     list-style: none;
     text-align: center;
