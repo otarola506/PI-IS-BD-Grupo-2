@@ -23,7 +23,7 @@
         <strong><br />
         </strong><span class="auto-style2"><strong>
      <br />
-     <span style="font-size: large">Subir archivo nuevamente:</span><br />
+     <span style="font-size: large">Subir archivo nuevo con cambios:</span><br />
      <asp:FileUpload ID="subirArchivo" runat="server" Width="527px" style="margin-bottom: 30px" />
         <asp:Button ID="btnGuardar" runat="server" OnClick="btnGuardar_Click"  OnClientClick ="return confirm('¿Está seguro enviar a revisión este artículo?')" Text="Someter a Revision" CssClass="panel-group" />
         <asp:Button ID="btnDescargar" runat="server" Text="Descargar" OnClick="btnDescargar_Click" CssClass="auto-style5" style="margin-bottom: 19px" />
