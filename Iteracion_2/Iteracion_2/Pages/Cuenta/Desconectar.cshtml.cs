@@ -11,7 +11,6 @@ namespace Iteracion_2.Pages.Cuenta
     {
         public void OnGet()
         {
-            ViewData.Remove("usuarioActual");
             HttpContext.Session.Remove("UsuarioActual");
             Response.Redirect("/Index");
         }
