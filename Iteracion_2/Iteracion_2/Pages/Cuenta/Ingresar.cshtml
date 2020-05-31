@@ -1,0 +1,31 @@
+﻿@page
+@model Iteracion_2.Pages.Cuenta.IngresarModel
+@{
+    ViewData["Title"] = "Ingresar";
+}
+
+<head>
+    <link rel="stylesheet" href="~/css/border-radius.css" />
+</head>
+
+<h2> <strong>Ingresar</strong></h2>
+
+<label for="inputName"> @ViewData["valid"] </label>
+
+<form method="post">
+    <div class="form-group">
+        <label for="nombreUsuario">Nombre de Usuario</label>
+        <input type="text" class="form-control" name="nombreUsuario" placeholder="Das_348" maxlength="49">
+    </div>
+    <div>
+        <label for="contrasenia">Contraseña</label>
+        <input type="text" class="form-control" name="contrasenia" placeholder="**************" maxlength="15" readonly>
+    </div>
+    <label for="inputName" style="color:red;"> @ViewData["username"] </label>
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+            <button asp-page-handler="Crear" class="btn btn-primary">Crear cuenta</button>
+        </div>
+    </div>
+</form>

@@ -30,40 +30,49 @@ namespace Iteracion_1
         }
         void llenarTabla()
         {
-            connection();
+            var UsuarioActual = Request["value1"];
+            if (UsuarioActual == null || UsuarioActual == "")
+            {
+                Response.Redirect("https://localhost:44338/Registrar/Ingresar");
+            }
+            connection(); 
             con.Open();
             DataTable dt = new DataTable();
             SqlDataAdapter ad = new SqlDataAdapter();
             SqlCommand cmd = new SqlCommand("Recuperar_Articulos_Autor",con);
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.Add("@userName", SqlDbType.VarChar).Value = "otarola506"; // En este caso está quemado el nombre de usuario
+            cmd.Parameters.Add("@userName", SqlDbType.VarChar).Value = UsuarioActual.ToString(); // En este caso está quemado el nombre de usuario
             SqlDataReader reader = cmd.ExecuteReader();
             reader.Read();
-            string nombre = reader[4].ToString();
-            lblArticulo.Text = "Bienvenido a sus artículos, " + nombre;
-            reader.Close();
-            ad.SelectCommand = cmd;
-            ad.Fill(dt);
-            if (dt.Rows.Count > 0)
+            if (reader.Read())
             {
-                tablaArticulos.DataSource = dt;
-                tablaArticulos.DataBind();
-                tablaArticulos.Columns[0].Visible = false;
+                string nombre = reader[4].ToString();
+                lblArticulo.Text = "Bienvenido a sus artículos, " + nombre;
+                reader.Close();
+                ad.SelectCommand = cmd;
+                ad.Fill(dt);
+                if (dt.Rows.Count > 0)
+                {
+                    tablaArticulos.DataSource = dt;
+                    tablaArticulos.DataBind();
+                    tablaArticulos.Columns[0].Visible = false;
 
-            }
-            else
-            {
-                dt.Rows.Add(dt.NewRow());
-                tablaArticulos.DataSource = dt;
-                tablaArticulos.DataBind();
-                tablaArticulos.Rows[0].Cells.Clear();
-                tablaArticulos.Rows[0].Cells.Add(new TableCell());
-                tablaArticulos.Rows[0].Cells[0].ColumnSpan = dt.Columns.Count;
-                tablaArticulos.Rows[0].Cells[0].Text = "No se han encontrado datos.";
-                tablaArticulos.Rows[0].Cells[0].HorizontalAlign = HorizontalAlign.Center;
-                
+                }
+                else
+                {
+                    dt.Rows.Add(dt.NewRow());
+                    tablaArticulos.DataSource = dt;
+                    tablaArticulos.DataBind();
+                    tablaArticulos.Rows[0].Cells.Clear();
+                    tablaArticulos.Rows[0].Cells.Add(new TableCell());
+                    tablaArticulos.Rows[0].Cells[0].ColumnSpan = dt.Columns.Count;
+                    tablaArticulos.Rows[0].Cells[0].Text = "No se han encontrado datos.";
+                    tablaArticulos.Rows[0].Cells[0].HorizontalAlign = HorizontalAlign.Center;
 
+
+                }
             }
+            
 
 
         }

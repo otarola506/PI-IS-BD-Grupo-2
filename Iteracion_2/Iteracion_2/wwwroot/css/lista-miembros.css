@@ -1,4 +1,8 @@
-﻿.titulo {
+﻿.navbar {
+    border-radius: 0;
+}
+
+.titulo {
     text-align: center;
 }
 

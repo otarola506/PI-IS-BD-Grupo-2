@@ -1,4 +1,8 @@
-﻿.caption {
+﻿.navbar {
+    border-radius: 0;
+}
+
+.caption {
     font-weight: bold;
 }
 
@@ -14,7 +18,7 @@ img {
     
 }
 
-body {
+.row {
     font-size: 20px;
 }
 

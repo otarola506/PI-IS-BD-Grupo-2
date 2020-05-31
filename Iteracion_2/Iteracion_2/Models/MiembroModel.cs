@@ -66,17 +66,22 @@ namespace Iteracion_2.Models
             return Existe;
         }
 
-        public List<List<string>> RetornarMiembros() {
+        public (List<List<string>>, string ) RetornarMiembros(string NombreUsuario) {
             List<List<string>> miembrosComunidad = new List<List<string>>();
 
             Connection();
             con.Open();
 
+            string PesoUsuarioActual = "";
             SqlCommand cmd = new SqlCommand("RecuperarTodosUsuarios", con);
             cmd.CommandType = CommandType.StoredProcedure;
             SqlDataReader reader = cmd.ExecuteReader();
 
             while (reader.Read()) {
+                if (reader[0].ToString() == NombreUsuario)
+                {
+                    PesoUsuarioActual = reader[4].ToString(); // peso 
+                }
                 miembrosComunidad.Add(new List<string>
                                         {
                                             reader[0].ToString(), // nombreUsuarioPK
@@ -89,7 +94,36 @@ namespace Iteracion_2.Models
 
             con.Close();
 
-            return miembrosComunidad;
+            return (miembrosComunidad, PesoUsuarioActual );
         }
+
+
+        public bool IngresarCuenta(string NombreUsuario)
+        {
+
+
+            // En este momento solo nos importaba validar el nombre de usuario, en un futuro deberemos de validar la contraseña
+            Connection();
+            con.Open();
+            string verificacion = "";
+            bool Existe = false;
+            SqlCommand cmd = new SqlCommand("VerificarNombreUsuario", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@nombreUsuario", SqlDbType.VarChar).Value = NombreUsuario;
+            SqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                verificacion = reader[0].ToString();
+            }
+
+            if (verificacion.Equals("1"))
+            {
+                Existe = true;
+            }
+
+            return Existe;
+        }
+
+
     }
 }

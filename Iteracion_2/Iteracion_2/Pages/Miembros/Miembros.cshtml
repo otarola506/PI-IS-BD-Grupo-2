@@ -13,11 +13,15 @@
     <script src="https://kit.fontawesome.com/8dbd1c7c50.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <form asp-page-handler="modificar" method="post">
-        <input type="text" asp-for="@Model.NombreUsuario"><input>
-        <button class="btn btn-default">Degradar</button>
-        <h3 class="clearfix">@Model.Mensaje</h3>
-    </form>
+    @if (Model.PesoMiembroActual == "5")
+    {
+        <form asp-page-handler="modificar" method="post">
+            <input type="text" asp-for="@Model.NombreUsuario">
+            <button class="btn btn-default">Degradar</button>
+            <h3 class="clearfix">@Model.Mensaje</h3>
+        </form>
+    }
+
 
     <div class="titulo">
         <h1>Miembros de la comunidad</h1>

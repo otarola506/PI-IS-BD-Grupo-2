@@ -6,7 +6,7 @@
         <asp:Label ID="lblArticulo" runat="server" style="font-family: Arial; font-size: 20px; position: relative;"></asp:Label>
         </strong>
         <br />
-        <asp:Button ID ="btnAgregarArticulo" Text="Crear articulo nuevo" runat="server" OnClick="btnAgregarArticulo_Click" CssClass="buttonClass" style="position: relative;" />
+        <asp:Button ID ="btnAgregarArticulo" Text="Crear articulo nuevo" runat="server" OnClick="btnAgregarArticulo_Click" class="btn-success" style="position: relative;" />
         <br />
     </div>
     <br />

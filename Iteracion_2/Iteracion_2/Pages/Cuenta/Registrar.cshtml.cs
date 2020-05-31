@@ -49,6 +49,11 @@ namespace Iteracion_2.Pages
             ViewData["username"] = "Registrese para ver perfil";
             return Page();
         }
-      
+
+        public void OnPostIngresar()
+        {
+            Response.Redirect("Ingresar");
+        }
+
     }
 }

@@ -24,7 +24,6 @@ namespace Iteracion_2.Pages.Perfil
             UsuarioActual = HttpContext.Session.GetString(SessionKeyUsuario);
             if (UsuarioActual != null) {
                 perfilController = new PerfilController();
-
                 InformacionPersonal = perfilController.RetornarDatosPerfil(UsuarioActual);
 
                 TempData.TryGetValue("resultado", out object temp);
@@ -36,7 +35,7 @@ namespace Iteracion_2.Pages.Perfil
 
                 return Page();
             }
-            return RedirectToPage("/Registrar/Registrar");
+            return RedirectToPage("/Cuenta/Registrar");
 
         }
 
