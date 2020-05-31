@@ -1,4 +1,8 @@
-﻿.caption {
+﻿.navbar {
+    border-radius: 0px;
+}
+
+.caption {
     font-weight: bold;
 }
 

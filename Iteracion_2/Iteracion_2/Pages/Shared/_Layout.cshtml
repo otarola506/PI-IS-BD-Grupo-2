@@ -6,8 +6,8 @@
     <title>Shieldship | @ViewData["Title"]</title>
 
     <environment include="Development">
-        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
         <link rel="stylesheet" href="~/css/site.css" />
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
     </environment>
     <environment exclude="Development">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
@@ -32,20 +32,19 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-
-                    <li><a asp-page="/Articulos/MisArticulos">Mis articulos</a></li>
-                    <li><a asp-page="/Articulos/TodosArticulos">Todos los articulos</a></li>
-                    <li><a asp-page="/Preguntas/PreguntasFrecuentes">Preguntas Frecuentes</a></li>
-                    <li><a asp-page="/Preguntas/AgregarPreguntaFrecuente">Agregar pregunta frecuente</a></li>
+                    <li><a asp-page="/Articulos/TodosArticulos">Articlos</a></li>
                     <li><a asp-page="/Miembros/Miembros">Miembros</a></li>
-                    <li><a asp-page="/Correo/Correo">Correo Pagina</a></li>
-                    
+                    <li><a asp-page="/Correo/Correo">Correo</a></li>
                 </ul>
 
-                <div class="navbar-collapse collapse navbar-right">
-                    <ul class="nav navbar-nav">
-                        <li><a asp-page="Registrar/Registrar">Crear Perfil</a></li>
-                    </ul>
+                <div class="dropdown topnav navbar-left">
+                    <div class="navbar-nav">Preguntas</div>
+                    <div class="dropdown-content">
+                        <ul class="nav">
+                            <li><a asp-page="/Preguntas/PreguntasFrecuentes">Mostrar preguntas</a></li>
+                            <li><a asp-page="/Preguntas/AgregarPreguntaFrecuente">Agregar pregunta frecuente</a></li>
+                        </ul>
+                    </div>
                 </div>
 
                 <div class="dropdown topnav navbar-right">
@@ -53,9 +52,16 @@
                     <div class="dropdown-content">
                         <ul class="nav">
                             <li><a asp-page="/Perfil/Perfil">Perfil</a></li>
-                            <li><a asp-page="/Perfil/EditarPerfil">Editar Perfil</a></li>
+                            <li><a asp-page="/Perfil/EditarPerfil">Editar perfil</a></li>
+                            <li><a asp-page="/Articulos/MisArticulos">Mis articulos</a></li>
                         </ul>
                     </div>
+                </div>
+
+                <div class="navbar-collapse collapse navbar-right">
+                    <ul class="nav navbar-nav">
+                        <li><a asp-page="Registrar/Registrar">Crear Perfil</a></li>
+                    </ul>
                 </div>
             </div>
 
