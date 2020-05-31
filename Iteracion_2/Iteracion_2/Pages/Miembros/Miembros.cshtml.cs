@@ -27,33 +27,29 @@ namespace Iteracion_2.Pages.Miembros
         {
             if (Retroalimentacion == null)
             {
-
                 MiembroController = new MiembroController();
 
                 MiembrosComunidad = MiembroController.RetornarMiembros();
             }
             else
             {
-
                 MiembroController = new MiembroController();
 
                 MiembrosComunidad = MiembroController.RetornarMiembros();
 
                 Mensaje = Retroalimentacion;
             }
-
-
             return Page();
         }
 
         public IActionResult OnPostModificar()
         {
             ControladorMerito = new MeritoController();
-            string Retroalimentacion = "";
+            string Respuesta = "";
 
-            Retroalimentacion = ControladorMerito.DegradarMiembros(NombreUsuario);
-            //Mensaje = "Su operación fue realizada con éxito.";
-            return RedirectToPage("/Miembros/Miembros", new { Retroalimentacion = Retroalimentacion});
+            Respuesta = ControladorMerito.DegradarMiembros(NombreUsuario);
+
+            return RedirectToPage("/Miembros/Miembros", new { Retroalimentacion = Respuesta});
         }
 
     }

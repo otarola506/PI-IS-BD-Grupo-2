@@ -13,30 +13,92 @@
     <script src="https://kit.fontawesome.com/8dbd1c7c50.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <h1>Miembros de la comunidad</h1>
     <form asp-page-handler="modificar" method="post">
-        <input type="text" asp-for="@Model.NombreUsuario"></input>
+        <input type="text" asp-for="@Model.NombreUsuario">
         <button class="btn btn-default">Degradar</button>
         <h3 class="clearfix">@Model.Mensaje</h3>
     </form>
-    <ul class="user-profiles-list-basic">
-        @for (int index = 0; index < Model.MiembrosComunidad.Count; index++)
-        {
-            <li>
-                <a href="~/Perfil/Perfil?Usuario=@Model.MiembrosComunidad[index][0]" class="user-avatar">
-                    <img src="~/Images/imagen-perfil-recortada.png" width="80" alt="Profile of @Model.MiembrosComunidad[index][1]" />
-                </a>
-                <p>
-                    <a href="~/Perfil/Perfil?Usuario=@Model.MiembrosComunidad[index][0]">@Model.MiembrosComunidad[index][1]</a>
-                    <span>&#64;<i>@Model.MiembrosComunidad[index][0]</i></span>
-                    <span>Correo: <i>@Model.MiembrosComunidad[index][2]</i></span>
-                    <span>Méritos: <i>@Model.MiembrosComunidad[index][3]</i></span>
-                </p>
-            </li>
-        }
-    </ul>
 
-    <ul></ul>
+    <div class="titulo">
+        <h1>Miembros de la comunidad</h1>
+    </div>
+
+    <div class="row">
+        <h1>Miembros Núcleo</h1>
+        <ul class="user-profiles-list-basic">
+            @for (int index = 0; index < Model.MiembrosComunidad.Count; index++)
+            {
+                @if (Model.MiembrosComunidad[index][4] == "5")
+                {
+                    <li>
+                        <a href="~/Perfil/Perfil?UsuarioURL=@Model.MiembrosComunidad[index][0]" class="user-avatar">
+                            <img src="~/images/miembro-nucleo.png" width="80" alt="Profile of @Model.MiembrosComunidad[index][1]" />
+                        </a>
+                        <p>
+                            <a href="~/Perfil/Perfil?UsuarioURL=@Model.MiembrosComunidad[index][0]">@Model.MiembrosComunidad[index][1]</a>
+                            <span>&#64;<i>@Model.MiembrosComunidad[index][0]</i></span>
+                            <span>Correo: <i>@Model.MiembrosComunidad[index][2]</i></span>
+                            <span>Méritos: <i>@Model.MiembrosComunidad[index][3]</i></span>
+                        </p>
+                    </li>
+                }
+
+            }
+        </ul>
+    </div>
+
+    <br />
+
+    <div class="row">
+        <h1>Miembros Activos</h1>
+        <ul class="user-profiles-list-basic">
+            @for (int index = 0; index < Model.MiembrosComunidad.Count; index++)
+            {
+                @if (Model.MiembrosComunidad[index][4] == "3")
+                {
+                    <li>
+                        <a href="~/Perfil/Perfil?UsuarioURL=@Model.MiembrosComunidad[index][0]" class="user-avatar">
+                            <img src="~/images/miembro-activo.png" width="80" alt="Profile of @Model.MiembrosComunidad[index][1]" />
+                        </a>
+                        <p>
+                            <a href="~/Perfil/Perfil?UsuarioURL=@Model.MiembrosComunidad[index][0]">@Model.MiembrosComunidad[index][1]</a>
+                            <span>&#64;<i>@Model.MiembrosComunidad[index][0]</i></span>
+                            <span>Correo: <i>@Model.MiembrosComunidad[index][2]</i></span>
+                            <span>Méritos: <i>@Model.MiembrosComunidad[index][3]</i></span>
+                        </p>
+                    </li>
+                }
+
+            }
+        </ul>
+    </div>
+
+    <br />
+
+    <div class="row">
+        <h1>Miembros Periféricos</h1>
+        <ul class="user-profiles-list-basic">
+            @for (int index = 0; index < Model.MiembrosComunidad.Count; index++)
+            {
+                @if (Model.MiembrosComunidad[index][4] == "0")
+                {
+                    <li>
+                        <a href="~/Perfil/Perfil?UsuarioURL=@Model.MiembrosComunidad[index][0]" class="user-avatar">
+                            <img src="~/images/imagen-perfil-recortada.png" width="80" alt="Profile of @Model.MiembrosComunidad[index][1]" />
+                        </a>
+                        <p>
+                            <a href="~/Perfil/Perfil?UsuarioURL=@Model.MiembrosComunidad[index][0]">@Model.MiembrosComunidad[index][1]</a>
+                            <span>&#64;<i>@Model.MiembrosComunidad[index][0]</i></span>
+                            <span>Correo: <i>@Model.MiembrosComunidad[index][2]</i></span>
+                            <span>Méritos: <i>@Model.MiembrosComunidad[index][3]</i></span>
+                        </p>
+                    </li>
+                }
+
+            }
+        </ul>
+    </div>
+
 </body>
 </html>
 

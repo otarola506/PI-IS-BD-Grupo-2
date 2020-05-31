@@ -90,29 +90,45 @@ namespace Iteracion_1
 
 
         }
-        public void modificarArticuloLargo()
+        public bool modificarArticuloLargo()
         {
+            bool largo = false;
             int artId = Convert.ToInt32(Session["articuloId"]);
             if (subirArchivo.HasFile)
             {
-                modificarArticuloCompleto(artId);
+                string extensionArchivo = System.IO.Path.GetExtension(subirArchivo.FileName);
+                if (extensionArchivo != ".doc" && extensionArchivo != ".docx" && extensionArchivo != ".txt" && extensionArchivo != ".pdf")
+                {
+                    txtError.Text = "Solo se permiten archivos de los tipos doc, docx, pdf y txt.";
+                }
+                else {
+                    modificarArticuloCompleto(artId);
+                    largo = true;
+
+                }
+                
 
             }
             else {
+                largo = true;
                 modificarTituloResumen(artId);
             }
+            return largo;
         }
 
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
-            if (txtResumen.Text != String.Empty || txtError.Text != String.Empty)
+            if (txtTitulo.Text != String.Empty && txtResumen.Text != String.Empty)
             {
-                modificarArticuloLargo();
-                Response.Redirect("MisArticulos.aspx");
+                bool check = modificarArticuloLargo();
+                if (check == true)
+                {
+                    Response.Redirect("MisArticulos.aspx");
+                }
 
             }
             else {
-                txtError.Text = "Escriba un resumen y un título porfavor";
+                txtError.Text = "Escriba título y un resumen porfavor";
             }
         }
 

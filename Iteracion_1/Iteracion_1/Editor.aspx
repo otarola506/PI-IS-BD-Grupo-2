@@ -17,8 +17,7 @@
     content_css: '//www.tiny.cloud/css/codepen.min.css',
 
 });</script>
-        <script>tinymce.init({
-    selector: '#<%=txtResumen.ClientID%>'});</script>
+
 
 
     <p>

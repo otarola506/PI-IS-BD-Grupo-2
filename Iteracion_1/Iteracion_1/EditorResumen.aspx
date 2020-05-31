@@ -21,21 +21,23 @@
         <br />
         <asp:TextBox ID="txtResumen" runat="server" Height="266px" Width="61%"   TextMode="MultiLine" Font-Size="Medium" maxsize="10" CssClass="panel-group" ></asp:TextBox>
         <strong><br />
+        <span class="auto-style2">
+     <asp:Label ID="txtError" runat="server" CssClass="auto-style4" style="color: #FF3300; font-size: large;"></asp:Label>
+     </span>
+        <br />
         </strong><span class="auto-style2"><strong>
      <br />
      <span style="font-size: large">Subir archivo nuevo con cambios:</span><br />
      <asp:FileUpload ID="subirArchivo" runat="server" Width="527px" style="margin-bottom: 30px" />
-        <asp:Button ID="btnGuardar" runat="server" OnClick="btnGuardar_Click"  OnClientClick ="return confirm('¿Está seguro enviar a revisión este artículo?')" Text="Someter a Revision" CssClass="panel-group" />
-        <asp:Button ID="btnDescargar" runat="server" Text="Descargar" OnClick="btnDescargar_Click" CssClass="auto-style5" style="margin-bottom: 19px" />
+        <asp:Button  ID="btnGuardar" runat="server" OnClick="btnGuardar_Click"  OnClientClick ="return confirm('¿Está seguro enviar a revisión este artículo?')" Text="Someter a Revisión" class="btn-success" style="margin-bottom: 21px"  />
+        <asp:Button ID="btnDescargar" runat="server" Text="Descargar" OnClick="btnDescargar_Click" class="btn-success" style="margin-bottom: 20px; "/>
      <br />
         </strong></span>
         </span><span class="auto-style2"><strong>
         <br />
-     <asp:Label ID="txtError" runat="server" CssClass="auto-style4"></asp:Label>
      <br />
         <br />
         <br />
-        <asp:Label ID="lblMensaje" runat="server" CssClass="auto-style3"></asp:Label>
         <br />
         </strong></span>
         <br />

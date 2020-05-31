@@ -15,7 +15,7 @@
 <body>
     <div class="row" id="primera-fila">
         <div class="col-lg-4" id="regresar-perfil">
-            <a href="Perfil?Usuario=@Model.UsuarioActual">&larr; Regresar al perfil</a>
+            <a href="Perfil">&larr; Regresar al perfil</a>
         </div>
         <div class="col-lg-5 col-lg-offset-0" id="mensaje-respuesta">
             @if (Model.Message != null)
@@ -47,16 +47,24 @@
                                     <input name="usuario-actual" type="text" class="form-control" value="@Model.UsuarioActual" readonly>
                                 </div>
                             </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Nombre Completo</label>
+                                <div class="col-sm-10">
+                                    <input name="nombre-completo" type="text" class="form-control" maxlength="50" value="@Model.InformacionPersonal[0]">
+                                </div>
+                            </div>
+
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Información Laboral</label>
                                 <div class="col-sm-10">
-                                    <textarea rows="3" id="info-laboral" class="form-control" name="laboral">@Model.informacionPersonal[2]</textarea>
+                                    <textarea rows="3" id="info-laboral" placeholder="Indique su información laboral aquí." class="form-control" name="laboral">@if (@Model.InformacionPersonal[2] != "") { @Model.InformacionPersonal[2] }</textarea>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Información Biográfica</label>
                                 <div class="col-sm-10">
-                                    <textarea rows="3" id="info-biografica" name="biografica" class="form-control">@Model.informacionPersonal[3]</textarea>
+                                    <textarea rows="3" id="info-biografica" placeholder="Indique su información biográfica aquí." name="biografica" class="form-control">@Model.InformacionPersonal[3]</textarea>
                                 </div>
                             </div>
                         </div>
@@ -70,13 +78,13 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Número de Teléfono</label>
                                 <div class="col-sm-10">
-                                    <input type="tel" id="telefono" class="form-control" name="telefono" value="@Model.informacionPersonal[4]">
+                                    <input type='text' onkeypress='validate(event)' id="telefono" placeholder="Teléfono de contacto" class="form-control" name="telefono" maxlength="20" value="@Model.InformacionPersonal[4]">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Correo electrónico</label>
                                 <div class="col-sm-10">
-                                    <input type="tel" id="correo" class="form-control" name="correo" value="@Model.informacionPersonal[5]">
+                                    <input type="email" id="correo" placeholder="Correo electrónico" class="form-control" name="correo" maxlength="50" value="@Model.InformacionPersonal[5]" required>
                                 </div>
                             </div>
                         </div>
@@ -94,9 +102,29 @@
     </div>
     <div class="row" id="ultima-fila">
         <div class="col-lg-4" id="regresar-perfil">
-            <a href="Perfil?Usuario=@Model.UsuarioActual">&larr; Regresar al perfil</a>
+            <a href="Perfil">&larr; Regresar al perfil</a>
         </div>
     </div>
+
+    <script>
+        function validate(evt) {
+            var theEvent = evt || window.event;
+
+            // Handle paste
+            if (theEvent.type === 'paste') {
+                key = event.clipboardData.getData('text/plain');
+            } else {
+                // Handle key press
+                var key = theEvent.keyCode || theEvent.which;
+                key = String.fromCharCode(key);
+            }
+            var regex = /[0-9]|\./;
+            if (!regex.test(key)) {
+                theEvent.returnValue = false;
+                if (theEvent.preventDefault) theEvent.preventDefault();
+            }
+        }
+    </script>
 </body>
 </html>
 
