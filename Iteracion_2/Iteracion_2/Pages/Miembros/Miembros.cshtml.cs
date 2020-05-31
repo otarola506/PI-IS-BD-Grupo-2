@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Iteracion_2.Controllers;
-
+using Microsoft.AspNetCore.Http;
 
 namespace Iteracion_2.Pages.Miembros
 {
@@ -17,6 +17,10 @@ namespace Iteracion_2.Pages.Miembros
 
         private MeritoController ControladorMerito { get; set; }
 
+        public string PesoMiembroActual { get; set; }
+
+
+        const string SessionKeyUsuario = "UsuarioActual";
 
         [BindProperty]
         public string NombreUsuario { get; set; }
@@ -25,17 +29,27 @@ namespace Iteracion_2.Pages.Miembros
 
         public IActionResult OnGet(string Retroalimentacion)
         {
+            MiembroController = new MiembroController();
+            string UsuarioActual = HttpContext.Session.GetString(SessionKeyUsuario);
+            if (UsuarioActual == null)
+            {
+                UsuarioActual = "";
+            }
+            var valoresMiembro = MiembroController.RetornarMiembros(UsuarioActual);
+
             if (Retroalimentacion == null)
             {
-                MiembroController = new MiembroController();
+                
 
-                MiembrosComunidad = MiembroController.RetornarMiembros();
+                MiembrosComunidad = valoresMiembro.Item1;
+
+                PesoMiembroActual = valoresMiembro.Item2;
             }
             else
             {
-                MiembroController = new MiembroController();
+                
 
-                MiembrosComunidad = MiembroController.RetornarMiembros();
+                MiembrosComunidad = valoresMiembro.Item1;
 
                 Mensaje = Retroalimentacion;
             }

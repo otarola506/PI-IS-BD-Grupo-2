@@ -58,10 +58,14 @@
                     </div>
                 </div>
 
-                <div class="navbar-collapse collapse navbar-right">
-                    <ul class="nav navbar-nav">
-                        <li><a asp-page="Registrar/Registrar">Crear Perfil</a></li>
-                    </ul>
+                <div class="dropdown topnav navbar-right">
+                    <div class="navbar-nav"> Cuentas  </div>
+                    <div class="dropdown-content">
+                        <ul class="nav">
+                            <li><a asp-page="/Registrar/Registrar">Registrarse</a></li>
+                            <li><a asp-page="/Registrar/Ingresar">Ingresar</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
 

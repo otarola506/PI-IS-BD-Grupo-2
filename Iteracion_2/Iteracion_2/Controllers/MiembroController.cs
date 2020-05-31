@@ -36,10 +36,19 @@ namespace Iteracion_2.Controllers
             MiembroModel.crearPerfil(nombreUsuario,info,merito);
         }
 
-        public List<List<string>> RetornarMiembros() {
+        public (List<List<string>>,string  )RetornarMiembros( string nombreUsuario) {
             MiembroModel = new MiembroModel();
+  
+            return MiembroModel.RetornarMiembros(nombreUsuario);
+        }
 
-            return MiembroModel.RetornarMiembros();
+
+
+        public bool IngresarCuenta(string NombreUsuario)
+        {
+            bool valor = false;
+            MiembroModel = new MiembroModel();
+            return MiembroModel.IngresarCuenta(NombreUsuario);
         }
 
     }
