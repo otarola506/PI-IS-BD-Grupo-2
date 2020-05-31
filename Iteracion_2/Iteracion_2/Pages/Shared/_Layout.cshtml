@@ -47,8 +47,25 @@
                     </div>
                 </div>
 
+                @{
+                    var sessionName = new Byte[20];
+                    bool nameOK = Context.Session.TryGetValue("UsuarioActual", out sessionName);
+                    string result = "";
+                    if (nameOK)
+                    {
+                        result = System.Text.Encoding.UTF8.GetString(sessionName);
+                    }
+                }
+
                 <div class="dropdown topnav navbar-right">
-                    <div class="navbar-nav"> Usuario </div>
+                    @if (result != "")
+                    {
+                        <div class="navbar-nav"> @result </div>
+                    }
+                    else
+                    {
+                        <div class="navbar-nav">Usuario</div>
+                    }
                     <div class="dropdown-content">
                         <ul class="nav">
                             <li><a asp-page="/Perfil/Perfil">Perfil</a></li>
@@ -58,12 +75,21 @@
                     </div>
                 </div>
 
+
                 <div class="dropdown topnav navbar-right">
-                    <div class="navbar-nav"> Cuentas  </div>
+                    <div class="navbar-nav">Cuenta</div>
                     <div class="dropdown-content">
                         <ul class="nav">
-                            <li><a asp-page="/Registrar/Registrar">Registrarse</a></li>
-                            <li><a asp-page="/Registrar/Ingresar">Ingresar</a></li>
+                            @if (result != "")
+                            {
+                                <li><a asp-page="/Registrar/Desconectarse">Desconectarse</a></li>
+                            }
+                            else
+                            {
+                                <li><a asp-page="/Registrar/Registrar">Registrarse</a></li>
+                                <li><a asp-page="/Registrar/Ingresar">Ingresar</a></li>
+                            }
+
                         </ul>
                     </div>
                 </div>

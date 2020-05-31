@@ -42,6 +42,7 @@ namespace Iteracion_2.Pages.Registrar
             {
                 HttpContext.Session.SetString("UsuarioActual", nombreUsuario);
 
+                ViewData["usuarioActual"] = nombreUsuario;
                 return RedirectToPage("/Perfil/Perfil");
             }
 

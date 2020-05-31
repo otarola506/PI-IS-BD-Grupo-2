@@ -24,7 +24,6 @@ namespace Iteracion_2.Pages.Perfil
             UsuarioActual = HttpContext.Session.GetString(SessionKeyUsuario);
             if (UsuarioActual != null) {
                 perfilController = new PerfilController();
-
                 InformacionPersonal = perfilController.RetornarDatosPerfil(UsuarioActual);
 
                 TempData.TryGetValue("resultado", out object temp);
