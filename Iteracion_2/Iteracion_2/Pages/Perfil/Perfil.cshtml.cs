@@ -31,7 +31,7 @@ namespace Iteracion_2.Pages
 
                 return Page();
             }
-            return RedirectToPage("/Registrar/Registrar");
+            return RedirectToPage("/Cuenta/Registrar");
         }
 
         public IActionResult OnPostSend()

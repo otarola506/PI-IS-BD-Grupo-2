@@ -35,7 +35,7 @@ namespace Iteracion_2.Pages.Perfil
 
                 return Page();
             }
-            return RedirectToPage("/Registrar/Registrar");
+            return RedirectToPage("/Cuenta/Registrar");
 
         }
 
