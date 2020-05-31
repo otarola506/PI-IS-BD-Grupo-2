@@ -1,4 +1,8 @@
-﻿#primera-fila{
+﻿.navbar {
+    border-radius: 0;
+}
+
+#primera-fila{
     margin-bottom: 2vmax;
 }
 

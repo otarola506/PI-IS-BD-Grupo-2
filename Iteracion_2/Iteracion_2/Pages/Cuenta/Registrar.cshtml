@@ -4,7 +4,11 @@
     ViewData["Title"] = "Registrar";
 }
 
-<h2>Registrarse</h2>
+<head>
+    <link rel="stylesheet" href="~/css/border-radius.css" />
+</head>
+
+<h2><strong>Registrarse</strong></h2>
 <label for="inputName"> @ViewData["valid"] </label>
 
 <form method="post">
@@ -21,9 +25,7 @@
     <div class="form-row">
         <div class="form-group col-md-6">
             <button type="submit" class="btn btn-primary">Registrarse</button>
-            <button type="reset" class="btn btn-primary">Limpiar</button>
+            <button asp-page-handler="Ingresar" class="btn btn-primary">Ingresar a cuenta</button>
         </div>
     </div>
-    
 </form>
-    

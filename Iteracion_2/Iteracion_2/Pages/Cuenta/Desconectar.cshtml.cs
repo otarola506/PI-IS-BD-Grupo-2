@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Iteracion_2.Pages.Cuenta
 {
-    public class DesconectarseModel : PageModel
+    public class DesconectarModel : PageModel
     {
         public void OnGet()
         {
