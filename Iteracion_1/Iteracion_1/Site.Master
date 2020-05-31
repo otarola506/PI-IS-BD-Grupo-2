@@ -13,10 +13,11 @@
         <%: Scripts.Render("~/bundles/modernizr") %>
     </asp:PlaceHolder>
 
+    <link href="Content/custom.css" rel="stylesheet" type="text/css" />
     <webopt:bundlereference runat="server" path="~/Content/css" />
 
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-    <link href="Content/custom.css" rel="stylesheet" type="text/css" />
+    
 
 </head>
 <body id="masterBody">
@@ -53,28 +54,60 @@
                     </button>
                 </div>
                 <div class="navbar-collapse collapse">
-                    
                     <ul class="nav navbar-nav">
                         <li><a runat="server" href="~/Default">Inicio</a></li>
-                        <li><a runat="server" href="~/MisArticulos">Mis Articulos</a></li>
-                        <li><a runat="server" href="~/Articulos">Todos Articulos</a></li>
-                        <li><a runat="server" href="~/SeccionPregFrecMP">Preguntas Frecuentes</a></li>
-                        <li><a runat="server" href="~/AgregarPregFrecMP">Agregar Pregunta Frecuente</a></li>
-                        <li id="busqueda">
-                            <asp:DropDownList AppendDataBoundItems="true" ID="DropDownList" runat="server" DataSourceID="SqlDataSource1" DataTextField="nombre" DataValueField="categoriaIdPK" style="top: 1vmax; left:1vmax; right:1vmax; position: relative;">
-                            <asp:ListItem Text="Categoria"  Value="null" Selected="true"></asp:ListItem>
-                            </asp:DropDownList>
-                            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:BD_Grupo2ConnectionString %>" SelectCommand="SELECT * FROM [Categoria] ORDER BY [nombre]"></asp:SqlDataSource>
-                        </li>
-                        <li id="busquedaTexto">
-                            <asp:TextBox ID="TextBox1" runat="server" style="top: 1vmax; left:1vmax; right:1vmax; position: relative;"></asp:TextBox>
-                        </li>
-                        <li>
-                            <asp:Button ID="Btn_ConsultaXTopico" runat="server" OnClick="Button1_Click" style="top: 1vmax; left:1vmax; right:1vmax; position: relative;" Text="Consultar" />
-                        </li>
+                        <li><a runat="server" href="~/Articulos">Articulos</a></li>
+                        <li><a runat="server" href="https://localhost:44338/Miembros/Miembros">Miembros</a></li>
+                        <li><a runat="server" href="https://localhost:44338/Correo/Correo">Correo</a></li>
                     </ul>
+                    
+                    <div class="dropdown topnav navbar-left">
+                        <div class="navbar-nav"> Preguntas </div>
+                        <div class="dropdown-content">
+                            <ul class="nav">
+                                <li><a runat="server" href="~/SeccionPregFrecMP">Mostrar Preguntas</a></li>
+                                <li><a runat="server" href="~/AgregarPregFrecMP">Agregar Pregunta</a></li>
+                            </ul>      
+                        </div>
+                    </div>
+
+                    <div class="topnav" id="busqueda">
+                        <ul class="nav navbar-nav">
+                            <li>
+                                <asp:DropDownList AppendDataBoundItems="true" ID="DropDownList" runat="server" DataSourceID="SqlDataSource1" DataTextField="nombre" DataValueField="categoriaIdPK" style="top: 1vmax; left:1vmax; right:1vmax; position: relative;">
+                                <asp:ListItem Text="Categoria"  Value="null" Selected="true"></asp:ListItem>
+                                </asp:DropDownList>
+                                <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:BD_Grupo2ConnectionString %>" SelectCommand="SELECT * FROM [Categoria] ORDER BY [nombre]"></asp:SqlDataSource>
+                            </li>
+                            <li id="busquedaTexto">
+                                <asp:TextBox ID="TextBox1" runat="server" style="top: 1vmax; left:1vmax; right:1vmax; position: relative;"></asp:TextBox>
+                            </li>
+                            <li>
+                                <asp:Button ID="Btn_ConsultaXTopico" runat="server" OnClick="Button1_Click" style="top: 1vmax; left:1vmax; right:1vmax; position: relative;" Text="Consultar" />
+                            </li>
+                        </ul>      
+                    </div>
+
+                     <div class="dropdown topnav navbar-right">
+                        <div class="navbar-nav"> Usuario </div>
+                        <div class="dropdown-content">
+                            <ul class="nav">
+                                <li><a href="https://localhost:44338/Perfil/Perfil">Perfil</a></li>
+                                <li><a href="https://localhost:44338/Perfil/EditarPerfil">Editar Perfil</a></li>
+                                <li><a runat="server" href="~/MisArticulos">Mis Articulos</a></li>
+                            </ul>      
+                        </div>
+                    </div>
+
+                    <div class="navbar-collapse collapse navbar-right">
+                        <ul class="nav navbar-nav">
+                            <li><a href="Registrar/Registrar">Crear Perfil</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
+
+            
         </div>
         <div class="container body-content">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
@@ -86,5 +119,18 @@
         </div>
 
     </form>
+
+    <script>
+        /* Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon */
+        function myFunction() {
+            var x = document.getElementById("myTopnav");
+            if (x.className === "topnav") {
+                x.className += " responsive";
+            } else {
+                x.className = "topnav";
+            }
+        }
+    </script>
+
 </body>
 </html>
