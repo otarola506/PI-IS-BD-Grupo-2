@@ -31,7 +31,7 @@ namespace Iteracion_2.Pages.Correo
             {
                 await controlador.enviarSolicitud(contenido, UsuarioActual);
                 ViewData["username"] = "Su correo ha sido enviado satisfactoriamente";
-                return RedirectToPage("/Correo/SolicitudPromocion", new { Username = UsuarioActual });
+                return Page();
             }
             else
             {
