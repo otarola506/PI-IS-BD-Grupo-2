@@ -33,7 +33,7 @@ namespace Iteracion_1
             var UsuarioActual = Request["value1"];
             if (UsuarioActual == null || UsuarioActual == "")
             {
-                Response.Redirect("https://localhost:44338/Registrar/Ingresar");
+                Response.Redirect("https://localhost:44338/Cuenta/Ingresar");
             }
             connection(); 
             con.Open();
@@ -41,10 +41,11 @@ namespace Iteracion_1
             SqlDataAdapter ad = new SqlDataAdapter();
             SqlCommand cmd = new SqlCommand("Recuperar_Articulos_Autor",con);
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.Add("@userName", SqlDbType.VarChar).Value = UsuarioActual.ToString(); // En este caso está quemado el nombre de usuario
+            cmd.Parameters.Add("@userName", SqlDbType.VarChar).Value = UsuarioActual; // En este caso está quemado el nombre de usuario
             SqlDataReader reader = cmd.ExecuteReader();
-            reader.Read();
-            if (reader.Read())
+            
+
+            if ( reader.Read())
             {
                 string nombre = reader[4].ToString();
                 lblArticulo.Text = "Bienvenido a sus artículos, " + nombre;
@@ -72,8 +73,8 @@ namespace Iteracion_1
 
                 }
             }
-            
 
+            
 
         }
 
