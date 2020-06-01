@@ -123,7 +123,7 @@ namespace Iteracion_1
             cmd.Parameters.Add("@tituloNuevo", SqlDbType.VarChar).Value = txtTitulo.Text;
             cmd.Parameters.Add("@resumenNuevo", SqlDbType.VarBinary).Value = bytesTextResumen;
             cmd.Parameters.Add("@contenidoNuevo", SqlDbType.VarBinary).Value = bytesText;
-            cmd.Parameters.Add("@estadoNuevo", SqlDbType.VarChar).Value = "revision";
+            cmd.Parameters.Add("@estadoNuevo", SqlDbType.VarChar).Value = "pendiente";
             con.Open();
             cmd.ExecuteNonQuery();
             con.Close();
@@ -167,7 +167,7 @@ namespace Iteracion_1
             cmd.Parameters.Add("@tituloNuevo", SqlDbType.VarChar).Value = txtTitulo.Text;
             cmd.Parameters.Add("@resumenNuevo", SqlDbType.VarBinary).Value = bytesTextResumen;
             cmd.Parameters.Add("@contenidoNuevo", SqlDbType.VarBinary).Value = bytesText;
-            cmd.Parameters.Add("@estadoNuevo", SqlDbType.VarChar).Value = "revision";
+            cmd.Parameters.Add("@estadoNuevo", SqlDbType.VarChar).Value = "pendiente";
             con.Open();
             cmd.ExecuteNonQuery();
             con.Close();

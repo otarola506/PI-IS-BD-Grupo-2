@@ -66,7 +66,7 @@ namespace Iteracion_1
             cmd.Parameters.Add("tituloNuevo", SqlDbType.VarChar).Value = txtTitulo.Text;
             cmd.Parameters.Add("@resumenNuevo", SqlDbType.VarBinary).Value = bytesTextResumen;
             cmd.Parameters.Add("@contenidoNuevo", SqlDbType.VarBinary).Value = bytesContenido;
-            cmd.Parameters.Add("@estadoNuevo", SqlDbType.VarChar).Value = "revision";
+            cmd.Parameters.Add("@estadoNuevo", SqlDbType.VarChar).Value = "pendiente";
             cmd.Parameters.Add("@nombreArch", SqlDbType.VarChar).Value = subirArchivo.FileName;
             con.Open();
             cmd.ExecuteNonQuery();
@@ -81,7 +81,7 @@ namespace Iteracion_1
             cmd.Parameters.Add("@ID", SqlDbType.Int).Value = artId;
             cmd.Parameters.Add("tituloNuevo", SqlDbType.VarChar).Value = txtTitulo.Text;
             cmd.Parameters.Add("@resumenNuevo", SqlDbType.VarBinary).Value = bytesTextResumen;
-            cmd.Parameters.Add("@estadoNuevo", SqlDbType.VarChar).Value = "revision";
+            cmd.Parameters.Add("@estadoNuevo", SqlDbType.VarChar).Value = "pendiente";
             con.Open();
             cmd.ExecuteNonQuery();
             con.Close();

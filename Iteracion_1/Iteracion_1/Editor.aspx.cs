@@ -454,7 +454,7 @@ namespace Iteracion_1
 
         protected void btnRevision_Click(object sender, EventArgs e)
         {
-            procesoGuardado("revision");
+            procesoGuardado("pendiente");
         }
     }
 }

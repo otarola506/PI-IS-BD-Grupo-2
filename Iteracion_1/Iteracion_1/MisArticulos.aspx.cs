@@ -114,7 +114,7 @@ namespace Iteracion_1
                 estado = reader[6].ToString();
 
             }
-            if (string.Compare(estado,"revision") == 0)
+            if (string.Compare(estado,"pendiente") == 0)
             {
                 Response.Write("<script>alert('Este artículo se encuentra en revisión por lo tanto no puede ser editado.')</script>");
             }
