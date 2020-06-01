@@ -31,10 +31,7 @@ namespace Iteracion_2.Pages.Miembros
         {
             MiembroController = new MiembroController();
             string UsuarioActual = HttpContext.Session.GetString(SessionKeyUsuario);
-            //if (UsuarioActual == null)
-            //{
-            //    UsuarioActual = "";
-            //}
+
             var valoresMiembro = MiembroController.RetornarMiembros(UsuarioActual);
             MiembrosComunidad = valoresMiembro.Item1;
             PesoMiembroActual = valoresMiembro.Item2;
