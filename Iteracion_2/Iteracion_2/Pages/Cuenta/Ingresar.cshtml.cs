@@ -28,11 +28,6 @@ namespace Iteracion_2.Pages.Cuenta
                 ViewData["username"] = "No digito un nombre usuario";
                 return Page();
             }
-            //if (contrasenia.Equals(""))
-            //{
-            //    ViewData["username"] = "No digito su contraseña";
-            //    return Page();
-            //}
 
             if (!miembroController.IngresarCuenta(nombreUsuario))
             {

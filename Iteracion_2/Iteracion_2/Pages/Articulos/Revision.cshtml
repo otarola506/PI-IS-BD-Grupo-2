@@ -1,0 +1,49 @@
+﻿@page
+@model Iteracion_2.Pages.Articulos.RevisionModel
+@{
+    ViewData["Title"] = "Revision";
+}
+
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Shieldship | Miembros</title>
+
+        <link rel="stylesheet" href="~/css/lista-miembros.css">
+        <script src="https://kit.fontawesome.com/8dbd1c7c50.js" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <h2>Articulos Pendientes de revisión</h2>
+
+        <div class="row">
+            <ul class="user-profiles-list-basic">
+                @for (int index = 0; index < Model.ArticulosPendientes.Count; index++)
+                {
+                <li>
+                    <p>
+                        <a>@Model.ArticulosPendientes[index][1]</a>
+                        <span>Autores:</span>
+                    </p>
+                    <ul id="segunda-lista">
+                        @{
+                            string[] autores = Model.ArticulosPendientes[index][2].Split(',');
+                            string[] usuarios = Model.ArticulosPendientes[index][3].Split(',');
+                            for (int indexJ = 0; indexJ < autores.Length; indexJ++)
+                            {
+                                <li>
+                                    <a href="~/Perfil/Perfil?UsuarioURL=@usuarios[indexJ]" title="Ir a perfil">@autores[indexJ]</a>
+                                </li>
+                            }
+                        }
+                    </ul>
+                    <button type="submit" title="" disabled>Ver artículo</button>
+                    <button type="submit" title="" disabled>Quiero revisar</button>
+                </li>
+                }
+            </ul>
+        </div>
+    </body>
+</html>
+
+
+
