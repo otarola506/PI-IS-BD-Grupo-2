@@ -61,18 +61,14 @@
                     @if (result != "")
                     {
                         <div class="navbar-nav"> @result </div>
+                        <div class="dropdown-content">
+                            <ul class="nav">
+                                <li><a asp-page="/Perfil/Perfil">Perfil</a></li>
+                                <li><a asp-page="/Perfil/EditarPerfil">Editar perfil</a></li>
+                                <li><a asp-page="/Articulos/MisArticulos">Mis articulos</a></li>
+                            </ul>
+                        </div>
                     }
-                    else
-                    {
-                        <div class="navbar-nav">Usuario</div>
-                    }
-                    <div class="dropdown-content">
-                        <ul class="nav">
-                            <li><a asp-page="/Perfil/Perfil">Perfil</a></li>
-                            <li><a asp-page="/Perfil/EditarPerfil">Editar perfil</a></li>
-                            <li><a asp-page="/Articulos/MisArticulos">Mis articulos</a></li>
-                        </ul>
-                    </div>
                 </div>
 
 

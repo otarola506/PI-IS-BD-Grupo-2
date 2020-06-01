@@ -12,13 +12,16 @@ namespace Iteracion_2.Pages.Articulos
     public class MisArticulosModel : PageModel
     {
         private const string Location = "http://localhost:51359/MisArticulos?value1=";
-        const string SessionKeyUsuario = "";
+        const string SessionKeyUsuario = "UsuarioActual";
 
         public void OnGet()
         {
             string UsuarioActual = HttpContext.Session.GetString(SessionKeyUsuario);
-            Response.Redirect(Location+UsuarioActual );
-            
+            if (UsuarioActual != null) {
+                Response.Redirect(Location + UsuarioActual);
+            }
+            RedirectToPage("/Cuenta/Registrar");
+
         }
     }
 }
