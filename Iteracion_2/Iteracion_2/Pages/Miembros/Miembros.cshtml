@@ -15,12 +15,27 @@
 <body>
     @if (Model.PesoMiembroActual == "5")
     {
-        <form asp-page-handler="modificar" method="post">
-            <input type="text" asp-for="@Model.NombreUsuario">
-            <button class="btn btn-default">Degradar</button>
-            <h3 class="clearfix">@Model.Mensaje</h3>
-        </form>
-    }
+    <form asp-page-handler="modificar" method="post">
+        <input type="text" asp-for="@Model.NombreUsuario">
+        <button class="btn btn-default">Degradar</button>
+        @if (Model.Mensaje != null)
+        {
+            @if (Model.Mensaje.Contains("exito"))
+            {
+                
+                <p class="clearfix" style="color:green ">@Model.Mensaje</p>
+            }
+            else
+            {
+                <p class="clearfix" style="color:red ">@Model.Mensaje</p>
+            }
+        }
+
+
+
+
+    </form>
+     }
 
 
     <div class="titulo">
