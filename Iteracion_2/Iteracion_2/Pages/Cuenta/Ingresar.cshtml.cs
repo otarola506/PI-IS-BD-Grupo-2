@@ -13,33 +13,40 @@ namespace Iteracion_2.Pages.Cuenta
     public class IngresarModel : PageModel
     {
 
-        private MiembroController miembroController { set; get; }
+        private MiembroController MiembroController { set; get; }
 
-        public string Message { get; set; }
+        public void OnGet(string Mensaje)
+        {
+            if (Mensaje != null) {
+                ViewData["alerta"] = Mensaje;
+            }
+        }
 
         public IActionResult OnPost()
         {
-            miembroController = new MiembroController();
+            MiembroController = new MiembroController();
             string nombreUsuario = Request.Form["nombreUsuario"];
             string contrasenia = Request.Form["contrasenia"];
 
             if (nombreUsuario.Equals(""))
             {
-                ViewData["username"] = "No digito un nombre usuario";
+                ViewData["alerta"] = "No digito un nombre usuario";
                 return Page();
             }
 
-            if (!miembroController.IngresarCuenta(nombreUsuario))
+            if (!MiembroController.IngresarCuenta(nombreUsuario))
             {
-                ViewData["username"] = "Usuario incorrecto.";
+                ViewData["alerta"] = "Usuario incorrecto.";
                 return Page();
             }else
             {
                 HttpContext.Session.SetString("UsuarioActual", nombreUsuario);
 
+                string pesoMiembro = MiembroController.RetornarPesoMiembro(nombreUsuario);
+                HttpContext.Session.SetString("PesoActual", pesoMiembro);
+
                 return RedirectToPage("/Perfil/Perfil");
             }
-
         }
 
         public void OnPostCrear()

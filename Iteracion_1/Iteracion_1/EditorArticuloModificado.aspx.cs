@@ -8,6 +8,8 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Text;
 using System.Configuration;
+using System.Net.Mail;
+using System.Net.Mime;
 
 namespace Iteracion_1
 {
@@ -389,13 +391,20 @@ namespace Iteracion_1
 
 
 
-                    txtTitulo.Text = String.Empty;
+                    //txtTitulo.Text = String.Empty;
                     txtResumen.Text = String.Empty;
                     txtArticulo.Text = String.Empty;
 
                     lblMensaje.Text = "Articulo subido con exito";
                     lblMensaje.ForeColor = System.Drawing.Color.Green;
-                    Response.Redirect("MisArticulos.aspx");
+                    string Location = "http://localhost:51359/MisArticulos?value1=";
+                    var UsuarioActual = Request["value1"];
+                    if (enviarRevision)
+                    {
+                        NotificarMiembro(UsuarioActual, txtTitulo.Text);
+                    }
+
+                    Response.Redirect(Location + UsuarioActual);
 
                 }
 
@@ -424,6 +433,53 @@ namespace Iteracion_1
         {
             procesoGuardar(true);
         }
-        
+
+
+
+        public void NotificarMiembro(string UsuarioActual, string titulo)
+        {
+            //Primero ocupo encontrar el correo del miembro
+            connection();
+            string correoDestinatario = "";
+            con.Open();
+            SqlCommand cmd = new SqlCommand("ObtenerCorreo", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@NombreUsuario", SqlDbType.VarChar).Value = UsuarioActual;
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            if (reader.Read())
+            {
+                correoDestinatario = reader[0].ToString();
+            }
+
+            reader.Close();
+            con.Close();
+
+
+
+            MailMessage mm = new MailMessage();
+            mm.To.Add(correoDestinatario);
+            mm.Subject = "Notificacion de articulo ";
+            AlternateView imgview = AlternateView.CreateAlternateViewFromString("Se ha empezado el proceso de revision en el articulo con el titulo:" + titulo
+                + "<br/><br/><br/><br/><img src=cid:imgpath height=200 width=400>", null, "text/html");
+            var pathName = "~/Imagenes/shieldship.jpg";
+            var fileName = Server.MapPath(pathName);
+            LinkedResource lr = new LinkedResource(fileName, MediaTypeNames.Image.Jpeg);
+            lr.ContentId = "imgpath";
+            imgview.LinkedResources.Add(lr);
+            mm.AlternateViews.Add(imgview);
+            mm.Body = lr.ContentId;
+            mm.IsBodyHtml = false;
+            mm.From = new MailAddress("comunidadshieldship@gmail.com");
+            SmtpClient smtp = new SmtpClient("smtp.gmail.com");
+            smtp.Port = 587;
+            smtp.UseDefaultCredentials = true;
+            smtp.EnableSsl = true;
+            smtp.Credentials = new System.Net.NetworkCredential("comunidadshieldship@gmail.com", "BASESdatos176");
+            smtp.Send(mm);
+
+        }
+
+
     }
 }

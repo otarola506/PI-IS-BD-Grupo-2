@@ -133,6 +133,7 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Imagenes\Button-Add-icon.png" />
+    <Content Include="Imagenes\shieldship.jpg" />
     <Content Include="Imagenes\Pencil-icon.png" />
     <Content Include="Imagenes\trash-icon.png" />
     <Content Include="MisArticulos.aspx" />

@@ -57,7 +57,7 @@ namespace Iteracion_1
 
         protected void VolverButton_OnClick(object sender, EventArgs e)
         {
-            Response.Redirect("PreguntasRecibidasMP.aspx");
+            Response.Redirect("SeccionPregFrecMP.aspx");
         }
     }
 }

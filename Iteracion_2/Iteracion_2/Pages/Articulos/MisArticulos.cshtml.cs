@@ -20,7 +20,7 @@ namespace Iteracion_2.Pages.Articulos
             if (UsuarioActual != null) {
                 Response.Redirect(Location + UsuarioActual);
             }
-            RedirectToPage("/Cuenta/Registrar");
+            //RedirectToPage("/Cuenta/Registrar");
 
         }
     }
