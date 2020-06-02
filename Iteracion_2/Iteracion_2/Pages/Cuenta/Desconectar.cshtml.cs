@@ -12,6 +12,7 @@ namespace Iteracion_2.Pages.Cuenta
         public void OnGet()
         {
             HttpContext.Session.Remove("UsuarioActual");
+            HttpContext.Session.Remove("PesoMiembro");
             Response.Redirect("/Index");
         }
     }

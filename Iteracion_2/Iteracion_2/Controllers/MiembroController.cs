@@ -42,12 +42,15 @@ namespace Iteracion_2.Controllers
             return MiembroModel.RetornarMiembros(nombreUsuario);
         }
 
-
-
         public bool IngresarCuenta(string NombreUsuario)
         {
             MiembroModel = new MiembroModel();
             return MiembroModel.IngresarCuenta(NombreUsuario);
+        }
+
+        public string RetornarPesoMiembro(string NombreUsuario) {
+            MiembroModel = new MiembroModel();
+            return MiembroModel.RetornarPesoMiembro(NombreUsuario);
         }
 
     }

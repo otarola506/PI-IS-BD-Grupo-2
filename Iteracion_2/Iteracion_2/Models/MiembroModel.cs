@@ -14,6 +14,7 @@ namespace Iteracion_2.Models
         {
             string conString = @"Server=172.16.202.75;Database=BD_Grupo2;persist security info=True;MultipleActiveResultSets=True;User ID=Grupo2;Password=grupo2.";
             con = new SqlConnection(conString);
+            con.Open();
         }
 
         public void crearCuenta(string nombreUsuario, string nombre, int peso) {
@@ -47,7 +48,6 @@ namespace Iteracion_2.Models
         public Boolean verificarNombreUsuario(string nombreUsuario)
         {
             Connection();
-            con.Open();
             string verificacion = "";
             bool Existe = false;
             SqlCommand cmd = new SqlCommand("VerificarNombreUsuario", con);
@@ -63,6 +63,7 @@ namespace Iteracion_2.Models
                 Existe = true;
             }
 
+            con.Close();
             return Existe;
         }
 
@@ -70,7 +71,6 @@ namespace Iteracion_2.Models
             List<List<string>> miembrosComunidad = new List<List<string>>();
 
             Connection();
-            con.Open();
 
             string PesoUsuarioActual = "";
             SqlCommand cmd = new SqlCommand("RecuperarTodosUsuarios", con);
@@ -100,11 +100,8 @@ namespace Iteracion_2.Models
 
         public bool IngresarCuenta(string NombreUsuario)
         {
-
-
             // En este momento solo nos importaba validar el nombre de usuario, en un futuro deberemos de validar la contraseña
             Connection();
-            con.Open();
             string verificacion = "";
             bool Existe = false;
             SqlCommand cmd = new SqlCommand("VerificarNombreUsuario", con);
@@ -120,10 +117,28 @@ namespace Iteracion_2.Models
             {
                 Existe = true;
             }
-
+            con.Close();
             return Existe;
         }
 
+        public string RetornarPesoMiembro(string NombreUsuario) {
+            Connection();
+            SqlCommand cmd = new SqlCommand("RecuperarPesoMiembro", con)
+            {
+                CommandType = CommandType.StoredProcedure
+            };
+            cmd.Parameters.Add("@NombreUsuario", SqlDbType.VarChar).Value = NombreUsuario;
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            string peso = "";
+            while (reader.Read())
+            {
+                peso = reader[0].ToString();
+            }
+
+            con.Close();
+            return peso;
+        }
 
     }
 }
