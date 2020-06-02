@@ -39,6 +39,8 @@ namespace Iteracion_2.Pages
             else
             {
                 HttpContext.Session.SetString("UsuarioActual", nuevo_nombreUsuario);
+                HttpContext.Session.SetString("PesoActual", "0");
+
                 miembroController.crearPerfil(nuevo_nombreUsuario, "", 0);
 
                 return RedirectToPage("/Perfil/EditarPerfil");
