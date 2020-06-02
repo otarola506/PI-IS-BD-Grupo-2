@@ -25,16 +25,16 @@ namespace Iteracion_1
         {
             if (!IsPostBack)
             {
-                string pregunta = Convert.ToString(Session["Pregunta_RespuestasPreg"]);
+                string pregunta = Convert.ToString(Session["Pregunta_SeccionPregFrec"]);
                 TxtBoxP.Text = pregunta;
-                string respuesta = Convert.ToString(Session["Respuesta_RespuestasPreg"]);
+                string respuesta = Convert.ToString(Session["Respuesta_SeccionPregFrec"]);
                 TxtBoxR.Text = respuesta;
             }
         }
 
         protected void GCButton_OnClick(object sender, EventArgs e)
         {
-            int pregID = Convert.ToInt32(Session["PregID_RespuestasPreg"]);
+            int pregID = Convert.ToInt32(Session["PregID_SeccionPregFrec"]);
             connection();
             if (con.State == ConnectionState.Closed)
             {
@@ -53,7 +53,7 @@ namespace Iteracion_1
 
         protected void VolverButton_OnClick(object sender, EventArgs e)
         {
-            Response.Redirect("RespuestasPregMP.aspx");
+            Response.Redirect("SeccionPregFrecMP.aspx");
         }
     }
 }
