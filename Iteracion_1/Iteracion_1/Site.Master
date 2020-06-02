@@ -52,7 +52,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a href="/Default" class="navbar-brand">𝕾𝖍𝖎𝖊𝖑𝖉𝖘𝖍𝖎𝖕</a>
+                    <a href="https://localhost:44338/" class="navbar-brand">𝕾𝖍𝖎𝖊𝖑𝖉𝖘𝖍𝖎𝖕</a>
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">

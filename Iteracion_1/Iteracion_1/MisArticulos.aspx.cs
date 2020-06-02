@@ -13,6 +13,7 @@ namespace Iteracion_1
 {
     public partial class MisArticulos : System.Web.UI.Page
     {
+        
         private SqlConnection con;
         Encoding unicode = Encoding.Unicode;
         private void connection()
@@ -125,12 +126,29 @@ namespace Iteracion_1
                 {
                     Session["articuloID"] = artId;
                     Session["estadoArt"] = estado;
-                    Response.Redirect("EditorArticuloModificado.aspx");
+                    //Response.Redirect("EditorArticuloModificado.aspx");
+                    string Location = "http://localhost:51359/EditorArticuloModificado?value1=";
+                    const string SessionKeyUsuario = "UsuarioActual";
+                    var UsuarioActual = Request["value1"];
+                    //string UsuarioActual = HttpContext.Session.GetString(SessionKeyUsuario);
+                    if (UsuarioActual != null)
+                    {
+                        Response.Redirect(Location + UsuarioActual);
+                    }
+
                 }
                 else
                 {
                     Session["articuloID"] = artId;
-                    Response.Redirect("EditorResumen.aspx");
+                    //Response.Redirect("EditorResumen.aspx");
+                    string Location = "http://localhost:51359/EditorResumen?value1=";
+                    const string SessionKeyUsuario = "UsuarioActual";
+                    var UsuarioActual = Request["value1"];
+                    //string UsuarioActual = HttpContext.Session.GetString(SessionKeyUsuario);
+                    if (UsuarioActual != null)
+                    {
+                        Response.Redirect(Location + UsuarioActual);
+                    }
                 }
             }
 
@@ -195,7 +213,16 @@ namespace Iteracion_1
 
         protected void btnAgregarArticulo_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Editor.aspx");
+            string Location = "http://localhost:51359/Editor?value1=";
+            const string SessionKeyUsuario = "UsuarioActual";
+            var UsuarioActual = Request["value1"];
+            //string UsuarioActual = HttpContext.Session.GetString(SessionKeyUsuario);
+            if (UsuarioActual != null)
+            {
+                Response.Redirect(Location + UsuarioActual);
+            }
+            //Response.Redirect("Editor.aspx");
+
         }
 
         
