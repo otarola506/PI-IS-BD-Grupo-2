@@ -19,7 +19,6 @@ namespace Iteracion_2.Models
 
         public void crearCuenta(string nombreUsuario, string nombre, int peso) {
             Connection();
-            con.Open();
             SqlCommand cmd = new SqlCommand("CrearCuenta", con);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.Add("@nombreUsuario", SqlDbType.VarChar).Value = nombreUsuario;
@@ -32,7 +31,6 @@ namespace Iteracion_2.Models
         public void crearPerfil(string nombreUsuario, string info,float merito)
         {
             Connection();
-            con.Open();
             SqlCommand cmd = new SqlCommand("CrearPerfil", con);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.Add("@nombreUsuarioFK", SqlDbType.VarChar).Value = nombreUsuario;
