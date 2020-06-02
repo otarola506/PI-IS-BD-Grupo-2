@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Iteracion_2.Models
@@ -18,7 +19,7 @@ namespace Iteracion_2.Models
 
         public List<List<string>> RetornarPendientes() {
             List<List<string>> ArticulosPendientes = new List<List<string>>();
-            string queryString = "SELECT A.artIdPK,A.titulo,M.nombre,M.nombreUsuarioPK FROM Articulo A JOIN Miembro_Articulo MA ON A.artIdPK = MA.artIdFK JOIN Miembro M  ON M.nombreUsuarioPK  = MA.nombreUsuarioFK WHERE A.estado = 'pendiente' ORDER BY A.artIdPK";
+            string queryString = "SELECT A.artIdPK,A.titulo,A.resumen,M.nombre,M.nombreUsuarioPK FROM Articulo A JOIN Miembro_Articulo MA ON A.artIdPK = MA.artIdFK JOIN Miembro M  ON M.nombreUsuarioPK  = MA.nombreUsuarioFK WHERE A.estado = 'pendiente' ORDER BY A.artIdPK";
 
             Connection();
             con.Open();
@@ -31,9 +32,6 @@ namespace Iteracion_2.Models
             DataTable dTable = new DataTable();
             SqlDataAdapter adapter = new SqlDataAdapter(command);
             adapter.Fill(dTable);
-
-            DataView view = new DataView(dTable);
-            DataTable articulosIdDistintos = view.ToTable(true, "artIdPK");
             
             for (int index=0; index<dTable.Rows.Count; index++) {
                 string idAnterior = "";
@@ -44,23 +42,23 @@ namespace Iteracion_2.Models
                 }
 
                 if (idActual != idAnterior) {
-                    DataRow[] autoresArticulo = dTable.Select("artIdPK = " + idActual); // devuelve los autores con ese artIdPK
-                    DataRow[] usuarioAutores = dTable.Select("artIdPK = " + idActual); // devuelve los nombres de usuario con ese artIdPK
-
+                    DataRow[] datosDeArticulo = dTable.Select("artIdPK = " + idActual); // devuelve los autores con ese artIdPK
+                    
                     string autores = "";
                     string usuarios = "";
-                    for (int indexJ=0; indexJ< autoresArticulo.Length; indexJ++) {
-                        autores += autoresArticulo[indexJ][2];
-                        usuarios += autoresArticulo[indexJ][3];
-                        if (indexJ < autoresArticulo.Length-1) {
+                    
+                    for (int indexJ=0; indexJ< datosDeArticulo.Length; indexJ++) {
+                        autores += datosDeArticulo[indexJ][3];
+                        usuarios += datosDeArticulo[indexJ][4];
+                        if (indexJ < datosDeArticulo.Length-1) {
                             autores += ",";
                             usuarios += ",";
                         }
                     }
 
                     ArticulosPendientes.Add(new List<string> {
-                                    dTable.Rows[index][0].ToString(),
-                                    dTable.Rows[index][1].ToString(),
+                                    dTable.Rows[index][0].ToString(), // artIdPK
+                                    dTable.Rows[index][1].ToString(), // titulo
                                     autores,
                                     usuarios,
                             });

@@ -46,7 +46,6 @@ namespace Iteracion_2.Controllers
 
         public bool IngresarCuenta(string NombreUsuario)
         {
-            bool valor = false;
             MiembroModel = new MiembroModel();
             return MiembroModel.IngresarCuenta(NombreUsuario);
         }

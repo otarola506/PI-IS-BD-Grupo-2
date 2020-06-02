@@ -10,38 +10,43 @@
         <title>Shieldship | Miembros</title>
 
         <link rel="stylesheet" href="~/css/lista-miembros.css">
+        <link rel="stylesheet" href="~/css/article-list-basic.css">
         <script src="https://kit.fontawesome.com/8dbd1c7c50.js" crossorigin="anonymous"></script>
     </head>
     <body>
-        <h2>Articulos Pendientes de revisión</h2>
+        <h3>Articulos pendientes de revisión</h3>
 
-        <div class="row">
-            <ul class="user-profiles-list-basic">
-                @for (int index = 0; index < Model.ArticulosPendientes.Count; index++)
-                {
-                <li>
-                    <p>
-                        <a>@Model.ArticulosPendientes[index][1]</a>
-                        <span>Autores:</span>
-                    </p>
-                    <ul id="segunda-lista">
+        <ul class="article-list-basic">
+            @for (int index = 0; index < Model.ArticulosPendientes.Count; index++)
+            {
+            <li id="@index">
+                <a href="#@index">
+                    <img src="~/images/sahale-wa.jpg" alt="Sahale Wa" />
+                </a>
+                <div>
+                    <h2><a href="#@index">@Model.ArticulosPendientes[index][1]</a></h2>
+                    <p></p>
+                    <span>
+                        por
                         @{
                             string[] autores = Model.ArticulosPendientes[index][2].Split(',');
                             string[] usuarios = Model.ArticulosPendientes[index][3].Split(',');
                             for (int indexJ = 0; indexJ < autores.Length; indexJ++)
                             {
-                                <li>
-                                    <a href="~/Perfil/Perfil?UsuarioURL=@usuarios[indexJ]" title="Ir a perfil">@autores[indexJ]</a>
-                                </li>
+                                <a href="~/Perfil/Perfil?UsuarioURL=@usuarios[indexJ]">@autores[indexJ]</a>
                             }
                         }
-                    </ul>
-                    <button type="submit" title="" disabled>Ver artículo</button>
-                    <button type="submit" title="" disabled>Quiero revisar</button>
-                </li>
-                }
-            </ul>
-        </div>
+
+                    </span>
+                    <br />
+                    <br />
+                    <a href="#" class="read-more">Revisar</a>
+                    <a href="#" class="read-more">Ver más &rarr;</a>
+
+                </div>
+            </li>
+            }
+        </ul>
     </body>
 </html>
 
