@@ -480,6 +480,11 @@ namespace Iteracion_1
 
         }
 
+        protected void VolverButton_OnClick(object sender, EventArgs e)
+        {
+            var UsuarioActual = Request["value1"];
+            Response.Redirect("http://localhost:51359/MisArticulos?value1=" + UsuarioActual);
+        }
 
     }
 }

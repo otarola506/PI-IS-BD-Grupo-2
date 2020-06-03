@@ -63,7 +63,9 @@
     <p style="font-size: x-large">
         <asp:TextBox ID="txtAutores" runat="server"></asp:TextBox>
     </p>
-    <p>
+    <p style="height: 45px">
+        <asp:Button ID="VolverButton" runat="server" Height="41px" Text="Volver a Mis Artículos" OnClick="VolverButton_OnClick" Width="159px" />
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <asp:Button ID="btnProgreso" runat="server" Height="41px" OnClick="btnProgreso_Click" Text="Guardar artículo en progreso" Width="217px" />
         <asp:Button ID="btnRevision" runat="server" Height="41px" Text="Guardar y enviar a revisión" Width="201px" OnClick="btnRevision_Click" OnClientClick ="return confirm('¿Está seguro que desea guardar y enviar a revisión este artículo?')" />
     </p>

@@ -521,5 +521,11 @@ namespace Iteracion_1
             smtp.Send(mm);
             
         }
+
+        protected void VolverButton_OnClick(object sender, EventArgs e)
+        {
+            var UsuarioActual = Request["value1"];
+            Response.Redirect("http://localhost:51359/MisArticulos?value1=" + UsuarioActual);
+        }
     }
 }
