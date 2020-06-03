@@ -101,7 +101,7 @@
 
                     <div class="navbar-collapse collapse navbar-right">
                         <ul class="nav navbar-nav">
-                            <li><a href="Registrar/Registrar">Crear Perfil</a></li>
+                            <li><a href="https://localhost:44338/Cuenta/Registrar">Crear Perfil</a></li>
                         </ul>
                     </div>
                 </div>
