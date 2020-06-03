@@ -13,6 +13,15 @@ namespace Iteracion_1 {
     public partial class EditorResumen {
         
         /// <summary>
+        /// txtError control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label txtError;
+        
+        /// <summary>
         /// txtTitulo control.
         /// </summary>
         /// <remarks>
@@ -31,15 +40,6 @@ namespace Iteracion_1 {
         protected global::System.Web.UI.WebControls.TextBox txtResumen;
         
         /// <summary>
-        /// txtError control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label txtError;
-        
-        /// <summary>
         /// subirArchivo control.
         /// </summary>
         /// <remarks>
@@ -47,6 +47,15 @@ namespace Iteracion_1 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.FileUpload subirArchivo;
+        
+        /// <summary>
+        /// btnVolver control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnVolver;
         
         /// <summary>
         /// btnGuardar control.
