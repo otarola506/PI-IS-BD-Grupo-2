@@ -29,8 +29,8 @@
      <br />
      <span style="font-size: large">Subir archivo nuevo con cambios:</span><br />
      <asp:FileUpload ID="subirArchivo" runat="server" Width="527px" style="margin-bottom: 30px" />
-        <asp:Button  ID="btnGuardar" runat="server" OnClick="btnGuardar_Click"  OnClientClick ="return confirm('¿Está seguro enviar a revisión este artículo?')" Text="Someter a Revisión" class="btn-success" style="margin-bottom: 21px"  />
-        <asp:Button ID="btnDescargar" runat="server" Text="Descargar" OnClick="btnDescargar_Click" class="btn-success" style="margin-bottom: 20px; "/>
+        <asp:Button  ID="btnGuardar" runat="server" OnClick="btnGuardar_Click"  OnClientClick ="return confirm('¿Está seguro enviar a revisión este artículo?')" Text="Someter a Revisión" style="margin-bottom: 21px"  />
+        <asp:Button ID="btnDescargar" runat="server" Text="Descargar" OnClick="btnDescargar_Click" style="margin-bottom: 20px; "/>
      <br />
         </strong></span>
         </span><span class="auto-style2"><strong>

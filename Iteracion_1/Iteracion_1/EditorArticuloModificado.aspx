@@ -1,5 +1,6 @@
 ﻿<%@ Page Title="Editor Texto" Language="C#" MasterPageFile="~/Site.Master" ValidateRequest ="false" AutoEventWireup="true" CodeBehind="EditorArticuloModificado.aspx.cs" Inherits="Iteracion_1.EditorArticuloModificado" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server" >
+     <br />
      <script src="https://cdn.tiny.cloud/1/ppfs7sld936k48b757gwua5p0k1knn5by42zeg00gm61xqwb/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 
       <script>tinymce.init({
@@ -31,19 +32,20 @@
         .auto-style2 {
             font-size: large;
         }
-        .auto-style3 {
-            width: 137px;
-            height: 27px;
-            position: absolute;
-            top: 96px;
-            left: 1089px;
+        .auto-style4 {
+            margin-bottom: 3px;
+        }
+        .auto-style5 {
+            font-size: medium;
         }
         </style>
 </head>
+        <asp:Label ID="lblMensaje" runat="server" CssClass="auto-style5"></asp:Label>
+        <br />
         <strong>
         <asp:Label ID="lblTitulo" runat="server" Text="Titulo : " CssClass="auto-style1"></asp:Label>
         </strong>
-        <asp:TextBox ID="txtTitulo" runat="server" Width="469px"></asp:TextBox>
+        <asp:TextBox ID="txtTitulo" runat="server" Width="469px" CssClass="auto-style4"></asp:TextBox>
         <br />
         <span class="auto-style1"><strong>Resumen:</strong></span><br />
         <span class="auto-style1">
@@ -75,7 +77,7 @@
         <asp:Button ID="btnRevision" runat="server" Height="41px" Text="Guardar y enviar a revisión" Width="306px" OnClick="btnRevision_Click" OnClientClick ="return confirm('¿Está seguro que desea guardar y enviar a revisión este artículo?')" />
         <br />
         <br />
-        <asp:Label ID="lblMensaje" runat="server" CssClass="auto-style3"></asp:Label>
+        
         <asp:Label ID="TituloObsLbl" runat="server" Text="" CssClass="auto-style1" style="width:300px;"> </asp:Label>
         <br />
         </strong></span>

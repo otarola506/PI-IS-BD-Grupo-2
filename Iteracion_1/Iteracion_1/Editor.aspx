@@ -21,6 +21,7 @@
 
 
     <p>
+        <asp:Label ID="lblMensaje" runat="server" CssClass="auto-style1"></asp:Label>
         <br />
         <strong>
         <asp:Label ID="lblTitulo" runat="server" style="font-size: x-large" Text="Titulo"></asp:Label>
@@ -75,6 +76,6 @@
         <asp:Label ID="lblprueba" runat="server"></asp:Label>
     </p>
     <p>
-        <asp:Label ID="lblMensaje" runat="server"></asp:Label>
+        
     </p>
 </asp:Content>
