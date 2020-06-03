@@ -58,7 +58,7 @@ namespace Iteracion_1
 
         }
 
-        public void modificarArticuloCompleto(int artId) {
+        public void modificarArticuloCompleto(int artId, string estado) {
            
             connection();
             SqlCommand cmd = new SqlCommand("Modificar_Articulo_Largo", con);
@@ -69,14 +69,14 @@ namespace Iteracion_1
             cmd.Parameters.Add("tituloNuevo", SqlDbType.VarChar).Value = txtTitulo.Text;
             cmd.Parameters.Add("@resumenNuevo", SqlDbType.VarBinary).Value = bytesTextResumen;
             cmd.Parameters.Add("@contenidoNuevo", SqlDbType.VarBinary).Value = bytesContenido;
-            cmd.Parameters.Add("@estadoNuevo", SqlDbType.VarChar).Value = "pendiente";
+            cmd.Parameters.Add("@estadoNuevo", SqlDbType.VarChar).Value = estado;
             cmd.Parameters.Add("@nombreArch", SqlDbType.VarChar).Value = subirArchivo.FileName;
             con.Open();
             cmd.ExecuteNonQuery();
             con.Close();
         }
 
-        public void modificarTituloResumen(int artId) {
+        public void modificarTituloResumen(int artId, string estado) {
             connection();
             SqlCommand cmd = new SqlCommand("Modificar_Titulo_Resumen", con);
             cmd.CommandType = CommandType.StoredProcedure;
@@ -84,7 +84,7 @@ namespace Iteracion_1
             cmd.Parameters.Add("@ID", SqlDbType.Int).Value = artId;
             cmd.Parameters.Add("tituloNuevo", SqlDbType.VarChar).Value = txtTitulo.Text;
             cmd.Parameters.Add("@resumenNuevo", SqlDbType.VarBinary).Value = bytesTextResumen;
-            cmd.Parameters.Add("@estadoNuevo", SqlDbType.VarChar).Value = "pendiente";
+            cmd.Parameters.Add("@estadoNuevo", SqlDbType.VarChar).Value = estado;
             con.Open();
             cmd.ExecuteNonQuery();
             con.Close();
@@ -93,7 +93,7 @@ namespace Iteracion_1
 
 
         }
-        public bool modificarArticuloLargo()
+        public bool modificarArticuloLargo(string estado)
         {
             bool largo = false;
             int artId = Convert.ToInt32(Session["articuloId"]);
@@ -105,7 +105,7 @@ namespace Iteracion_1
                     txtError.Text = "Solo se permiten archivos de los tipos doc, docx, pdf y txt.";
                 }
                 else {
-                    modificarArticuloCompleto(artId);
+                    modificarArticuloCompleto(artId,estado);
                     largo = true;
 
                 }
@@ -114,7 +114,7 @@ namespace Iteracion_1
             }
             else {
                 largo = true;
-                modificarTituloResumen(artId);
+                modificarTituloResumen(artId,estado);
             }
             return largo;
         }
@@ -123,7 +123,7 @@ namespace Iteracion_1
         {
             if (txtTitulo.Text != String.Empty && txtResumen.Text != String.Empty)
             {
-                bool check = modificarArticuloLargo();
+                bool check = modificarArticuloLargo("pendiente");
                 if (check == true)
                 {
                     string Location = "http://localhost:51359/MisArticulos?value1=";
@@ -213,6 +213,22 @@ namespace Iteracion_1
         {
             var UsuarioActual = Request["value1"];
             Response.Redirect("http://localhost:51359/MisArticulos?value1=" + UsuarioActual);
+        }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            int artId = Convert.ToInt32(Session["articuloId"]);
+            bool check = modificarArticuloLargo( "progreso");
+            
+            if (check == true)
+            {
+                string Location = "http://localhost:51359/MisArticulos?value1=";
+                var UsuarioActual = Request["value1"];
+
+                NotificarMiembro(UsuarioActual, txtTitulo.Text);
+
+                Response.Redirect(Location + UsuarioActual);
+            }
         }
     }
 }
