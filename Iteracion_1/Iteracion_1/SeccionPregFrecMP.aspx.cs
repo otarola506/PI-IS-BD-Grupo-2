@@ -86,6 +86,16 @@ namespace Iteracion_1
             con.Close();
             FillGridView();
             Response.Write("<script>alert('Pregunta frecuente eliminada con éxito')</script>");
-        }   
+        }
+
+        protected void EditarButton_OnClick(object sender, EventArgs e)
+        {
+            string[] arg = new string[3];
+            arg = (sender as Button).CommandArgument.Split(';');
+            Session["PregID_SeccionPregFrec"] = arg[0];
+            Session["Pregunta_SeccionPregFrec"] = arg[1];
+            Session["Respuesta_SeccionPregFrec"] = arg[2];
+            Response.Redirect("EdicionPregFrecMP.aspx");
+        }
     }
 }

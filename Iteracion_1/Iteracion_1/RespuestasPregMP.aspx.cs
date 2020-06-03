@@ -42,14 +42,5 @@ namespace Iteracion_1
             Response.Redirect("SeccionPregFrecMP.aspx");
         }
 
-        protected void EditarButton_OnClick(object sender, EventArgs e)
-        {
-            //La verdad no se si sea necesario volver a llenar los Session
-            Session["PregID_RespuestasPreg"] = Session["PregID_SeccionPregFrec"];
-            Session["Pregunta_RespuestasPreg"] = Session["Pregunta_SeccionPregFrec"];
-            Session["Respuesta_RespuestasPreg"] = Session["Respuesta_SeccionPregFrec"];
-
-            Response.Redirect("EdicionPregFrecMP.aspx");
-        }
     }
 }

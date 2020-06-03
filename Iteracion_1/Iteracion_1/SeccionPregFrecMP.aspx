@@ -11,6 +11,7 @@
                         <br />
                         <br />
                         <asp:Button ID="VerRespButton" runat="server" CommandArgument = '<%# Eval("pregIdPK") + ";" + Eval("pregunta") + ";" + Eval("respuesta") %>' OnClick="VerRespButton_OnClick" Text="Ver respuesta" />
+                        <asp:Button ID="EditarButton" runat="server" CommandArgument = '<%# Eval("pregIdPK") + ";" + Eval("pregunta") + ";" + Eval("respuesta") %>' Text="Editar" OnClick="EditarButton_OnClick" /> 
                         <asp:Button ID="BorrarPFButton" runat="server" CommandArgument = '<%# Eval("pregIdPK") %>' OnClientClick ="return confirm('¿Seguro que desea eliminar esta pregunta?')"  OnClick="BorrarPFButton_OnClick" Text="Borrar" />
                     </ItemTemplate>                       
                 </asp:TemplateField>                                

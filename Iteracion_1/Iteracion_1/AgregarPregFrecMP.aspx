@@ -25,9 +25,9 @@
             </tr>
             <tr>
                 <td>
-                    <asp:Button ID="VolverButton" runat="server" Text="Preguntas Freguntas" OnClick="VolverButton_OnClick" Width="125px" />
+                    <asp:Button ID="VolverButton" runat="server" Text="Ir a Preguntas Frecuentes" title="Cancelar e ir a Preguntas Frecuentes" OnClick="VolverButton_OnClick" Width="211px" />
                     &nbsp;&nbsp;
-                    <asp:Button ID="GRButton" runat="server" OnClientClick ="return confirm('¿Seguro que desea agregar esta pregunta con esta respuesta a la sección de preguntas frecuentes?')" OnClick="GRButton_OnClick" Text="Añadir a preguntas frecuentes" />
+                    <asp:Button ID="GRButton" runat="server" OnClientClick ="return confirm('¿Seguro que desea agregar esta pregunta con esta respuesta a la sección de preguntas frecuentes?')" OnClick="GRButton_OnClick" Text="Añadir a Preguntas Frecuentes" title="Añadir esta pregunta y respuesta a la sección de Preguntas Frecuentes" Width="244px" />
                 </td>
             </tr>
         </table>

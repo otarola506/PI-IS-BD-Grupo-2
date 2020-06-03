@@ -222,7 +222,6 @@ namespace Iteracion_1
                 Response.Redirect(Location + UsuarioActual);
             }
             //Response.Redirect("Editor.aspx");
-
         }
 
         

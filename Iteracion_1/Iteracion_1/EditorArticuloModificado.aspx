@@ -35,8 +35,8 @@
             width: 137px;
             height: 27px;
             position: absolute;
-            top: 25px;
-            left: 975px;
+            top: 96px;
+            left: 1089px;
         }
         </style>
 </head>
@@ -69,22 +69,22 @@
         <br />
         <br />
         <span class="auto-style2"><strong>Suba un articulo de su computadora:<asp:FileUpload ID="Seleccionador" runat="server" />
+        <asp:Button ID="VolverButton" runat="server" Height="41px" Text="Volver a Mis Artículos" OnClick="VolverButton_OnClick" Width="254px" />
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <asp:Button ID="btnGuardar" runat="server" Height="41px" OnClick="btnGuardar_Click"  OnClientClick ="return confirm('¿Está seguro que desea guardar este artículo?')" Text="Guardar" />
-        <asp:Button ID="btnRevision" runat="server" Height="41px" Text="Guardar y enviar a revisión" Width="243px" OnClick="btnRevision_Click" OnClientClick ="return confirm('¿Está seguro que desea guardar y enviar a revisión este artículo?')" />
+        <asp:Button ID="btnRevision" runat="server" Height="41px" Text="Guardar y enviar a revisión" Width="306px" OnClick="btnRevision_Click" OnClientClick ="return confirm('¿Está seguro que desea guardar y enviar a revisión este artículo?')" />
         <br />
         <br />
         <asp:Label ID="lblMensaje" runat="server" CssClass="auto-style3"></asp:Label>
+        <asp:Label ID="TituloObsLbl" runat="server" Text="" CssClass="auto-style1" style="width:300px;"> </asp:Label>
         <br />
         </strong></span>
         <br />
+        <asp:label ID="ObsTextLbl" runat="server" CssClass="auto-style1" Text="" ></asp:label>
         <span class="auto-style2"><strong>
         <br />
         <br />
         </strong></span>
         
-        <strong>
-        <asp:Label ID="TituloObsLbl" runat="server" Text="" CssClass="auto-style1" style="width:300px;"> </asp:Label>
-        </strong>
         <br />
-        <asp:label ID="ObsTextLbl" runat="server" CssClass="auto-style1" Text="" ></asp:label>
-</asp:Content>
+        </asp:Content>

@@ -15,7 +15,5 @@
     <br />
     <br />
     <asp:Button ID="VolverButton" runat="server" Text="Volver a Preguntas Frecuentes" OnClick="VolverButton_OnClick" Width="214px" />
-    &nbsp;&nbsp;
-    <asp:Button ID="EditarButton" runat="server" Text="Editar Pregunta Frecuente" OnClick="EditarButton_OnClick" Width="214px" />
 
 </asp:Content>

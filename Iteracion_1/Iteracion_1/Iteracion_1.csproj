@@ -137,7 +137,6 @@
     <Content Include="Imagenes\Pencil-icon.png" />
     <Content Include="Imagenes\trash-icon.png" />
     <Content Include="MisArticulos.aspx" />
-    <Content Include="PreguntasRecibidasMP.aspx" />
     <Content Include="RespuestasPregMP.aspx" />
     <Content Include="MostrarContenido.aspx" />
     <Content Include="Scripts\bootstrap.js" />
@@ -238,13 +237,6 @@
     </Compile>
     <Compile Include="MisArticulos.aspx.designer.cs">
       <DependentUpon>MisArticulos.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="PreguntasRecibidasMP.aspx.cs">
-      <DependentUpon>PreguntasRecibidasMP.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="PreguntasRecibidasMP.aspx.designer.cs">
-      <DependentUpon>PreguntasRecibidasMP.aspx</DependentUpon>
     </Compile>
     <Compile Include="MostrarContenido.aspx.cs">
       <DependentUpon>MostrarContenido.aspx</DependentUpon>
