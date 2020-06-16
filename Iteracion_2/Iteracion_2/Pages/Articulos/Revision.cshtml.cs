@@ -34,5 +34,8 @@ namespace Iteracion_2.Pages.Articulos
                 return RedirectToPage("/Cuenta/Ingresar", new {Mensaje = "Permisos insuficientes" });
             }
         }
+        // Método para que solo aparezca el botón para el coordinador.
+        //Metódo onPost que pasa datos de artículo al controlador para que este se los pase al modelo de correo.
+
     }
 }

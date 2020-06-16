@@ -4,17 +4,18 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Data;
 using System.Data.SqlClient;
+using Iteracion_2.Models;
 
 namespace Iteracion_2.Models
 {
     public class MiembroModel
     {
         private SqlConnection con;
+        private ConexionModel connectionString { get; set; }
         public void Connection()
         {
-            string conString = @"Server=172.16.202.75;Database=BD_Grupo2;persist security info=True;MultipleActiveResultSets=True;User ID=Grupo2;Password=grupo2.";
-            con = new SqlConnection(conString);
-            con.Open();
+            connectionString = new ConexionModel();
+            con = connectionString.Connection();
         }
 
         public void crearCuenta(string nombreUsuario, string nombre, int peso) {
