@@ -13,5 +13,18 @@ namespace Iteracion_2.Pages.Articulos
         {
 
         }
+
+        public void OnPost()
+        {
+            string opinion = Request.Form["Opinion"].ToString();
+            string contribucion = Request.Form["Contribucion"].ToString();
+            string forma = Request.Form["Forma"].ToString();
+            string observaciones = "" + Request.Form["comentarios"].ToString();
+
+            int opinionInt = Int16.Parse(opinion);
+            int contribucionInt = Int16.Parse(contribucion);
+            int formaInt = Int16.Parse(forma);
+
+        }
     }
 }
