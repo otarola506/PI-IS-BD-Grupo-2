@@ -33,16 +33,35 @@ namespace Iteracion_2.Models
                 }
 
             }
+            con.Close();
             return Results;
         }
 
-        public void MarcarArticuloSolicitado(int artIdPk) {
+        public void MarcarArticuloSolicitado(int artIdPk)
+        {
+            List<String> nombresUsuarioNucleo = RecuperarNombresUsuarioNucleo();
+            Connection();
+            var query = "INSERT INTO Nucleo_Solicita_Articulo VALUES (@nombreUsuario,@artID,@estado)";
+            using (SqlCommand cmd = new SqlCommand(query,con))
+            {
+                for (int index = 0; index < nombresUsuarioNucleo.Count; index++)
+                {
+                    cmd.Parameters.AddWithValue("@nombreUsuario", nombresUsuarioNucleo[index]);
+                    cmd.Parameters.AddWithValue("@artID", artIdPk);
+                    cmd.Parameters.AddWithValue("@estado", "solicitado");
+                    cmd.ExecuteNonQuery();
+                    cmd.Parameters.Clear();
 
 
-        }
+                }
+
+            }
+            con.Close();
+
+        }   
 
         public List<List<string>> RetornarPendientes() {
-            List<string> nombresUsuario = RecuperarNombresUsuarioNucleo();
+            MarcarArticuloSolicitado(1);
             List<List<string>> ArticulosPendientes = new List<List<string>>();
             string queryString = "SELECT A.artIdPK,A.titulo,A.resumen,M.nombre,M.nombreUsuarioPK FROM Articulo A JOIN Miembro_Articulo MA ON A.artIdPK = MA.artIdFK JOIN Miembro M  ON M.nombreUsuarioPK  = MA.nombreUsuarioFK WHERE A.estado = 'pendiente' ORDER BY A.artIdPK";
 
