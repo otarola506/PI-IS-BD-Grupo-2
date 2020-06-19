@@ -13,7 +13,6 @@ namespace Iteracion_2.Models
         private SqlConnection con;
         private ConexionModel connectionString { get; set; }
 
-        private Email Email1 { get; set; }
         public void Connection()
         {
             connectionString = new ConexionModel();
