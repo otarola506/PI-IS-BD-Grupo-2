@@ -4,18 +4,28 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Iteracion_2.Controllers;
+using Microsoft.AspNetCore.Http;
 
 namespace Iteracion_2.Pages.Articulos
 {
     public class FormularioRevisionModel : PageModel
     {
+        FormularioRevisionController FormularioContro { get; set; }
+
+
+        const string SessionKeyUsuario = "UsuarioActual";
+
+        
+
         public void OnGet()
         {
-
+             //UsuarioActual = HttpContext.Session.GetString(SessionKeyUsuario);
         }
 
         public void OnPost()
         {
+            string UsuarioActual = HttpContext.Session.GetString(SessionKeyUsuario);
             string opinion = Request.Form["Opinion"].ToString();
             string contribucion = Request.Form["Contribucion"].ToString();
             string forma = Request.Form["Forma"].ToString();
@@ -24,6 +34,17 @@ namespace Iteracion_2.Pages.Articulos
             int opinionInt = Int16.Parse(opinion);
             int contribucionInt = Int16.Parse(contribucion);
             int formaInt = Int16.Parse(forma);
+
+
+            //Atributo de preuba 
+            
+            string artID = "1";
+
+
+            FormularioContro = new FormularioRevisionController();
+            FormularioContro.ProcesarFormulario(opinionInt,contribucionInt,formaInt,observaciones, UsuarioActual, artID);
+
+            //Redireccion
 
         }
     }
