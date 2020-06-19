@@ -16,7 +16,13 @@ namespace Iteracion_2.Models
 {
     public class Email
     {
-
+        private SqlConnection Con;
+        private ConexionModel ConnectionString { get; set; }
+        public void Connection()
+        {
+            ConnectionString = new ConexionModel();
+            Con = ConnectionString.Connection();
+        }
         public async Task enviarCorreo(string destinatario, string asunto, string contenido,IFormFile archivo) {
             
             MailMessage mm = new MailMessage();
@@ -68,8 +74,28 @@ namespace Iteracion_2.Models
             await smtp.SendMailAsync(mm);
         }
 
-        public void RecuperarCorreosNucleo() {
+        public List<List<String>> RecuperarCorreosNucleo() {
+            Connection();
+            List<List<String>> Results = new List<List<String>>();
+            string query = "SELECT nombreUsuarioPk,correo FROM Miembro WHERE pesoMiembro = 5";
+            SqlCommand command = new SqlCommand(query, Con)
+            {
+                CommandType = CommandType.Text
+            };
+            DataTable dTable = new DataTable();
+            SqlDataAdapter adapter = new SqlDataAdapter(command);
+            adapter.Fill(dTable);
+            for (int index = 0; index < dTable.Rows.Count; index++)
+            {
+                Results.Add(new List<string> {
+                                    dTable.Rows[index][0].ToString(), // nombreUsuario
+                                        dTable.Rows[index][1].ToString(), // correo
+                            });
 
+            }
+
+            Con.Close();
+            return Results;
         }
 
         public async Task EnviarSolicitudNucleo() {

@@ -12,6 +12,8 @@ namespace Iteracion_2.Models
     {
         private SqlConnection con;
         private ConexionModel connectionString { get; set; }
+
+        private Email Email1 { get; set; }
         public void Connection()
         {
             connectionString = new ConexionModel();
@@ -59,9 +61,7 @@ namespace Iteracion_2.Models
             con.Close();
 
         }   
-
         public List<List<string>> RetornarPendientes() {
-            MarcarArticuloSolicitado(1);
             List<List<string>> ArticulosPendientes = new List<List<string>>();
             string queryString = "SELECT A.artIdPK,A.titulo,A.resumen,M.nombre,M.nombreUsuarioPK FROM Articulo A JOIN Miembro_Articulo MA ON A.artIdPK = MA.artIdFK JOIN Miembro M  ON M.nombreUsuarioPK  = MA.nombreUsuarioFK WHERE A.estado = 'pendiente' ORDER BY A.artIdPK";
 
