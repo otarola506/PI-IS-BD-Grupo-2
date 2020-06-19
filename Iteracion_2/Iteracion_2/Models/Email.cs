@@ -68,9 +68,14 @@ namespace Iteracion_2.Models
             await smtp.SendMailAsync(mm);
         }
 
-        //´Método que reciba nombre del artículo y lo que hace es mandar un correo a todos los miembros de núcleo.
-        //public void enviarSolicitud()
-        //Ocupo de fijo recuperar correos y pasarselos a este método para que se los envíe a todos
+        public void RecuperarCorreosNucleo() {
+
+        }
+
+        public async Task EnviarSolicitudNucleo() {
+
+
+        }
 
     }
 }
