@@ -11,10 +11,11 @@ namespace Iteracion_2.Models
     public class ArticuloModel
     {
         private SqlConnection con;
+        private ConexionModel conString { get; set; }
         public void Connection()
         {
-            string conString = @"Server=172.16.202.75;Database=BD_Grupo2;persist security info=True;MultipleActiveResultSets=True;User ID=Grupo2;Password=grupo2.";
-            con = new SqlConnection(conString);
+            conString = new ConexionModel();
+            con = conString.Connection();
         }
 
         public List<List<string>> RetornarPendientes() {
@@ -22,7 +23,6 @@ namespace Iteracion_2.Models
             string queryString = "SELECT A.artIdPK,A.titulo,A.resumen,M.nombre,M.nombreUsuarioPK FROM Articulo A JOIN Miembro_Articulo MA ON A.artIdPK = MA.artIdFK JOIN Miembro M  ON M.nombreUsuarioPK  = MA.nombreUsuarioFK WHERE A.estado = 'pendiente' ORDER BY A.artIdPK";
 
             Connection();
-            con.Open();
 
             SqlCommand command = new SqlCommand(queryString, con)
             {
