@@ -65,7 +65,6 @@ namespace Iteracion_2.Models
             string queryString = "SELECT A.artIdPK,A.titulo,A.resumen,M.nombre,M.nombreUsuarioPK FROM Articulo A JOIN Miembro_Articulo MA ON A.artIdPK = MA.artIdFK JOIN Miembro M  ON M.nombreUsuarioPK  = MA.nombreUsuarioFK WHERE A.estado = 'pendiente' ORDER BY A.artIdPK";
 
             Connection();
-            con.Open();
 
             SqlCommand command = new SqlCommand(queryString, con)
             {
