@@ -1,97 +1,125 @@
-﻿@page
+﻿
+
+@page
+@using Microsoft.AspNetCore.Http;
 @model Iteracion_2.Pages.Articulos.FormularioRevisionModel
 @{
     ViewData["Title"] = "FormularioRevision";
 }
 
+
+
+
+
 <h2>Formulario de Revision</h2>
 
 <div class="container">
-    <div class="row">
-        <div class="col-md-6 no-float">Datos del Articulo</div>
-        <div class="col-md-6 no-float">
-            <div class="form-group row">
-                <h3>Formulario de Revision</h3>
-                <br>
-                <br>
-                <form method="post">
-                    <div class="row">
-                        <div class="col-lg-3 ">
-                            <label for="Opinion general">Opinión General</label>
+    @if ((HttpContext.Session.GetString("PesoActual") == "5") || ((HttpContext.Session.GetString("PesoActual") == "5")))
+    {
+        <div class="row">
+            <div class="col-md-6 no-float">Datos del Articulo</div>
+            <div class="col-md-6 no-float">
+                <div class="form-group row">
+                    <h3>Formulario de Revision</h3>
+                    <br>
+                    <br>
+                    <form method="post">
+                        <div class="row">
+                            <div class="col-lg-3 ">
+                                <label for="Opinion general">Opinión General</label>
+                            </div>
+                            <div class="col-lg-4">
+                                <select class="form-control" id="sel1" name="Opinion">
+                                    <option value="">Seleccione Nota</option>
+                                    <option value=0>0</option>
+                                    <option value=1>1</option>
+                                    <option value=2>2</option>
+                                    <option value=3>3</option>
+                                    <option value=4>4</option>
+                                    <option value=5>5</option>
+                                </select>
+                            </div>
                         </div>
-                        <div class="col-lg-4">
-                            <select class="form-control" id="sel1" name="Opinion">
-                                <option value="">Seleccione Nota</option>
-                                <option value=0>0</option>
-                                <option value=1>1</option>
-                                <option value=2>2</option>
-                                <option value=3>3</option>
-                                <option value=4>4</option>
-                                <option value=5>5</option>
-                            </select>
+                        <br>
+                        <br>
+                        <br>
+
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <label for="Contribucion">Contribución</label>
+
+                            </div>
+                            <div class="col-lg-4">
+                                <select class="form-control" id="sel2" name="Contribucion">
+                                    <option value="">Seleccione Nota</option>
+                                    <option value=0>0</option>
+                                    <option value=1>1</option>
+                                    <option value=2>2</option>
+                                    <option value=3>3</option>
+                                    <option value=4>4</option>
+                                    <option value=5>5</option>
+                                </select>
+                            </div>
                         </div>
-                    </div>
-                    <br>
-                    <br>
-                    <br>
+                        <br>
+                        <br>
+                        <br>
 
-                    <div class="row">
-                        <div class="col-lg-3">
-                            <label for="Contribucion">Contribución</label>
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <label for="Forma">Forma del articulo</label>
 
+                            </div>
+                            <div class="col-lg-4">
+                                <select class="form-control" id="sel3" name="Forma">
+                                    <option value="">Seleccione Nota</option>
+                                    <option value=0>0</option>
+                                    <option value=1>1</option>
+                                    <option value=2>2</option>
+                                    <option value=3>3</option>
+                                    <option value=4>4</option>
+                                    <option value=5>5</option>
+                                </select>
+                            </div>
                         </div>
-                        <div class="col-lg-4">
-                            <select class="form-control" id="sel2" name="Contribucion">
-                                <option value="">Seleccione Nota</option>
-                                <option value=0>0</option>
-                                <option value=1>1</option>
-                                <option value=2>2</option>
-                                <option value=3>3</option>
-                                <option value=4>4</option>
-                                <option value=5>5</option>
-                            </select>
+                        <br>
+                        <br>
+
+                        <label for="Observaciones">Observaciones</label>
+                        <br>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-7 col-lg-offset-0">
+                                <textarea class="form-control" rows="5" id="comment" name="comentarios"></textarea>
+                            </div>
                         </div>
-                    </div>
-                    <br>
-                    <br>
-                    <br>
+                        <br>
+                        <br>
 
-                    <div class="row">
-                        <div class="col-lg-3">
-                            <label for="Forma">Forma del articulo</label>
+                        <button type="submit" class="btn btn-primary" onclick="retroalimentacion()">Enviar</button>
 
-                        </div>
-                        <div class="col-lg-4">
-                            <select class="form-control" id="sel3" name="Forma">
-                                <option value="">Seleccione Nota</option>
-                                <option value=0>0</option>
-                                <option value=1>1</option>
-                                <option value=2>2</option>
-                                <option value=3>3</option>
-                                <option value=4>4</option>
-                                <option value=5>5</option>
-                            </select>
-                        </div>
-                    </div>
-                    <br>
-                    <br>
 
-                    <label for="Observaciones">Observaciones</label>
-                    <br>
-                    <br>
-                    <div class="row">
-                        <div class="col-lg-7 col-lg-offset-0">
-                            <textarea class="form-control" rows="5" id="comment" name="comentarios"></textarea>
-                        </div>
-                    </div>
-                    <br>
-                    <br>
 
-                    <button type="submit" class="btn btn-primary">Enviar</button>
-
-                   
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
+    }
+    else
+    {
+        <div>
+            <h3>Usted no tiene el rango requerido</h3>
+        </div>
+
+
+    }
+
 </div>
+
+
+
+<script>
+    function retroalimentacion() {
+        alert("Se envio su revision.");
+    }
+</script>

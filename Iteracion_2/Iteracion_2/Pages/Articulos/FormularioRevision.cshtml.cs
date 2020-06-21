@@ -15,12 +15,13 @@ namespace Iteracion_2.Pages.Articulos
 
 
         const string SessionKeyUsuario = "UsuarioActual";
+         string SessionKeyPesoUsuario = "PesoActual";
 
-        
+
 
         public void OnGet()
         {
-             //UsuarioActual = HttpContext.Session.GetString(SessionKeyUsuario);
+
         }
 
         public void OnPost()
