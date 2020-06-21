@@ -15,5 +15,11 @@ namespace Iteracion_2.Controllers
 
             return ArticuloModel.RetornarPendientes();
         }
+
+        public void MarcarArtSolicitado(int artID) {
+            ArticuloModel = new ArticuloModel();
+            ArticuloModel.MarcarArticuloSolicitado(artID);
+
+        }
     }
 }

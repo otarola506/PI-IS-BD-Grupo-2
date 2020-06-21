@@ -46,5 +46,12 @@ namespace Iteracion_2.Controllers
             perf = new PerfilModel();
             return perf.obtenerCorreo(Usuario);
         }
+
+        public async Task EnviarSolicitudNucleo(string titulo) {
+            sendMail =  new EmailModel();
+            await sendMail.EnviarSolicitudNucleo(titulo);
+
+
+        }
     }
 }
