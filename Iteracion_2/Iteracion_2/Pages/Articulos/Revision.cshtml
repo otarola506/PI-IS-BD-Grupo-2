@@ -19,70 +19,71 @@
         <ul class="article-list-basic">
             @for (int index = 0; index < Model.ArticulosPendientes.Count; index++)
             {
-            <li id="@index">
-                <a href="#@index">
-                    <img src="https://source.unsplash.com/random/800x600" alt="Sahale Wa" />
-                </a>
-                <div>
-                    <h2><a href="#@index">@Model.ArticulosPendientes[index][1]</a></h2>
-                    <p></p>
-                    <span>
-                        por
-                        @{
-                            int artIDPk = Int32.Parse(Model.ArticulosPendientes[index][0]);
-                            string titulo = Model.ArticulosPendientes[index][1];
-                            string[] autores = Model.ArticulosPendientes[index][2].Split(',');
-                            string[] usuarios = Model.ArticulosPendientes[index][3].Split(',');
-                            for (int indexJ = 0; indexJ < autores.Length; indexJ++)
-                            {
-                                <a href="~/Perfil/Perfil?UsuarioURL=@usuarios[indexJ]">@autores[indexJ]</a>
+                <li id="@index">
+                    <a href="#@index">
+                        <img src="https://source.unsplash.com/random/800x600" alt="Sahale Wa" />
+                    </a>
+                    <div>
+                        <h2><a href="#@index">@Model.ArticulosPendientes[index][1]</a></h2>
+                        <p></p>
+                        <span>
+                            por
+                            @{
+                                int artIDPk = Int32.Parse(Model.ArticulosPendientes[index][0]);
+                                string titulo = Model.ArticulosPendientes[index][1];
+                                string[] autores = Model.ArticulosPendientes[index][2].Split(',');
+                                string[] usuarios = Model.ArticulosPendientes[index][3].Split(',');
+                                for (int indexJ = 0; indexJ < autores.Length; indexJ++)
+                                {
+                                    <a href="~/Perfil/Perfil?UsuarioURL=@usuarios[indexJ]">@autores[indexJ]</a>
+                                }
                             }
-                        }
 
-                    </span>
-                    <br />
-                    <br />
-                    <a href="#" class="read-more">Revisar</a>
-                    <a href="#" class="read-more">Ver más &rarr;</a>
-                    <br />
-                    <br />
-                    
-   
-                    <a data-toggle="modal" href="#exampleModal" class="read-more">Solicitar Colaboración</a>
+                        </span>
+                        <br />
+                        <br />
+                        <a href="#" class="btn btn-primary">Revisar</a>
+                        <a href="#" class="btn btn-primary">Ver más &rarr;</a>
+                        <br />
+                        <br />
+
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-articulo="@artIDPk" data-titulo="@titulo">Solicitar Colaboración</button>
+          
 
 
-                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                    <h4 class="modal-title" id="exampleModalLabel">¿Desea Solicitar la Colaboración de los Miembros de núcleo?</h4>
+                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        <h4 class="modal-title" id="exampleModalLabel">¿Desea Solicitar la Colaboración de los Miembros de núcleo?</h4>
 
+                                    </div>
+                                    <form asp-page-handler="send" method="post">
+                                        <div class="modal-body">
+                                            <input id="artId" type="hidden" name="artID" runat="server" />
+                                            <input id="titulo"type="hidden" name="titulo" runat="server" />
+                                        </div>
+                                        
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                            <button type="submit" class="btn btn-primary">Enviar Solicitud</button>
+
+                                       
+                                    </form>
                                 </div>
-                                <form asp-page-handler="send" method="post">
-                                    <div class="modal-body">
-                                        <input type="hidden" name="artID" value="@artIDPk" runat="server" />
-                                        <input type="hidden" name="titulo" value="@titulo"  runat="server" />
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                        <button type="submit" class="btn btn-primary">Enviar Solicitud</button>
-                                
-                                    </div>
-                            </form>
                             </div>
                         </div>
+
+
+
+
                     </div>
-
-
-
-
-                </div>
-            </li>
+                </li>
             }
         </ul>
+        <script src="~/js/site.js"></script>
     </body>
 </html>
 
