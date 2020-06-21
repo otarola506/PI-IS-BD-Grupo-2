@@ -111,5 +111,27 @@ namespace Iteracion_2.Models
 
             return ArticulosPendientes;
         }
+
+        public List<List<string>> RetornarSolicitados(string nombreUsuarioActual)
+        {
+            List<List<string>> ArticulosSolicitados = new List<List<string>>();
+            string queryString = "SELECT A.artIdPK,A.titulo FROM Articulo A JOIN Nucleo_Solicita_Articulo NS ON A.artIdPK = NS.artIdFK WHERE NS.estadoSolicitud = 'solicitado' AND NS.nombreUsuarioFK = @nombreUsuario ORDER BY A.artIdPK";
+
+            Connection();
+            SqlDataAdapter sqlDa = new SqlDataAdapter(queryString, con);
+            sqlDa.SelectCommand.CommandType = CommandType.Text;
+            sqlDa.SelectCommand.Parameters.AddWithValue("@nombreUsuario", nombreUsuarioActual);
+            DataTable dTable = new DataTable();
+            sqlDa.Fill(dTable);
+            for (int index = 0; index < dTable.Rows.Count; index++)
+            {
+                ArticulosSolicitados.Add(new List<string> {
+                                    dTable.Rows[index][0].ToString(), // artIdPK
+                                    dTable.Rows[index][1].ToString(), // titulo
+                                    });
+            }
+            con.Close();
+            return ArticulosSolicitados;
+        }
     }
 }
