@@ -13,6 +13,9 @@ namespace Iteracion_2.Pages.Articulos
     {
         FormularioRevisionController FormularioContro { get; set; }
 
+        public string[] informacionArticulo { get; private set; }
+
+        public string [] autor { get; private set; }
 
         const string SessionKeyUsuario = "UsuarioActual";
          string SessionKeyPesoUsuario = "PesoActual";
