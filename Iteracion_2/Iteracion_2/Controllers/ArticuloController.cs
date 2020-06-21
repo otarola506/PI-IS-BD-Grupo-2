@@ -21,5 +21,12 @@ namespace Iteracion_2.Controllers
             return ArticuloModel.retornarDatos(artId);
 
         }
+
+        public List<string> retornarAutor(int artId)
+        {
+            ArticuloModel = new ArticuloModel();
+            return ArticuloModel.retornarAutor(artId);
+
+        }
     }
 }
