@@ -13,6 +13,8 @@ namespace Iteracion_2.Pages.Articulos
     {
         FormularioRevisionController FormularioContro { get; set; }
 
+        ArticuloController ArticuloContro { get; set; }
+
         public string[] informacionArticulo { get; private set; }
 
         public string [] autor { get; private set; }
@@ -22,9 +24,14 @@ namespace Iteracion_2.Pages.Articulos
 
 
 
-        public void OnGet()
+        public IActionResult OnGet()
         {
+            string UsuarioActual = HttpContext.Session.GetString(SessionKeyUsuario);
+            ArticuloContro = new ArticuloController();
 
+            informacionArticulo = ArticuloContro.retornarDatos(10);
+
+            return Page();
         }
 
 

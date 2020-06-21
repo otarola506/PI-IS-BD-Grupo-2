@@ -15,5 +15,11 @@ namespace Iteracion_2.Controllers
 
             return ArticuloModel.RetornarPendientes();
         }
+
+        public string[] retornarDatos(int artId) {
+            ArticuloModel = new ArticuloModel();
+            return ArticuloModel.retornarDatos(artId);
+
+        }
     }
 }

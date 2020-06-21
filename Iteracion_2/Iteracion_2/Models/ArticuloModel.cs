@@ -69,5 +69,31 @@ namespace Iteracion_2.Models
 
             return ArticulosPendientes;
         }
+
+        public string[] retornarDatos(int artId) {
+            string[] info = new string[2];
+            string queryString = "SELECT titulo,resumen FROM Articulo  WHERE artIdPK = 1";
+           
+            Encoding unicode = Encoding.Unicode;
+            Connection();
+            con.Open();
+
+            SqlCommand command = new SqlCommand(queryString, con)
+            {
+                CommandType = CommandType.Text
+            };
+            using (SqlDataReader reader = command.ExecuteReader())
+            {
+            
+                if (reader.Read()) {
+                    info[0] = reader["titulo"].ToString();
+                    byte[]  bytesResumen = (byte[])reader["resumen"];
+                    info[1] = Encoding.UTF8.GetString(bytesResumen);
+                }
+            }
+           
+
+            return info;
+        }
     }
 }
