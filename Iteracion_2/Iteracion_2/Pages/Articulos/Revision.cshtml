@@ -46,26 +46,42 @@
                     <a href="#" class="read-more">Ver más &rarr;</a>
                     <br />
                     <br />
-                    <!--Necesito recuperar el nombre del artículo o el art id cuando el mae haga click en solicitar
-    colaboracion-->
-                    <!--Además necesito que este botón solo sea visto por el coordinador-->
-                    <!--Incluir código de Iván del layout para que esto solo lo vea el coordinador-->
-                    <span>
-                        @{
-                            Model.ArtIDPk = artIDPk;
-                            Model.Titulo = titulo;
-                        }
-                    </span>
+                    
+   
+                    <a data-toggle="modal" href="#exampleModal" class="read-more">Solicitar Colaboración</a>
 
-                    <form asp-page-handler="send" method="post">
-                        <a href="~/Articulos/Revision" class="read-more">Solicitar Colaboración </a>
-                    </form>
+
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    <h4 class="modal-title" id="exampleModalLabel">¿Desea Solicitar la Colaboración de los Miembros de núcleo?</h4>
+
+                                </div>
+                                <form asp-page-handler="send" method="post">
+                                    <div class="modal-body">
+                                        <input type="hidden" name="artID" value="@artIDPk" runat="server" />
+                                        <input type="hidden" name="titulo" value="@titulo"  runat="server" />
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                        <button type="submit" class="btn btn-primary">Enviar Solicitud</button>
+                                
+                                    </div>
+                            </form>
+                            </div>
+                        </div>
+                    </div>
+
 
 
 
                 </div>
             </li>
-                        }
+            }
         </ul>
     </body>
 </html>
