@@ -105,12 +105,17 @@
             </div>
         </div>
     }
-    else
+    else if ((HttpContext.Session.GetString("PesoActual") == "0") || (HttpContext.Session.GetString("PesoActual") == "3"))
     {
         <div>
-            <h3>Usted no tiene el rango requerido</h3>
+            <h3>Usted no tiene el rango requerido para esta accion.</h3>
         </div>
 
+
+    }
+    else
+    {
+        Response.Redirect("/Cuenta/Ingresar");
 
     }
 

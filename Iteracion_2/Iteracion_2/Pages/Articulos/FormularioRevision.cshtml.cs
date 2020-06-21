@@ -24,8 +24,12 @@ namespace Iteracion_2.Pages.Articulos
 
         }
 
+
+
+
         public void OnPost()
         {
+
             string UsuarioActual = HttpContext.Session.GetString(SessionKeyUsuario);
             string opinion = Request.Form["Opinion"].ToString();
             string contribucion = Request.Form["Contribucion"].ToString();
@@ -38,14 +42,16 @@ namespace Iteracion_2.Pages.Articulos
 
 
             //Atributo de preuba 
-            
+
             string artID = "1";
 
 
             FormularioContro = new FormularioRevisionController();
-            FormularioContro.ProcesarFormulario(opinionInt,contribucionInt,formaInt,observaciones, UsuarioActual, artID);
+            FormularioContro.ProcesarFormulario(opinionInt, contribucionInt, formaInt, observaciones, UsuarioActual, artID);
 
             //Redireccion
+            
+
 
         }
     }
