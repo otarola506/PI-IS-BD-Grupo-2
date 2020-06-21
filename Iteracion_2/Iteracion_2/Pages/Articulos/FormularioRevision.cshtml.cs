@@ -52,7 +52,7 @@ namespace Iteracion_2.Pages.Articulos
 
 
 
-        public void OnPost()
+        public IActionResult OnPost()
         {
 
             string UsuarioActual = HttpContext.Session.GetString(SessionKeyUsuario);
@@ -60,6 +60,12 @@ namespace Iteracion_2.Pages.Articulos
             string contribucion = Request.Form["Contribucion"].ToString();
             string forma = Request.Form["Forma"].ToString();
             string observaciones = "" + Request.Form["comentarios"].ToString();
+
+           /* if (opinion.Equals("") || contribucion.Equals("") || forma.Equals("")) {
+                ViewData["Message"] = "No completo todo";
+                return RedirectToPage("/Articulos/FormularioRevision");
+            }*/
+
 
             int opinionInt = Int16.Parse(opinion);
             int contribucionInt = Int16.Parse(contribucion);
@@ -75,8 +81,8 @@ namespace Iteracion_2.Pages.Articulos
             FormularioContro.ProcesarFormulario(opinionInt, contribucionInt, formaInt, observaciones, UsuarioActual, artID);
 
             //Redireccion
-            
 
+            return RedirectToPage("/Perfil/Perfil");//Hay que redireccionar hacia articulos pendientes de revision
 
         }
     }

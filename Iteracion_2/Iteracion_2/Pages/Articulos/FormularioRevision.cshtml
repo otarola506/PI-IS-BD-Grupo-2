@@ -16,6 +16,7 @@
 <div class="container">
     @if ((HttpContext.Session.GetString("PesoActual") == "5") || ((HttpContext.Session.GetString("PesoActual") == "5")))
     {
+        <label for="inputName" style="color:red;"> @ViewData["Message"] </label>
         <div class="row">
             <br />
             <div class="col-md-7 no-float" >
