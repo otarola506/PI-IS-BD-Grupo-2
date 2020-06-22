@@ -22,11 +22,11 @@ namespace Iteracion_2.Pages.Articulos
         public List<string> autor { get; private set; }
 
         const string SessionKeyUsuario = "UsuarioActual";
-         string SessionKeyPesoUsuario = "PesoActual";
+        string SessionKeyPesoUsuario = "PesoActual";
 
+         public string ArticuloID { get;  private set; }
 
-
-        public IActionResult OnGet()
+        public IActionResult OnGet( string artId)
         {
             string UsuarioActual = HttpContext.Session.GetString(SessionKeyUsuario);
             ArticuloContro = new ArticuloController();
@@ -43,7 +43,7 @@ namespace Iteracion_2.Pages.Articulos
             }
 
 
- 
+            ArticuloID = artId;
 
 
             return Page();
@@ -52,7 +52,7 @@ namespace Iteracion_2.Pages.Articulos
 
 
 
-        public IActionResult OnPost()
+        public IActionResult OnPost(string artId)
         {
 
             string UsuarioActual = HttpContext.Session.GetString(SessionKeyUsuario);
@@ -72,13 +72,13 @@ namespace Iteracion_2.Pages.Articulos
             int formaInt = Int16.Parse(forma);
 
 
-            //Atributo de preuba 
-
-            string artID = "1";
-
+            
+            ArticuloID = artId; // ojo si se cae es por esto
+            
+            
 
             FormularioContro = new FormularioRevisionController();
-            FormularioContro.ProcesarFormulario(opinionInt, contribucionInt, formaInt, observaciones, UsuarioActual, artID);
+            FormularioContro.ProcesarFormulario(opinionInt, contribucionInt, formaInt, observaciones, UsuarioActual, ArticuloID);
 
             //Redireccion
 
