@@ -118,7 +118,7 @@ namespace Iteracion_2.Models
            
             Encoding unicode = Encoding.Unicode;
             Connection();
-            con.Open();
+            
 
             SqlCommand command = new SqlCommand(queryString, con)
             {
@@ -133,8 +133,8 @@ namespace Iteracion_2.Models
                     info[1] = Encoding.UTF8.GetString(bytesResumen);
                 }
             }
-           
 
+            con.Close();
             return info;
         }
 
@@ -144,7 +144,7 @@ namespace Iteracion_2.Models
             string queryString = "SELECT M.nombre+' '+M.apellido AS 'Nombre' FROM Articulo A JOIN Miembro_Articulo MA  ON A.artIdPK = MA.artIdFK JOIN Miembro M  ON M.nombreUsuarioPK = MA.nombreUsuarioFK WHERE A.artIdPK = 1";
 
             Connection();
-            con.Open();
+           
 
             SqlCommand command = new SqlCommand(queryString, con)
             {
@@ -162,7 +162,7 @@ namespace Iteracion_2.Models
                 }
             }
 
-
+            con.Close();
             return autores;
         }
     }
