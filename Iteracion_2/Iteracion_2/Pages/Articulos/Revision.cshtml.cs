@@ -13,6 +13,7 @@ namespace Iteracion_2.Pages.Articulos
     {
         const string SessionKeyUsuario = "UsuarioActual";
         const string SessionKeyPeso = "PesoActual";
+        const string SessionKeyTipo = "TipoActual";
         private ArticuloController ArticuloController { get; set; }
         private EmailController EmailController { get; set; }
         
@@ -28,10 +29,11 @@ namespace Iteracion_2.Pages.Articulos
         {
             UsuarioActual = HttpContext.Session.GetString(SessionKeyUsuario);
             string PesoActual = HttpContext.Session.GetString(SessionKeyPeso);
+            string tipo = HttpContext.Session.GetString(SessionKeyTipo);
 
             ArticuloController = new ArticuloController();
 
-            if (UsuarioActual != null && PesoActual == "5")
+            if (UsuarioActual != null && PesoActual == "5" && tipo == "coordinador")
             {
                 ArticulosPendientes = ArticuloController.RetornarPendientes();
                 return Page();

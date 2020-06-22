@@ -42,8 +42,11 @@ namespace Iteracion_2.Pages.Cuenta
             {
                 HttpContext.Session.SetString("UsuarioActual", nombreUsuario);
 
-                string pesoMiembro = MiembroController.RetornarPesoMiembro(nombreUsuario);
+                var valoresMiembro = MiembroController.RetornarPesoMiembroTipo(nombreUsuario);
+                string pesoMiembro = valoresMiembro.Item1;
+                string tipo = valoresMiembro.Item2;
                 HttpContext.Session.SetString("PesoActual", pesoMiembro);
+                HttpContext.Session.SetString("TipoActual", tipo);
 
                 return RedirectToPage("/Perfil/Perfil");
             }

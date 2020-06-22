@@ -48,9 +48,9 @@ namespace Iteracion_2.Controllers
             return MiembroModel.IngresarCuenta(NombreUsuario);
         }
 
-        public string RetornarPesoMiembro(string NombreUsuario) {
+        public (string,string) RetornarPesoMiembroTipo(string NombreUsuario) {
             MiembroModel = new MiembroModel();
-            return MiembroModel.RetornarPesoMiembro(NombreUsuario);
+            return MiembroModel.RetornarPesoMiembroTipo(NombreUsuario);
         }
 
     }

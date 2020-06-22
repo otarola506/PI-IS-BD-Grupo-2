@@ -120,7 +120,7 @@ namespace Iteracion_2.Models
             return Existe;
         }
 
-        public string RetornarPesoMiembro(string NombreUsuario) {
+        public (string,string) RetornarPesoMiembroTipo(string NombreUsuario) {
             Connection();
             SqlCommand cmd = new SqlCommand("RecuperarPesoMiembro", con)
             {
@@ -130,14 +130,17 @@ namespace Iteracion_2.Models
             SqlDataReader reader = cmd.ExecuteReader();
 
             string peso = "";
+            string tipo = "";
             while (reader.Read())
             {
                 peso = reader[0].ToString();
+                tipo = reader[1].ToString();
             }
 
             con.Close();
-            return peso;
+            return (peso,tipo);
         }
+
 
 
         public List<String> RecuperarCorreosMiembros()
