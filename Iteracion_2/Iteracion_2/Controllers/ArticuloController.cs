@@ -16,6 +16,19 @@ namespace Iteracion_2.Controllers
             return ArticuloModel.RetornarPendientes();
         }
 
+        public string[] retornarDatos(int artId) {
+            ArticuloModel = new ArticuloModel();
+            return ArticuloModel.retornarDatos(artId);
+
+        }
+
+        public List<string> retornarAutor(int artId)
+        {
+            ArticuloModel = new ArticuloModel();
+            return ArticuloModel.retornarAutor(artId);
+
+        }
+
         public void MarcarArtSolicitado(int artID) {
             ArticuloModel = new ArticuloModel();
             ArticuloModel.MarcarArticuloSolicitado(artID);

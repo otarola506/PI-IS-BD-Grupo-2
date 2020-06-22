@@ -112,26 +112,58 @@ namespace Iteracion_2.Models
             return ArticulosPendientes;
         }
 
-        public List<List<string>> RetornarSolicitados(string nombreUsuarioActual)
+        public string[] retornarDatos(int artId) {
+            string[] info = new string[2];
+            string queryString = "SELECT titulo,resumen FROM Articulo  WHERE artIdPK = 1";
+           
+            Encoding unicode = Encoding.Unicode;
+            Connection();
+            
+
+            SqlCommand command = new SqlCommand(queryString, con)
+            {
+                CommandType = CommandType.Text
+            };
+            using (SqlDataReader reader = command.ExecuteReader())
+            {
+            
+                if (reader.Read()) {
+                    info[0] = reader["titulo"].ToString();
+                    byte[]  bytesResumen = (byte[])reader["resumen"];
+                    info[1] = Encoding.UTF8.GetString(bytesResumen);
+                }
+            }
+
+            con.Close();
+            return info;
+        }
+
+        public List<string> retornarAutor(int artId)
         {
-            List<List<string>> ArticulosSolicitados = new List<List<string>>();
-            string queryString = "SELECT A.artIdPK,A.titulo FROM Articulo A JOIN Nucleo_Solicita_Articulo NS ON A.artIdPK = NS.artIdFK WHERE NS.estadoSolicitud = 'solicitado' AND NS.nombreUsuarioFK = @nombreUsuario ORDER BY A.artIdPK";
+            List<string> autores = new List<string>();
+            string queryString = "SELECT M.nombre+' '+M.apellido AS 'Nombre' FROM Articulo A JOIN Miembro_Articulo MA  ON A.artIdPK = MA.artIdFK JOIN Miembro M  ON M.nombreUsuarioPK = MA.nombreUsuarioFK WHERE A.artIdPK = 1";
 
             Connection();
-            SqlDataAdapter sqlDa = new SqlDataAdapter(queryString, con);
-            sqlDa.SelectCommand.CommandType = CommandType.Text;
-            sqlDa.SelectCommand.Parameters.AddWithValue("@nombreUsuario", nombreUsuarioActual);
-            DataTable dTable = new DataTable();
-            sqlDa.Fill(dTable);
-            for (int index = 0; index < dTable.Rows.Count; index++)
+           
+
+            SqlCommand command = new SqlCommand(queryString, con)
             {
-                ArticulosSolicitados.Add(new List<string> {
-                                    dTable.Rows[index][0].ToString(), // artIdPK
-                                    dTable.Rows[index][1].ToString(), // titulo
-                                    });
+                CommandType = CommandType.Text
+            };
+            using (SqlDataReader reader = command.ExecuteReader())
+            {
+
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        autores.Add(reader[0].ToString());
+                    }
+                }
             }
+
             con.Close();
-            return ArticulosSolicitados;
+            return autores;
         }
     }
 }
