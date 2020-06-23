@@ -99,7 +99,7 @@ namespace Iteracion_2.Models
             MailMessage mm = new MailMessage();
             mm.To.Add(correo);
             mm.Subject = asunto;
-            AlternateView imgview = AlternateView.CreateAlternateViewFromString(mensaje + "<br/><img src=cid:imgpath height=200 width=400>", null, "text/html");
+            AlternateView imgview = AlternateView.CreateAlternateViewFromString(mensaje + "<br/><br/><img src=cid:imgpath height=200 width=400>", null, "text/html");
             LinkedResource lr = new LinkedResource(@"Images/shieldship.jpg", MediaTypeNames.Image.Jpeg);
             lr.ContentId = "imgpath";
             imgview.LinkedResources.Add(lr);

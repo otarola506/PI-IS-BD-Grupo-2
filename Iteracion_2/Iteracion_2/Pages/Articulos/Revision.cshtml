@@ -15,6 +15,12 @@
     </head>
     <body>
         <h3>Articulos pendientes de revisión</h3>
+        <div id="mensaje-respuesta">
+            @if (Model.Message != null)
+            {
+                <h4 style="color:green; text-align:center"> @Model.Message</h4>
+            }
+        </div>
 
         <ul class="article-list-basic">
             @for (int index = 0; index < Model.ArticulosPendientes.Count; index++)
@@ -47,8 +53,8 @@
                         <br />
                         <br />
 
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-articulo="@artIDPk" data-titulo="@titulo">Solicitar Colaboración</button>
-          
+                        <button type="button" class="btn btn-primary" data-toggle="modal" id="solicitar" data-target="#exampleModal" data-articulo="@artIDPk" data-titulo="@titulo">Solicitar Colaboración</button>
+
 
 
                         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -64,13 +70,13 @@
                                     <form asp-page-handler="send" method="post">
                                         <div class="modal-body">
                                             <input id="artId" type="hidden" name="artID" runat="server" />
-                                            <input id="titulo"type="hidden" name="titulo" runat="server" />
+                                            <input id="titulo" type="hidden" name="titulo" runat="server" />
                                         </div>
-                                        
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                            <button type="submit" class="btn btn-primary">Enviar Solicitud</button>
 
-                                       
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                        <button type="submit" class="btn btn-primary">Enviar Solicitud</button>
+
+
                                     </form>
                                 </div>
                             </div>

@@ -23,7 +23,7 @@ namespace Iteracion_2.Models
 
             Connection();
             List<string> Results = new List<string>();
-            string query = "SELECT nombreUsuarioPk FROM Miembro WHERE pesoMiembro = 5";
+            string query = "SELECT nombreUsuarioPk FROM Miembro WHERE pesoMiembro = 5 AND tipo = 'nucleo'";
             SqlCommand command = new SqlCommand(query, con)
             {
                 CommandType = CommandType.Text

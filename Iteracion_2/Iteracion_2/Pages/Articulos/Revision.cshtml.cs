@@ -16,14 +16,13 @@ namespace Iteracion_2.Pages.Articulos
         const string SessionKeyTipo = "TipoActual";
         private ArticuloController ArticuloController { get; set; }
         private EmailController EmailController { get; set; }
+
         
 
         public List<List<string>> ArticulosPendientes { get; set; }
 
         public string UsuarioActual { get; set; }
-        public int ArtId { get; set; }
-
-        public string Titulo { get; set; } 
+        public string Message;
 
         public IActionResult OnGet()
         {
@@ -36,6 +35,13 @@ namespace Iteracion_2.Pages.Articulos
             if (UsuarioActual != null && PesoActual == "5" && tipo == "coordinador")
             {
                 ArticulosPendientes = ArticuloController.RetornarPendientes();
+                object temp;
+                TempData.TryGetValue("resultadoSolicitud", out temp);
+
+                if (temp != null)
+                {
+                    Message = (string)temp;
+                }
                 return Page();
             }
             else {
@@ -50,9 +56,10 @@ namespace Iteracion_2.Pages.Articulos
             EmailController = new EmailController();
             ArticuloController.MarcarArtSolicitado(id);
             await EmailController.EnviarSolicitudNucleo(titulo);
+            TempData["resultadoSolicitud"] = "La solicitud ha sido enviada exitosamente a los miembro de núcleo";
 
-
-            return RedirectToPage("/Articulos/Revision");
+     
+            return new RedirectToPageResult("Revision"); ;
         }
 
     }

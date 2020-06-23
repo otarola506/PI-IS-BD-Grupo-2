@@ -12,4 +12,8 @@ $('#exampleModal').on('show.bs.modal', function (event) {
     modal.find('.modal-subtitle').text('New message to ' + artId)
     modal.find('.modal-body #artId').val(artId)
     modal.find('.modal-body #titulo').val(titulo)
+
 })
+
+
+
