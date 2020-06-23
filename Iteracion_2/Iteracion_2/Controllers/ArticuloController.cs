@@ -34,5 +34,10 @@ namespace Iteracion_2.Controllers
             ArticuloModel.MarcarArticuloSolicitado(artID);
 
         }
+
+        public void AsignarArticulo(int articuloId, List<String> revisores) {
+            ArticuloModel = new ArticuloModel();
+            ArticuloModel.AsignarArticulo(articuloId, revisores);
+        }
     }
 }

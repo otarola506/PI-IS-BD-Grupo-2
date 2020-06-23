@@ -11,12 +11,12 @@ namespace Iteracion_2.Models
     public class ArticuloModel
     {
         private SqlConnection con;
-        private ConexionModel connectionString { get; set; }
+        private ConexionModel ConnectionString { get; set; }
 
         public void Connection()
         {
-            connectionString = new ConexionModel();
-            con = connectionString.Connection();
+            ConnectionString = new ConexionModel();
+            con = ConnectionString.Connection();
         }
 
         public List<String> RecuperarNombresUsuarioNucleo() {
@@ -43,7 +43,7 @@ namespace Iteracion_2.Models
             List<String> nombresUsuarioNucleo = RecuperarNombresUsuarioNucleo();
             Connection();
             var query = "INSERT INTO Nucleo_Solicita_Articulo VALUES (@nombreUsuario,@artID,@estado)";
-            using (SqlCommand cmd = new SqlCommand(query,con))
+            using (SqlCommand cmd = new SqlCommand(query, con))
             {
                 for (int index = 0; index < nombresUsuarioNucleo.Count; index++)
                 {
@@ -59,7 +59,7 @@ namespace Iteracion_2.Models
             }
             con.Close();
 
-        }   
+        }
         public List<List<string>> RetornarPendientes() {
             List<List<string>> ArticulosPendientes = new List<List<string>>();
             string queryString = "SELECT A.artIdPK,A.titulo,A.resumen,M.nombre,M.nombreUsuarioPK FROM Articulo A JOIN Miembro_Articulo MA ON A.artIdPK = MA.artIdFK JOIN Miembro M  ON M.nombreUsuarioPK  = MA.nombreUsuarioFK WHERE A.estado = 'pendiente' ORDER BY A.artIdPK";
@@ -74,8 +74,8 @@ namespace Iteracion_2.Models
             DataTable dTable = new DataTable();
             SqlDataAdapter adapter = new SqlDataAdapter(command);
             adapter.Fill(dTable);
-            
-            for (int index=0; index<dTable.Rows.Count; index++) {
+
+            for (int index = 0; index < dTable.Rows.Count; index++) {
                 string idAnterior = "";
                 string idActual = dTable.Rows[index][0].ToString(); //ardIdPK actual
 
@@ -85,14 +85,14 @@ namespace Iteracion_2.Models
 
                 if (idActual != idAnterior) {
                     DataRow[] datosDeArticulo = dTable.Select("artIdPK = " + idActual); // devuelve los autores con ese artIdPK
-                    
+
                     string autores = "";
                     string usuarios = "";
-                    
-                    for (int indexJ=0; indexJ< datosDeArticulo.Length; indexJ++) {
+
+                    for (int indexJ = 0; indexJ < datosDeArticulo.Length; indexJ++) {
                         autores += datosDeArticulo[indexJ][3];
                         usuarios += datosDeArticulo[indexJ][4];
-                        if (indexJ < datosDeArticulo.Length-1) {
+                        if (indexJ < datosDeArticulo.Length - 1) {
                             autores += ",";
                             usuarios += ",";
                         }
@@ -115,10 +115,10 @@ namespace Iteracion_2.Models
         public string[] retornarDatos(int artId) {
             string[] info = new string[2];
             string queryString = "SELECT titulo,resumen FROM Articulo  WHERE artIdPK = 1";
-           
+
             Encoding unicode = Encoding.Unicode;
             Connection();
-            
+
 
             SqlCommand command = new SqlCommand(queryString, con)
             {
@@ -126,10 +126,10 @@ namespace Iteracion_2.Models
             };
             using (SqlDataReader reader = command.ExecuteReader())
             {
-            
+
                 if (reader.Read()) {
                     info[0] = reader["titulo"].ToString();
-                    byte[]  bytesResumen = (byte[])reader["resumen"];
+                    byte[] bytesResumen = (byte[])reader["resumen"];
                     info[1] = Encoding.UTF8.GetString(bytesResumen);
                 }
             }
@@ -144,7 +144,7 @@ namespace Iteracion_2.Models
             string queryString = "SELECT M.nombre+' '+M.apellido AS 'Nombre' FROM Articulo A JOIN Miembro_Articulo MA  ON A.artIdPK = MA.artIdFK JOIN Miembro M  ON M.nombreUsuarioPK = MA.nombreUsuarioFK WHERE A.artIdPK = 1";
 
             Connection();
-           
+
 
             SqlCommand command = new SqlCommand(queryString, con)
             {
@@ -164,6 +164,40 @@ namespace Iteracion_2.Models
 
             con.Close();
             return autores;
+        }
+
+        public void AsignarArticulo(int articuloId, List<String> revisores) {
+
+            Connection();
+
+            string query = "INSERT INTO dbo.Nucleo_Revisa_Articulo(nombreUsuarioFK, artIdFK) VALUES(@nombreUsuario, @articuloId)";
+            using (SqlCommand cmd = new SqlCommand(query, con))
+            {
+                for (int index = 0; index < revisores.Count; index++)
+                {
+                    cmd.Parameters.AddWithValue("@nombreUsuario", revisores[index]);
+                    cmd.Parameters.AddWithValue("@articuloId", articuloId);
+                    cmd.ExecuteNonQuery();
+                    cmd.Parameters.Clear();
+                }
+
+            }
+            ActualizarEstado(articuloId, "asignado");
+
+            con.Close();
+
+        }
+
+
+        private void ActualizarEstado(int articuloId, string estado) {
+            string query = "UPDATE Articulo SET estado = '@estado' WHERE artIdPK = @articuloId";
+            using (SqlCommand cmd = new SqlCommand(query, con))
+            {
+                cmd.Parameters.AddWithValue("@articuloId", articuloId);
+                cmd.Parameters.AddWithValue("@estado", estado);
+                cmd.ExecuteNonQuery();
+                cmd.Parameters.Clear();
+            }
         }
     }
 }

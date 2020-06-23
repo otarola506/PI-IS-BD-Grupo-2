@@ -15,6 +15,7 @@ namespace Iteracion_2.Pages.Articulos
         const string SessionKeyPeso = "PesoActual";
         const string SessionKeyTipo = "TipoActual";
         private ArticuloController ArticuloController { get; set; }
+        private MiembroController MiembroController { get; set; }
         private EmailController EmailController { get; set; }
         
 
@@ -57,13 +58,16 @@ namespace Iteracion_2.Pages.Articulos
 
         public async Task<IActionResult> OnPostAsignar()
         {
-            int id = Int32.Parse(Request.Form["artIdRevisar"]);
+            int articuloId = Int32.Parse(Request.Form["artIdRevisar"]);
             string titulo = Request.Form["tituloRevisar"];
             EmailController = new EmailController();
+            ArticuloController = new ArticuloController();
 
-            List<String> usuarios = new List<String> {"Coordinador","otarola506", "Dasc12"};
+            List<String> revisores = new List<String> {"Coordinador","otarola506", "Dasc12"};
 
-            await EmailController.CorreoANucleo(titulo,"asignar", usuarios);
+
+            ArticuloController.AsignarArticulo(articuloId, revisores);
+            await EmailController.CorreoANucleo(titulo,"asignar", revisores);
 
 
             return RedirectToPage("/Articulos/Revision");
