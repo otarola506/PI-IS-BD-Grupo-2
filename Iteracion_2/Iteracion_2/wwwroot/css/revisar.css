@@ -1,17 +1,22 @@
-﻿#revisores form {
-    display: inline-block;
+﻿.asignar {
+    background-color: #f2f2f2;
 }
+    .asignar #revisores h4 {
+        font-size: 18px;
+        font-family: Verdana;
+    }
 
-#revisores form {
-    display: inline-block;
-}
+    .asignar #revisores ul {
+        font-size: 20px;
+        padding: 4px
+    }
 
 #revisores a.close {
     float: right;
 }
 
 .close {
-    font-size: 15px;
+    font-size: 25px;
 }
 
 /*======================================================================*/

@@ -69,17 +69,15 @@ namespace Iteracion_2.Pages.Articulos
 
         public async Task<IActionResult> OnPostAsignar()
         {
+            List<String> revisores = new List<String> { "Coordinador", "otarola506", "Dasc12" };
             int articuloId = Int32.Parse(Request.Form["artIdRevisar"]);
             string titulo = Request.Form["tituloRevisar"];
+
             EmailController = new EmailController();
             ArticuloController = new ArticuloController();
 
-            List<String> revisores = new List<String> {"Coordinador","otarola506", "Dasc12"};
-
-
             ArticuloController.AsignarArticulo(articuloId, revisores);
-            await EmailController.CorreoANucleo(titulo,"asignar", revisores);
-
+            await EmailController.CorreoANucleo(titulo, "asignar", revisores);
 
             return RedirectToPage("/Articulos/Revision");
         }

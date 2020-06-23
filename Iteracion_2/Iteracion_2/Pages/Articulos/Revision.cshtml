@@ -64,8 +64,10 @@
                                         <input id="titulo" type="hidden" name="titulo" runat="server" />
                                     </div>
 
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                    <button type="submit" class="btn btn-primary">Enviar Solicitud</button>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                        <button type="submit" class="btn btn-primary">Enviar Solicitud</button>
+                                    </div>
                                 </form>
                             </div>
                         </div>
@@ -87,7 +89,7 @@
                                         <input id="artIdRevisar" type="hidden" name="artIdRevisar" runat="server" />
                                         <input id="tituloRevisar" type="hidden" name="tituloRevisar" runat="server" />
 
-                                        <div class="row">
+                                        <div class="row asignar">
                                             <div id="revisores" class="col-lg-5">
                                                 <h4><b>Revisores:</b></h4>
                                                 <div class="cantidad">
@@ -99,7 +101,7 @@
                                                 <h4><b>Respuestas:</b></h4>
                                                 <table class="responstable">
                                                     <tr>
-                                                        <th data-th="Driver details"><span>Nombre de Usuario</span></th>
+                                                        <th><span>Nombre de Usuario</span></th>
                                                         <th>Estado de la solicitud</th>
                                                         <th></th>
                                                     </tr>
