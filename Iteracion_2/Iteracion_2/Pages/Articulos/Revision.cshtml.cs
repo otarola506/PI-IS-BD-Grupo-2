@@ -59,9 +59,11 @@ namespace Iteracion_2.Pages.Articulos
         {
             int id = Int32.Parse(Request.Form["artIdRevisar"]);
             string titulo = Request.Form["tituloRevisar"];
+            EmailController = new EmailController();
 
+            List<String> usuarios = new List<String> {"Coordinador","otarola506", "Dasc12"};
 
-            await EmailController.CorreoANucleo(titulo,"asignar",null);
+            await EmailController.CorreoANucleo(titulo,"asignar", usuarios);
 
 
             return RedirectToPage("/Articulos/Revision");

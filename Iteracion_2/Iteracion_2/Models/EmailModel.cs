@@ -68,7 +68,7 @@ namespace Iteracion_2.Models
                     query = "SELECT nombreUsuarioPK,correo FROM Miembro WHERE pesoMiembro = 5";
                     break;
                 case 2:
-                    query = "SELECT nombreUsuarioPK,correo FROM Miembro WHERE pesoMiembro = 5 AND nombreUsuarioPK=" + usuario;
+                    query = "SELECT nombreUsuarioPK,correo FROM Miembro WHERE pesoMiembro = 5 AND nombreUsuarioPK='"+usuario+"'";
                     break;
                 default:
                     break;
@@ -106,7 +106,7 @@ namespace Iteracion_2.Models
             {
                 await CorreoDefault(CorreosNucleo[index][1],
                  "Asignación de revisión.",
-                 "Estimado " + CorreosNucleo[index][0] + " se le ha asignado para su revisión el artículo titulado '" + titulo+". Por favor revisarlo lo más antes posible.");
+                 "Estimado " + CorreosNucleo[index][0] + ", se le ha asignado para su revisión el artículo titulado '"+titulo+"'. Por favor revisarlo lo más antes posible.");
             }
         }
 
