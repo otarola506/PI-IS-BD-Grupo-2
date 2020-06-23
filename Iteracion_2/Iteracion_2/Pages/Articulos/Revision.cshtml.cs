@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Iteracion_2.Controllers;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Http;
-
+using HtmlAgilityPack;
 namespace Iteracion_2.Pages.Articulos
 {
     public class RevisionModel : PageModel
@@ -49,7 +49,19 @@ namespace Iteracion_2.Pages.Articulos
             ArticuloController = new ArticuloController();
             EmailController = new EmailController();
             ArticuloController.MarcarArtSolicitado(id);
-            await EmailController.EnviarSolicitudNucleo(titulo);
+            await EmailController.CorreoANucleo(titulo,"solicitar",null);
+
+
+            return RedirectToPage("/Articulos/Revision");
+        }
+
+        public async Task<IActionResult> OnPostAsignar()
+        {
+            int id = Int32.Parse(Request.Form["artIdRevisar"]);
+            string titulo = Request.Form["tituloRevisar"];
+
+
+            await EmailController.CorreoANucleo(titulo,"asignar",null);
 
 
             return RedirectToPage("/Articulos/Revision");
