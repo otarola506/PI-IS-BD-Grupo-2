@@ -26,7 +26,9 @@ namespace Iteracion_2.Pages.Articulos
 
         public string Titulo { get; set; } 
 
-        public IActionResult OnGet()
+        public List<List<String>> ResultadoSolicitud { get; set; }
+
+        public IActionResult OnGet(string envio, int articuloId)
         {
             UsuarioActual = HttpContext.Session.GetString(SessionKeyUsuario);
             string PesoActual = HttpContext.Session.GetString(SessionKeyPeso);
@@ -34,17 +36,26 @@ namespace Iteracion_2.Pages.Articulos
 
             ArticuloController = new ArticuloController();
 
-            if (UsuarioActual != null && PesoActual == "5" && tipo == "coordinador")
+            if (envio == "ajax")
             {
-                ArticulosPendientes = ArticuloController.RetornarPendientes();
+                RetornarResultadoSolicitud(articuloId);
                 return Page();
             }
-            else {
-                return RedirectToPage("/Cuenta/Ingresar", new {Mensaje = "Permisos insuficientes" });
+            else
+            {
+                if (UsuarioActual != null && PesoActual == "5" && tipo == "coordinador")
+                {
+                    ArticulosPendientes = ArticuloController.RetornarPendientes();
+                    return Page();
+                }
+                else
+                {
+                    return RedirectToPage("/Cuenta/Ingresar", new { Mensaje = "Permisos insuficientes" });
+                }
             }
         }
 
-        public async Task <IActionResult> OnPost() { 
+        public async Task <IActionResult> OnPost(string value) { 
             int id = Int32.Parse(Request.Form["artID"]);
             string titulo = Request.Form["titulo"];
             ArticuloController = new ArticuloController();
@@ -73,5 +84,10 @@ namespace Iteracion_2.Pages.Articulos
             return RedirectToPage("/Articulos/Revision");
         }
 
+        private void RetornarResultadoSolicitud(int articuloId) {
+            ArticuloController = new ArticuloController();
+
+            ResultadoSolicitud = ArticuloController.RetornarResultadoSolicitud(articuloId);
+        }
     }
 }

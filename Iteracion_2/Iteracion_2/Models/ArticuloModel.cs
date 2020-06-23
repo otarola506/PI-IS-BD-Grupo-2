@@ -188,7 +188,6 @@ namespace Iteracion_2.Models
 
         }
 
-
         private void ActualizarEstado(int articuloId, string estado) {
             string query = "UPDATE Articulo SET estado = '@estado' WHERE artIdPK = @articuloId";
             using (SqlCommand cmd = new SqlCommand(query, con))
@@ -198,6 +197,37 @@ namespace Iteracion_2.Models
                 cmd.ExecuteNonQuery();
                 cmd.Parameters.Clear();
             }
+        }
+
+        public List<List<String>> RetornarResultadoSolicitud(int articuloId)
+        {
+            List<List<String>> ResultadoSolicitud = new List<List<String>>();
+            string query = "SELECT NS.nombreUsuarioFK AS [Nombre de Usuario], NS.estadoSolicitud AS [Solicitud] FROM dbo.Nucleo_Solicita_Articulo NS WHERE NS.artIdFK = @articuloId";
+
+            Connection();
+
+            SqlCommand command = new SqlCommand(query, con)
+            {
+                CommandType = CommandType.Text    
+            };
+
+            command.Parameters.AddWithValue("@articuloId", articuloId);
+
+            using (SqlDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    ResultadoSolicitud.Add(new List<string> {
+                                                            reader[0].ToString(), //nombreUsuarioFK
+                                                            reader[1].ToString() //estadoSolicitud
+                                                            });
+                }
+
+            }
+
+            con.Close();
+
+            return ResultadoSolicitud;
         }
     }
 }

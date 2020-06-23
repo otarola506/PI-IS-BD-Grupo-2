@@ -45,3 +45,39 @@ $(document).ready(function () {
     });
 });
 
+
+$(".revi").click(function () {
+    var $fila = $(this).closest("tr");    // Find the row
+    var $revisor = $fila.find(".nombre-usuario").text(); // Find the text
+    var $boton = $fila.find("#agregar-revisor")
+
+    console.log($fila)
+
+    if ($('.cantidad #todo ul').length < 5) {
+        $('#todo').append("<ul>" + $revisor + " <a href='#' class='close' aria-hidden='true'>&times;</a></ul>");
+        console.log($('.cantidad #todo ul').length)
+        if ($('.cantidad #todo ul').length > 2) {
+            $(document.getElementById('finalizar').disabled = false)
+        }
+        $boton.disabled = true
+    }
+});
+
+$("body").on('click', '#todo a', function () {
+    $(this).closest("ul").remove();
+    console.log($('.cantidad #todo ul').length)
+    if ($('.cantidad #todo ul').length < 3) {
+        $(document.getElementById('finalizar').disabled = true)
+    }
+});
+
+function retSol(articuloId) {
+    $.ajax({
+        url: "/Articulos/Revision?envio=ajax&articuloId=" + articuloId,
+        type: "GET",
+        data: { articuloId },
+        dataType: "int",
+        async: true,
+        cache: false
+    });
+}

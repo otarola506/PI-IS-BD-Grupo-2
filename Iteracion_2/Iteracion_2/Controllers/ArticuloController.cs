@@ -39,5 +39,10 @@ namespace Iteracion_2.Controllers
             ArticuloModel = new ArticuloModel();
             ArticuloModel.AsignarArticulo(articuloId, revisores);
         }
+
+        public List<List<String>> RetornarResultadoSolicitud(int articuloId) {
+            ArticuloModel = new ArticuloModel();
+            return ArticuloModel.RetornarResultadoSolicitud(articuloId);
+        }
     }
 }

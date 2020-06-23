@@ -45,8 +45,8 @@
                     <a href="~/Articulos/FormularioRevision?artId=@artIDPk" class="read-more">Revisar</a>
                     <br />
                     <br />
-                    <a href="#exampleModal" type="button" class="read-more" data-toggle="modal" data-target="#exampleModal" data-articulo="@artIDPk" data-titulo="@titulo">Solicitar Colaboración</a>
-                    <a href="#exampleModalLong" type="button" class="read-more" data-toggle="modal" data-target="#exampleModalLong" data-articulo="@artIDPk" data-titulo="@titulo">Asignar revisor</a>
+                    <a href="#exampleModal" type="button" class="read-more openModal" data-toggle="modal" data-target="#exampleModal" data-articulo="@artIDPk" data-titulo="@titulo">Solicitar Colaboración</a>
+                    <a href="#exampleModalLong" type="button" onclick="retSol(@artIDPk)" class="read-more" data-toggle="modal" data-target="#exampleModalLong" data-articulo="@artIDPk" data-titulo="@titulo">Asignar revisor</a>
 
                     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
@@ -83,52 +83,48 @@
                                 </div>
                                 <form asp-page-handler="send" method="post">
                                     <div class="modal-body">
+
                                         <input id="artIdRevisar" type="hidden" name="artIdRevisar" runat="server" />
                                         <input id="tituloRevisar" type="hidden" name="tituloRevisar" runat="server" />
 
                                         <div class="row">
                                             <div id="revisores" class="col-lg-5">
-                                                <h4><b>Revisor</b></h4>
-                                                <div class="form-group">
-
-                                                    <input type="text" class="form-control" placeholder="usuario" name="task" maxlength="49">
-
-                                                    <button id="agrega-revisor" type="button">Agregar</button>
-                                                </div>
+                                                <h4><b>Revisores:</b></h4>
                                                 <div class="cantidad">
                                                     <ul class="list-unstyled" id="todo"></ul>
                                                 </div>
-
                                             </div>
 
-
-                                            <div class="col-lg-7">
+                                            <div id="solicitudes" class="col-lg-7">
                                                 <h4><b>Respuestas:</b></h4>
-                                                Aliquam maximus imperdiet lectus, in porttitor odio.
-                                                Etiam congue enim turpis, ac pharetra odio convallis a.
-                                                Proin consectetur odio in mattis commodo.
-                                                Aliquam maximus imperdiet lectus, in porttitor odio.
-                                                Etiam congue enim turpis, ac pharetra odio convallis a.
-                                                Proin consectetur odio in mattis commodo.
-                                                Aliquam maximus imperdiet lectus, in porttitor odio.
-                                                Etiam congue enim turpis, ac pharetra odio convallis a.
-                                                Proin consectetur odio in mattis commodo.
-                                                Aliquam maximus imperdiet lectus, in porttitor odio.
-                                                Etiam congue enim turpis, ac pharetra odio convallis a.
-                                                Proin consectetur odio in mattis commodo.
-                                                Aliquam maximus imperdiet lectus, in porttitor odio.
-                                                Etiam congue enim turpis, ac pharetra odio convallis a.
-                                                Proin consectetur odio in mattis commodo.
-                                                Aliquam maximus imperdiet lectus, in porttitor odio.
-                                                Etiam congue enim turpis, ac pharetra odio convallis a.
-                                                Proin consectetur odio in mattis commodo.
-                                                Aliquam maximus imperdiet lectus, in porttitor odio.
-                                                Etiam congue enim turpis, ac pharetra odio convallis a.
-                                                Aliquam maximus imperdiet lectus, in porttitor odio.
-                                                Etiam congue enim turpis, ac pharetra odio convallis a.
-                                                Proin consectetur odio in mattis commodo.
+                                                <table class="responstable">
+                                                    <tr>
+                                                        <th data-th="Driver details"><span>Nombre de Usuario</span></th>
+                                                        <th>Estado de la solicitud</th>
+                                                        <th></th>
+                                                    </tr>
+                                                    @{
+                                                        
+                                                        for (int indexJ = 0; indexJ < 10; indexJ++)
+                                                        {
+                                                            <tr>
+                                                                <td class="nombre-usuario">Usuario#@indexJ</td>
+                                                                <td id="estado-solicitud">Aceptado</td>
+                                                                <td><input class="revi" id="agregar-revisor" type="button" value="Agregar" /></td>
+                                                            </tr>
+                                                        }
 
-                                                Proin consectetur odio in mattis commodo.
+                                                        /*
+                                                        for (int indexJ = 0; indexJ < Model.ResultadoSolicitud.Count; indexJ++)
+                                                        {
+                                                            <tr>
+                                                                <td class="nombre-usuario">Model.ResultadoSolicitud[0][0]</td>
+                                                                <td id="estado-solicitud">Model.ResultadoSolicitud[0][1]</td>
+                                                                <td><input class="revi" id="agregar-revisor" type="button" value="Agregar" /></td>
+                                                            </tr>
+                                                        }*/
+                                                    }
+                                                </table>
                                             </div>
                                         </div>
                                     </div>
