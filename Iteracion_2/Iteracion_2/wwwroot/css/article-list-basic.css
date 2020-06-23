@@ -38,7 +38,7 @@
                 width: 100%;
             }
 
-        .article-list-basic li div {
+        .article-list-basic > li > div {
             padding: 25px 20px;
         }
 
