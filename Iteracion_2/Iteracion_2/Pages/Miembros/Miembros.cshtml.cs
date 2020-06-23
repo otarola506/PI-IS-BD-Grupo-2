@@ -11,6 +11,8 @@ namespace Iteracion_2.Pages.Miembros
 {
     public class MiembrosModel : PageModel
     {
+        const string SessionKeyUsuario = "UsuarioActual";
+        const string SessionKeyPeso = "PesoActual";
         private MiembroController MiembroController { get; set; }
 
         public List<List<string>> MiembrosComunidad { get; set; }
@@ -20,7 +22,7 @@ namespace Iteracion_2.Pages.Miembros
         public string PesoMiembroActual { get; set; }
 
 
-        const string SessionKeyUsuario = "UsuarioActual";
+        
 
         [BindProperty]
         public string NombreUsuario { get; set; }
@@ -31,18 +33,13 @@ namespace Iteracion_2.Pages.Miembros
         {
             MiembroController = new MiembroController();
             string UsuarioActual = HttpContext.Session.GetString(SessionKeyUsuario);
+            PesoMiembroActual = HttpContext.Session.GetString(SessionKeyPeso);
 
-            var valoresMiembro = MiembroController.RetornarMiembros(UsuarioActual);
-            MiembrosComunidad = valoresMiembro.Item1;
-            PesoMiembroActual = valoresMiembro.Item2;
+            MiembrosComunidad = MiembroController.RetornarMiembros();
 
             if (Retroalimentacion != null)
             {
-
-
                 Mensaje = Retroalimentacion;
-
-
             }
 
             return Page();
