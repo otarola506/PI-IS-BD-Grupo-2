@@ -24,10 +24,7 @@ namespace Iteracion_2.Pages.Analitica
 
         DistribucionMiembroController ControladorDistribucion { get; set; }
 
-        public void OnGet()
-        {
-
-        }
+        public void OnGet() { }
 
         public ActionResult OnGetChartData(string val)
         {
@@ -55,41 +52,15 @@ namespace Iteracion_2.Pages.Analitica
                 string[] Selecciones = new string[2];
                 Selecciones = val.Split(',');
                 ControladorDistribucion = new DistribucionMiembroController();
-                //List<List<string>> ValoresGrafico = new List<List<string>>();
-                ValoresGrafica = ControladorDistribucion.ComunicarDatosDistrubucion(Selecciones);
 
-                string[] temp = new string[ValoresGrafica.Count];
+                var reporte = ControladorDistribucion.ComunicarDatosDistrubucion(Selecciones);
 
-                for (int i=0; i<ValoresGrafica.Count; i++) {
-                    temp.Append(ValoresGrafica[i][0], ValoresGrafica[i][1])
-                }
-
-                var paises = new[]
-                {
-                    new {Name = "Costa Rica", Count = 2},
-                    new {Name = "USA", Count = 1},
-                    new {Name = "Korea", Count = 6},
-                    new {Name = "Canada", Count = 3},
-                    new {Name = "Peru", Count = 6}
-                };
-
-
-                //for (int i = 0; i < ValoresGrafica.Count; i++)
-                //{
-                //    paises = new[]
-                //    {
-                //        new {Name = ValoresGrafica[i][0], Count = Int16.Parse(ValoresGrafica[i][1])}
-                //    };
-                //}
-
-                json = paises.ToGoogleDataTable()
-                        .NewColumn(new Column(ColumnType.String, "Paises"), x => x.Name)
-                        .NewColumn(new Column(ColumnType.Number, "Cantidad"), x => x.Count)
+                json = reporte.ToGoogleDataTable()
+                        .NewColumn(new Column(ColumnType.String, "Paises"), x => x.Pais)
+                        .NewColumn(new Column(ColumnType.Number, "Cantidad"), x => x.Cantidad)
                         .Build()
                         .GetJson();
             }
-
-            
 
             return Content(json);
         }

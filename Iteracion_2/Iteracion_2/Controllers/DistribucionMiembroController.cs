@@ -11,15 +11,11 @@ namespace Iteracion_2.Controllers
         DistribucionMiembroModel ModeloDistribucion { get; set; }
         
 
-        public List<List<string >> ComunicarDatosDistrubucion(string [] Valores )
+        public List<ReporteConfigurable> ComunicarDatosDistrubucion(string [] Valores )
         {
             ModeloDistribucion = new DistribucionMiembroModel();
             
-            List<List<string>> Retorno = new List<List<string>>();
-
-            Retorno = ModeloDistribucion.EncontrarValoresDistribucion(Valores);
-
-            return Retorno;
+            return ModeloDistribucion.EncontrarValoresDistribucion(Valores);
         }
 
 
