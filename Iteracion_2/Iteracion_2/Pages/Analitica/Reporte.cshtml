@@ -1,0 +1,58 @@
+﻿@page
+@model Iteracion_2.Pages.Analitica.ReporteModel
+@{
+    ViewData["Title"] = "Reporte";
+}
+
+<div id="chart"></div>
+
+<input type="text" id="tipo" value="" />
+<button onclick="drawChart()">DIBUJAR MIEDO</button>
+
+@section Scripts
+    {
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <script type="text/javascript">
+        google.charts.load('current', { 'packages': ['corechart'] });
+        google.charts.setOnLoadCallback(drawChart);
+        function drawChart(e) {
+
+            if (e == 0) {
+                console.log("get?")
+                var jsonData = $.ajax({
+                    url: "/Analitica/Reporte?handler=ChartData",
+                    dataType: "json",
+                    async: false
+                }).responseText;
+                var data = new google.visualization.DataTable(jsonData);
+                var options = {
+                    'title': 'How Much Pizza I Ate Last Night',
+                    'width': 600,
+                    'height': 500
+                };
+            } else {
+                console.log("get?")
+                const tipo = document.getElementById('tipo').value;
+
+                console.log(tipo);
+
+                var jsonData = $.ajax({
+                    url: "/Analitica/Reporte?handler=ChartData&val=" + tipo,
+                    dataType: "json",
+                    async: false
+                }).responseText;
+                var data = new google.visualization.DataTable(jsonData);
+                var options = {
+                    'title': 'Reporte por: '+tipo,
+                    'width': 600,
+                    'height': 500
+                };
+            }
+            
+
+            var chart = new google.visualization.PieChart(document.getElementById('chart'));
+            chart.draw(data, options);
+        }
+    </script>
+}
