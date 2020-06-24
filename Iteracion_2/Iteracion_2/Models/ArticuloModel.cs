@@ -261,7 +261,7 @@ namespace Iteracion_2.Models
 
             Connection();
 
-            string query = "INSERT INTO dbo.Nucleo_Revisa_Articulo(nombreUsuarioFK, artIdFK) VALUES(@nombreUsuario, @articuloId)";
+            string query = "INSERT INTO dbo.Nucleo_Revisa_Articulo(nombreUsuarioFK, artIdFK, estadoRevision) VALUES(@nombreUsuario, @articuloId, 'asignado')";
             using (SqlCommand cmd = new SqlCommand(query, con))
             {
                 for (int index = 0; index < revisores.Length; index++)
@@ -280,7 +280,7 @@ namespace Iteracion_2.Models
         }
 
         private void ActualizarEstado(int articuloId, string estado) {
-            string query = "UPDATE Articulo SET estado = '@estado' WHERE artIdPK = @articuloId";
+            string query = "UPDATE Articulo SET estado = @estado WHERE artIdPK = @articuloId";
             using (SqlCommand cmd = new SqlCommand(query, con))
             {
                 cmd.Parameters.AddWithValue("@articuloId", articuloId);

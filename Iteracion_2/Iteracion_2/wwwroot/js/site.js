@@ -16,38 +16,32 @@ $('#exampleModal').on('show.bs.modal', function (event) {
 })
 
 $(document).ready(function () {
-    $(document.getElementById('agrega-revisor')).click(function () {
-        if ($('.cantidad #todo ul').length < 5) {
-            $('#todo').append("<ul>" + $("input[name=task]").val() + " <a href='#' class='close' aria-hidden='true'>&times;</a></ul>");
-            if ($('.cantidad #todo ul').length > 2) {
-                $(document.getElementById('finalizar').disabled = false)
-            }
-        }
-    });
-
     $("body").on('click', '#todo a', function () {
+        var $fila = $(this).closest("ul");   
+
         $(this).closest("ul").remove();
-        if ($('.cantidad #todo ul').length < 3) {
-            $(document.getElementById('finalizar').disabled = true)
-        }
+
+        $listaAsignados.pop()
+
+        console.log($fila)
     });
 });
 
 var $lista = "";
+
+var $listaAsignados = [];
 
 $(".revi").click(function () {
     var $fila = $(this).closest("tr");    // Find the row
     var $revisor = $fila.find(".nombre-usuario").text(); // Find the text
     var $boton = $fila.find("#agregar-revisor")
 
-    $lista += $revisor+","
-    $(document.getElementById('lista-revisores')).val($lista)
+    if ($('.cantidad #todo ul').length < 5 && $listaAsignados.indexOf($revisor) == -1) {
+        $listaAsignados.push($revisor)
+        console.log($listaAsignados)
+        
+        $('#todo').append("<ul id='item-revisor'>" + $revisor + " <a href='#' class='close' aria-hidden='true'>&times;</a></ul>");
 
-    console.log($(document.getElementById('lista-revisores')))
-
-    if ($('.cantidad #todo ul').length < 5) {
-        $('#todo').append("<ul>" + $revisor + " <a href='#' class='close' aria-hidden='true'>&times;</a></ul>");
-        console.log($('.cantidad #todo ul').length)
         if ($('.cantidad #todo ul').length > 2) {
             $(document.getElementById('finalizar').disabled = false)
         }
@@ -55,21 +49,16 @@ $(".revi").click(function () {
     }
 });
 
-$("body").on('click', '#todo a', function () {
-    $(this).closest("ul").remove();
-    console.log($('.cantidad #todo ul').length)
-    if ($('.cantidad #todo ul').length < 3) {
-        $(document.getElementById('finalizar').disabled = true)
-    }
-});
+$('#finalizar').click(function () {
+    var revisores = $(document.getElementById('lista-revisores'));
 
-function retSol(articuloId) {
-    $.ajax({
-        url: "/Articulos/Revision?envio=ajax&articuloId=" + articuloId,
-        type: "GET",
-        data: { articuloId },
-        dataType: "int",
-        async: true,
-        cache: false
-    });
-}
+    var $temp = ""
+    for (let i = 0; i < $listaAsignados.length; i++) {
+        $temp += $listaAsignados[i] + ","
+    }
+
+    revisores.val($temp)
+
+    console.log($temp)
+
+});

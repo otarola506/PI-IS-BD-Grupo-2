@@ -63,7 +63,7 @@
                     @if (Model.TipoUsuarioActual == "coordinador")
                     {
                         <a href="#exampleModal" type="button" class="read-more openModal" data-toggle="modal" data-target="#exampleModal" data-articulo="@artIDPk" data-titulo="@titulo">Solicitar Colaboración</a>
-                        <a href="~/Articulos/AsignarRevisor?articuloId=@artIDPk" type="button" class="read-more">Asignar revisor</a>
+                        <a href="~/Articulos/AsignarRevisor?articuloId=@artIDPk&titulo=@titulo" type="button" class="read-more">Asignar revisor</a>
                     }
                     else
                     {
