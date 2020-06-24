@@ -139,5 +139,33 @@ namespace Iteracion_2.Models
             return peso;
         }
 
+
+        public List<String> RecuperarCorreosMiembros()
+        {
+            Connection();
+            List<string> Results = new List<string>();
+            string query = "SELECT correo FROM Miembro";
+            SqlCommand command = new SqlCommand(query, con)
+            {
+                CommandType = CommandType.Text
+            };
+            using (SqlDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    Results.Add(reader["correo"].ToString());
+                }
+
+            }
+            con.Close();
+            return Results;
+
+
+
+
+        }
+
     }
+
+    
 }

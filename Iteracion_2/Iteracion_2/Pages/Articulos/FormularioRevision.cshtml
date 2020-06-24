@@ -1,0 +1,157 @@
+﻿
+
+@page
+@using Microsoft.AspNetCore.Http;
+@model Iteracion_2.Pages.Articulos.FormularioRevisionModel
+@{
+    ViewData["Title"] = "FormularioRevision";
+}
+
+
+
+
+
+<h2>Formulario de Revision</h2>
+
+<div class="container">
+    @if ((HttpContext.Session.GetString("PesoActual") == "5") || ((HttpContext.Session.GetString("PesoActual") == "5")))
+    {
+        <label for="inputName" style="color:red;"> @ViewData["Message"] </label>
+        <div class="row">
+            <br />
+            <div class="col-md-7   " >
+                <div class="col-lg-10 " style=" background-color:#E3E4E5;border-radius:9px 9px 9px 9px; height:600px; border-style:solid;" >
+             
+                    <h4><b>@Model.informacionArticulo[0]</b></h4>
+                    <br>
+                    <h4><b>Autores</b></h4>
+                    
+                    <p>@Model.autores</p>
+                    <br>
+                    <h4><b>Resumen</b></h4>
+                    <p>@Model.informacionArticulo[1] </p>
+                </div>
+            
+            
+            </div>
+            <div class="col-md-5 col-lg-offset-0" >
+                <div class="col-lg-11 " style="background-color:#3B83BD; border-style:solid; border-radius:9px 9px 9px 9px; height:600px;"  >
+                    <h3><b>Formulario de Revision</b></h3>
+                    <br>
+                    
+                    <form method="post">
+                        <div class="row">
+                            <div class="col-lg-4 col-lg-offset-1">
+                                <label for="Opinion general">Opinión General</label>
+                            </div>
+                            <div class="col-lg-5 col-lg-offset-1">
+                                <select class="form-control" id="sel1" name="Opinion">
+                                    <option value="">Seleccione Nota</option>
+                                    <option value=0>0</option>
+                                    <option value=1>1</option>
+                                    <option value=2>2</option>
+                                    <option value=3>3</option>
+                                    <option value=4>4</option>
+                                    <option value=5>5</option>
+                                </select>
+                            </div>
+                        </div>
+                        <br>
+                        <br>
+                        <br>
+
+                        <div class="row">
+                            <div class="col-lg-4 col-lg-offset-1">
+                                <label for="Contribucion">Contribución</label>
+
+                            </div>
+                            <div class="col-lg-5 col-lg-offset-1">
+                                <select class="form-control" id="sel2" name="Contribucion">
+                                    <option value="">Seleccione Nota</option>
+                                    <option value=0>0</option>
+                                    <option value=1>1</option>
+                                    <option value=2>2</option>
+                                    <option value=3>3</option>
+                                    <option value=4>4</option>
+                                    <option value=5>5</option>
+                                </select>
+                            </div>
+                        </div>
+                        <br>
+                        <br>
+                        <br>
+
+                        <div class="row">
+                            <div class="col-lg-4 col-lg-offset-1">
+                                <label for="Forma">Forma del articulo</label>
+
+                            </div>
+                            <div class="col-lg-5 col-lg-offset-1">
+                                <select class="form-control" id="sel3" name="Forma">
+                                    <option value="">Seleccione Nota</option>
+                                    <option value=0>0</option>
+                                    <option value=1>1</option>
+                                    <option value=2>2</option>
+                                    <option value=3>3</option>
+                                    <option value=4>4</option>
+                                    <option value=5>5</option>
+                                </select>
+                            </div>
+                        </div>
+                        <br>
+
+
+
+                        <br>
+
+                        <div class="row">
+                            <div class="col-lg-4 col-lg-offset-1">
+                                <label for="Observaciones">Observaciones</label>
+
+                            </div>
+                            <div class="col-lg-9 col-lg-offset-1">
+                                <textarea class="form-control" rows="5" id="comment" name="comentarios"></textarea>
+                            </div>
+                        </div>
+                        <br />
+
+                        <div class="row">
+                            <div class="col-lg-4 col-lg-offset-1">
+                                <button type="submit" class="btn btn-success" onclick="retroalimentacion()">Enviar</button>
+
+                            </div>
+
+                        </div>
+
+                        
+
+
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    }
+    else if ((HttpContext.Session.GetString("PesoActual") == "0") || (HttpContext.Session.GetString("PesoActual") == "3"))
+    {
+        <div>
+            <h3>Usted no tiene el rango requerido para esta accion.</h3>
+        </div>
+
+
+    }
+    else
+    {
+        Response.Redirect("/Cuenta/Ingresar");
+
+    }
+
+</div>
+
+
+
+<script>
+    function retroalimentacion() {
+        alert("Se envio su revision.");
+    }
+</script>

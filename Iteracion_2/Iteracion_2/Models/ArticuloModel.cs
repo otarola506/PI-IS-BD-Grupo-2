@@ -11,18 +11,60 @@ namespace Iteracion_2.Models
     public class ArticuloModel
     {
         private SqlConnection con;
+        private ConexionModel connectionString { get; set; }
+
         public void Connection()
         {
-            string conString = @"Server=172.16.202.75;Database=BD_Grupo2;persist security info=True;MultipleActiveResultSets=True;User ID=Grupo2;Password=grupo2.";
-            con = new SqlConnection(conString);
+            connectionString = new ConexionModel();
+            con = connectionString.Connection();
         }
 
+        public List<String> RecuperarNombresUsuarioNucleo() {
+
+            Connection();
+            List<string> Results = new List<string>();
+            string query = "SELECT nombreUsuarioPk FROM Miembro WHERE pesoMiembro = 5";
+            SqlCommand command = new SqlCommand(query, con)
+            {
+                CommandType = CommandType.Text
+            };
+            using (SqlDataReader reader = command.ExecuteReader()) {
+                while (reader.Read()) {
+                    Results.Add(reader["nombreUsuarioPk"].ToString());
+                }
+
+            }
+            con.Close();
+            return Results;
+        }
+
+        public void MarcarArticuloSolicitado(int artIdPk)
+        {
+            List<String> nombresUsuarioNucleo = RecuperarNombresUsuarioNucleo();
+            Connection();
+            var query = "INSERT INTO Nucleo_Solicita_Articulo VALUES (@nombreUsuario,@artID,@estado)";
+            using (SqlCommand cmd = new SqlCommand(query,con))
+            {
+                for (int index = 0; index < nombresUsuarioNucleo.Count; index++)
+                {
+                    cmd.Parameters.AddWithValue("@nombreUsuario", nombresUsuarioNucleo[index]);
+                    cmd.Parameters.AddWithValue("@artID", artIdPk);
+                    cmd.Parameters.AddWithValue("@estado", "solicitado");
+                    cmd.ExecuteNonQuery();
+                    cmd.Parameters.Clear();
+
+
+                }
+
+            }
+            con.Close();
+
+        }   
         public List<List<string>> RetornarPendientes() {
             List<List<string>> ArticulosPendientes = new List<List<string>>();
             string queryString = "SELECT A.artIdPK,A.titulo,A.resumen,M.nombre,M.nombreUsuarioPK FROM Articulo A JOIN Miembro_Articulo MA ON A.artIdPK = MA.artIdFK JOIN Miembro M  ON M.nombreUsuarioPK  = MA.nombreUsuarioFK WHERE A.estado = 'pendiente' ORDER BY A.artIdPK";
 
             Connection();
-            con.Open();
 
             SqlCommand command = new SqlCommand(queryString, con)
             {
@@ -58,7 +100,7 @@ namespace Iteracion_2.Models
 
                     ArticulosPendientes.Add(new List<string> {
                                     dTable.Rows[index][0].ToString(), // artIdPK
-                                    dTable.Rows[index][1].ToString(), // titulo
+                                        dTable.Rows[index][1].ToString(), // titulo
                                     autores,
                                     usuarios,
                             });
@@ -68,6 +110,60 @@ namespace Iteracion_2.Models
             con.Close();
 
             return ArticulosPendientes;
+        }
+
+        public string[] retornarDatos(string artId) {
+            string[] info = new string[2];
+            string queryString = "SELECT titulo,resumen FROM Articulo  WHERE artIdPK = "+artId;
+           
+            Encoding unicode = Encoding.Unicode;
+            Connection();
+            
+
+            SqlCommand command = new SqlCommand(queryString, con)
+            {
+                CommandType = CommandType.Text
+            };
+            using (SqlDataReader reader = command.ExecuteReader())
+            {
+            
+                if (reader.Read()) {
+                    info[0] = reader["titulo"].ToString();
+                    byte[]  bytesResumen = (byte[])reader["resumen"];
+                    info[1] = Encoding.UTF8.GetString(bytesResumen);
+                }
+            }
+
+            con.Close();
+            return info;
+        }
+
+        public List<string> retornarAutor(string artId)
+        {
+            List<string> autores = new List<string>();
+            string queryString = "SELECT M.nombre+' '+M.apellido AS 'Nombre' FROM Articulo A JOIN Miembro_Articulo MA  ON A.artIdPK = MA.artIdFK JOIN Miembro M  ON M.nombreUsuarioPK = MA.nombreUsuarioFK WHERE A.artIdPK = "+artId;
+
+            Connection();
+           
+
+            SqlCommand command = new SqlCommand(queryString, con)
+            {
+                CommandType = CommandType.Text
+            };
+            using (SqlDataReader reader = command.ExecuteReader())
+            {
+
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        autores.Add(reader[0].ToString());
+                    }
+                }
+            }
+
+            con.Close();
+            return autores;
         }
     }
 }

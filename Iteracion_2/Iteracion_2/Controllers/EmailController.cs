@@ -12,11 +12,13 @@ namespace Iteracion_2.Controllers
 {
     public class EmailController
     {
-        public Email sendMail { get; set; }
+        public EmailModel sendMail { get; set; }
         public PerfilModel perf { get; set; }
-        
+
+        public MiembroModel Miembros { get; set; }
+
         public async Task enviarCorreo(string destinatario, string asunto, string contenido,IFormFile archivo) {
-            sendMail = new Email();
+            sendMail = new EmailModel();
             await sendMail.enviarCorreo(destinatario,asunto,contenido,archivo);
             
 
@@ -31,18 +33,25 @@ namespace Iteracion_2.Controllers
 
         public async Task enviarSolicitud(string contenido, string Usuario)
         {
-            sendMail = new Email();
+            sendMail = new EmailModel();
             await sendMail.enviarSolicitud(contenido, Usuario);
         }
 
         public List<string> recuperarCorreos() {
-            perf = new PerfilModel();
-            return perf.recuperarCorreos();
+            Miembros= new MiembroModel();
+            return Miembros.RecuperarCorreosMiembros();
         }
 
         public string obtenerCorreo(string Usuario) {
             perf = new PerfilModel();
             return perf.obtenerCorreo(Usuario);
+        }
+
+        public async Task EnviarSolicitudNucleo(string titulo) {
+            sendMail =  new EmailModel();
+            await sendMail.EnviarSolicitudNucleo(titulo);
+
+
         }
     }
 }
