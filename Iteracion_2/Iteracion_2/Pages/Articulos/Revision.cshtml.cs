@@ -70,13 +70,13 @@ namespace Iteracion_2.Pages.Articulos
             
         }
 
-        public async Task <IActionResult> OnPost(string value) { 
+        public async Task <IActionResult> OnPost() { 
             int id = Int32.Parse(Request.Form["artID"]);
             string titulo = Request.Form["titulo"];
             ArticuloController = new ArticuloController();
             EmailController = new EmailController();
             ArticuloController.MarcarArtSolicitado(id);
-            TempData["resultadoSolicitud"] = "La solicitud ha sido enviada exitosamente a los miembro de núcleo";
+            TempData["resultadoSolicitud"] = "La solicitud ha sido enviada exitosamente a los miembros de núcleo";
             await EmailController.CorreoANucleo(titulo,"solicitar",null);
 
 
@@ -85,26 +85,26 @@ namespace Iteracion_2.Pages.Articulos
 
         public async Task<IActionResult> OnPostAceptar()
         {
+            UsuarioActual = HttpContext.Session.GetString(SessionKeyUsuario);
             int id = Int32.Parse(Request.Form["artID"]);
-            string titulo = Request.Form["titulo"]; 
+            string titulo = Request.Form["titulo"];
+            string estado = Request.Form["estado"];
             ArticuloController = new ArticuloController();
             EmailController = new EmailController();
-            ArticuloController.ModificarEstadoSolicitud(id, UsuarioActual, "aceptado");
             TempData["resultadoSolicitud"] = "La respuesta ha sido enviada al coordinador exitosamente";
-            await EmailController.CorreoACoordinadores(titulo, "aceptado", UsuarioActual);           
+            if (estado == "aceptado")
+            {
+                ArticuloController.ModificarEstadoSolicitud(id, UsuarioActual, "aceptado");
+                await EmailController.CorreoACoordinadores(titulo, "aceptado", UsuarioActual);
+            }
+            else
+            {
+                ArticuloController.ModificarEstadoSolicitud(id, UsuarioActual, "rechazado");
+                await EmailController.CorreoACoordinadores(titulo, "rechazado", UsuarioActual);
+            }
+              
             return RedirectToPage("/Articulos/Revision");
         }
 
-        public async Task<IActionResult> OnPostRechazar()
-        {
-            int id = Int32.Parse(Request.Form["artID"]);
-            string titulo = Request.Form["titulo"]; 
-            ArticuloController = new ArticuloController();
-            EmailController = new EmailController();
-            ArticuloController.ModificarEstadoSolicitud(id, UsuarioActual, "rechazado");
-            TempData["resultadoSolicitud"] = "La respuesta ha sido enviada al coordinador exitosamente";
-            await EmailController.CorreoACoordinadores(titulo, "rechazado", UsuarioActual);
-            return RedirectToPage("/Articulos/Revision");
-        }
     }
 }

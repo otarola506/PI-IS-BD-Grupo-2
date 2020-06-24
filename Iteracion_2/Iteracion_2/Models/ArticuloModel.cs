@@ -323,7 +323,8 @@ namespace Iteracion_2.Models
 
         public void ModificarEstadoSolicitud(int artID, string nombreUsuarioActual, string estadoSolicitud)
         {
-            string query = "UPDATE Nucleo_Solicita_Articulo SET estadoSolicitud = '@estado' WHERE artIdFK = @articuloId AND nombreUsuarioFK = @nombreUsuario";
+            Connection();
+            string query = "UPDATE Nucleo_Solicita_Articulo SET estadoSolicitud = @estado WHERE artIdFK = @articuloId AND nombreUsuarioFK = @nombreUsuario";
             using (SqlCommand cmd = new SqlCommand(query, con))
             {
                 cmd.Parameters.AddWithValue("@articuloId", artID);
