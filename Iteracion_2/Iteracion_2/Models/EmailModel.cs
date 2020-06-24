@@ -23,7 +23,7 @@ namespace Iteracion_2.Models
             ConnectionString = new ConexionModel();
             Con = ConnectionString.Connection();
         }
-        public async Task enviarCorreo(string destinatario, string asunto, string contenido,IFormFile archivo) {
+        public async Task EnviarCorreo(string destinatario, string asunto, string contenido,IFormFile archivo) {
             
             MailMessage mm = new MailMessage();
             mm.To.Add(destinatario);
@@ -52,17 +52,28 @@ namespace Iteracion_2.Models
 
         }
 
-        public async Task enviarSolicitud(string contenido,string Usuario)
+        public async Task EnviarSolicitud(string contenido,string Usuario)
         {
             await CorreoDefault("comunidadshieldship@gmail.com", "Solicitud de promocion de rango de " + Usuario, contenido);
-
-           
         }
 
-        public List<List<String>> RecuperarCorreosNucleo() {
+        public List<List<String>> RecuperarCorreos(int tipo, string usuario) {
             Connection();
             List<List<String>> Results = new List<List<String>>();
-            string query = "SELECT nombreUsuarioPk,correo FROM Miembro WHERE pesoMiembro = 5";
+            string query = "";
+
+            switch(tipo)
+            {
+                case 1:
+                    query = "SELECT nombreUsuarioPK,correo FROM Miembro WHERE pesoMiembro = 5";
+                    break;
+                case 2:
+                    query = "SELECT nombreUsuarioPK,correo FROM Miembro WHERE pesoMiembro = 5 AND nombreUsuarioPK='"+usuario+"'";
+                    break;
+                default:
+                    break;
+
+            }
             SqlCommand command = new SqlCommand(query, Con)
             {
                 CommandType = CommandType.Text
@@ -83,13 +94,29 @@ namespace Iteracion_2.Models
             return Results;
         }
 
-        public async Task EnviarSolicitudNucleo(string titulo) {
-            List<List<String>> correosNucleo = RecuperarCorreosNucleo();
-            for (int index = 0; index < correosNucleo.Count; index++)
+
+        public async Task EnviarAsignacion(string titulo, List<String> usuarios)
+        {
+            List<List<String>> CorreosNucleo = new List<List<string>>();
+            for (int index=0; index<usuarios.Count; index++) {
+                CorreosNucleo.Add(RecuperarCorreos(2,usuarios[index])[0]);
+            }
+
+            for (int index = 0; index < CorreosNucleo.Count; index++)
             {
-                await CorreoDefault(correosNucleo[index][1],
+                await CorreoDefault(CorreosNucleo[index][1],
+                 "Asignación de revisión.",
+                 "Estimado " + CorreosNucleo[index][0] + ", se le ha asignado para su revisión el artículo titulado '"+titulo+"'. Por favor revisarlo lo más antes posible.");
+            }
+        }
+
+        public async Task EnviarSolicitudNucleo(string titulo) {
+            List<List<String>> CorreosNucleo = RecuperarCorreos(1,null);
+            for (int index = 0; index < CorreosNucleo.Count; index++)
+            {
+                await CorreoDefault(CorreosNucleo[index][1],
                  "Colaboración en el artículo " + titulo,
-                 "Estimado "+correosNucleo[index][0]+" se le solicita la colaboración en el proceso de revisión del artículo "+titulo);
+                 "Estimado "+ CorreosNucleo[index][0]+" se le solicita la colaboración en el proceso de revisión del artículo "+titulo);
             }
 
         }

@@ -12,29 +12,27 @@ namespace Iteracion_2.Controllers
 {
     public class EmailController
     {
-        public EmailModel sendMail { get; set; }
-        public PerfilModel perf { get; set; }
+        public EmailModel Correo { get; set; }
+        public PerfilModel Perfil { get; set; }
 
         public MiembroModel Miembros { get; set; }
 
         public async Task enviarCorreo(string destinatario, string asunto, string contenido,IFormFile archivo) {
-            sendMail = new EmailModel();
-            await sendMail.enviarCorreo(destinatario,asunto,contenido,archivo);
-            
-
+            Correo = new EmailModel();
+            await Correo.EnviarCorreo(destinatario,asunto,contenido,archivo);
         }
 
-        public bool verificarCorreo(string Usuario)
+        public bool verificarCorreo(string usuario)
         {
-            perf = new PerfilModel();
-            return perf.verificarCorreo(Usuario);
+            Perfil = new PerfilModel();
+            return Perfil.verificarCorreo(usuario);
 
         }
 
         public async Task enviarSolicitud(string contenido, string Usuario)
         {
-            sendMail = new EmailModel();
-            await sendMail.enviarSolicitud(contenido, Usuario);
+            Correo = new EmailModel();
+            await Correo.EnviarSolicitud(contenido, Usuario);
         }
 
         public List<string> recuperarCorreos() {
@@ -42,16 +40,24 @@ namespace Iteracion_2.Controllers
             return Miembros.RecuperarCorreosMiembros();
         }
 
-        public string obtenerCorreo(string Usuario) {
-            perf = new PerfilModel();
-            return perf.obtenerCorreo(Usuario);
+        public string obtenerCorreo(string usuario) {
+            Perfil = new PerfilModel();
+            return Perfil.obtenerCorreo(usuario);
         }
 
-        public async Task EnviarSolicitudNucleo(string titulo) {
-            sendMail =  new EmailModel();
-            await sendMail.EnviarSolicitudNucleo(titulo);
+        public async Task CorreoANucleo(string titulo, string tipo, List<String> usuarios) {
+            Correo =  new EmailModel();
 
-
+            switch (tipo) {
+                case "solicitar":
+                    await Correo.EnviarSolicitudNucleo(titulo);
+                    break;
+                case "asignar":
+                    await Correo.EnviarAsignacion(titulo, usuarios);
+                    break;
+                default:
+                    break;
+            }            
         }
     }
 }

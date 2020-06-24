@@ -40,6 +40,7 @@ namespace Iteracion_2.Pages
             {
                 HttpContext.Session.SetString("UsuarioActual", nuevo_nombreUsuario);
                 HttpContext.Session.SetString("PesoActual", "0");
+                HttpContext.Session.SetString("TipoActual", "periferico");
 
                 miembroController.crearPerfil(nuevo_nombreUsuario, "", 0);
 
