@@ -73,7 +73,7 @@
                             
 
 
-                            @if (Model.ArticulosUsuario != null)
+                            @if (Model.ArticulosUsuario.Count > 0)
                             {
                             <ul class="article-list-basic">
                                 @for (int index = 0; index < Model.ArticulosUsuario.Count; index++)
@@ -97,6 +97,10 @@
                                 </li>
                                 }
                             </ul>
+                            }else{
+                                <p>
+                                    No hay artículos disponibles.
+                                </p>
                             }
                         </div>
                     </div>
