@@ -20,22 +20,30 @@ namespace Iteracion_2.Pages.Articulos
 
         public List<List<string>> ArticulosPendientes { get; set; }
 
+        public List<List<string>> ArticulosSolicitados { get; set; }
+
         public string UsuarioActual { get; set; }
         public int ArtId { get; set; }
 
-        public string Titulo { get; set; } 
+        public string Titulo { get; set; }
+
+        public string TipoUsuarioActual { get; set; }
 
         public IActionResult OnGet()
         {
             UsuarioActual = HttpContext.Session.GetString(SessionKeyUsuario);
             string PesoActual = HttpContext.Session.GetString(SessionKeyPeso);
-            string tipo = HttpContext.Session.GetString(SessionKeyTipo);
+            TipoUsuarioActual = HttpContext.Session.GetString(SessionKeyTipo);
 
             ArticuloController = new ArticuloController();
 
-            if (UsuarioActual != null && PesoActual == "5" && tipo == "coordinador")
+            if (UsuarioActual != null && PesoActual == "5" && TipoUsuarioActual == "coordinador")
             {
                 ArticulosPendientes = ArticuloController.RetornarPendientes();
+                return Page();
+            }else if (UsuarioActual != null && PesoActual == "5")
+            {
+                ArticulosSolicitados = ArticuloController.RetornarArticulosPendientes(UsuarioActual,"solicitado");
                 return Page();
             }
             else {
