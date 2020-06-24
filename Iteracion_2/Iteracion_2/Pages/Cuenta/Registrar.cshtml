@@ -44,7 +44,7 @@
 <br />
 
 
-<label for="inputName"> @ViewData["valid"] </label>
+<label for="inputName"> @ViewData["username"] </label>
 
 <!------ Include the above in your HEAD tag ---------->
 <div class="container register-form">
@@ -58,48 +58,48 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="exampleFormControlTextarea1">Nombre *</label>
-                            <input type="text" class="form-control" placeholder="Nombre " maxlength="49" value="" />
+                            <input type="text" class="form-control" placeholder="Nombre " maxlength="49" value=""name="Nombre" />
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlTextarea1">Nombre de usuario *</label>
-                            <input type="text" class="form-control" placeholder="Nombre de Usuario " value="" maxlength="49"/>
+                            <input type="text" class="form-control" placeholder="Nombre de Usuario " value="" maxlength="49" name="nombreUsuario"/>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="exampleFormControlTextarea1">Apellido *</label>
-                            <input type="text" class="form-control" placeholder="Apellido " value=""  maxlength="49"/>
+                            <input type="text" class="form-control" placeholder="Apellido " value=""  maxlength="49" name="Apellido"/>
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlTextarea1">Correo *</label>
-                            <input type="text" class="form-control" placeholder="Correo " value=""  maxlength="49"/>
+                            <input type="text" class="form-control" placeholder="Correo " value=""  maxlength="49" name="Correo"/>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="exampleFormControlTextarea1">Pais</label>
-                            <input type="text" class="form-control" placeholder="Pais " value=""  maxlength="49"/>
+                            <input type="text" class="form-control" placeholder="Pais " value=""  maxlength="49" name="Pais"/>
                         </div>
 
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="exampleFormControlTextarea1">idioma</label>
-                            <input type="text" class="form-control" placeholder="Idioma " value="" />
+                            <input type="text" class="form-control" placeholder="Idioma " value="" name="Idioma"/>
                         </div>
 
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="exampleFormControlTextarea1">Hobbies</label>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"  maxlength="400"></textarea>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"  maxlength="400" name="Hobbies"></textarea>
                         </div>
 
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="exampleFormControlTextarea1">Habilidades</label>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"  maxlength="400"></textarea>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"  maxlength="400" name="Habilidades"></textarea>
                         </div>
 
                     </div>
@@ -113,7 +113,7 @@
         </div>
         <div class="row">
             <div class="col-md-6 col-lg-offset-5">
-                <button type="button" class="btnSubmit">Registrarse</button>
+                <button type="submit" class="btnSubmit">Registrarse</button>
             </div>
         </div>
     </form>
