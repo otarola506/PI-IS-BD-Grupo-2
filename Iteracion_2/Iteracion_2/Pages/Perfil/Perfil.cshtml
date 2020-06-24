@@ -16,7 +16,7 @@
             <div class="col-lg-3" id="columna-izquierda">
                 <div class="foto-perfil">
                     <img src="~/Images/imagen-perfil.png" />
-                    <div class="caption"><br>@Model.informacionPersonal[0]</div>
+                    <div class="caption"><br>@Model.informacionPersonal[0] @Model.informacionPersonal[1]</div>
                     <form asp-page-handler="send" method="post">
                         <button type="submit" class="btn btn-primary">Solicitar promocion de rango</button>
                     </form>
@@ -27,7 +27,7 @@
                 <div class="inf-laboral">
                     <h1> <strong>Información Laboral</strong> </h1>
                     <p>
-                        @Model.informacionPersonal[2]
+                        @Model.informacionPersonal[3]
                     </p>
                 </div>
             </div>
@@ -36,16 +36,12 @@
                 <div class="inf-biografica">
                     <h1> <strong>Información Biográfica</strong> </h1>
                     <p>
-                        @Model.informacionPersonal[3]
+                        @Model.informacionPersonal[4]
                     </p>
                 </div>
             </div>
 
-            <div class="col-lg-2 col-lg-offset-4" id="columna-derecha">
-
-            </div>
-
-
+            <div class="col-lg-2 col-lg-offset-4" id="columna-derecha"></div>
         </div>   
         
         <div class="row" id="segunda-fila">
@@ -53,9 +49,9 @@
                 <div class="contacto">
                     <h3>Contacto</h3>
                     <ul>
-                        <li><i class="fas fa-phone-volume"></i> @Model.informacionPersonal[4]</li>
+                        <li><i class="fas fa-phone-volume"></i> @Model.informacionPersonal[5]</li>
                         <li>
-                            <span><i class="fas fa-envelope-open"></i> @Model.informacionPersonal[5]</span>    
+                            <span><i class="fas fa-envelope-open"></i> @Model.informacionPersonal[6]</span>    
                         </li>
                     </ul>
                 </div>
@@ -63,12 +59,12 @@
                 <div class="peso">
                     <h3>Peso en la comunidad</h3>
                     <ul>
-                        <li>Miembro @Model.informacionPersonal[1]</li>
+                        <li>Miembro @Model.informacionPersonal[2]</li>
                     </ul>
                 </div>
 
                 <div class="merito">
-                    <h3>Merito: @Model.informacionPersonal[6]</h3>
+                    <h3>Merito: @Model.informacionPersonal[7]</h3>
                 </div>
             </div>
 

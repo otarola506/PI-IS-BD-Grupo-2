@@ -49,22 +49,61 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="col-sm-2 control-label">Nombre Completo</label>
+                                <label class="col-sm-2 control-label">Nombre</label>
                                 <div class="col-sm-10">
-                                    <input name="nombre-completo" type="text" class="form-control" maxlength="50" value="@Model.InformacionPersonal[0]">
+                                    <input id="nombre" name="nombre" type="text" class="form-control" maxlength="50" value="@Model.InformacionPersonal[0]">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Apellido</label>
+                                <div class="col-sm-10">
+                                    <input id="apellido" name="apellido" type="text" class="form-control" maxlength="50" value="@Model.InformacionPersonal[1]">
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Información Laboral</label>
                                 <div class="col-sm-10">
-                                    <textarea rows="3" id="info-laboral" placeholder="Indique su información laboral aquí." class="form-control" name="laboral">@if (@Model.InformacionPersonal[2] != "") { @Model.InformacionPersonal[2] }</textarea>
+                                    <textarea rows="3" id="info-laboral" placeholder="Indique su información laboral aquí." class="form-control" name="laboral">@Model.InformacionPersonal[3]</textarea>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Información Biográfica</label>
                                 <div class="col-sm-10">
-                                    <textarea rows="3" id="info-biografica" placeholder="Indique su información biográfica aquí." name="biografica" class="form-control">@Model.InformacionPersonal[3]</textarea>
+                                    <textarea rows="3" id="info-biografica" placeholder="Indique su información biográfica aquí." name="biografica" class="form-control">@Model.InformacionPersonal[4]</textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">País</label>
+                                <div class="col-sm-10">
+                                    <input type='text' id="pais" placeholder="País" class="form-control" name="pais" maxlength="20" value="@Model.InformacionPersonal[8]">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Idiomas</label>
+                                <div class="col-sm-10">
+                                    <input type='text' id="idiomas" placeholder="Idiomas" class="form-control" name="idiomas" maxlength="20" value="@Model.InformacionPersonal[10]">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">Preferencias</h4>
+                        </div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Pasatiempos</label>
+                                <div class="col-sm-10">
+                                    <input type="text" id="pasatiempos" placeholder="Pasatiempos" class="form-control" name="pasatiempos" maxlength="50" value="@Model.InformacionPersonal[11]" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Habilidades</label>
+                                <div class="col-sm-10">
+                                    <input type="text" id="habilidades" placeholder="Habilidades" class="form-control" name="habilidades" maxlength="50" value="@Model.InformacionPersonal[9]" required>
                                 </div>
                             </div>
                         </div>
@@ -78,13 +117,13 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Número de Teléfono</label>
                                 <div class="col-sm-10">
-                                    <input type='text' onkeypress='validate(event)' id="telefono" placeholder="Teléfono de contacto" class="form-control" name="telefono" maxlength="20" value="@Model.InformacionPersonal[4]">
+                                    <input type='text' onkeypress='validate(event)' id="telefono" placeholder="Teléfono de contacto" class="form-control" name="telefono" maxlength="20" value="@Model.InformacionPersonal[5]">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Correo electrónico</label>
                                 <div class="col-sm-10">
-                                    <input type="email" id="correo" placeholder="Correo electrónico" class="form-control" name="correo" maxlength="50" value="@Model.InformacionPersonal[5]" required>
+                                    <input type="email" id="correo" placeholder="Correo electrónico" class="form-control" name="correo" maxlength="50" value="@Model.InformacionPersonal[6]" required>
                                 </div>
                             </div>
                         </div>

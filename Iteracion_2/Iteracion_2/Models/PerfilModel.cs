@@ -10,52 +10,68 @@ namespace Iteracion_2.Models
     public class PerfilModel
     {
         private SqlConnection con;
+        private ConexionModel ConnectionString { get; set; }
+
         public void Connection()
         {
-            string conString = @"Server=172.16.202.75;Database=BD_Grupo2;persist security info=True;MultipleActiveResultSets=True;User ID=Grupo2;Password=grupo2.";
-            con = new SqlConnection(conString);
+            ConnectionString = new ConexionModel();
+            con = ConnectionString.Connection();
         }
 
-        public string[] RetornarDatosPerfil(string nombreUsuario)
+        public List<String> RetornarDatosPerfil(string nombreUsuario)
         {
-            List<string> informacionPersonal = new List<string>();
-            SqlDataReader reader = this.RetornarDatosDeUsuario(nombreUsuario, "RetornarDatosPerfil");
+            List<String> informacionPersonal = new List<String>();
 
-            while (reader.Read())
+            string query = "SELECT M.nombre,M.apellido, M.pesoMiembro, M.informacionLaboral, M.informacionBiografica, M.telefono, M.correo, M.merito, M.pais, M.habilidades, M.idiomas, M.hobbies FROM dbo.Miembro M WHERE M.nombreUsuarioPK = @nombreUsuario";
+
+            Connection();
+
+            SqlCommand command = new SqlCommand(query, con)
             {
+                CommandType = CommandType.Text
+                
+            };
 
-                for (int index = 0; index < 7; index++)
+            command.Parameters.AddWithValue("@nombreUsuario", nombreUsuario);
+
+            using (SqlDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
                 {
-
-                    if (index == 1)
+                    for (int index = 0; index < 12; index++)
                     {
-                        string pesoMiembro = reader[index].ToString();
-                        string pesoComunidad = "";
-                        if (pesoMiembro == "3")
+
+                        if (index == 2)
                         {
-                            pesoComunidad = "Activo";
-                        }
-                        else if (pesoMiembro == "5")
-                        {
-                            pesoComunidad = "Núcleo";
+                            string pesoMiembro = reader[index].ToString();
+                            string pesoComunidad = "";
+                            if (pesoMiembro == "3")
+                            {
+                                pesoComunidad = "Activo";
+                            }
+                            else if (pesoMiembro == "5")
+                            {
+                                pesoComunidad = "Núcleo";
+                            }
+                            else
+                            {
+                                pesoComunidad = "Periférico";
+                            }
+
+                            informacionPersonal.Add(pesoComunidad);
                         }
                         else
                         {
-                            pesoComunidad = "Periférico";
+                            informacionPersonal.Add(reader[index].ToString());
                         }
-
-                        informacionPersonal.Add(pesoComunidad);
-                    }
-                    else
-                    {
-                        informacionPersonal.Add(reader[index].ToString());
                     }
                 }
+
             }
 
             con.Close();
 
-            return informacionPersonal.ToArray();
+            return informacionPersonal;
         }
 
         public List<List<string>> RetornarArticulosMiembro(string nombreUsuario)
@@ -77,7 +93,6 @@ namespace Iteracion_2.Models
         private SqlDataReader RetornarDatosDeUsuario(string nombreUsuario, string procedimiento)
         {
             Connection();
-            con.Open();
 
             SqlCommand cmd = new SqlCommand(procedimiento, con);
             cmd.CommandType = CommandType.StoredProcedure;
@@ -89,19 +104,29 @@ namespace Iteracion_2.Models
 
         public void GuardarDatosPerfil(string nombreUsuario, string[] informacionActualizada)
         {
+            string query = "UPDATE dbo.Miembro SET nombre = @nombre, apellido = @apellido, informacionLaboral = @informacionLaboral, informacionBiografica = @informacionBiografica, telefono = @telefono, correo = @correo, pais = @pais, habilidades = @habilidades, idiomas = @idiomas, hobbies = @hobbies WHERE nombreUsuarioPK = @nombreUsuario";
+
             Connection();
-            con.Open();
 
-            SqlCommand cmd = new SqlCommand("GuardarDatosPerfil", con);
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.Add("@nombreUsuario", SqlDbType.VarChar).Value = nombreUsuario;
-            cmd.Parameters.Add("@nombre", SqlDbType.VarChar).Value = informacionActualizada[0];
-            cmd.Parameters.Add("@informacionLaboral", SqlDbType.VarChar).Value = informacionActualizada[1];
-            cmd.Parameters.Add("@informacionBiografica", SqlDbType.VarChar).Value = informacionActualizada[2];
-            cmd.Parameters.Add("@telefono", SqlDbType.VarChar).Value = informacionActualizada[3];
-            cmd.Parameters.Add("@correo", SqlDbType.VarChar).Value = informacionActualizada[4];
+            SqlCommand command = new SqlCommand(query, con)
+            {
+                CommandType = CommandType.Text
 
-            cmd.ExecuteNonQuery();
+            };
+
+            command.Parameters.Add("@nombreUsuario", SqlDbType.VarChar).Value = nombreUsuario;
+            command.Parameters.Add("@nombre", SqlDbType.VarChar).Value = informacionActualizada[0];
+            command.Parameters.Add("@apellido", SqlDbType.VarChar).Value = informacionActualizada[1];
+            command.Parameters.Add("@informacionLaboral", SqlDbType.VarChar).Value = informacionActualizada[2];
+            command.Parameters.Add("@informacionBiografica", SqlDbType.VarChar).Value = informacionActualizada[3];
+            command.Parameters.Add("@telefono", SqlDbType.VarChar).Value = informacionActualizada[4];
+            command.Parameters.Add("@correo", SqlDbType.VarChar).Value = informacionActualizada[5];
+            command.Parameters.Add("@pais", SqlDbType.VarChar).Value = informacionActualizada[6];
+            command.Parameters.Add("@habilidades", SqlDbType.VarChar).Value = informacionActualizada[7];
+            command.Parameters.Add("@idiomas", SqlDbType.VarChar).Value = informacionActualizada[8];
+            command.Parameters.Add("@hobbies", SqlDbType.VarChar).Value = informacionActualizada[9];
+
+            command.ExecuteNonQuery();
 
             con.Close();
         }
@@ -109,7 +134,7 @@ namespace Iteracion_2.Models
         public List<string> recuperarCorreos()
         {
             Connection();
-            con.Open();
+
             SqlCommand cmd = new SqlCommand("Recuperar_Correos", con);
             cmd.CommandType = CommandType.StoredProcedure;
             List<string> results = new List<string>();
@@ -126,7 +151,7 @@ namespace Iteracion_2.Models
         public bool verificarCorreo(string Usuario)
         {
             Connection();
-            con.Open();
+
             string verificacion = "";
             bool Existe = true;
             SqlCommand cmd = new SqlCommand("ObtenerCorreo", con);
@@ -149,7 +174,7 @@ namespace Iteracion_2.Models
         public string obtenerCorreo(string Usuario)
         {
             Connection();
-            con.Open();
+
             string correo = "";
             SqlCommand cmd = new SqlCommand("ObtenerCorreo", con);
             cmd.CommandType = CommandType.StoredProcedure;
