@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Iteracion_2.Models
@@ -76,30 +77,90 @@ namespace Iteracion_2.Models
 
         public List<List<string>> RetornarArticulosMiembro(string nombreUsuario)
         {
-            List<List<string>> informacionPersonal = new List<List<string>>();
-            SqlDataReader reader = this.RetornarDatosDeUsuario(nombreUsuario, "Recuperar_Articulos_Autor");
-
-
-            while (reader.Read())
-            {
-                informacionPersonal.Add(new List<string> { reader[0].ToString(), reader[1].ToString() });
-            }
-
-            con.Close();
-
-            return informacionPersonal;
-        }
-
-        private SqlDataReader RetornarDatosDeUsuario(string nombreUsuario, string procedimiento)
-        {
+            string queryIds = "SELECT A.artIdPK FROM Articulo A JOIN Miembro_Articulo MA ON A.artIdPK = MA.artIdFK JOIN Miembro M  ON M.nombreUsuarioPK  = MA.nombreUsuarioFK WHERE M.nombreUsuarioPK = @nombreUsuario ORDER BY A.artIdPK";
+            
             Connection();
 
-            SqlCommand cmd = new SqlCommand(procedimiento, con);
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.Add("@userName", SqlDbType.VarChar).Value = nombreUsuario;
-            SqlDataReader reader = cmd.ExecuteReader();
+            SqlCommand commandIds = new SqlCommand(queryIds, con)
+            {
+                CommandType = CommandType.Text
 
-            return reader;
+            };
+            commandIds.Parameters.AddWithValue("@nombreUsuario", nombreUsuario);
+
+            List<int> ids = new List<int>();
+
+            using (SqlDataReader reader = commandIds.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    ids.Add(Int16.Parse(reader[0].ToString() ));
+                }
+            }
+
+            return RetornarEspecificos(ids);
+        }
+
+        private List<List<string>> RetornarEspecificos(List<int> ids) {
+            List<List<string>> ArticulosAutor = new List<List<string>>();
+            string queryArticulos = "SELECT A.artIdPK,A.titulo,A.resumen,M.nombre+' '+M.apellido AS [Nombre Completo],M.nombreUsuarioPK FROM Articulo A JOIN Miembro_Articulo MA ON A.artIdPK = MA.artIdFK JOIN Miembro M  ON M.nombreUsuarioPK  = MA.nombreUsuarioFK WHERE A.artIdPK = @artIdPK ORDER BY A.artIdPK";
+
+            for (int indexId = 0; indexId < ids.Count; indexId++)
+            {
+                SqlCommand commandArticulos = new SqlCommand(queryArticulos, con)
+                {
+                    CommandType = CommandType.Text
+                };
+                commandArticulos.Parameters.AddWithValue("@artIdPK", ids[indexId]);
+                DataTable dTable = new DataTable();
+                SqlDataAdapter adapter = new SqlDataAdapter(commandArticulos);
+                adapter.Fill(dTable);
+
+                for (int index = 0; index < dTable.Rows.Count; index++)
+                {
+                    string idAnterior = "";
+                    string idActual = dTable.Rows[index][0].ToString(); //ardIdPK actual
+
+                    if (index > 0)
+                    {
+                        idAnterior = dTable.Rows[index - 1][0].ToString(); //ardIdPK de la iteración pasada
+                    }
+
+                    if (idActual != idAnterior)
+                    {
+                        DataRow[] datosDeArticulo = dTable.Select("artIdPK = " + idActual); // devuelve los autores con ese artIdPK
+
+                        string autores = "";
+                        string usuarios = "";
+
+                        for (int indexJ = 0; indexJ < datosDeArticulo.Length; indexJ++)
+                        {
+                            autores += datosDeArticulo[indexJ][3];
+                            usuarios += datosDeArticulo[indexJ][4];
+                            if (indexJ < datosDeArticulo.Length - 1)
+                            {
+                                autores += ",";
+                                usuarios += ",";
+                            }
+                        }
+
+                        byte[] binaryString = (byte[])dTable.Rows[index][2];
+                        string resumen = Encoding.UTF8.GetString(binaryString);
+
+                        ArticulosAutor.Add(new List<string>
+                                {
+                                    dTable.Rows[index][0].ToString(),
+                                    dTable.Rows[index][1].ToString(),
+                                    resumen,
+                                    autores,
+                                    usuarios 
+                                });
+                    }
+                }
+            }
+            con.Close();
+
+            return ArticulosAutor;
         }
 
         public void GuardarDatosPerfil(string nombreUsuario, string[] informacionActualizada)

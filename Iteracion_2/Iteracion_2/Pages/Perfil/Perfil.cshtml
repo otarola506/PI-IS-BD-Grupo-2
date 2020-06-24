@@ -27,7 +27,7 @@
                 <div class="row">
                     <div class="fb-profile-text">
                         <div class="col-lg-12">
-                            <h1>@Model.informacionPersonal[0] @Model.informacionPersonal[1]</h1>
+                            <h1>@Model.InformacionPersonal[0] @Model.InformacionPersonal[1]</h1>
                         </div>
                     </div>
                 </div>
@@ -60,33 +60,42 @@
                         <div class="tab-pane active" id="tab_default_1">
 
                             <p>
-                                @Model.informacionPersonal[3]
+                                @Model.InformacionPersonal[3]
                             </p>
 
                         </div>
                         <div class="tab-pane" id="tab_default_2">
                             <p>
-                                @Model.informacionPersonal[4]
+                                @Model.InformacionPersonal[4]
                             </p>
                         </div>
                         <div class="tab-pane" id="tab_default_3">
                             
 
 
-                            @if (Model.articulosUsuario.Count > 0)
+                            @if (Model.ArticulosUsuario != null)
                             {
                             <ul class="article-list-basic">
-                                @for (int index = 0; index < Model.articulosUsuario.Count; index++)
+                                @for (int index = 0; index < Model.ArticulosUsuario.Count; index++)
                                 {
                                 <li>
                                     <div>
-                                        <h2><a href="#">@Model.articulosUsuario[index][0]</a></h2>
-                                        <p>@Model.articulosUsuario[index][1]</p>
-                                        <a href="#" class="read-more">Read more &rarr;</a>
+                                        <h2><a href="#">@Model.ArticulosUsuario[index][1]</a></h2>
+                                        <p>@Model.ArticulosUsuario[index][2]</p>
+                                        <p>
+                                            Autores:
+                                            @{
+                                                string[] autores = Model.ArticulosUsuario[index][3].Split(',');
+                                                string[] usuarios = Model.ArticulosUsuario[index][4].Split(',');
+                                                for (int indexJ = 0; indexJ < autores.Length; indexJ++)
+                                                {
+                                                    <a href="~/Perfil/Perfil?UsuarioURL=@usuarios[indexJ]">@autores[indexJ]</a>
+                                                }
+                                            }
+                                        </p>
                                     </div>
                                 </li>
                                 }
-                                
                             </ul>
                             }
                         </div>
@@ -105,19 +114,19 @@
                         <div class="col-lg-12">
                             <div class="form-group">
                                 <label for="email">Pasatiempos:</label>
-                                <p>@Model.informacionPersonal[11]</p>
+                                <p>@Model.InformacionPersonal[11]</p>
                             </div>
                             <div class="form-group">
                                 <label for="email">Habilidades:</label>
-                                <p>@Model.informacionPersonal[9]</p>
+                                <p>@Model.InformacionPersonal[9]</p>
                             </div>
                             <div class="form-group">
                                 <label for="email">Idiomas:</label>
-                                <p>@Model.informacionPersonal[10]</p>
+                                <p>@Model.InformacionPersonal[10]</p>
                             </div>
                             <div class="form-group">
                                 <label for="email">Pais:</label>
-                                <p>@Model.informacionPersonal[8]</p>
+                                <p>@Model.InformacionPersonal[8]</p>
                             </div>
                         </div>
                     </div>
@@ -133,11 +142,11 @@
                         <div class="col-lg-12">
                             <div class="form-group">
                                 <label for="email">Meritos:</label>
-                                <p>@Model.informacionPersonal[7]</p>
+                                <p>@Model.InformacionPersonal[7]</p>
                             </div>
                             <div class="form-group">
                                 <label for="email">Peso en la comunidad:</label>
-                                <p>Miembro @Model.informacionPersonal[2]</p>
+                                <p>Miembro @Model.InformacionPersonal[2]</p>
                             </div>
                         </div>
                         <div class="col-lg-12">
