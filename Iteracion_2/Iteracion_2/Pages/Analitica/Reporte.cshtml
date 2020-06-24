@@ -9,9 +9,20 @@
 </head>
 
 <body>
-    <input type="text" id="tipo" value="" />
-    <button onclick="drawChart(1)">Graficar</button>
+    <h1 style="text-align:center"><b>Reporte Configurable</b></h1>
 
+
+    <select style="font-size:20px" id="configuracion">
+        <option value="">===Selecciona===</option>
+        <option value="pais">País</option>
+        <option value="tipo">Tipo de miembro</option>
+        <option value="habilidades">Habilidades</option>
+        <option value="hobbies">Hobbies</option>
+        <option value="nombre">Nombre</option>
+        <option value="apellido">Apellido</option>
+        <option value="idiomas">Idioma</option>
+        <option value="merito">Merito</option>
+    </select>
     <div id="chart"></div>
 
     @section Scripts
@@ -21,40 +32,46 @@
         <script type="text/javascript">
             google.charts.load('current', { 'packages': ['corechart'] });
             google.charts.setOnLoadCallback(drawChart);
-            function drawChart(e) {
-
-                if (e == null) {
-                    var jsonData = $.ajax({
-                        url: "/Analitica/Reporte?handler=ChartData",
-                        dataType: "json",
-                        async: false
-                    }).responseText;
-                    var data = new google.visualization.DataTable(jsonData);
-                    var options = {
-                        'title': 'Tipos de miembro en la comunidad',
-                        'width': 850,
-                        'height': 650
-                    };
-                } else {
-                    const tipo = document.getElementById('tipo').value;
-
-                    var jsonData = $.ajax({
-                        url: "/Analitica/Reporte?handler=ChartData&entrada=" + tipo,
-                        dataType: "json",
-                        async: false
-                    }).responseText;
-                    var data = new google.visualization.DataTable(jsonData);
-                    var options = {
-                        'title': 'Reporte por: ' + tipo,
-                        'width': 600,
-                        'height': 500
-                    };
-                }
-
-
+            function drawChart() {
+                var jsonData = $.ajax({
+                    url: "/Analitica/Reporte?handler=ChartData",
+                    dataType: "json",
+                    async: false
+                }).responseText;
+                var data = new google.visualization.DataTable(jsonData);
+                var options = {
+                    'title': 'Miembros de la comunidad',
+                    'width': 850,
+                    'height': 650
+                };
                 var chart = new google.visualization.PieChart(document.getElementById('chart'));
                 chart.draw(data, options);
             }
+
+            $('select').on('change', function (e) {
+                var optionSelected = $("option:selected", this);
+                var valueSelected = this.value;
+
+                if (valueSelected != "") {
+                    var jsonData = $.ajax({
+                        url: "/Analitica/Reporte?handler=ChartData&entrada=" + valueSelected,
+                        dataType: "json",
+                        async: false
+                    }).responseText;
+                    var data = new google.visualization.DataTable(jsonData);
+                    var options = {
+                        'title': 'Miembros de la comunidad por: ' + valueSelected,
+                        'width': 850,
+                        'height': 650
+                    };
+
+                    var chart = new google.visualization.PieChart(document.getElementById('chart'));
+                    chart.draw(data, options);
+                } else {
+                    drawChart();
+                }
+            });
+
         </script>
     }
 </body>
