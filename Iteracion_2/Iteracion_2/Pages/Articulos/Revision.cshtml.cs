@@ -21,9 +21,7 @@ namespace Iteracion_2.Pages.Articulos
         
 
         public List<List<string>> ArticulosPendientes { get; set; }
-
-        public List<List<string>> ArticulosSolicitados { get; set; }
-
+               
         public string UsuarioActual { get; set; }
         public string Message;
 
@@ -61,7 +59,14 @@ namespace Iteracion_2.Pages.Articulos
                 }
                 else if (UsuarioActual != null && PesoActual == "5")
                 {
-                    ArticulosSolicitados = ArticuloController.RetornarArticulosPendientes(UsuarioActual, "solicitado");
+                    ArticulosPendientes = ArticuloController.RetornarArticulosPendientes(UsuarioActual, "solicitado");
+                    object temp;
+                    TempData.TryGetValue("resultadoSolicitud", out temp);
+
+                    if (temp != null)
+                    {
+                        Message = (string)temp;
+                    }
                     return Page();
                 }
                 else

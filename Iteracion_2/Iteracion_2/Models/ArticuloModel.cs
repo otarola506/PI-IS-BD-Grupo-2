@@ -208,7 +208,7 @@ namespace Iteracion_2.Models
                 adapter.Fill(dTable);
             }else if(estado == "solicitado")
             {
-                string queryString = "SELECT A.artIdPK,A.titulo,A.resumen,M.nombre+' '+M.apellido AS [Nombre Completo],M.nombreUsuarioPK FROM Articulo A JOIN Miembro_Articulo MA ON A.artIdPK = MA.artIdFK JOIN Miembro M  ON M.nombreUsuarioPK = MA.nombreUsuarioFK JOIN Nucleo_Solicita_Articulo NS ON M.nombreUsuarioPK = NS.nombreUsuarioFK WHERE M.nombreUsuarioPK = @nombreUsuario AND NS.estadoSolicitud = 'solicitado' ORDER BY A.artIdPK";
+                string queryString = "SELECT A.artIdPK,A.titulo,A.resumen,M.nombre+' '+M.apellido AS [Nombre Completo],M.nombreUsuarioPK FROM Miembro M JOIN Nucleo_Solicita_Articulo NS ON M.nombreUsuarioPK = NS.nombreUsuarioFK JOIN Articulo A ON A.artIdPK = NS.artIdFK WHERE M.nombreUsuarioPK = @nombreUsuario AND NS.estadoSolicitud = 'solicitado' ORDER BY A.artIdPK";
                 SqlDataAdapter sqlDa = new SqlDataAdapter(queryString, con);
                 sqlDa.SelectCommand.CommandType = CommandType.Text;
                 sqlDa.SelectCommand.Parameters.AddWithValue("@nombreUsuario", nombreUsuarioActual);

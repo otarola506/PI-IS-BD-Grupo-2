@@ -17,7 +17,14 @@
     <script src="https://kit.fontawesome.com/8dbd1c7c50.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <h3>Articulos pendientes de revisión</h3>
+    @if (Model.TipoUsuarioActual == "coordinador")
+    {
+        <h3>Articulos pendientes de revisión</h3>
+    }
+    else
+    {
+        <h3>Solicitudes de revisión de artículos</h3>
+    }
     <div id="mensaje-respuesta">
         @if (Model.Message != null)
         {
@@ -48,11 +55,22 @@
                     </span>
                     <br />
                     <br />
-                    <a href="~/Articulos/FormularioRevision?artId=@artIDPk" class="read-more">Revisar</a>
-                    <br />
-                    <br />
-                    <a href="#exampleModal" type="button" class="read-more openModal" data-toggle="modal" data-target="#exampleModal" data-articulo="@artIDPk" data-titulo="@titulo">Solicitar Colaboración</a>
-                    <a href="#exampleModalLong" type="button" onclick="retSol(@artIDPk)" class="read-more" data-toggle="modal" data-target="#exampleModalLong" data-articulo="@artIDPk" data-titulo="@titulo">Asignar revisor</a>
+                    @if (Model.TipoUsuarioActual == "coordinador")
+                    {
+                        <a href="~/Articulos/FormularioRevision?artId=@artIDPk" class="read-more">Revisar</a>
+                        <br />
+                        <br />
+                    }
+                    @if (Model.TipoUsuarioActual == "coordinador")
+                    {
+                        <a href="#exampleModal" type="button" class="read-more openModal" data-toggle="modal" data-target="#exampleModal" data-articulo="@artIDPk" data-titulo="@titulo">Solicitar Colaboración</a>
+                        <a href="#exampleModalLong" type="button" onclick="retSol(@artIDPk)" class="read-more" data-toggle="modal" data-target="#exampleModalLong" data-articulo="@artIDPk" data-titulo="@titulo">Asignar revisor</a>
+                    }
+                    else
+                    {
+                        <a href="#exampleModal" type="button" class="read-more openModal" data-toggle="modal" data-target="#exampleModal" data-articulo="@artIDPk" data-titulo="@titulo">Aceptar</a>
+                        <a href="#exampleModalLong" type="button" onclick="retSol(@artIDPk)" class="read-more" data-toggle="modal" data-target="#exampleModalLong" data-articulo="@artIDPk" data-titulo="@titulo">Rechazar</a>
+                    }
 
                     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
