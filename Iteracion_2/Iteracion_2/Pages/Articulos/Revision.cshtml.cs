@@ -76,13 +76,13 @@ namespace Iteracion_2.Pages.Articulos
             }
         }
 
-        public async Task <IActionResult> OnPost(string value) { 
+        public async Task <IActionResult> OnPost() { 
             int id = Int32.Parse(Request.Form["artID"]);
             string titulo = Request.Form["titulo"];
             ArticuloController = new ArticuloController();
             EmailController = new EmailController();
             ArticuloController.MarcarArtSolicitado(id);
-            TempData["resultadoSolicitud"] = "La solicitud ha sido enviada exitosamente a los miembro de núcleo";
+            TempData["resultadoSolicitud"] = "La solicitud ha sido enviada exitosamente a los miembros de núcleo";
             await EmailController.CorreoANucleo(titulo,"solicitar",null);
 
 
