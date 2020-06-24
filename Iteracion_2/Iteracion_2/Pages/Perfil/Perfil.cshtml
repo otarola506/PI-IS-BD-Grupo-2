@@ -5,87 +5,152 @@
 }
 
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <link rel="stylesheet" href="../css/custom.css">
-        <script src="https://kit.fontawesome.com/8dbd1c7c50.js" crossorigin="anonymous"></script>
-    </head>
+<head>
+    <meta charset="utf-8" />
 
-    <body>
+    <script src="https://kit.fontawesome.com/8dbd1c7c50.js" crossorigin="anonymous"></script>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+    <link rel="stylesheet" href="~/css/border-radius.css">
+    <link rel="stylesheet" href="~/css/perfil.css">
+</head>
+
+<body>
+    <div class="container-fluid">
         <div class="row">
-            <div class="col-lg-3" id="columna-izquierda">
-                <div class="foto-perfil">
-                    <img src="~/Images/imagen-perfil.png" />
-                    <div class="caption"><br>@Model.informacionPersonal[0] @Model.informacionPersonal[1]</div>
-                    <form asp-page-handler="send" method="post">
-                        <button type="submit" class="btn btn-primary">Solicitar promocion de rango</button>
-                    </form>
+            <div class="fb-profile">
+                <div class="row">
+                    <img align="left" class="fb-image-lg" src="~/images/imagen-perfil-recortada.png" alt="Profile image example" />
                 </div>
-            </div>
-
-            <div class="col-lg-4 col-lg-offset-0" id="columna-derecha">
-                <div class="inf-laboral">
-                    <h1> <strong>Información Laboral</strong> </h1>
-                    <p>
-                        @Model.informacionPersonal[3]
-                    </p>
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-lg-offset-0" id="columna-derecha">
-                <div class="inf-biografica">
-                    <h1> <strong>Información Biográfica</strong> </h1>
-                    <p>
-                        @Model.informacionPersonal[4]
-                    </p>
-                </div>
-            </div>
-
-            <div class="col-lg-2 col-lg-offset-4" id="columna-derecha"></div>
-        </div>   
-        
-        <div class="row" id="segunda-fila">
-            <div class="col-lg-4 col-lg-offset-0" id="columna-izquierda2">
-                <div class="contacto">
-                    <h3>Contacto</h3>
-                    <ul>
-                        <li><i class="fas fa-phone-volume"></i> @Model.informacionPersonal[5]</li>
-                        <li>
-                            <span><i class="fas fa-envelope-open"></i> @Model.informacionPersonal[6]</span>    
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="peso">
-                    <h3>Peso en la comunidad</h3>
-                    <ul>
-                        <li>Miembro @Model.informacionPersonal[2]</li>
-                    </ul>
-                </div>
-
-                <div class="merito">
-                    <h3>Merito: @Model.informacionPersonal[7]</h3>
-                </div>
-            </div>
-
-            @if (Model.articulosUsuario.Count > 0)
-            {
-                <div class="col-lg-5 col-lg-offset-3" id="espacio-articulo">
-                    <div class="articulos-publicados">
-                        <h1> Artículos </h1>
-                        <ul>
-                            @for (int index = 0; index < Model.articulosUsuario.Count; index++)
-                            {
-                                <li> <a href="#@Model.articulosUsuario[index][0]">@Model.articulosUsuario[index][1]</a> </li>
-                            }
-                        </ul>
-
+                <div class="row">
+                    <div class="fb-profile-text">
+                        <div class="col-lg-12">
+                            <h1>@Model.informacionPersonal[0] @Model.informacionPersonal[1]</h1>
+                        </div>
                     </div>
                 </div>
-            }
+                
+            </div>
         </div>
+    </div> <!-- /container fluid-->
+    <div class="container">
+        <div class="col-sm-8">
+            <div data-spy="scroll" class="tabbable-panel">
+                <div class="tabbable-line">
+                    <ul class="nav nav-tabs ">
+                        <li class="active">
+                            <a href="#tab_default_1" data-toggle="tab">
+                                Información Personal
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#tab_default_2" data-toggle="tab">
+                                Información Biográfica
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#tab_default_3" data-toggle="tab">
+                                Artículos
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="tab_default_1">
 
-    </body>
+                            <p>
+                                @Model.informacionPersonal[3]
+                            </p>
+
+                        </div>
+                        <div class="tab-pane" id="tab_default_2">
+                            <p>
+                                @Model.informacionPersonal[4]
+                            </p>
+                        </div>
+                        <div class="tab-pane" id="tab_default_3">
+                            
+
+
+                            @if (Model.articulosUsuario.Count > 0)
+                            {
+                            <ul class="article-list-basic">
+                                @for (int index = 0; index < Model.articulosUsuario.Count; index++)
+                                {
+                                <li>
+                                    <div>
+                                        <h2><a href="#">@Model.articulosUsuario[index][0]</a></h2>
+                                        <p>@Model.articulosUsuario[index][1]</p>
+                                        <a href="#" class="read-more">Read more &rarr;</a>
+                                    </div>
+                                </li>
+                                }
+                                
+                            </ul>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-sm-4">
+            <div class="panel panel-default">
+                <div class="menu_title">
+                    Sobre mi
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label for="email">Pasatiempos:</label>
+                                <p>@Model.informacionPersonal[11]</p>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Habilidades:</label>
+                                <p>@Model.informacionPersonal[9]</p>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Idiomas:</label>
+                                <p>@Model.informacionPersonal[10]</p>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Pais:</label>
+                                <p>@Model.informacionPersonal[8]</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="menu_title">
+                    Participación en la comunidad
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label for="email">Meritos:</label>
+                                <p>@Model.informacionPersonal[7]</p>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Peso en la comunidad:</label>
+                                <p>Miembro @Model.informacionPersonal[2]</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <form asp-page-handler="send" method="post">
+                                <button type="submit" class="btn btn-danger btn-block">Solicitar promocion de rango</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
 </html>
 
 
