@@ -12,22 +12,22 @@ namespace Iteracion_2.Pages
     public class PerfilModel : PageModel
     {
         const string SessionKeyUsuario = "UsuarioActual";
-        private PerfilController perfilController { set; get; }
+        private PerfilController PerfilController { set; get; }
 
-        public string[] informacionPersonal { get; private set; }
+        public List<String> InformacionPersonal { get; set; }
 
         public string UsuarioActual { get; set; }
-        public List<List<string>> articulosUsuario { get; private set; }
+        public List<List<string>> ArticulosUsuario { get; set; }
         public IActionResult OnGet(string UsuarioURL)
         {
             UsuarioActual = HttpContext.Session.GetString(SessionKeyUsuario);
             if (UsuarioActual != null || UsuarioURL != null)
             {
-                perfilController = new PerfilController();
+                PerfilController = new PerfilController();
 
-                informacionPersonal = perfilController.RetornarDatosPerfil(UsuarioURL ?? UsuarioActual);
+                InformacionPersonal = PerfilController.RetornarDatosPerfil(UsuarioURL ?? UsuarioActual);
 
-                articulosUsuario = perfilController.RetornarArticulosMiembro(UsuarioURL ?? UsuarioActual);
+                ArticulosUsuario = PerfilController.RetornarArticulosMiembro(UsuarioURL ?? UsuarioActual);
 
                 return Page();
             }

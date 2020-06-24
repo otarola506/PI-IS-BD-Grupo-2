@@ -10,12 +10,12 @@ namespace Iteracion_2.Controllers
     {
         private MiembroModel MiembroModel { set; get; }
 
-        public bool crearCuenta(string nombreUsuario, string nombre, int peso)
+        public bool CrearCuenta(string [] info)
         {
             MiembroModel = new MiembroModel();
-            if (!MiembroModel.verificarNombreUsuario(nombreUsuario))
+            if (!MiembroModel.VerificarNombreUsuario(info[0]))
             {
-                MiembroModel.crearCuenta(nombreUsuario, nombre, peso);
+                MiembroModel.CrearCuenta(info);
                 return true;
             }
             else
@@ -25,21 +25,16 @@ namespace Iteracion_2.Controllers
 
         }
 
-        public bool validarNombreUsuario(string nombreUsuario) {
+        public bool ValidarNombreUsuario(string nombreUsuario) {
             MiembroModel = new MiembroModel();
             return MiembroModel.verificarNombreUsuario(nombreUsuario);     
         }
 
-        public void crearPerfil(string nombreUsuario, string info, float merito)
-        {
-            MiembroModel = new MiembroModel();
-            MiembroModel.crearPerfil(nombreUsuario,info,merito);
-        }
 
-        public (List<List<string>>,string  )RetornarMiembros( string nombreUsuario) {
+        public List<List<string>>RetornarMiembros() {
             MiembroModel = new MiembroModel();
   
-            return MiembroModel.RetornarMiembros(nombreUsuario);
+            return MiembroModel.RetornarMiembros();
         }
 
         public bool IngresarCuenta(string NombreUsuario)

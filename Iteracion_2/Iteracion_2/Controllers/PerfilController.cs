@@ -9,7 +9,7 @@ namespace Iteracion_2.Controllers
     public class PerfilController
     {
         private PerfilModel perfilModel { set; get; }
-        public string[] RetornarDatosPerfil(string nombreUsuario) {
+        public List<String> RetornarDatosPerfil(string nombreUsuario) {
             perfilModel = new PerfilModel();
 
             return perfilModel.RetornarDatosPerfil(nombreUsuario);
