@@ -27,7 +27,7 @@ namespace Iteracion_2.Controllers
 
         public bool ValidarNombreUsuario(string nombreUsuario) {
             MiembroModel = new MiembroModel();
-            return MiembroModel.verificarNombreUsuario(nombreUsuario);     
+            return MiembroModel.VerificarNombreUsuario(nombreUsuario);     
         }
 
 
