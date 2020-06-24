@@ -65,7 +65,7 @@ namespace Iteracion_2.Models
             switch(tipo)
             {
                 case 1:
-                    query = "SELECT nombreUsuarioPK,correo FROM Miembro WHERE pesoMiembro = 5";
+                    query = "SELECT nombreUsuarioPK,correo FROM Miembro WHERE pesoMiembro = 5 AND tipo = 'nucleo'";
                     break;
                 case 2:
                     query = "SELECT nombreUsuarioPK,correo FROM Miembro WHERE pesoMiembro = 5 AND nombreUsuarioPK='"+usuario+"'";
