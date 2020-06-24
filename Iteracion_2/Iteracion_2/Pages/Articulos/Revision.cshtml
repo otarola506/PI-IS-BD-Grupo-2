@@ -68,8 +68,8 @@
                     }
                     else
                     {
-                        <a href="#exampleModal" type="button" class="read-more openModal" data-toggle="modal" data-target="#exampleModal" data-articulo="@artIDPk" data-titulo="@titulo">Aceptar</a>
-                        <a href="#exampleModal" type="button" class="read-more openModal" data-toggle="modal" data-target="#exampleModal" data-articulo="@artIDPk" data-titulo="@titulo">Rechazar</a>
+                        <a href="#modalAceptarRechazar" type="button" class="read-more openModal" data-toggle="modal" data-target="#modalAceptarRechazar" data-articulo="@artIDPk" data-titulo="@titulo" data-estado = "aceptado" >Aceptar</a>
+                        <a href="#modalAceptarRechazar" type="button" class="read-more openModal" data-toggle="modal" data-target="#modalAceptarRechazar" data-articulo="@artIDPk" data-titulo="@titulo" data-estado = "rechazado" >Rechazar</a>
                     }
 
                     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -97,6 +97,31 @@
                         </div>
                     </div>
 
+                    <div class="modal fade" id="modalAceptarRechazar" tabindex="-1" role="dialog" aria-labelledby="modalAceptarRechazarLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden ="true">&times;</span>
+                                    </button>
+                                    <h4 class="modal-title" id="modalAceptarRechazarLabel">¿Seguro que desea elegir esta opción como respuesta a la solicitud?</h4>
+
+                                </div>
+                                <form asp-page-handler="send" method="post">
+                                    <div class="modal-body">
+                                        <input id="artId" type="hidden" name="artID" runat="server" />
+                                        <input id="titulo" type="hidden" name="titulo" runat="server" />
+                                        <input id="estado" type="hidden" name="estadoR" runat="server" />
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                        <button asp-page-handler= "AceptarRechazar" type="submit" class="btn btn-primary" id="confirmar" disabled>Confirmar</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
 
                     <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
                         <div class="modal-dialog modal-lg" role="document">
