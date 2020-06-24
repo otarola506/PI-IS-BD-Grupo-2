@@ -98,10 +98,10 @@ namespace Iteracion_2.Models
         }
 
 
-        public async Task EnviarAsignacion(string titulo, List<String> usuarios)
+        public async Task EnviarAsignacion(string titulo, string[] usuarios)
         {
             List<List<String>> CorreosNucleo = new List<List<string>>();
-            for (int index=0; index<usuarios.Count; index++) {
+            for (int index=0; index<usuarios.Length; index++) {
                 CorreosNucleo.Add(RecuperarCorreos(2,usuarios[index])[0]);
             }
 

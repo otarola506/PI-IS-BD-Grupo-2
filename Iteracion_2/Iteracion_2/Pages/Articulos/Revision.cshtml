@@ -9,7 +9,6 @@
     <meta charset="utf-8" />
     <title>Shieldship | Miembros</title>
 
-    <link rel="stylesheet" href="~/css/revisar.css">
     <link rel="stylesheet" href="~/css/lista-miembros.css">
     <link rel="stylesheet" href="~/css/article-list-basic.css">
 
@@ -64,7 +63,7 @@
                     @if (Model.TipoUsuarioActual == "coordinador")
                     {
                         <a href="#exampleModal" type="button" class="read-more openModal" data-toggle="modal" data-target="#exampleModal" data-articulo="@artIDPk" data-titulo="@titulo">Solicitar Colaboración</a>
-                        <a href="#exampleModalLong" type="button" onclick="retSol(@artIDPk)" class="read-more" data-toggle="modal" data-target="#exampleModalLong" data-articulo="@artIDPk" data-titulo="@titulo">Asignar revisor</a>
+                        <a href="~/Articulos/AsignarRevisor?articuloId=@artIDPk" type="button" class="read-more">Asignar revisor</a>
                     }
                     else
                     {
@@ -97,71 +96,6 @@
                         </div>
                     </div>
 
-
-                    <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-                        <div class="modal-dialog modal-lg" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                    <h4 class="modal-title" id="exampleModalLabel"><b>Agregue de 3 a 5 revisores.</b></h4>
-                                </div>
-                                <form asp-page-handler="send" method="post">
-                                    <div class="modal-body">
-
-                                        <input id="artIdRevisar" type="hidden" name="artIdRevisar" runat="server" />
-                                        <input id="tituloRevisar" type="hidden" name="tituloRevisar" runat="server" />
-
-                                        <div class="row asignar">
-                                            <div id="revisores" class="col-lg-5">
-                                                <h4><b>Revisores:</b></h4>
-                                                <div class="cantidad">
-                                                    <ul class="list-unstyled" id="todo"></ul>
-                                                </div>
-                                            </div>
-
-                                            <div id="solicitudes" class="col-lg-7">
-                                                <h4><b>Respuestas:</b></h4>
-                                                <table class="responstable">
-                                                    <tr>
-                                                        <th><span>Nombre de Usuario</span></th>
-                                                        <th>Estado de la solicitud</th>
-                                                        <th></th>
-                                                    </tr>
-                                                    @{
-
-                                                        for (int indexJ = 0; indexJ < 10; indexJ++)
-                                                        {
-                                                            <tr>
-                                                                <td class="nombre-usuario">Usuario#@indexJ</td>
-                                                                <td id="estado-solicitud">Aceptado</td>
-                                                                <td><input class="revi" id="agregar-revisor" type="button" value="Agregar" /></td>
-                                                            </tr>
-                                                        }
-
-                                                        /*
-                                                        for (int indexJ = 0; indexJ < Model.ResultadoSolicitud.Count; indexJ++)
-                                                        {
-                                                            <tr>
-                                                                <td class="nombre-usuario">Model.ResultadoSolicitud[0][0]</td>
-                                                                <td id="estado-solicitud">Model.ResultadoSolicitud[0][1]</td>
-                                                                <td><input class="revi" id="agregar-revisor" type="button" value="Agregar" /></td>
-                                                            </tr>
-                                                        }*/
-                                                    }
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                                        <button asp-page-handler="Asignar" type="submit" class="btn btn-primary" id="finalizar" disabled>Finalizar</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </li>
         }

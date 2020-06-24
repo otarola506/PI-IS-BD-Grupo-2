@@ -257,14 +257,14 @@ namespace Iteracion_2.Models
             return ArticulosRetorno;
         }
 
-        public void AsignarArticulo(int articuloId, List<String> revisores) {
+        public void AsignarArticulo(int articuloId, string[] revisores) {
 
             Connection();
 
             string query = "INSERT INTO dbo.Nucleo_Revisa_Articulo(nombreUsuarioFK, artIdFK) VALUES(@nombreUsuario, @articuloId)";
             using (SqlCommand cmd = new SqlCommand(query, con))
             {
-                for (int index = 0; index < revisores.Count; index++)
+                for (int index = 0; index < revisores.Length; index++)
                 {
                     cmd.Parameters.AddWithValue("@nombreUsuario", revisores[index]);
                     cmd.Parameters.AddWithValue("@articuloId", articuloId);

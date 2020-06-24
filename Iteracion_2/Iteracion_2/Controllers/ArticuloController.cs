@@ -42,7 +42,7 @@ namespace Iteracion_2.Controllers
 
         }
 
-        public void AsignarArticulo(int articuloId, List<String> revisores) {
+        public void AsignarArticulo(int articuloId, string[] revisores) {
             ArticuloModel = new ArticuloModel();
             ArticuloModel.AsignarArticulo(articuloId, revisores);
         }

@@ -15,22 +15,10 @@ $('#exampleModal').on('show.bs.modal', function (event) {
 
 })
 
-$('#exampleModalLong').on('show.bs.modal', function (event) {
-    var button = $(event.relatedTarget) // Button that triggered the modal
-    var artId = button.data('articulo') // Extract info from data-* attributes
-    var titulo = button.data('titulo') // Extract info from data-* attributes
-
-    var modal = $(this)
-    modal.find('.modal-subtitle').text('New message to ' + artId)
-    modal.find('.modal-body #artIdRevisar').val(artId)
-    modal.find('.modal-body #tituloRevisar').val(titulo)
-})
-
 $(document).ready(function () {
     $(document.getElementById('agrega-revisor')).click(function () {
         if ($('.cantidad #todo ul').length < 5) {
             $('#todo').append("<ul>" + $("input[name=task]").val() + " <a href='#' class='close' aria-hidden='true'>&times;</a></ul>");
-            console.log($('.cantidad #todo ul').length)
             if ($('.cantidad #todo ul').length > 2) {
                 $(document.getElementById('finalizar').disabled = false)
             }
@@ -39,20 +27,23 @@ $(document).ready(function () {
 
     $("body").on('click', '#todo a', function () {
         $(this).closest("ul").remove();
-        console.log($('.cantidad #todo ul').length)
         if ($('.cantidad #todo ul').length < 3) {
             $(document.getElementById('finalizar').disabled = true)
         }
     });
 });
 
+var $lista = "";
 
 $(".revi").click(function () {
     var $fila = $(this).closest("tr");    // Find the row
     var $revisor = $fila.find(".nombre-usuario").text(); // Find the text
     var $boton = $fila.find("#agregar-revisor")
 
-    console.log($fila)
+    $lista += $revisor+","
+    $(document.getElementById('lista-revisores')).val($lista)
+
+    console.log($(document.getElementById('lista-revisores')))
 
     if ($('.cantidad #todo ul').length < 5) {
         $('#todo').append("<ul>" + $revisor + " <a href='#' class='close' aria-hidden='true'>&times;</a></ul>");
