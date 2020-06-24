@@ -71,34 +71,30 @@
                                 <li><a asp-page="/Perfil/Perfil">Perfil</a></li>
                                 <li><a asp-page="/Perfil/EditarPerfil">Editar perfil</a></li>
                                 <li><a asp-page="/Articulos/MisArticulos">Mis articulos</a></li>
-                                @if (pesoActual == "5") {
+                                @if (pesoActual == "5")
+                                {
                                     <li><a asp-page="/Articulos/Revision">Revisar</a></li>
                                 }
+                                <li><a asp-page="/Cuenta/Desconectar">Desconectarse</a></li>
                             </ul>
                         </div>
                     }
                 </div>
 
-
-                <div class="dropdown topnav navbar-right">
-                    <div class="navbar-nav">Cuenta</div>
-                    <div class="dropdown-content">
-                        <ul class="nav">
-                            @if (miembroActual != "")
-                            {
-                                <li><a asp-page="/Cuenta/Desconectar">Desconectarse</a></li>
-                            }
-                            else
-                            {
+                @if (miembroActual == "")
+                {
+                    <div class="dropdown topnav navbar-right">
+                        <div class="navbar-nav">Cuenta</div>
+                        <div class="dropdown-content">
+                            <ul class="nav">
                                 <li><a asp-page="/Cuenta/Registrar">Registrarse</a></li>
                                 <li><a asp-page="/Cuenta/Ingresar">Ingresar</a></li>
-                            }
-
-                        </ul>
+                            </ul>
+                        </div>
                     </div>
+                 }
                 </div>
-            </div>
-
+                               
         </div>
     </nav>
 
