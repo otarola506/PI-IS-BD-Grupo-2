@@ -31,8 +31,8 @@ namespace Iteracion_2.Pages.Articulos
             string UsuarioActual = HttpContext.Session.GetString(SessionKeyUsuario);
             ArticuloContro = new ArticuloController();
             autores = "";
-            informacionArticulo = ArticuloContro.retornarDatos(1);
-            autor = ArticuloContro.retornarAutor(1);
+            informacionArticulo = ArticuloContro.retornarDatos(artId);
+            autor = ArticuloContro.retornarAutor(artId);
             for (int index = 0; index < autor.Count; index++)
             {
                 if(index != 0)
