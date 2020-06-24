@@ -111,6 +111,7 @@ namespace Iteracion_2.Pages.Articulos
 
         public async Task<IActionResult> OnPostAceptarRechazar()
         {
+            UsuarioActual = HttpContext.Session.GetString(SessionKeyUsuario);
             int id = Int32.Parse(Request.Form["artID"]);
             string titulo = Request.Form["titulo"];
             string estado = Request.Form["estado"];
