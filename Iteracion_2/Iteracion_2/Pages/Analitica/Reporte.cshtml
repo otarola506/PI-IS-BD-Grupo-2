@@ -4,55 +4,59 @@
     ViewData["Title"] = "Reporte";
 }
 
-<div id="chart"></div>
+<head>
+    <link rel="stylesheet" href="~/css/border-radius.css" />
+</head>
 
-<input type="text" id="tipo" value="" />
-<button onclick="drawChart()">DIBUJAR MIEDO</button>
+<body>
+    <input type="text" id="tipo" value="" />
+    <button onclick="drawChart(1)">Graficar</button>
 
-@section Scripts
-    {
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <div id="chart"></div>
 
-    <script type="text/javascript">
-        google.charts.load('current', { 'packages': ['corechart'] });
-        google.charts.setOnLoadCallback(drawChart);
-        function drawChart(e) {
+    @section Scripts
+        {
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
-            if (e == 0) {
-                console.log("get?")
-                var jsonData = $.ajax({
-                    url: "/Analitica/Reporte?handler=ChartData",
-                    dataType: "json",
-                    async: false
-                }).responseText;
-                var data = new google.visualization.DataTable(jsonData);
-                var options = {
-                    'title': 'How Much Pizza I Ate Last Night',
-                    'width': 600,
-                    'height': 500
-                };
-            } else {
-                console.log("get?")
-                const tipo = document.getElementById('tipo').value;
+        <script type="text/javascript">
+            google.charts.load('current', { 'packages': ['corechart'] });
+            google.charts.setOnLoadCallback(drawChart);
+            function drawChart(e) {
 
-                console.log(tipo);
+                if (e == null) {
+                    var jsonData = $.ajax({
+                        url: "/Analitica/Reporte?handler=ChartData",
+                        dataType: "json",
+                        async: false
+                    }).responseText;
+                    var data = new google.visualization.DataTable(jsonData);
+                    var options = {
+                        'title': 'Tipos de miembro en la comunidad',
+                        'width': 850,
+                        'height': 650
+                    };
+                } else {
+                    const tipo = document.getElementById('tipo').value;
 
-                var jsonData = $.ajax({
-                    url: "/Analitica/Reporte?handler=ChartData&val=" + tipo,
-                    dataType: "json",
-                    async: false
-                }).responseText;
-                var data = new google.visualization.DataTable(jsonData);
-                var options = {
-                    'title': 'Reporte por: '+tipo,
-                    'width': 600,
-                    'height': 500
-                };
+                    var jsonData = $.ajax({
+                        url: "/Analitica/Reporte?handler=ChartData&entrada=" + tipo,
+                        dataType: "json",
+                        async: false
+                    }).responseText;
+                    var data = new google.visualization.DataTable(jsonData);
+                    var options = {
+                        'title': 'Reporte por: ' + tipo,
+                        'width': 600,
+                        'height': 500
+                    };
+                }
+
+
+                var chart = new google.visualization.PieChart(document.getElementById('chart'));
+                chart.draw(data, options);
             }
-            
+        </script>
+    }
+</body>
 
-            var chart = new google.visualization.PieChart(document.getElementById('chart'));
-            chart.draw(data, options);
-        }
-    </script>
-}
+

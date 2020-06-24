@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Iteracion_2.Models
 {
     public class ReporteConfigurable {
-        public string Pais { get; set; }
+        public string Entrada { get; set; }
         public string Cantidad { get; set; }
     }
 
@@ -34,12 +34,11 @@ namespace Iteracion_2.Models
             {
                 // hacemos la consulta avanzada  para los nombres que queremos en la grafica
                 string AtributoDistribucion = "M."+ Valores[0] +"";
-                SqlCommand cmd1 = new SqlCommand("SELECT "+AtributoDistribucion+", COUNT(*)   FROM Miembro M GROUP BY "+AtributoDistribucion+"", con);
-                //con.Open();
-                SqlDataReader reader = cmd1.ExecuteReader();
+                SqlCommand command = new SqlCommand("SELECT "+AtributoDistribucion+", COUNT(*)   FROM Miembro M GROUP BY "+AtributoDistribucion+"", con);
+                SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
-                    var reporte = new ReporteConfigurable { Pais = reader[0].ToString(), Cantidad = reader[1].ToString() };
+                    var reporte = new ReporteConfigurable { Entrada = reader[0].ToString(), Cantidad = reader[1].ToString() };
                     Retorno.Add(reporte);
                 }
                 con.Close();
