@@ -56,7 +56,6 @@ namespace Iteracion_2.Controllers
         {
             ArticuloModel = new ArticuloModel();
             ArticuloModel.ModificarEstadoSolicitud(artID, nombreUsuarioActual, estadoSolicitud);
-
         }
     }
 }
