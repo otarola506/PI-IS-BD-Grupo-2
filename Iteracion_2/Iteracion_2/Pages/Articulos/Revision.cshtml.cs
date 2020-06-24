@@ -100,7 +100,6 @@ namespace Iteracion_2.Pages.Articulos
 
             ArticuloController.AsignarArticulo(articuloId, revisores);
             await EmailController.CorreoANucleo(titulo, "asignar", revisores);
-
             return RedirectToPage("/Articulos/Revision");
         }
 
@@ -108,6 +107,30 @@ namespace Iteracion_2.Pages.Articulos
             ArticuloController = new ArticuloController();
 
             ResultadoSolicitud = ArticuloController.RetornarResultadoSolicitud(articuloId);
+        }
+
+        public async Task<IActionResult> OnPostAceptar()
+        {
+            int id = Int32.Parse(Request.Form["artID"]);
+            string titulo = Request.Form["titulo"]; 
+            ArticuloController = new ArticuloController();
+            EmailController = new EmailController();
+            ArticuloController.ModificarEstadoSolicitud(id, UsuarioActual, "aceptado");
+            TempData["resultadoSolicitud"] = "La respuesta ha sido enviada al coordinador exitosamente";
+            await EmailController.CorreoACoordinadores(titulo, "aceptado", UsuarioActual);           
+            return RedirectToPage("/Articulos/Revision");
+        }
+
+        public async Task<IActionResult> OnPostRechazar()
+        {
+            int id = Int32.Parse(Request.Form["artID"]);
+            string titulo = Request.Form["titulo"]; 
+            ArticuloController = new ArticuloController();
+            EmailController = new EmailController();
+            ArticuloController.ModificarEstadoSolicitud(id, UsuarioActual, "rechazado");
+            TempData["resultadoSolicitud"] = "La respuesta ha sido enviada al coordinador exitosamente";
+            await EmailController.CorreoACoordinadores(titulo, "rechazado", UsuarioActual);
+            return RedirectToPage("/Articulos/Revision");
         }
     }
 }

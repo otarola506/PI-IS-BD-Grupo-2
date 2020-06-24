@@ -59,5 +59,11 @@ namespace Iteracion_2.Controllers
                     break;
             }            
         }
+
+        public async Task CorreoACoordinadores(string titulo, string estado, string nombreUsuario)
+        {
+            Correo = new EmailModel();
+            await Correo.CorreoACoordinadores(titulo, estado, nombreUsuario);
+        }
     }
 }

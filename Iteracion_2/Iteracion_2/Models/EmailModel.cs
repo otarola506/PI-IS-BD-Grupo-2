@@ -70,6 +70,9 @@ namespace Iteracion_2.Models
                 case 2:
                     query = "SELECT nombreUsuarioPK,correo FROM Miembro WHERE pesoMiembro = 5 AND nombreUsuarioPK='"+usuario+"'";
                     break;
+                case 3:
+                    query = "SELECT nombreUsuarioPK,correo FROM Miembro WHERE pesoMiembro = 5 AND tipo = 'coordinador'";
+                    break;
                 default:
                     break;
 
@@ -140,6 +143,18 @@ namespace Iteracion_2.Models
             smtp.EnableSsl = true;
             smtp.Credentials = new System.Net.NetworkCredential("comunidadshieldship@gmail.com", "BASESdatos176");
             await smtp.SendMailAsync(mm);
+        }
+
+        public async Task CorreoACoordinadores(string titulo, string estadoSolicitud, string nombreUsuario)
+        {
+            List<List<String>> CorreosCoodinador = RecuperarCorreos(3, null);
+
+            for (int index = 0; index < CorreosCoodinador.Count; index++)
+            {
+                await CorreoDefault(CorreosCoodinador[index][1],
+                 "Respuesta a solicitud de revisión.",
+                 "Estimado " + CorreosCoodinador[index][0] + ", se le informa que '" + nombreUsuario + "' ha '" + estadoSolicitud + "' la solicitud para la revisión del artículo titulado '" + titulo);
+            }
         }
 
     }

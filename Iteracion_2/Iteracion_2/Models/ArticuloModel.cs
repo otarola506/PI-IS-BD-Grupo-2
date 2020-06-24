@@ -320,5 +320,18 @@ namespace Iteracion_2.Models
 
             return ResultadoSolicitud;
         }
+
+        public void ModificarEstadoSolicitud(int artID, string nombreUsuarioActual, string estadoSolicitud)
+        {
+            string query = "UPDATE Nucleo_Solicita_Articulo SET estadoSolicitud = '@estado' WHERE artIdFK = @articuloId AND nombreUsuarioFK = @nombreUsuario";
+            using (SqlCommand cmd = new SqlCommand(query, con))
+            {
+                cmd.Parameters.AddWithValue("@articuloId", artID);
+                cmd.Parameters.AddWithValue("@estado", estadoSolicitud);
+                cmd.Parameters.AddWithValue("@nombreUsuario", nombreUsuarioActual);
+                cmd.ExecuteNonQuery();
+                cmd.Parameters.Clear();
+            }
+        }
     }
 }
