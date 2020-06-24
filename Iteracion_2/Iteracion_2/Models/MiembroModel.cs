@@ -18,33 +18,24 @@ namespace Iteracion_2.Models
             con = connectionString.Connection();
         }
 
-        public void crearCuenta(string nombreUsuario, string nombre, int peso) {
+        public void CrearCuenta(string[] info) {
             Connection();
             SqlCommand cmd = new SqlCommand("CrearCuenta", con);
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.Add("@nombreUsuario", SqlDbType.VarChar).Value = nombreUsuario;
-            cmd.Parameters.Add("@nombre", SqlDbType.VarChar).Value = nombre;
-            cmd.Parameters.Add("@peso", SqlDbType.VarChar).Value = peso;
+            cmd.Parameters.Add("@nombreUsuario", SqlDbType.VarChar).Value = info[0];
+            cmd.Parameters.Add("@nombre", SqlDbType.VarChar).Value = info[1];
+            cmd.Parameters.Add("@apellido", SqlDbType.VarChar).Value = info[2];
+            cmd.Parameters.Add("@correo", SqlDbType.VarChar).Value = info[3];
+            cmd.Parameters.Add("@pais", SqlDbType.VarChar).Value = info[4];
+            cmd.Parameters.Add("@idioma", SqlDbType.VarChar).Value = info[5];
+            cmd.Parameters.Add("@hobbies", SqlDbType.VarChar).Value = info[6];
+            cmd.Parameters.Add("@habilidades", SqlDbType.VarChar).Value = info[7];
             cmd.ExecuteNonQuery();
             con.Close();
         }
 
-        public void crearPerfil(string nombreUsuario, string info,float merito)
-        {
-            Connection();
-            SqlCommand cmd = new SqlCommand("CrearPerfil", con);
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.Add("@nombreUsuarioFK", SqlDbType.VarChar).Value = nombreUsuario;
-            cmd.Parameters.Add("@infoLaboral", SqlDbType.VarChar).Value = info;
-            cmd.Parameters.Add("@infoBiografico", SqlDbType.VarChar).Value = info;
-            cmd.Parameters.Add("@telefono", SqlDbType.VarChar).Value = info;
-            cmd.Parameters.Add("@correo", SqlDbType.VarChar).Value = info;
-            cmd.Parameters.Add("@merito", SqlDbType.VarChar).Value = merito;
-            cmd.ExecuteNonQuery();
-            con.Close();
-        }
 
-        public Boolean verificarNombreUsuario(string nombreUsuario)
+        public Boolean VerificarNombreUsuario(string nombreUsuario)
         {
             Connection();
             string verificacion = "";
@@ -66,22 +57,22 @@ namespace Iteracion_2.Models
             return Existe;
         }
 
-        public (List<List<string>>, string ) RetornarMiembros(string NombreUsuario) {
+        public List<List<string>>RetornarMiembros() {
             List<List<string>> miembrosComunidad = new List<List<string>>();
 
             Connection();
 
-            string PesoUsuarioActual = "";
-            SqlCommand cmd = new SqlCommand("RecuperarTodosUsuarios", con);
-            cmd.CommandType = CommandType.StoredProcedure;
-            SqlDataReader reader = cmd.ExecuteReader();
+            string query = "SELECT M.nombreUsuarioPK, M.nombre+' '+M.apellido AS [Nombre Completo], M.correo, M.merito, M.pesoMiembro FROM dbo.Miembro M ORDER BY M.pesoMiembro DESC, M.nombre ASC";
+            SqlCommand command = new SqlCommand(query, con)
+            {
+                CommandType = CommandType.Text
 
-            while (reader.Read()) {
-                if (reader[0].ToString() == NombreUsuario)
+            };
+            using (SqlDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
                 {
-                    PesoUsuarioActual = reader[4].ToString(); // peso 
-                }
-                miembrosComunidad.Add(new List<string>
+                    miembrosComunidad.Add(new List<string>
                                         {
                                             reader[0].ToString(), // nombreUsuarioPK
                                             reader[1].ToString(), // nombre
@@ -89,11 +80,12 @@ namespace Iteracion_2.Models
                                             reader[3].ToString(), // merito 
                                             reader[4].ToString(), // peso 
                                         });
-            }
+                }
 
+            }
             con.Close();
 
-            return (miembrosComunidad, PesoUsuarioActual );
+            return miembrosComunidad;
         }
 
 

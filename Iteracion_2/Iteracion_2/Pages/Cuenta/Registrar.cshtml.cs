@@ -18,21 +18,51 @@ namespace Iteracion_2.Pages
         public IActionResult OnPost()
         {
             miembroController = new MiembroController();
-            string nuevo_nombreUsuario = Request.Form["inputUsername"];
-            string nuevo_nombre = Request.Form["inputName"];
-            int peso = 0;
+            string nuevo_nombreUsuario = Request.Form["nombreUsuario"].ToString();
+            string nuevo_nombre = Request.Form["Nombre"].ToString();
+            string nuevo_apellido = Request.Form["Apellido"].ToString();
+            string nuevo_correo = Request.Form["Correo"].ToString();
+            string nuevo_pais = Request.Form["Pais"].ToString();
+            string nuevo_idioma = Request.Form["Idioma"].ToString();
+            string nuevo_hobbies = Request.Form["Hobbies"].ToString();
+            string nuevo_habilidades = Request.Form["Habilidades"].ToString();
+         
 
             if (nuevo_nombreUsuario.Equals("")) {
-                ViewData["username"] = "No digito un nombre usuario";
+                ViewData["username"] = "Hacen falta datos";
                 return Page();
             }
 
             if (nuevo_nombre.Equals("")) {
-                ViewData["username"] = "No digito su nombre";
+                ViewData["username"] = "Hacen falta datos";
                 return Page();
             }
 
-            if (!miembroController.crearCuenta(nuevo_nombreUsuario, nuevo_nombre, peso)) {
+            if (nuevo_apellido.Equals(""))
+            {
+                ViewData["username"] = "Hacen falta datos";
+                return Page();
+            }
+
+            if (nuevo_correo.Equals(""))
+            {
+                ViewData["username"] = "Hacen falta datos";
+                return Page();
+            }
+
+            string[] informacionNueva = new string[]
+                             {
+                                            nuevo_nombreUsuario,
+                                            nuevo_nombre,
+                                            nuevo_apellido,
+                                            nuevo_correo,
+                                            nuevo_pais,
+                                            nuevo_idioma,
+                                            nuevo_hobbies,
+                                            nuevo_habilidades
+                             };
+
+            if (!miembroController.CrearCuenta(informacionNueva)) {
                 ViewData["username"] = "Este nombre usuario ya existe";
                 return Page();
             }
@@ -42,7 +72,7 @@ namespace Iteracion_2.Pages
                 HttpContext.Session.SetString("PesoActual", "0");
                 HttpContext.Session.SetString("TipoActual", "periferico");
 
-                miembroController.crearPerfil(nuevo_nombreUsuario, "", 0);
+    
 
                 return RedirectToPage("/Perfil/EditarPerfil");
             }
