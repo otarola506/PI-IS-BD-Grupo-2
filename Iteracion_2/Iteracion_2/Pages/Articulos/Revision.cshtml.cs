@@ -47,6 +47,13 @@ namespace Iteracion_2.Pages.Articulos
                 if (UsuarioActual != null && PesoActual == "5" && tipo == "coordinador")
                 {
                     ArticulosPendientes = ArticuloController.RetornarPendientes();
+                    object temp;
+                    TempData.TryGetValue("resultadoSolicitud", out temp);
+
+                    if (temp != null)
+                    {
+                        Message = (string)temp;
+                    }
                     return Page();
                 }
                 else
@@ -62,6 +69,7 @@ namespace Iteracion_2.Pages.Articulos
             ArticuloController = new ArticuloController();
             EmailController = new EmailController();
             ArticuloController.MarcarArtSolicitado(id);
+            TempData["resultadoSolicitud"] = "La solicitud ha sido enviada exitosamente a los miembro de núcleo";
             await EmailController.CorreoANucleo(titulo,"solicitar",null);
 
 

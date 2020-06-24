@@ -18,6 +18,12 @@
 </head>
 <body>
     <h3>Articulos pendientes de revisión</h3>
+    <div id="mensaje-respuesta">
+        @if (Model.Message != null)
+        {
+            <h4 style="color:green; text-align:center"> @Model.Message</h4>
+        }
+    </div>
 
     <ul class="article-list-basic">
         @for (int index = 0; index < Model.ArticulosPendientes.Count; index++)
@@ -73,7 +79,7 @@
                         </div>
                     </div>
 
-                    
+
                     <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
                         <div class="modal-dialog modal-lg" role="document">
                             <div class="modal-content">
@@ -106,7 +112,7 @@
                                                         <th></th>
                                                     </tr>
                                                     @{
-                                                        
+
                                                         for (int indexJ = 0; indexJ < 10; indexJ++)
                                                         {
                                                             <tr>
