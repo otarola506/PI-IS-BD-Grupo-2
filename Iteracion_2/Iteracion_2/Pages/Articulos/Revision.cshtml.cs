@@ -83,7 +83,7 @@ namespace Iteracion_2.Pages.Articulos
             return RedirectToPage("/Articulos/Revision");
         }
 
-        public async Task<IActionResult> OnPostAceptar()
+        public async Task<IActionResult> OnPostAceptarRechazar()
         {
             UsuarioActual = HttpContext.Session.GetString(SessionKeyUsuario);
             int id = Int32.Parse(Request.Form["artID"]);
