@@ -18,11 +18,20 @@
         <option value="tipo">Tipo de miembro</option>
         <option value="habilidades">Habilidades</option>
         <option value="hobbies">Hobbies</option>
-        <option value="nombre">Nombre</option>
-        <option value="apellido">Apellido</option>
         <option value="idiomas">Idioma</option>
-        <option value="merito">Merito</option>
+
+        
     </select>
+    <div>
+        <label for="GG">Prueba</label>
+
+        <input id="datos" type="text" value="" disabled />
+        <input id="realizarBusqueda" type="button" value="Graficar" />
+
+
+    </div>
+
+
     <div id="chart"></div>
 
     @section Scripts
@@ -32,6 +41,9 @@
         <script type="text/javascript">
             google.charts.load('current', { 'packages': ['corechart'] });
             google.charts.setOnLoadCallback(drawChart);
+            var $selecciones = "";
+            var $cantidadSelecciones = []
+            var $contador = 0;
             function drawChart() {
                 var jsonData = $.ajax({
                     url: "/Analitica/Reporte?handler=ChartData",
@@ -48,28 +60,54 @@
                 chart.draw(data, options);
             }
 
+            var $lista = []
+            var $filtros = ""
+
             $('select').on('change', function (e) {
                 var optionSelected = $("option:selected", this);
+
                 var valueSelected = this.value;
 
-                if (valueSelected != "") {
+                if ($lista.length < 2) {
+                    $filtros += valueSelected + ","
+                    $lista.push(valueSelected)
+
+                    $("#datos").val($filtros)
+                }
+
+                console.log(optionSelected)
+                console.log(valueSelected)
+            });
+
+            $('#realizarBusqueda').click(function () {
+                console.log("hola")
+                if ($filtros != "") {
                     var jsonData = $.ajax({
-                        url: "/Analitica/Reporte?handler=ChartData&entrada=" + valueSelected,
+                        url: "/Analitica/Reporte?handler=ChartData&entrada=" + $filtros,
                         dataType: "json",
                         async: false
                     }).responseText;
                     var data = new google.visualization.DataTable(jsonData);
                     var options = {
-                        'title': 'Miembros de la comunidad por: ' + valueSelected,
+                        'title': 'Miembros de la comunidad por: ' + $filtros,
                         'width': 850,
                         'height': 650
                     };
 
-                    var chart = new google.visualization.PieChart(document.getElementById('chart'));
-                    chart.draw(data, options);
+                    if ($cantidadSelecciones.length === 1) {
+                        var chart = new google.visualization.PieChart(document.getElementById('chart'));
+                        chart.draw(data, options);
+                    } else {
+                        var chart = new google.visualization.BarChart(document.getElementById('chart'));
+                        chart.draw(data, options);
+                    }
+
+
                 } else {
                     drawChart();
                 }
+
+
             });
 
         </script>

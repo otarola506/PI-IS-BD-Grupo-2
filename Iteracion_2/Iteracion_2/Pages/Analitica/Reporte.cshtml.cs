@@ -44,8 +44,12 @@ namespace Iteracion_2.Pages.Analitica
                         .GetJson();
             }
             else {
-                string[] Selecciones = new string[2];
-                Selecciones = entrada.Split(',');
+
+                
+                string FiltrosSeleccionados = entrada.TrimEnd(new Char[] { ',' });
+
+                
+                string[] Selecciones = FiltrosSeleccionados.Split(',');
                 ControladorDistribucion = new DistribucionMiembroController();
 
                 var reporte = ControladorDistribucion.ComunicarDatosDistrubucion(Selecciones);
@@ -53,6 +57,8 @@ namespace Iteracion_2.Pages.Analitica
                 json = reporte.ToGoogleDataTable()
                         .NewColumn(new Column(ColumnType.String, "Paises"), x => x.Entrada)
                         .NewColumn(new Column(ColumnType.Number, "Cantidad"), x => x.Cantidad)
+                        .NewColumn(new Column(ColumnType.String, "Paises1"), x => x.Entrada2)
+                        .NewColumn(new Column(ColumnType.Number, "Cantidad1"), x => x.Cantidad2)
                         .Build()
                         .GetJson();
             }
