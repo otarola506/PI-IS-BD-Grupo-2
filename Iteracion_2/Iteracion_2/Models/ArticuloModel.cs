@@ -112,10 +112,10 @@ namespace Iteracion_2.Models
             return ArticulosPendientes;
         }
 
-        public string[] retornarDatos(int artId) {
+        public string[] retornarDatos(string artId) {
             string[] info = new string[2];
-            string queryString = "SELECT titulo,resumen FROM Articulo  WHERE artIdPK = 1";
-
+            string queryString = "SELECT titulo,resumen FROM Articulo  WHERE artIdPK = "+artId;
+           
             Encoding unicode = Encoding.Unicode;
             Connection();
 
@@ -138,10 +138,10 @@ namespace Iteracion_2.Models
             return info;
         }
 
-        public List<string> retornarAutor(int artId)
+        public List<string> retornarAutor(string artId)
         {
             List<string> autores = new List<string>();
-            string queryString = "SELECT M.nombre+' '+M.apellido AS 'Nombre' FROM Articulo A JOIN Miembro_Articulo MA  ON A.artIdPK = MA.artIdFK JOIN Miembro M  ON M.nombreUsuarioPK = MA.nombreUsuarioFK WHERE A.artIdPK = 1";
+            string queryString = "SELECT M.nombre+' '+M.apellido AS 'Nombre' FROM Articulo A JOIN Miembro_Articulo MA  ON A.artIdPK = MA.artIdFK JOIN Miembro M  ON M.nombreUsuarioPK = MA.nombreUsuarioFK WHERE A.artIdPK = "+artId;
 
             Connection();
 

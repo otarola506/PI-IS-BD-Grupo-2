@@ -29,7 +29,7 @@ namespace Iteracion_2.Controllers
 
         }
 
-        public List<string> retornarAutor(int artId)
+        public List<string> retornarAutor(string artId)
         {
             ArticuloModel = new ArticuloModel();
             return ArticuloModel.retornarAutor(artId);
