@@ -16,12 +16,12 @@ namespace Iteracion_2.Pages.Articulos
     {
         const string SessionKeyUsuario = "UsuarioActual";
         const string SessionKeyTipo = "TipoActual";
-        private IHostingEnvironment _env;
+        private readonly IHostingEnvironment _env;
 
         private ArticuloController ArticuloController { get; set; }
         private EmailController EmailController { get; set; }
 
-        public List<List<String>> ResultadoSolicitud { get; set; }
+        public List<List<string>> ResultadoSolicitud { get; set; }
 
         public AsignarRevisorModel(IHostingEnvironment env)
         {

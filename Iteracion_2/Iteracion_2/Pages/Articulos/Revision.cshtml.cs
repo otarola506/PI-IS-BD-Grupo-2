@@ -18,12 +18,13 @@ namespace Iteracion_2.Pages.Articulos
         private MiembroController MiembroController { get; set; }
         private EmailController EmailController { get; set; }
 
-        
+        public List<List<string>> ArticulosPendientes;
+        public List<List<string>> ArticulosAsignados;
 
-        public List<List<string>> ArticulosPendientes { get; set; }
-               
-        public string UsuarioActual { get; set; }
+        public string UsuarioActual;
         public string Message;
+        public string PesoActual;
+        public string Retroalimentacion;
 
         public string Titulo { get; set; }
         public string TipoUsuarioActual { get; set; }
@@ -32,42 +33,40 @@ namespace Iteracion_2.Pages.Articulos
 
         public IActionResult OnGet()
         {
-            UsuarioActual = HttpContext.Session.GetString(SessionKeyUsuario);
             string PesoActual = HttpContext.Session.GetString(SessionKeyPeso);
+            string Estado = "";
+            UsuarioActual = HttpContext.Session.GetString(SessionKeyUsuario);
             TipoUsuarioActual = HttpContext.Session.GetString(SessionKeyTipo);
 
             ArticuloController = new ArticuloController();
 
-            
+            TempData.TryGetValue("resultadoSolicitud", out object temp);
+
+            if (temp != null)
+            {
+                Message = (string)temp;
+            }
+
             if (UsuarioActual != null && PesoActual == "5" && TipoUsuarioActual == "coordinador")
             {
-                ArticulosPendientes = ArticuloController.RetornarPendientes();
-                object temp;
-                TempData.TryGetValue("resultadoSolicitud", out temp);
-
-                if (temp != null)
-                {
-                    Message = (string)temp;
-                }
-                return Page();
+                Estado = "pendiente";
+                Retroalimentacion = "No hay artículos pendientes";
             }
             else if (UsuarioActual != null && PesoActual == "5")
             {
-                ArticulosPendientes = ArticuloController.RetornarArticulosPendientes(UsuarioActual, "solicitado");
-                object temp;
-                TempData.TryGetValue("resultadoSolicitud", out temp);
-
-                if (temp != null)
-                {
-                    Message = (string)temp;
-                }
-                return Page();
+                Estado = "solicitado";
+                Retroalimentacion = "No tiene ningún artículo pendiente de aceptar";
             }
             else
             {
                 return RedirectToPage("/Cuenta/Ingresar", new { Mensaje = "Permisos insuficientes" });
             }
-            
+
+            ArticulosPendientes = ArticuloController.RetornarArticulosPendientes(UsuarioActual, Estado);
+            ArticulosAsignados = ArticuloController.RetornarArticulosPendientes(UsuarioActual, "asignado");
+
+            return Page();
+
         }
 
         public async Task <IActionResult> OnPost() { 
