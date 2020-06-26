@@ -1,0 +1,72 @@
+﻿@page
+@model Iteracion_2.Pages.Articulos.AsignarRevisorModel
+@{
+    ViewData["Title"] = "AsignarRevisor";
+}
+
+<html>
+<head>
+    <link rel="stylesheet" href="~/css/revisar.css">
+    <link rel="stylesheet" href="~/css/border-radius.css">
+</head>
+
+    <body>
+        <div class="row" id="primera-fila">
+            <div class="col-lg-4" id="regresar-pendientes">
+                <a href="Revision">&larr; Regresar a articulos pendientes</a>
+            </div>
+        </div>
+        <br />
+        <form method="post">
+            <div class="row asignar">
+                <div id="revisores" class="col-lg-5">
+                    <h4><b>Revisores:</b></h4>
+                    <div class="cantidad">
+                        <ul class="list-unstyled" id="todo"></ul>
+                    </div>
+                </div>
+
+                <div id="solicitudes" class="col-lg-7">
+                    @if (Model.ResultadoSolicitud.Count > 0)
+                    {
+                        <h4><b>Respuestas:</b></h4>
+                        <table class="responstable">
+                            <tr>
+                                <th><span>Nombre de Usuario</span></th>
+                                <th>Estado de la solicitud</th>
+                                <th></th>
+                            </tr>
+                            @{
+
+                                for (int index = 0; index < Model.ResultadoSolicitud.Count; index++)
+                                {
+                                    <tr>
+                                        <td class="nombre-usuario">@Model.ResultadoSolicitud[index][0]</td>
+                                        <td id="estado-solicitud">@Model.ResultadoSolicitud[index][1]</td>
+                                        <td><input class="revi" id="agregar-revisor" type="button" value="Agregar" /></td>
+                                    </tr>
+                                }
+                            }
+                        </table>
+                    }
+                    else
+                    {
+                        <h4><b>Aún no hay respuestas a la solicitud</b></h4>
+                    }
+
+                </div>
+            </div>
+            <br />
+
+            <input type="hidden" id="lista-revisores" name="listaRevisores" runat="server"/>
+            <input id="artIdRevisar" type="hidden" name="artIdRevisar" runat="server" />
+            <input id="tituloRevisar" type="hidden" name="tituloRevisar" runat="server" />
+
+            <br />
+            <button asp-page-handler="Asignar" type="submit" class="btn btn-primary" id="finalizar" disabled>Finalizar</button>
+        </form>
+
+        <script src="~/js/site.js"></script>
+    </body>
+</html>
+

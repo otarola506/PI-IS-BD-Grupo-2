@@ -166,28 +166,6 @@ namespace Iteracion_2.Models
             return autores;
         }
 
-        public List<List<string>> RetornarSolicitados(string nombreUsuarioActual)
-        {
-            List<List<string>> ArticulosSolicitados = new List<List<string>>();
-            string queryString = "SELECT A.artIdPK,A.titulo FROM Articulo A JOIN Nucleo_Solicita_Articulo NS ON A.artIdPK = NS.artIdFK WHERE NS.estadoSolicitud = 'solicitado' AND NS.nombreUsuarioFK = @nombreUsuario ORDER BY A.artIdPK";
-
-            Connection();
-            SqlDataAdapter sqlDa = new SqlDataAdapter(queryString, con);
-            sqlDa.SelectCommand.CommandType = CommandType.Text;
-            sqlDa.SelectCommand.Parameters.AddWithValue("@nombreUsuario", nombreUsuarioActual);
-            DataTable dTable = new DataTable();
-            sqlDa.Fill(dTable);
-            for (int index = 0; index < dTable.Rows.Count; index++)
-            {
-                ArticulosSolicitados.Add(new List<string> {
-                                    dTable.Rows[index][0].ToString(), // artIdPK
-                                    dTable.Rows[index][1].ToString(), // titulo
-                                    });
-            }
-            con.Close();
-            return ArticulosSolicitados;
-        }
-
         public List<List<string>> RetornarArticulosPendientes(string nombreUsuarioActual, string estado)
         {
             List<List<string>> ArticulosRetorno = new List<List<string>>();
@@ -257,14 +235,14 @@ namespace Iteracion_2.Models
             return ArticulosRetorno;
         }
 
-        public void AsignarArticulo(int articuloId, List<String> revisores) {
+        public void AsignarArticulo(int articuloId, string[] revisores) {
 
             Connection();
 
-            string query = "INSERT INTO dbo.Nucleo_Revisa_Articulo(nombreUsuarioFK, artIdFK) VALUES(@nombreUsuario, @articuloId)";
+            string query = "INSERT INTO dbo.Nucleo_Revisa_Articulo(nombreUsuarioFK, artIdFK, estadoRevision) VALUES(@nombreUsuario, @articuloId, 'asignado')";
             using (SqlCommand cmd = new SqlCommand(query, con))
             {
-                for (int index = 0; index < revisores.Count; index++)
+                for (int index = 0; index < revisores.Length; index++)
                 {
                     cmd.Parameters.AddWithValue("@nombreUsuario", revisores[index]);
                     cmd.Parameters.AddWithValue("@articuloId", articuloId);
@@ -273,14 +251,14 @@ namespace Iteracion_2.Models
                 }
 
             }
-            ActualizarEstado(articuloId, "asignado");
+            ActualizarEstado(articuloId, "revision");
 
             con.Close();
 
         }
 
         private void ActualizarEstado(int articuloId, string estado) {
-            string query = "UPDATE Articulo SET estado = '@estado' WHERE artIdPK = @articuloId";
+            string query = "UPDATE Articulo SET estado = @estado WHERE artIdPK = @articuloId";
             using (SqlCommand cmd = new SqlCommand(query, con))
             {
                 cmd.Parameters.AddWithValue("@articuloId", articuloId);
@@ -323,12 +301,86 @@ namespace Iteracion_2.Models
 
         public void ModificarEstadoSolicitud(int artID, string nombreUsuarioActual, string estadoSolicitud)
         {
-            string query = "UPDATE Nucleo_Solicita_Articulo SET estadoSolicitud = '@estado' WHERE artIdFK = @articuloId AND nombreUsuarioFK = @nombreUsuario";
+            Connection();
+            string query = "UPDATE Nucleo_Solicita_Articulo SET estadoSolicitud = @estado WHERE artIdFK = @articuloId AND nombreUsuarioFK = @nombreUsuario";
             using (SqlCommand cmd = new SqlCommand(query, con))
             {
                 cmd.Parameters.AddWithValue("@articuloId", artID);
                 cmd.Parameters.AddWithValue("@estado", estadoSolicitud);
                 cmd.Parameters.AddWithValue("@nombreUsuario", nombreUsuarioActual);
+                cmd.ExecuteNonQuery();
+                cmd.Parameters.Clear();
+            }
+        }
+
+        public List<List<string>> RetornarRevisados()
+        {
+            List<List<string>> ArticulosRevisados = new List<List<string>>();
+            string queryString = "SELECT A.artIdPK,A.titulo,A.resumen,M.nombre+' '+M.apellido AS [Nombre Revisor],M.nombreUsuarioPK,NR.puntuacion,NR.comentarios FROM Miembro M JOIN Nucleo_Revisa_Articulo NR ON M.nombreUsuarioPK = NR.nombreUsuarioFK JOIN Articulo A ON A.artIdPK = NR.artIdFK WHERE NR.estadoRevision = 'revisado' ORDER BY A.artIdPK";
+
+            Connection();
+
+            SqlCommand command = new SqlCommand(queryString, con)
+            {
+                CommandType = CommandType.Text
+            };
+
+            DataTable dTable = new DataTable();
+            SqlDataAdapter adapter = new SqlDataAdapter(command);
+            adapter.Fill(dTable);
+
+            for (int index = 0; index < dTable.Rows.Count; index++)
+            {
+                string idAnterior = "";
+                string idActual = dTable.Rows[index][0].ToString(); //ardIdPK actual
+
+                if (index > 0)
+                {
+                    idAnterior = dTable.Rows[index - 1][0].ToString(); //ardIdPK de la iteración pasada
+                }
+
+                if (idActual != idAnterior)
+                {
+                    DataRow[] datosDeArticulo = dTable.Select("artIdPK = " + idActual); // devuelve los autores con ese artIdPK
+
+                    string autores = "";
+                    string usuarios = "";
+
+                    for (int indexJ = 0; indexJ < datosDeArticulo.Length; indexJ++)
+                    {
+                        autores += datosDeArticulo[indexJ][3];
+                        usuarios += datosDeArticulo[indexJ][4];
+                        if (indexJ < datosDeArticulo.Length - 1)
+                        {
+                            autores += ",";
+                            usuarios += ",";
+                        }
+                    }
+
+                    ArticulosRevisados.Add(new List<string> {
+                                    dTable.Rows[index][0].ToString(), // artIdPK
+                                    dTable.Rows[index][1].ToString(), // titulo
+                                    autores,
+                                    usuarios,
+                                    dTable.Rows[index][5].ToString(), //Puntuacion
+                                    dTable.Rows[index][6].ToString() //Comentarios
+                            });
+                }
+            }
+
+            con.Close();
+
+            return ArticulosRevisados;
+        }
+
+        public void ModificarEstadoArticulo(int artID, string estadoRevision)
+        {
+            Connection();
+            string query = "UPDATE Articulo SET estado = @estado WHERE artIdPK = @articuloId";
+            using (SqlCommand cmd = new SqlCommand(query, con))
+            {
+                cmd.Parameters.AddWithValue("@articuloId", artID);
+                cmd.Parameters.AddWithValue("@estado", estadoRevision);
                 cmd.ExecuteNonQuery();
                 cmd.Parameters.Clear();
             }

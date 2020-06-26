@@ -45,7 +45,7 @@ namespace Iteracion_2.Controllers
             return Perfil.obtenerCorreo(usuario);
         }
 
-        public async Task CorreoANucleo(string titulo, string tipo, List<String> usuarios) {
+        public async Task CorreoANucleo(string titulo, string tipo, string[] usuarios) {
             Correo =  new EmailModel();
 
             switch (tipo) {

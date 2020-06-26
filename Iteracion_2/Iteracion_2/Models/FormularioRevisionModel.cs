@@ -38,11 +38,6 @@ namespace Iteracion_2.Models
 
             int Puntuacion = suma * Peso;
 
-
-
-            int a =78;
-
-
             // Despues se guardan la nota y los comentarios con un estado de Revisado
             ConexionBD = new ConexionModel();
             SqlConnection con2 = ConexionBD.Connection();

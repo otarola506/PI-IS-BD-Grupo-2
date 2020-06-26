@@ -65,7 +65,7 @@ namespace Iteracion_2.Models
             switch(tipo)
             {
                 case 1:
-                    query = "SELECT nombreUsuarioPK,correo FROM Miembro WHERE pesoMiembro = 5";
+                    query = "SELECT nombreUsuarioPK,correo FROM Miembro WHERE pesoMiembro = 5 AND tipo = 'nucleo'";
                     break;
                 case 2:
                     query = "SELECT nombreUsuarioPK,correo FROM Miembro WHERE pesoMiembro = 5 AND nombreUsuarioPK='"+usuario+"'";
@@ -98,10 +98,10 @@ namespace Iteracion_2.Models
         }
 
 
-        public async Task EnviarAsignacion(string titulo, List<String> usuarios)
+        public async Task EnviarAsignacion(string titulo, string[] usuarios)
         {
             List<List<String>> CorreosNucleo = new List<List<string>>();
-            for (int index=0; index<usuarios.Count; index++) {
+            for (int index=0; index<usuarios.Length; index++) {
                 CorreosNucleo.Add(RecuperarCorreos(2,usuarios[index])[0]);
             }
 
