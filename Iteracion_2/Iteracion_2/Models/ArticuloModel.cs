@@ -251,7 +251,7 @@ namespace Iteracion_2.Models
                 }
 
             }
-            ActualizarEstado(articuloId, "asignado");
+            ActualizarEstado(articuloId, "revision");
 
             con.Close();
 
@@ -373,5 +373,17 @@ namespace Iteracion_2.Models
             return ArticulosRevisados;
         }
 
+        public void ModificarEstadoArticulo(int artID, string estadoRevision)
+        {
+            Connection();
+            string query = "UPDATE Articulo SET estado = @estado WHERE artIdPK = @articuloId";
+            using (SqlCommand cmd = new SqlCommand(query, con))
+            {
+                cmd.Parameters.AddWithValue("@articuloId", artID);
+                cmd.Parameters.AddWithValue("@estado", estadoRevision);
+                cmd.ExecuteNonQuery();
+                cmd.Parameters.Clear();
+            }
+        }
     }
 }

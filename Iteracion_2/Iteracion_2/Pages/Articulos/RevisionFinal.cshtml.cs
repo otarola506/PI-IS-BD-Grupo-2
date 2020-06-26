@@ -67,27 +67,31 @@ namespace Iteracion_2.Pages.Articulos
             ResultadoSolicitud = ArticuloController.RetornarResultadoSolicitud(articuloId);
         }
 
-        public async Task<IActionResult> OnPostAceptarRechazar()
+        public async Task<IActionResult> OnPost()
         {
             UsuarioActual = HttpContext.Session.GetString(SessionKeyUsuario);
             int id = Int32.Parse(Request.Form["artID"]);
-            string titulo = Request.Form["titulo"];
+            //string titulo = Request.Form["titulo"];
             string estado = Request.Form["estado"];
             ArticuloController = new ArticuloController();
-            EmailController = new EmailController();
-            TempData["resultadoSolicitud"] = "La respuesta ha sido enviada al coordinador exitosamente";
+            //EmailController = new EmailController();
+            TempData["resultadoSolicitud"] = "La decisión fue ejecutada exitosamente";
             if (estado == "aceptado")
             {
-                ArticuloController.ModificarEstadoSolicitud(id, UsuarioActual, "aceptado");
-                await EmailController.CorreoACoordinadores(titulo, "aceptado", UsuarioActual);
+                ArticuloController.ModificarEstadoArticulo(id, "aceptado");
+                //await EmailController.CorreoACoordinadores(titulo, "aceptado", UsuarioActual);
+            }
+            else if (estado == "cambios")
+            {
+                ArticuloController.ModificarEstadoArticulo(id, "cambios");
             }
             else
             {
-                ArticuloController.ModificarEstadoSolicitud(id, UsuarioActual, "rechazado");
-                await EmailController.CorreoACoordinadores(titulo, "rechazado", UsuarioActual);
+                ArticuloController.ModificarEstadoArticulo(id, "rechazado");
+                //await EmailController.CorreoACoordinadores(titulo, "rechazado", UsuarioActual);
             }
 
-            return RedirectToPage("/Articulos/Revision");
+            return RedirectToPage("/Articulos/RevisionFinal");
         }
 
     }

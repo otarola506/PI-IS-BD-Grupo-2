@@ -54,7 +54,7 @@
                     </span>
                     <br />
                     <br />
-                    <a href="#modalAceptarRechazar" type="button" class="read-more openModal" data-toggle="modal" data-target="#modalAceptarRechazar" data-articulo="@artIDPk" data-titulo="@titulo" data-estado="aceptado">Aceptar con cambios</a>
+                    <a href="#modalAceptarRechazar" type="button" class="read-more openModal" data-toggle="modal" data-target="#modalAceptarRechazar" data-articulo="@artIDPk" data-titulo="@titulo" data-estado="cambios">Aceptar con cambios</a>
                     <br />
                     <br />
                     <a href="#modalAceptarRechazar" type="button" class="read-more openModal" data-toggle="modal" data-target="#modalAceptarRechazar" data-articulo="@artIDPk" data-titulo="@titulo" data-estado="aceptado">Aceptar</a>
@@ -67,7 +67,7 @@
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
-                                    <h4 class="modal-title" id="modalAceptarRechazarLabel">¿Seguro que desea elegir esta opción como respuesta a la solicitud?</h4>
+                                    <h4 class="modal-title" id="modalAceptarRechazarLabel">¿Seguro que desea elegir esta opción como revisión a este artículo?</h4>
 
                                 </div>
                                 <form asp-page-handler="send" method="post">
@@ -79,7 +79,7 @@
 
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                        <button asp-page-handler="AceptarRechazar" type="submit" class="btn btn-primary" id="confirmar">Confirmar</button>
+                                        <button type="submit" class="btn btn-primary">Confirmar</button>
                                     </div>
                                 </form>
                             </div>

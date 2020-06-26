@@ -64,5 +64,11 @@ namespace Iteracion_2.Controllers
             ArticuloModel = new ArticuloModel();
             ArticuloModel.ModificarEstadoSolicitud(artID, nombreUsuarioActual, estadoSolicitud);
         }
+
+        public void ModificarEstadoArticulo(int artID, string estadoRevision)
+        {
+            ArticuloModel = new ArticuloModel();
+            ArticuloModel.ModificarEstadoArticulo(artID, estadoRevision);
+        }
     }
 }

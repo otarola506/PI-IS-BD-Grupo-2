@@ -52,12 +52,15 @@
                     var pesoSession = new Byte[20];
                     bool nameOK = Context.Session.TryGetValue("UsuarioActual", out miembroSession);
                     bool pesoOK = Context.Session.TryGetValue("PesoActual", out pesoSession);
+                    bool tipoOK = Context.Session.TryGetValue("TipoActual", out miembroSession);
                     string miembroActual = "";
                     string pesoActual = "";
+                    string tipoActual = "";
                     if (nameOK && pesoOK)
                     {
                         miembroActual = System.Text.Encoding.UTF8.GetString(miembroSession);
                         pesoActual = System.Text.Encoding.UTF8.GetString(pesoSession);
+                        tipoActual = System.Text.Encoding.UTF8.GetString(miembroSession);
                     }
                 }
 
@@ -73,7 +76,10 @@
                                 @if (pesoActual == "5")
                                 {
                                     <li><a asp-page="/Articulos/Revision">Revisar</a></li>
-                                    <li><a asp-page="/Articulos/RevisionFinal">Revisiones</a></li>
+                                    @if (tipoActual == "coordinador")
+                                    {
+                                        <li><a asp-page="/Articulos/RevisionFinal">Revisiones</a></li>
+                                    }
                                 }
                                 <li><a asp-page="/Cuenta/Desconectar">Desconectarse</a></li>
                             </ul>
