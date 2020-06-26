@@ -38,12 +38,25 @@ namespace Iteracion_2.Models
 
             int Puntuacion = suma * Peso;
 
-            // Despues se guardan la nota y los comentarios con un estado de Revisado
-            ConexionBD = new ConexionModel();
-            SqlConnection con2 = ConexionBD.Connection();
-            SqlCommand cmd = new SqlCommand("UPDATE Nucleo_Revisa_Articulo SET estadoRevision= 'Revisado',puntuacion=  "+Puntuacion+", comentarios = '"+observaciones+"' WHERE nombreUsuarioFK = '"+ miembroID + "'AND artIdFK = '"+ artID+"'",con2);
-            cmd.ExecuteNonQuery();
-            con2.Close();
+
+            if (miembroID != "Coordinador")
+            {
+                // Despues se guardan la nota y los comentarios con un estado de Revisado
+                ConexionBD = new ConexionModel();
+                SqlConnection con2 = ConexionBD.Connection();
+                SqlCommand cmd = new SqlCommand("UPDATE Nucleo_Revisa_Articulo SET estadoRevision= 'revisado',puntuacion=  " + Puntuacion + ", comentarios = '" + observaciones + "' WHERE nombreUsuarioFK = '" + miembroID + "'AND artIdFK = '" + artID + "'", con2);
+                cmd.ExecuteNonQuery();
+                con2.Close();
+            }else
+            {
+                // Despues se guardan la nota y los comentarios con un estado de Revisado
+                ConexionBD = new ConexionModel();
+                SqlConnection con2 = ConexionBD.Connection();
+                SqlCommand cmd = new SqlCommand("INSERT INTO  Nucleo_Revisa_Articulo VALUES ('"+miembroID +"','"+ artID + "', 'revisado',"+ Puntuacion+", '"+observaciones+"'  )", con2);
+                cmd.ExecuteNonQuery();
+                con2.Close();
+            }
+            
 
 
         }
