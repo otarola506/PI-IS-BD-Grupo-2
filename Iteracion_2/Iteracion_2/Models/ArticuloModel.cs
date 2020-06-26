@@ -112,7 +112,7 @@ namespace Iteracion_2.Models
             return ArticulosPendientes;
         }
 
-        public string[] retornarDatos(string artId) {
+        public string[] RetornarDatos(string artId) {
             string[] info = new string[2];
             string queryString = "SELECT titulo,resumen FROM Articulo  WHERE artIdPK = "+artId;
            
@@ -138,7 +138,7 @@ namespace Iteracion_2.Models
             return info;
         }
 
-        public List<string> retornarAutor(string artId)
+        public List<string> RetornarAutor(string artId)
         {
             List<string> autores = new List<string>();
             string queryString = "SELECT M.nombre+' '+M.apellido AS 'Nombre' FROM Articulo A JOIN Miembro_Articulo MA  ON A.artIdPK = MA.artIdFK JOIN Miembro M  ON M.nombreUsuarioPK = MA.nombreUsuarioFK WHERE A.artIdPK = "+artId;
