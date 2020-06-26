@@ -60,57 +60,6 @@ namespace Iteracion_2.Models
             con.Close();
 
         }
-        public List<List<string>> RetornarPendientes() {
-            List<List<string>> ArticulosPendientes = new List<List<string>>();
-            string queryString = "SELECT A.artIdPK,A.titulo,A.resumen,M.nombre+' '+M.apellido AS [Nombre Completo],M.nombreUsuarioPK FROM Articulo A JOIN Miembro_Articulo MA ON A.artIdPK = MA.artIdFK JOIN Miembro M  ON M.nombreUsuarioPK  = MA.nombreUsuarioFK WHERE A.estado = 'pendiente' ORDER BY A.artIdPK";
-
-            Connection();
-
-            SqlCommand command = new SqlCommand(queryString, con)
-            {
-                CommandType = CommandType.Text
-            };
-
-            DataTable dTable = new DataTable();
-            SqlDataAdapter adapter = new SqlDataAdapter(command);
-            adapter.Fill(dTable);
-
-            for (int index = 0; index < dTable.Rows.Count; index++) {
-                string idAnterior = "";
-                string idActual = dTable.Rows[index][0].ToString(); //ardIdPK actual
-
-                if (index > 0) {
-                    idAnterior = dTable.Rows[index - 1][0].ToString(); //ardIdPK de la iteración pasada
-                }
-
-                if (idActual != idAnterior) {
-                    DataRow[] datosDeArticulo = dTable.Select("artIdPK = " + idActual); // devuelve los autores con ese artIdPK
-
-                    string autores = "";
-                    string usuarios = "";
-
-                    for (int indexJ = 0; indexJ < datosDeArticulo.Length; indexJ++) {
-                        autores += datosDeArticulo[indexJ][3];
-                        usuarios += datosDeArticulo[indexJ][4];
-                        if (indexJ < datosDeArticulo.Length - 1) {
-                            autores += ",";
-                            usuarios += ",";
-                        }
-                    }
-
-                    ArticulosPendientes.Add(new List<string> {
-                                    dTable.Rows[index][0].ToString(), // artIdPK
-                                        dTable.Rows[index][1].ToString(), // titulo
-                                    autores,
-                                    usuarios,
-                            });
-                }
-            }
-
-            con.Close();
-
-            return ArticulosPendientes;
-        }
 
         public string[] RetornarDatos(string artId) {
             string[] info = new string[2];
@@ -190,15 +139,12 @@ namespace Iteracion_2.Models
 
         public List<List<string>> RetornarArticulosPendientes(string nombreUsuarioActual, string estado)
         {
-            List<List<string>> ArticulosRetorno = new List<List<string>>();
-
-            Connection();
             DataTable dTable = new DataTable();
-
+            Connection();
+            
             if (estado == "pendiente")
             {
-                string queryString = "SELECT A.artIdPK,A.titulo,A.resumen,M.nombre,M.nombreUsuarioPK FROM Articulo A JOIN Miembro_Articulo MA ON A.artIdPK = MA.artIdFK JOIN Miembro M  ON M.nombreUsuarioPK  = MA.nombreUsuarioFK WHERE A.estado = 'pendiente' ORDER BY A.artIdPK";
-                                
+                string queryString = "SELECT A.artIdPK,A.titulo,A.resumen,M.nombre+' '+M.apellido AS [Nombre Completo],M.nombreUsuarioPK FROM Articulo A JOIN Miembro_Articulo MA ON A.artIdPK = MA.artIdFK JOIN Miembro M  ON M.nombreUsuarioPK  = MA.nombreUsuarioFK WHERE A.estado = 'pendiente' ORDER BY A.artIdPK";
                 SqlCommand command = new SqlCommand(queryString, con)
                 {
                     CommandType = CommandType.Text
@@ -206,7 +152,8 @@ namespace Iteracion_2.Models
 
                 SqlDataAdapter adapter = new SqlDataAdapter(command);
                 adapter.Fill(dTable);
-            }else if(estado == "solicitado")
+            }
+            else if (estado == "solicitado")
             {
                 string queryString = "SELECT A.artIdPK,A.titulo,A.resumen,M.nombre+' '+M.apellido AS [Nombre Completo],M.nombreUsuarioPK FROM Miembro M JOIN Nucleo_Solicita_Articulo NS ON M.nombreUsuarioPK = NS.nombreUsuarioFK JOIN Articulo A ON A.artIdPK = NS.artIdFK WHERE M.nombreUsuarioPK = @nombreUsuario AND NS.estadoSolicitud = 'solicitado' ORDER BY A.artIdPK";
                 SqlDataAdapter sqlDa = new SqlDataAdapter(queryString, con);
@@ -214,6 +161,16 @@ namespace Iteracion_2.Models
                 sqlDa.SelectCommand.Parameters.AddWithValue("@nombreUsuario", nombreUsuarioActual);
                 sqlDa.Fill(dTable);
             }
+            else if (estado == "asignado") {
+
+            }
+
+
+            return LlenarArticulos(dTable);
+        }
+
+        private List<List<string>> LlenarArticulos(DataTable dTable) {
+            List<List<string>> ArticulosRetorno = new List<List<string>>();
 
             for (int index = 0; index < dTable.Rows.Count; index++)
             {
@@ -242,7 +199,7 @@ namespace Iteracion_2.Models
                             usuarios += ",";
                         }
                     }
-                                        
+
                     ArticulosRetorno.Add(new List<string> {
                                     dTable.Rows[index][0].ToString(), // artIdPK
                                     dTable.Rows[index][1].ToString(), // titulo
@@ -253,7 +210,6 @@ namespace Iteracion_2.Models
             }
 
             con.Close();
-
             return ArticulosRetorno;
         }
 
@@ -290,9 +246,9 @@ namespace Iteracion_2.Models
             }
         }
 
-        public List<List<String>> RetornarResultadoSolicitud(int articuloId)
+        public List<List<string>> RetornarResultadoSolicitud(int articuloId)
         {
-            List<List<String>> ResultadoSolicitud = new List<List<String>>();
+            List<List<string>> ResultadoSolicitud = new List<List<string>>();
             string query = "SELECT NS.nombreUsuarioFK AS [Nombre de Usuario], NS.estadoSolicitud AS [Solicitud] FROM dbo.Nucleo_Solicita_Articulo NS WHERE NS.artIdFK = @articuloId";
 
             Connection();

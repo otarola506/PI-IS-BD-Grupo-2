@@ -10,11 +10,6 @@ namespace Iteracion_2.Controllers
     public class ArticuloController : Controller
     {
         private ArticuloModel ArticuloModel { get; set; }
-        public List<List<string>> RetornarPendientes() {
-            ArticuloModel = new ArticuloModel();
-
-            return ArticuloModel.RetornarPendientes();
-        }
 
         public List<List<string>> RetornarArticulosPendientes(string nombreUsuarioActual, string estado)
         {
@@ -47,7 +42,7 @@ namespace Iteracion_2.Controllers
             ArticuloModel.AsignarArticulo(articuloId, revisores);
         }
 
-        public List<List<String>> RetornarResultadoSolicitud(int articuloId) {
+        public List<List<string>> RetornarResultadoSolicitud(int articuloId) {
             ArticuloModel = new ArticuloModel();
             return ArticuloModel.RetornarResultadoSolicitud(articuloId);
         }

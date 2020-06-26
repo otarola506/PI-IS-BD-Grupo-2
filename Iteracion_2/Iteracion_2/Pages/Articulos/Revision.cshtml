@@ -5,132 +5,173 @@
 }
 
 <html>
-<head>
-    <meta charset="utf-8" />
-    <title>Shieldship | Miembros</title>
+    <head>
+        <meta charset="utf-8" />
+        <title>Shieldship | Miembros</title>
 
-    <link rel="stylesheet" href="~/css/lista-miembros.css">
-    <link rel="stylesheet" href="~/css/article-list-basic.css">
+        <link rel="stylesheet" href="~/css/lista-miembros.css">
+        <link rel="stylesheet" href="~/css/article-list-basic.css">
 
     
-    <script src="https://kit.fontawesome.com/8dbd1c7c50.js" crossorigin="anonymous"></script>
-</head>
-<body>
-    @if (Model.TipoUsuarioActual == "coordinador")
-    {
-        <h3>Articulos pendientes de revisión</h3>
-    }
-    else
-    {
-        <h3>Solicitudes de revisión de artículos</h3>
-    }
-    <div id="mensaje-respuesta">
-        @if (Model.Message != null)
-        {
-            <h4 style="color:green; text-align:center"> @Model.Message</h4>
-        }
-    </div>
+        <script src="https://kit.fontawesome.com/8dbd1c7c50.js" crossorigin="anonymous"></script>
+    </head>
+    <body>
 
-    <ul class="article-list-basic">
-        @for (int index = 0; index < Model.ArticulosPendientes.Count; index++)
+        @if (Model.TipoUsuarioActual == "coordinador")
         {
-            <li id="@index">
-                <div>
-                    <h2><a href="#@index">@Model.ArticulosPendientes[index][1]</a></h2>
-                    <p></p>
-                    <span>
-                        por
-                        @{
-                            int artIDPk = Int32.Parse(Model.ArticulosPendientes[index][0]);
-                            string titulo = Model.ArticulosPendientes[index][1];
-                            string[] autores = Model.ArticulosPendientes[index][2].Split(',');
-                            string[] usuarios = Model.ArticulosPendientes[index][3].Split(',');
-                            for (int indexJ = 0; indexJ < autores.Length; indexJ++)
+            <h3>Articulos pendientes de revisión</h3>
+        }
+        else
+        {
+            <h3>Solicitudes de revisión de artículos</h3>
+        }
+        <div id="mensaje-respuesta">
+            @if (Model.Message != null)
+            {
+                <h4 style="color:green; text-align:center"> @Model.Message</h4>
+            }
+        </div>
+
+        @if (Model.ArticulosPendientes.Count > 0)
+        {
+            <ul class="article-list-basic">
+                @for (int index = 0; index < Model.ArticulosPendientes.Count; index++)
+                {
+                    <li>
+                        <div>
+                            <h2 title="@Model.ArticulosPendientes[index][1]"><a href="#@index">@Model.ArticulosPendientes[index][1]</a></h2>
+                            <p></p>
+                            <span>
+                                por
+                                @{
+                                    int artIDPk = Int32.Parse(Model.ArticulosPendientes[index][0]);
+                                    string titulo = Model.ArticulosPendientes[index][1];
+                                    string[] autores = Model.ArticulosPendientes[index][2].Split(',');
+                                    string[] usuarios = Model.ArticulosPendientes[index][3].Split(',');
+                                    for (int indexJ = 0; indexJ < autores.Length; indexJ++)
+                                    {
+                                        <a href="~/Perfil/Perfil?UsuarioURL=@usuarios[indexJ]">@autores[indexJ]</a>
+                                    }
+                                }
+
+                            </span>
+                            <br />
+                            <br />
+                            @if (Model.TipoUsuarioActual == "coordinador")
                             {
-                                <a href="~/Perfil/Perfil?UsuarioURL=@usuarios[indexJ]">@autores[indexJ]</a>
+                                <a href="~/Articulos/FormularioRevision?artId=@artIDPk" class="read-more">Revisar</a>
+                                <br />
+                                <br />
+                                <a href="#exampleModal" type="submit" class="read-more openModal" data-toggle="modal" id="solicitar_@index" data-target="#exampleModal" data-articulo="@artIDPk" data-titulo="@titulo">Solicitar Colaboración</a>
+                                <a href="~/Articulos/AsignarRevisor?articuloId=@artIDPk&titulo=@titulo" type="button" class="read-more">Asignar revisor</a>
                             }
-                        }
+                            else
+                            {
+                                <a href="#modalAceptarRechazar" type="button" class="read-more openModal" data-toggle="modal" data-target="#modalAceptarRechazar" data-articulo="@artIDPk" data-titulo="@titulo" data-estado="aceptado">Aceptar</a>
+                                <a href="#modalAceptarRechazar" type="button" class="read-more openModal" data-toggle="modal" data-target="#modalAceptarRechazar" data-articulo="@artIDPk" data-titulo="@titulo" data-estado="rechazado">Rechazar</a>
+                            }
 
-                    </span>
-                    <br />
-                    <br />
-                    @if (Model.TipoUsuarioActual == "coordinador")
-                    {
-                        <a href="~/Articulos/FormularioRevision?artId=@artIDPk" class="read-more">Revisar</a>
-                        <br />
-                        <br />
-                    }
-                    @if (Model.TipoUsuarioActual == "coordinador")
-                    {
-                        <a href="#exampleModal" type="button" class="read-more openModal" data-toggle="modal" data-target="#exampleModal" data-articulo="@artIDPk" data-titulo="@titulo">Solicitar Colaboración</a>
-                        <a href="~/Articulos/AsignarRevisor?articuloId=@artIDPk&titulo=@titulo" type="button" class="read-more">Asignar revisor</a>
-                    }
-                    else
-                    {
-                        <a href="#modalAceptarRechazar" type="button" class="read-more openModal" data-toggle="modal" data-target="#modalAceptarRechazar" data-articulo="@artIDPk" data-titulo="@titulo" data-estado = "aceptado" >Aceptar</a>
-                        <a href="#modalAceptarRechazar" type="button" class="read-more openModal" data-toggle="modal" data-target="#modalAceptarRechazar" data-articulo="@artIDPk" data-titulo="@titulo" data-estado = "rechazado" >Rechazar</a>
-                    }
+                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                            <h4 class="modal-title" id="exampleModalLabel">¿Desea Solicitar la Colaboración de los Miembros de núcleo?</h4>
 
-                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                    <h4 class="modal-title" id="exampleModalLabel">¿Desea Solicitar la Colaboración de los Miembros de núcleo?</h4>
+                                        </div>
+                                        <form asp-page-handler="send" method="post">
+                                            <div class="modal-body">
+                                                <input id="artId" type="hidden" name="artID" runat="server" />
+                                                <input id="titulo" type="hidden" name="titulo" runat="server" />
+                                            </div>
 
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                                <button type="submit" class="btn btn-primary" runat="server">Enviar Solicitud</button>
+                                            </div>
+                                        </form>
+                                    </div>
                                 </div>
-                                <form asp-page-handler="send" method="post">
-                                    <div class="modal-body">
-                                        <input id="artId" type="hidden" name="artID" runat="server" />
-                                        <input id="titulo" type="hidden" name="titulo" runat="server" />
-                                    </div>
+                            </div>
 
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                        <button type="submit" class="btn btn-primary">Enviar Solicitud</button>
+                            <div class="modal fade" id="modalAceptarRechazar" tabindex="-1" role="dialog" aria-labelledby="modalAceptarRechazarLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                            <h4 class="modal-title" id="modalAceptarRechazarLabel">¿Seguro que desea elegir esta opción como respuesta a la solicitud?</h4>
+
+                                        </div>
+                                        <form asp-page-handler="send" method="post">
+                                            <div class="modal-body">
+                                                <input id="artId" type="hidden" name="artID" runat="server" />
+                                                <input id="titulo" type="hidden" name="titulo" runat="server" />
+                                                <input id="estado" type="hidden" name="estado" runat="server" />
+                                            </div>
+
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                                <button asp-page-handler="AceptarRechazar" type="submit" class="btn btn-primary" id="confirmar">Confirmar</button>
+                                            </div>
+                                        </form>
                                     </div>
-                                </form>
+                                </div>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="modal fade" id="modalAceptarRechazar" tabindex="-1" role="dialog" aria-labelledby="modalAceptarRechazarLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden ="true">&times;</span>
-                                    </button>
-                                    <h4 class="modal-title" id="modalAceptarRechazarLabel">¿Seguro que desea elegir esta opción como respuesta a la solicitud?</h4>
-
-                                </div>
-                                <form asp-page-handler="send" method="post">
-                                    <div class="modal-body">
-                                        <input id="artId" type="hidden" name="artID" runat="server" />
-                                        <input id="titulo" type="hidden" name="titulo" runat="server" />
-                                        <input id="estado" type="hidden" name="estado" runat="server" />
-                                    </div>
-
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                        <button asp-page-handler= "AceptarRechazar" type="submit" class="btn btn-primary" id="confirmar">Confirmar</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-
-                    
-
-                </div>
-            </li>
+                    </li>
+                }
+            </ul>
         }
-    </ul>
+        else
+        {
+            <h4>@Model.Retroalimentacion</h4>
+        }
 
-    <script src="~/js/site.js"></script>
-</body>
+        <br />
+        <h3>Sus articulos pendientes de revisión</h3>
+        @if (Model.ArticulosAsignados != null && Model.ArticulosAsignados.Count > 0)
+        {
+            <ul>
+                @for (int index = 0; index < Model.ArticulosAsignados.Count; index++)
+                {
+                    <li id="@index">
+                        <div>
+                            <h2 title="@Model.ArticulosPendientes[index][1]"><a href="#@index">@Model.ArticulosPendientes[index][1]</a></h2>
+                            <p></p>
+                            <span>
+                                por
+                                @{
+                                    int artIDPk = Int32.Parse(Model.ArticulosPendientes[index][0]);
+                                    string titulo = Model.ArticulosPendientes[index][1];
+                                    string[] autores = Model.ArticulosPendientes[index][2].Split(',');
+                                    string[] usuarios = Model.ArticulosPendientes[index][3].Split(',');
+                                    for (int indexJ = 0; indexJ < autores.Length; indexJ++)
+                                    {
+                                        <a href="~/Perfil/Perfil?UsuarioURL=@usuarios[indexJ]">@autores[indexJ]</a>
+                                    }
+                                }
+
+                            </span>
+                            <br />
+                            <br />
+                            <a href="~/Articulos/FormularioRevision?artId=@artIDPk" class="read-more">Revisar</a>
+                            }
+                        </div>
+                    </li>
+                }
+            </ul>
+        }
+        else
+        {
+            <h4>No tienen ningún artículo pendiente.</h4>
+        }
+
+        <script src="~/js/site.js"></script>
+    </body>
 </html>
 
 
