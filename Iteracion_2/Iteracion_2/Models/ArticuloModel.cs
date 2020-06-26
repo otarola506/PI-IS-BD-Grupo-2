@@ -140,30 +140,40 @@ namespace Iteracion_2.Models
         public List<List<string>> RetornarArticulosPendientes(string nombreUsuarioActual, string estado)
         {
             DataTable dTable = new DataTable();
+            SqlCommand command = null;
+            string query = "";
             Connection();
             
             if (estado == "pendiente")
             {
-                string queryString = "SELECT A.artIdPK,A.titulo,A.resumen,M.nombre+' '+M.apellido AS [Nombre Completo],M.nombreUsuarioPK FROM Articulo A JOIN Miembro_Articulo MA ON A.artIdPK = MA.artIdFK JOIN Miembro M  ON M.nombreUsuarioPK  = MA.nombreUsuarioFK WHERE A.estado = 'pendiente' ORDER BY A.artIdPK";
-                SqlCommand command = new SqlCommand(queryString, con)
+                query = "SELECT A.artIdPK,A.titulo,A.resumen,M.nombre+' '+M.apellido AS [Nombre Completo],M.nombreUsuarioPK FROM Articulo A JOIN Miembro_Articulo MA ON A.artIdPK = MA.artIdFK JOIN Miembro M  ON M.nombreUsuarioPK  = MA.nombreUsuarioFK WHERE A.estado = 'pendiente' ORDER BY A.artIdPK";
+                command = new SqlCommand(query, con)
                 {
                     CommandType = CommandType.Text
                 };
-
-                SqlDataAdapter adapter = new SqlDataAdapter(command);
-                adapter.Fill(dTable);
             }
             else if (estado == "solicitado")
             {
-                string queryString = "SELECT A.artIdPK,A.titulo,A.resumen,M.nombre+' '+M.apellido AS [Nombre Completo],M.nombreUsuarioPK FROM Miembro M JOIN Nucleo_Solicita_Articulo NS ON M.nombreUsuarioPK = NS.nombreUsuarioFK JOIN Articulo A ON A.artIdPK = NS.artIdFK WHERE M.nombreUsuarioPK = @nombreUsuario AND NS.estadoSolicitud = 'solicitado' ORDER BY A.artIdPK";
-                SqlDataAdapter sqlDa = new SqlDataAdapter(queryString, con);
-                sqlDa.SelectCommand.CommandType = CommandType.Text;
-                sqlDa.SelectCommand.Parameters.AddWithValue("@nombreUsuario", nombreUsuarioActual);
-                sqlDa.Fill(dTable);
+                query = "SELECT DISTINCT A.artIdPK,A.titulo,A.resumen,M.nombre+' '+M.apellido AS [Nombre Completo],M.nombreUsuarioPK FROM Articulo A JOIN Miembro_Articulo MA ON A.artIdPK = MA.artIdFK JOIN Miembro M ON M.nombreUsuarioPK  = MA.nombreUsuarioFK JOIN Nucleo_Solicita_Articulo NS ON A.artIdPK = NS.artIdFK WHERE NS.nombreUsuarioFK = @nombreUsuario AND Ns.estadoSolicitud = 'solicitado'  ORDER BY A.artIdPK";
+                command = new SqlCommand(query, con)
+                {
+                    CommandType = CommandType.Text
+                };
+                command.Parameters.AddWithValue("@nombreUsuario", nombreUsuarioActual);
             }
             else if (estado == "asignado") {
+                query = "SELECT DISTINCT A.artIdPK,A.titulo,A.resumen,M.nombre+' '+M.apellido AS [Nombre Completo],M.nombreUsuarioPK FROM Articulo A JOIN Miembro_Articulo MA ON A.artIdPK = MA.artIdFK JOIN Miembro M ON M.nombreUsuarioPK  = MA.nombreUsuarioFK JOIN Nucleo_Revisa_Articulo NA ON A.artIdPK = NA.artIdFK WHERE NA.nombreUsuarioFK = @nombreUsuario AND NA.estadoRevision = 'asignado' ORDER BY A.artIdPK";
 
+
+                command = new SqlCommand(query, con)
+                {
+                    CommandType = CommandType.Text
+                };
+                command.Parameters.AddWithValue("@nombreUsuario", nombreUsuarioActual);
             }
+
+            SqlDataAdapter adapter = new SqlDataAdapter(command);
+            adapter.Fill(dTable);
 
 
             return LlenarArticulos(dTable);
@@ -229,7 +239,7 @@ namespace Iteracion_2.Models
                 }
 
             }
-            ActualizarEstado(articuloId, "asignado");
+            ActualizarEstado(articuloId, "revision");
 
             con.Close();
 

@@ -50,7 +50,14 @@
                                     string[] usuarios = Model.ArticulosPendientes[index][3].Split(',');
                                     for (int indexJ = 0; indexJ < autores.Length; indexJ++)
                                     {
-                                        <a href="~/Perfil/Perfil?UsuarioURL=@usuarios[indexJ]">@autores[indexJ]</a>
+                                        if (indexJ == autores.Length - 1)
+                                        {
+                                            <a href="~/Perfil/Perfil?UsuarioURL=@usuarios[indexJ]">@autores[indexJ]</a><span>.</span>
+                                        }
+                                        else
+                                        {
+                                            <a href="~/Perfil/Perfil?UsuarioURL=@usuarios[indexJ]">@autores[indexJ]</a><span>, </span>
+                                        }
                                     }
                                 }
 
@@ -135,23 +142,31 @@
         <h3>Sus articulos pendientes de revisión</h3>
         @if (Model.ArticulosAsignados != null && Model.ArticulosAsignados.Count > 0)
         {
-            <ul>
+            <ul class="article-list-basic">
                 @for (int index = 0; index < Model.ArticulosAsignados.Count; index++)
                 {
                     <li id="@index">
                         <div>
-                            <h2 title="@Model.ArticulosPendientes[index][1]"><a href="#@index">@Model.ArticulosPendientes[index][1]</a></h2>
+                            <h2 title="@Model.ArticulosAsignados[index][1]"><a href="#@index">@Model.ArticulosAsignados[index][1]</a></h2>
                             <p></p>
                             <span>
                                 por
                                 @{
-                                    int artIDPk = Int32.Parse(Model.ArticulosPendientes[index][0]);
-                                    string titulo = Model.ArticulosPendientes[index][1];
-                                    string[] autores = Model.ArticulosPendientes[index][2].Split(',');
-                                    string[] usuarios = Model.ArticulosPendientes[index][3].Split(',');
+                                    int artIDPk = Int32.Parse(Model.ArticulosAsignados[index][0]);
+                                    string titulo = Model.ArticulosAsignados[index][1];
+                                    string[] autores = Model.ArticulosAsignados[index][2].Split(',');
+                                    string[] usuarios = Model.ArticulosAsignados[index][3].Split(',');
                                     for (int indexJ = 0; indexJ < autores.Length; indexJ++)
                                     {
-                                        <a href="~/Perfil/Perfil?UsuarioURL=@usuarios[indexJ]">@autores[indexJ]</a>
+                                        if (indexJ == autores.Length - 1)
+                                        {
+                                            <a href="~/Perfil/Perfil?UsuarioURL=@usuarios[indexJ]">@autores[indexJ]</a><span>.</span>
+                                        }
+                                        else
+                                        {
+                                            <a href="~/Perfil/Perfil?UsuarioURL=@usuarios[indexJ]">@autores[indexJ]</a><span>, </span>
+                                        }
+
                                     }
                                 }
 
@@ -159,7 +174,6 @@
                             <br />
                             <br />
                             <a href="~/Articulos/FormularioRevision?artId=@artIDPk" class="read-more">Revisar</a>
-                            }
                         </div>
                     </li>
                 }
