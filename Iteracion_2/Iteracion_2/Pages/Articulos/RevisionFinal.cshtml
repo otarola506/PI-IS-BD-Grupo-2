@@ -30,15 +30,15 @@
          {
             <li id="@index">
                 <div>
-                    <h2><a href="#@index">@Model.ArticulosRevisados[index][1]</a></h2>
+                    <h2>@Model.ArticulosRevisados[index][1]</h2>
                     <br />
-                    Puntuación: <a href="#@index">@Model.ArticulosRevisados[index][4]</a>
+                    Puntuación: @Model.ArticulosRevisados[index][4]
                     <br />
                     Comentarios:
-                    <a href="#@index">@Model.ArticulosRevisados[index][5]</a>
+                    @Model.ArticulosRevisados[index][5]
                     <span>
                         <br />
-                        Revisado por
+                        por
                         @{
                             int artIDPk = Int32.Parse(Model.ArticulosRevisados[index][0]);
                             string titulo = Model.ArticulosRevisados[index][1];
@@ -46,12 +46,17 @@
                             string[] usuarios = Model.ArticulosRevisados[index][3].Split(',');
                             int puntuacion = Int32.Parse(Model.ArticulosRevisados[index][4]);
                             string comentarios = Model.ArticulosRevisados[index][5];
+                            string revisor = Model.ArticulosRevisados[index][6];
+                            string usuarioRevisor = Model.ArticulosRevisados[index][7];
                             for (int indexJ = 0; indexJ < autores.Length; indexJ++)
                             {
                                 <a href="~/Perfil/Perfil?UsuarioURL=@usuarios[indexJ]">@autores[indexJ]</a>
                             }
                         }
                     </span>
+                    <br />
+                    <br />
+                    Revisado por: <a href="~/Perfil/Perfil?UsuarioURL=@Model.ArticulosRevisados[index][7]">@Model.ArticulosRevisados[index][6]</a>
                     <br />
                     <br />
                     <a href="#modalAceptarRechazar" type="button" class="read-more openModal" data-toggle="modal" data-target="#modalAceptarRechazar" data-articulo="@artIDPk" data-titulo="@titulo" data-estado="cambios">Aceptar con cambios</a>

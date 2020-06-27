@@ -279,7 +279,7 @@ namespace Iteracion_2.Models
         public List<List<string>> RetornarRevisados()
         {
             List<List<string>> ArticulosRevisados = new List<List<string>>();
-            string queryString = "SELECT A.artIdPK,A.titulo,A.resumen,M.nombre+' '+M.apellido AS [Nombre Revisor],M.nombreUsuarioPK,NR.puntuacion,NR.comentarios FROM Miembro M JOIN Nucleo_Revisa_Articulo NR ON M.nombreUsuarioPK = NR.nombreUsuarioFK JOIN Articulo A ON A.artIdPK = NR.artIdFK WHERE NR.estadoRevision = 'revisado' ORDER BY A.artIdPK";
+            string queryString = "SELECT DISTINCT A.artIdPK,A.titulo,A.resumen,M.nombre+' '+M.apellido AS [Nombre Autor],M.nombreUsuarioPK AS 'Username Autor',NR.puntuacion,NR.comentarios,M2.nombre+' '+M2.apellido AS 'Nombre Revisor',M2.nombreUsuarioPK AS 'Username Revisor' FROM Articulo A JOIN Miembro_Articulo MA ON A.artIdPK = MA.artIdFK JOIN Miembro M ON M.nombreUsuarioPK = MA.nombreUsuarioFK JOIN Nucleo_Revisa_Articulo NR ON A.artIdPK = NR.artIdFK JOIN Miembro M2 ON M2.nombreUsuarioPK = NR.nombreUsuarioFK WHERE NR.estadoRevision = 'revisado' ORDER BY A.artIdPK";
 
             Connection();
 
@@ -325,9 +325,11 @@ namespace Iteracion_2.Models
                                     dTable.Rows[index][1].ToString(), // titulo
                                     autores,
                                     usuarios,
-                                    dTable.Rows[index][5].ToString(), //Puntuacion
-                                    dTable.Rows[index][6].ToString() //Comentarios
-                            });
+                                    dTable.Rows[index][5].ToString(), // Puntuacion
+                                    dTable.Rows[index][6].ToString(), // Comentarios
+                                    dTable.Rows[index][7].ToString(), // Nombre del revisor
+                                    dTable.Rows[index][8].ToString()  // Username del revisor
+                    });
                 }
             }
 
