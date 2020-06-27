@@ -6,16 +6,24 @@ using Iteracion_2.Models;
 
 namespace Iteracion_2.Controllers
 {
-    public class DistribucionMiembroController
+    public class ReporteController
     {
-        DistribucionMiembroModel ModeloDistribucion { get; set; }
+        ReporteModel ModeloDistribucion { get; set; }
         
 
         public List<ReporteConfigurable> ComunicarDatosDistrubucion(string [] Valores )
         {
-            ModeloDistribucion = new DistribucionMiembroModel();
+            ModeloDistribucion = new ReporteModel();
             
             return ModeloDistribucion.EncontrarValoresDistribucion(Valores);
+        }
+
+
+        public string ComunicarSeleccion(string Seleccion)
+        {
+            ModeloDistribucion = new ReporteModel();
+
+            return ModeloDistribucion.OptenerValoresSeleccion(Seleccion);
         }
 
 

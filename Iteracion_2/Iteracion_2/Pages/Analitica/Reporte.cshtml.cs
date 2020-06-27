@@ -8,23 +8,27 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Google.DataTable.Net.Wrapper.Extension;
 using Google.DataTable.Net.Wrapper;
 using Iteracion_2.Controllers;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+
 
 namespace Iteracion_2.Pages.Analitica
 {
-    public class Chart
-    {
-        public object[] cols { get; set; }
-        public object[] rows { get; set; }
-    }
-
     public class ReporteModel : PageModel
     {
-
         public List<List<string>> ValoresGrafica { set; get; }
 
-        DistribucionMiembroController ControladorDistribucion { get; set; }
+        ReporteController ControladorDistribucion { get; set; }
 
-        public void OnGet() { }
+        public ActionResult OnGetOpciones(string Seleccion)
+        {
+            ControladorDistribucion = new ReporteController();
+            string reporte = ControladorDistribucion.ComunicarSeleccion(Seleccion);
+            string jsonString;
+            jsonString = JsonSerializer.Serialize(reporte);
+
+            return Content(reporte);
+        }
 
         public ActionResult OnGetChartData(string entrada)
         {
@@ -33,7 +37,7 @@ namespace Iteracion_2.Pages.Analitica
             if (entrada == null)
             {
                 string[] seleccion = { "tipo" };
-                ControladorDistribucion = new DistribucionMiembroController();
+                ControladorDistribucion = new ReporteController();
 
                 var reporte = ControladorDistribucion.ComunicarDatosDistrubucion(seleccion);
 
@@ -44,9 +48,10 @@ namespace Iteracion_2.Pages.Analitica
                         .GetJson();
             }
             else {
-                string[] Selecciones = new string[2];
-                Selecciones = entrada.Split(',');
-                ControladorDistribucion = new DistribucionMiembroController();
+                string FiltrosSeleccionados = entrada.TrimEnd(new Char[] { ',' });
+                string[] Selecciones = FiltrosSeleccionados.Split(',');
+
+                ControladorDistribucion = new ReporteController();
 
                 var reporte = ControladorDistribucion.ComunicarDatosDistrubucion(Selecciones);
 
