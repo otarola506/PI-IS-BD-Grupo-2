@@ -144,14 +144,11 @@ namespace Iteracion_2.Models
                             }
                         }
 
-                        byte[] binaryString = (byte[])dTable.Rows[index][2];
-                        string resumen = Encoding.UTF8.GetString(binaryString);
-
                         ArticulosAutor.Add(new List<string>
                                 {
                                     dTable.Rows[index][0].ToString(),
                                     dTable.Rows[index][1].ToString(),
-                                    resumen,
+                                    dTable.Rows[index][2].ToString(),
                                     autores,
                                     usuarios 
                                 });

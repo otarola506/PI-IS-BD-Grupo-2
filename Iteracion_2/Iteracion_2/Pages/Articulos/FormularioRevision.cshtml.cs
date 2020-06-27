@@ -17,40 +17,47 @@ namespace Iteracion_2.Pages.Articulos
 
         ArticuloController ArticuloContro { get; set; }
 
-        public string[] informacionArticulo { get; private set; }
+        public string[] InformacionArticulo { get; private set; }
 
-        public string autores { get; set; }
+        public string Autores { get; set; }
         [TempData]
         public string Message { get; set; }
 
-        public List<string> autor { get; private set; }
+        public List<string> Autor { get; private set; }
 
         const string SessionKeyUsuario = "UsuarioActual";
-        string SessionKeyPesoUsuario = "PesoActual";
+        const string SessionKeyPesoUsuario = "PesoActual";
 
         public string ArticuloID { get; private set; }
 
         public IActionResult OnGet(string artId)
         {
             string UsuarioActual = HttpContext.Session.GetString(SessionKeyUsuario);
-            ArticuloContro = new ArticuloController();
-            autores = "";
-            informacionArticulo = ArticuloContro.RetornarDatos(artId);
-            autor = ArticuloContro.RetornarAutor(artId);
-            for (int index = 0; index < autor.Count; index++)
+            string PesoActual = HttpContext.Session.GetString(SessionKeyPesoUsuario);
+
+            if(PesoActual == "5" && artId != null)
             {
-                if (index != 0)
+                ArticuloContro = new ArticuloController();
+                Autores = "";
+                InformacionArticulo = ArticuloContro.RetornarDatos(artId);
+                Autor = ArticuloContro.RetornarAutor(artId);
+                for (int index = 0; index < Autor.Count; index++)
                 {
-                    autores += " , ";
+                    if (index != 0)
+                    {
+                        Autores += " , ";
+                    }
+                    Autores += Autor[index] + " ";
                 }
-                autores += autor[index] + " ";
+
+
+                ArticuloID = artId;
+
+
+                return Page();
             }
+            return RedirectToPage("/Cuenta/Ingresar", new { Mensaje = "Permisos insuficientes" });
 
-
-            ArticuloID = artId;
-
-
-            return Page();
         }
 
         public IActionResult OnPost(string artId)
@@ -66,7 +73,7 @@ namespace Iteracion_2.Pages.Articulos
             {
 
                 Message = "No ha seleccionado todas las calificaciones";
-                return RedirectToPage("FormularioRevision", new { artId = artId });
+                return RedirectToPage("FormularioRevision", new { artId });
             }
 
 
@@ -81,9 +88,18 @@ namespace Iteracion_2.Pages.Articulos
 
 
             FormularioContro = new FormularioRevisionController();
-            FormularioContro.ProcesarFormulario(opinionInt, contribucionInt, formaInt, observaciones, UsuarioActual, ArticuloID);
+            bool validado = FormularioContro.ProcesarFormulario(opinionInt, contribucionInt, formaInt, observaciones, UsuarioActual, ArticuloID);
+            if (validado)
+            {
+                return RedirectToPage("/Articulos/Revision");
+            }
+            else {
+                Message = "Intentar de nuevo.";
+                return RedirectToPage("FormularioRevision", new { artId });
 
-            return RedirectToPage("/Articulos/Revision");
+            }
+
+            
 
         }
     }

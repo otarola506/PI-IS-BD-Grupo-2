@@ -14,21 +14,11 @@ CREATE TABLE Miembro(
 	merito FLOAT
 );
 
-CREATE TABLE Nucleo(
-	nombreUsuarioFK VARCHAR(50) NOT NULL PRIMARY KEY,
-	tipo VARCHAR(50) NOT NULL,
-
-	CONSTRAINT FK_Nucleo_Miembro
-		FOREIGN KEY(nombreUsuarioFK) REFERENCES Miembro(nombreUsuarioPK)
-			ON DELETE CASCADE
-);
-
-
 
 CREATE TABLE Articulo(
 	artIdPK INTEGER NOT NULL PRIMARY KEY IDENTITY (1,1),
 	titulo VARCHAR(max) NOT NULL,
-	resumen VARBINARY(max) NOT NULL,
+	resumen VARCHAR(max) NOT NULL,
 	contenido VARBINARY(max) NOT NULL,
 	puntuacionInicial INTEGER,
 	visitas INTEGER,
@@ -85,9 +75,10 @@ CREATE TABLE Pregunta_Frecuente(
 );
 
 CREATE TABLE Topico(
-	topicoIdPK INTEGER NOT NULL PRIMARY KEY IDENTITY(1,1),
-	categoriaIdFK INTEGER NOT NULL, 
-
+	topicoIdPK INTEGER NOT NULL IDENTITY(1,1) ,
+	categoriaIdFK INTEGER NOT NULL,
+	nombre VARCHAR(150), 
+	CONSTRAINT PK_TopicoIdPk PRIMARY KEY NONCLUSTERED(topicoIdPk ),
 	CONSTRAINT FK_Topico_Categoria
 	FOREIGN KEY(categoriaIdFK) REFERENCES Categoria(categoriaIdPK)
 		ON DELETE CASCADE
