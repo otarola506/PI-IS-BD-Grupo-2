@@ -33,7 +33,7 @@ namespace Iteracion_2.Pages.Articulos
         {
             string UsuarioActual = HttpContext.Session.GetString(SessionKeyUsuario);
             ArticuloContro = new ArticuloController();
-            Autores = "";
+            string Autores = "";
             InformacionArticulo = ArticuloContro.RetornarDatos(artId);
             Autor = ArticuloContro.RetornarAutor(artId);
             for (int index = 0; index < Autor.Count; index++)

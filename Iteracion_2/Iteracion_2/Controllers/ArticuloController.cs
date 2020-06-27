@@ -25,7 +25,7 @@ namespace Iteracion_2.Controllers
             return ArticuloModel.RetornarRevisados();
         }
 
-        public string[] retornarDatos(int artId) {
+        public string[] RetornarDatos(string artId) {
             ArticuloModel = new ArticuloModel();
             return ArticuloModel.RetornarDatos(artId);
 
