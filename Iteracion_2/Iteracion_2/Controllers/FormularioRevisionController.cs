@@ -11,10 +11,10 @@ namespace Iteracion_2.Controllers
 
         FormularioRevisionModel FormularioMod { get; set; }
 
-        public void ProcesarFormulario(int opinion, int contribucion, int forma, string observaciones, string miembroID, string artID)
+        public bool ProcesarFormulario(int opinion, int contribucion, int forma, string observaciones, string miembroID, string artID)
         {
             FormularioMod = new FormularioRevisionModel();
-            FormularioMod.ProcesarFormulario(opinion, contribucion, forma, observaciones, miembroID, artID);
+            return FormularioMod.ProcesarFormulario(opinion, contribucion, forma, observaciones, miembroID, artID);
 
         }
 

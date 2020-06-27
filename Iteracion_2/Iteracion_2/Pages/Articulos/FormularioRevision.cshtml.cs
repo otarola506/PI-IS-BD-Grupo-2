@@ -81,9 +81,18 @@ namespace Iteracion_2.Pages.Articulos
 
 
             FormularioContro = new FormularioRevisionController();
-            FormularioContro.ProcesarFormulario(opinionInt, contribucionInt, formaInt, observaciones, UsuarioActual, ArticuloID);
+            bool validado = FormularioContro.ProcesarFormulario(opinionInt, contribucionInt, formaInt, observaciones, UsuarioActual, ArticuloID);
+            if (validado)
+            {
+                return RedirectToPage("/Articulos/Revision");
+            }
+            else {
+                Message = "Intentar de nuevo.";
+                return RedirectToPage("FormularioRevision", new { artId = artId });
 
-            return RedirectToPage("/Articulos/Revision");
+            }
+
+            
 
         }
     }
