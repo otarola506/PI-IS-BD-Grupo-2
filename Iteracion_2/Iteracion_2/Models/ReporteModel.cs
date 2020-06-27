@@ -30,54 +30,43 @@ namespace Iteracion_2.Models
         }
 
 
-        public string OptenerValoresSeleccion(string Seleccion)
+        public string OptenerValoresSeleccion(string seleccion, string tipo)
         {
             List<ReporteConfigurable> Opciones = new List<ReporteConfigurable>();
             string Retorno= "";
             Connection();
-            string AtributoDistribucion = "M." + Seleccion + "";
-      
-            SqlCommand command = new SqlCommand("SELECT DISTINCT " + AtributoDistribucion + " FROM Miembro  M", con);
+            string AtributoDistribucion = "M." + seleccion + "";
+
+            string query = "";
+
+            if (tipo == "1")
+                query = "SELECT DISTINCT " + AtributoDistribucion + " FROM Miembro  M";
+            else
+                query = "SELECT nombre FROM Topico";
+
+
+            SqlCommand command = new SqlCommand(query, con);
             SqlDataReader reader = command.ExecuteReader();
             while (reader.Read())
             {
                 Retorno += reader[0].ToString() +",";
-                //var reporte = new ReporteConfigurable { Entrada = reader[0].ToString()};
-                //Opciones.Add(reporte);
             }
 
-
-            //return Opciones ;
             return Retorno;
         }
 
-
-
-        public List<ReporteConfigurable> EncontrarValoresDistribucion(string[] Valores)
+        public List<ReporteConfigurable> EncontrarValoresDistribucion(string[] valores, string tipo)
         {
             List<ReporteConfigurable> Retorno = new List<ReporteConfigurable>();
             Connection();
-            if (Valores.Length > 1)
+            if (valores.Length > 1)
             {
-                // Busqueda por varios valores 
-                //string AtributoDistribucion = "M." + Valores[0] + "";
-                //string AtributoDistribucionAvanzada = "M."+Valores[1]+ "";
-                //SqlCommand command = new SqlCommand("SELECT " + AtributoDistribucion + ", COUNT(*)   FROM Miembro WHERE "+AtributoDistribucionAvanzada+" = '"+Valores[2]+"' GROUP BY " + AtributoDistribucion + "", con);
-                //SqlDataReader reader = command.ExecuteReader();
-                //while (reader.Read())
-                //{
-                //    var reporte = new ReporteConfigurable { Entrada = reader[0].ToString(), Cantidad = reader[1].ToString() };
-                //    Retorno.Add(reporte);
-                //}
-                var query = "SELECT "+Valores[0]+" ,COUNT(*) FROM Miembro  WHERE "+Valores[1]+" = '"+Valores[2]+"' GROUP BY ("+Valores[0]+")";
+                var query = "SELECT "+valores[0]+" ,COUNT(*) FROM Miembro  WHERE "+valores[1]+" = '"+valores[2]+"' GROUP BY ("+valores[0]+")";
 
                 SqlCommand cmd = new SqlCommand(query, con)
                 {
                     CommandType = CommandType.Text
                 };
-                //cmd.Parameters.AddWithValue("@Valor1", Valores[0]);
-                //cmd.Parameters.AddWithValue("@Valor2", Valores[1]);
-                //cmd.Parameters.AddWithValue("@Valor3", Valores[2]);
 
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {
@@ -89,18 +78,32 @@ namespace Iteracion_2.Models
                 }
 
             }
-            else if (Valores.Length == 1) //Busqueda por un unico valor
+            else if (valores.Length == 1) //Busqueda por un unico valor
             {
-                // hacemos la consulta avanzada  para los nombres que queremos en la grafica
-                string AtributoDistribucion = "M."+ Valores[0] +"";
-                SqlCommand command = new SqlCommand("SELECT "+AtributoDistribucion+", COUNT(*)   FROM Miembro M GROUP BY "+AtributoDistribucion+"", con);
+                string query = "";
+
+                if (tipo == "simple") {
+                    string AtributoDistribucion = "M." + valores[0] + "";
+                    query = "SELECT " + AtributoDistribucion + ", COUNT(*)   FROM Miembro M GROUP BY " + AtributoDistribucion + "";
+
+                }else
+                {
+                    string condicion = "";
+                    if (valores[0] != "cantidad articulos")
+                        condicion = "COUNT(M.tipo) AS'Cantidad'";
+                    else
+                        condicion = "AVG(A.puntuacionInicial) AS'Puntuacion Promedio'";
+                    query = "SELECT M.tipo, " + condicion + " FROM Miembro M ,Articulo A, Miembro_Articulo MA WHERE M.nombreUsuarioPK  = MA.nombreUsuarioFK AND MA.artIdFK = A.artIdPK GROUP BY M.tipo";
+
+                }
+
+                SqlCommand command = new SqlCommand(query, con);
                 SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
                     var reporte = new ReporteConfigurable { Entrada = reader[0].ToString(), Cantidad = reader[1].ToString() };
                     Retorno.Add(reporte);
                 }
-                
             }
             con.Close();
             return Retorno;

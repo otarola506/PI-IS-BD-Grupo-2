@@ -20,26 +20,25 @@ namespace Iteracion_2.Pages.Analitica
 
         ReporteController ControladorDistribucion { get; set; }
 
-        public ActionResult OnGetOpciones(string Seleccion)
+        public ActionResult OnGetOpciones(string seleccion, string tipo)
         {
             ControladorDistribucion = new ReporteController();
-            string reporte = ControladorDistribucion.ComunicarSeleccion(Seleccion);
+            string reporte = ControladorDistribucion.ComunicarSeleccion(seleccion, tipo);
             string jsonString;
             jsonString = JsonSerializer.Serialize(reporte);
 
             return Content(reporte);
         }
 
-        public ActionResult OnGetChartData(string entrada)
+        public ActionResult OnGetChartData(string entrada, string tipo)
         {
             var json = "";
 
-            if (entrada == null)
+            if (entrada == null)//onget
             {
-                string[] seleccion = { "tipo" };
                 ControladorDistribucion = new ReporteController();
 
-                var reporte = ControladorDistribucion.ComunicarDatosDistrubucion(seleccion);
+                var reporte = ControladorDistribucion.ComunicarDatosDistrubucion(entrada.Split(","), tipo);
 
                 json = reporte.ToGoogleDataTable()
                         .NewColumn(new Column(ColumnType.String, "Tipo Miembro"), x => x.Entrada)
@@ -49,15 +48,15 @@ namespace Iteracion_2.Pages.Analitica
             }
             else {
                 string FiltrosSeleccionados = entrada.TrimEnd(new Char[] { ',' });
-                string[] Selecciones = FiltrosSeleccionados.Split(',');
+                string[] selecciones = FiltrosSeleccionados.Split(',');
 
                 ControladorDistribucion = new ReporteController();
 
-                var reporte = ControladorDistribucion.ComunicarDatosDistrubucion(Selecciones);
+                var reporte = ControladorDistribucion.ComunicarDatosDistrubucion(selecciones, tipo);
 
                 json = reporte.ToGoogleDataTable()
-                        .NewColumn(new Column(ColumnType.String, "Paises"), x => x.Entrada)
-                        .NewColumn(new Column(ColumnType.Number, "Cantidad"), x => x.Cantidad)
+                        .NewColumn(new Column(ColumnType.String,"Tipo"), x => x.Entrada)
+                        .NewColumn(new Column(ColumnType.Number,"Cantidad"), x => x.Cantidad)
                         .Build()
                         .GetJson();
             }

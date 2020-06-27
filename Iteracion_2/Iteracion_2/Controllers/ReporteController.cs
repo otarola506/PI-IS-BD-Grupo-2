@@ -11,19 +11,19 @@ namespace Iteracion_2.Controllers
         ReporteModel ModeloDistribucion { get; set; }
         
 
-        public List<ReporteConfigurable> ComunicarDatosDistrubucion(string [] Valores )
+        public List<ReporteConfigurable> ComunicarDatosDistrubucion(string [] valores, string tipo)
         {
             ModeloDistribucion = new ReporteModel();
             
-            return ModeloDistribucion.EncontrarValoresDistribucion(Valores);
+            return ModeloDistribucion.EncontrarValoresDistribucion(valores, tipo);
         }
 
 
-        public string ComunicarSeleccion(string Seleccion)
+        public string ComunicarSeleccion(string seleccion, string tipo)
         {
             ModeloDistribucion = new ReporteModel();
 
-            return ModeloDistribucion.OptenerValoresSeleccion(Seleccion);
+            return ModeloDistribucion.OptenerValoresSeleccion(seleccion, tipo);
         }
 
 

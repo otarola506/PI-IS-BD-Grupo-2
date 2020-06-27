@@ -11,26 +11,52 @@
 <body>
     <h1 style="text-align:center"><b>Reporte Configurable</b></h1>
 
-    <div class="row">
-        <select style="font-size:20px" id="configuracion">
-            <option value="default">===Selecciona===</option>
-            <option value="pais">País</option>
-            <option value="tipo">Tipo de miembro</option>
-            <option value="habilidades">Habilidades</option>
-            <option value="hobbies">Hobbies</option>
-            <option value="idiomas">Idioma</option>
-        </select>
+    <div class="col-lg-6">
+        <div class="row">
+            <select style="font-size:20px" id="configuracion">
+                <option value="default">===Selecciona===</option>
+                <option value="pais">País</option>
+                <option value="tipo">Tipo de miembro</option>
+                <option value="habilidades">Habilidades</option>
+                <option value="hobbies">Hobbies</option>
+                <option value="idiomas">Idioma</option>
+            </select>
 
-        <select style="font-size:20px" id="rellenarInfo" hidden></select>
+            <select style="font-size:20px" id="rellenarInfo" hidden></select>
 
-        <input style="font-size:18px" id="realizarBusqueda" type="button" value="Graficar" disabled />
+            <input style="font-size:18px" id="realizarBusqueda" type="button" value="Graficar" disabled />
+        </div>
+        <br />
+        <div class="row">
+            <input id="datos" type="text" value="" placeholder="Filtros" disabled />
+        </div>
+
+        <div id="chart"></div>
     </div>
-    <br />
-    <div class="row">
-        <input id="datos" type="text" value="" placeholder="Filtros" disabled />
+
+    <div class="col-lg-6">
+        <div class="row">
+            <select style="font-size:20px" id="configuracion2">
+                <option value="default2">===Selecciona===</option>
+                <option value="cantidad articulos">Cantida de artículos</option>
+                <option value="puntaje promedio">Puntaje</option>
+                <option value="topico">Cantidad de artículos por tópico</option>
+                <option value="accesos">Cantidad de accesos por tópico</option>
+            </select>
+
+            <select style="font-size:20px" id="rellenarInfo2" hidden></select>
+
+            <input style="font-size:18px" id="realizarBusqueda2" type="button" value="Graficar" disabled />
+        </div>
+        <br />
+        <div class="row">
+            <input id="datos2" type="text" placeholder="Filtros" disabled />
+        </div>
+
+        <div id="chart2"></div>
     </div>
 
-    <div id="chart" class="col-lg-offset-2"></div>
+
 
     @section Scripts
         {
@@ -39,23 +65,41 @@
         <script type="text/javascript">
             google.charts.load('current', { 'packages': ['corechart'] });
             google.charts.setOnLoadCallback(drawChart);
-            var $selecciones = "";
-            var $cantidadSelecciones = []
-            var $contador = 0;
+
             function drawChart() {
                 var jsonData = $.ajax({
-                    url: "/Analitica/Reporte?handler=ChartData",
+                    url: "/Analitica/Reporte?handler=ChartData&entrada=tipo&tipo=simple",
                     dataType: "json",
                     async: false
                 }).responseText;
+
+                var jsonDataAvanzado = $.ajax({
+                    url: "/Analitica/Reporte?handler=ChartData&entrada=cantidad&tipo=avanzada",
+                    dataType: "json",
+                    async: false
+                }).responseText;
+
                 var data = new google.visualization.DataTable(jsonData);
+                var dataAvanzado = new google.visualization.DataTable(jsonDataAvanzado);
                 var options = {
                     'title': 'Miembros de la comunidad',
                     'width': 850,
                     'height': 650,
+                    chartArea: { left: 0, top: 100, width: "40%", height: "40%" }
                 };
+
+                var options2 = {
+                    'title': 'Cantidad de artículos por tipo de miembro',
+                    'width': 850,
+                    'height': 650,
+                    chartArea: { left: 0, top: 100, width: "40%", height: "40%" }
+                };
+
                 var chart = new google.visualization.PieChart(document.getElementById('chart'));
+
+                var chart2 = new google.visualization.BarChart(document.getElementById('chart2'));
                 chart.draw(data, options);
+                chart2.draw(dataAvanzado, options2);
             }
 
             var $lista = []
@@ -63,11 +107,10 @@
 
             $("#configuracion").on('change', function (e) {
                 $("#realizarBusqueda").prop("disabled", false);
-                
+
                 var valueSelected = this.value;
                 var opciones;
 
-                console.log("Length lista ",$lista.length)
                 if ($lista.length < 2) {
                     $filtros += valueSelected + ","
                     $lista.push(valueSelected)
@@ -76,7 +119,7 @@
                     if ($lista.length === 2) {
                         $('#rellenarInfo').show();
                         var jsonData = $.ajax({
-                            url: "/Analitica/Reporte?handler=Opciones&Seleccion=" + $lista[1],
+                            url: "/Analitica/Reporte?handler=Opciones&Seleccion=" + $lista[1]+"&tipo=1",
                             dataType: "string",
                             async: false
                         }).responseText;
@@ -108,7 +151,7 @@
 
                 if ($filtros != "") {
                     var jsonData = $.ajax({
-                        url: "/Analitica/Reporte?handler=ChartData&entrada=" + $filtros,
+                        url: "/Analitica/Reporte?handler=ChartData&entrada=" + $filtros+"&tipo=simple",
                         dataType: "json",
                         async: false
                     }).responseText;
@@ -116,16 +159,15 @@
                     var options = {
                         'title': 'Miembros de la comunidad por: ' + $filtros,
                         'width': 850,
-                        'height': 650
+                        'height': 650,
+                        chartArea: { left: 0, top: 100, width: "40%", height: "40%" }
                     };
 
                     if ($lista.length === 1) {
                         var chart = new google.visualization.PieChart(document.getElementById('chart'));
-                        console.log($lista)
                         chart.draw(data, options);
                     } else {
                         var chart = new google.visualization.BarChart(document.getElementById('chart'));
-                        console.log($lista)
                         chart.draw(data, options);
                     }
 
@@ -136,6 +178,96 @@
                     $lista = []
                     $filtros = ""
                     $("#configuracion").val("default")
+                } else {
+                    drawChart();
+                }
+            });
+
+            // Avanzado
+
+            var $listaAvanzada = []
+            var $filtroAvanzado = ""
+
+            $("#configuracion2").on('change', function (e) {
+                $("#realizarBusqueda2").prop("disabled", false);
+
+                var valueSelected = this.value;
+                $filtroAvanzado = valueSelected
+                if ($listaAvanzada.length < 2) {
+                    
+                } else {
+                    $filtroAvanzado = "";
+                    $listaAvanzada.empty();
+                    $filtroAvanzado = valueSelected
+                }
+                $("#datos2").val($filtroAvanzado)
+                console.log(valueSelected)
+
+                if (valueSelected === "topico" || valueSelected === "accesos") {
+                    var jsonData = $.ajax({
+                        url: "/Analitica/Reporte?handler=Opciones&Seleccion=" + valueSelected + "&tipo=2",
+                        dataType: "string",
+                        async: false
+                    }).responseText;
+
+                    jsonData = jsonData.substring(0, jsonData.length - 1)
+                    opciones = jsonData.split(',')
+                    for (var i = 0; i < opciones.length; i++) {
+                        var o = new Option(opciones[i], "value");
+                        $(o).html(opciones[i]);
+                        $("#rellenarInfo2").append(o);
+                    }
+                    $('#rellenarInfo2').show();
+                    console.log(opciones)
+                    
+                } else {
+                    $("#rellenarInfo2").empty();
+                    $('#rellenarInfo2').hide();
+                    console.log("aun no")
+                }
+                
+            });
+
+            $('#realizarBusqueda2').click(function () {
+                console.log("asd")
+                var valueSelected = $('#rellenarInfo2 option:selected').html()
+
+                if (valueSelected != null) {
+                    $filtroAvanzado += valueSelected
+                    $listaAvanzada.push(valueSelected)
+                }
+
+                console.log($filtroAvanzado)
+
+                if ($filtroAvanzado != "") {
+                    var jsonData = $.ajax({
+                        url: "/Analitica/Reporte?handler=ChartData&entrada=" + $filtroAvanzado+"&tipo=avanzada",
+                        dataType: "json",
+                        async: false
+                    }).responseText;
+                    var data = new google.visualization.DataTable(jsonData);
+                    var options = {
+                        'title': 'Tipos de miembro filtrados por: ' + $filtroAvanzado,
+                        'width': 850,
+                        'height': 650,
+                        chartArea: { left: 0, top: 100, width: "50%", height: "50%" }
+                    };
+
+                    if ($listaAvanzada.length === 1) {
+                        var chart2 = new google.visualization.PieChart(document.getElementById('chart2'));
+                        chart2.draw(data, options);
+                    } else {
+                        var chart2 = new google.visualization.BarChart(document.getElementById('chart2'));
+                        chart2.draw(data, options);
+                    }
+
+                    $('#rellenarInfo2').hide();
+                    $("#realizarBusqueda2").prop("disabled", true);
+                    $("#rellenarInfo2").empty();
+                    $("#datos2").val("")
+                    $lista = []
+                    $filtros = ""
+                    $("#configuracion2").val("default2")
                 } else {
                     drawChart();
                 }
