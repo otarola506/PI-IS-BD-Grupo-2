@@ -17,32 +17,33 @@ namespace Iteracion_2.Pages.Articulos
 
         ArticuloController ArticuloContro { get; set; }
 
-        public string[] InformacionArticulo { get; private set; }
+        public string[] informacionArticulo { get; private set; }
 
         public string autores { get; set; }
         [TempData]
         public string Message { get; set; }
 
-        public List<string> Autor { get; private set; }
+        public List<string> autor { get; private set; }
 
         const string SessionKeyUsuario = "UsuarioActual";
+        string SessionKeyPesoUsuario = "PesoActual";
 
-         public string ArticuloID { get;  private set; }
+        public string ArticuloID { get; private set; }
 
         public IActionResult OnGet(string artId)
         {
             string UsuarioActual = HttpContext.Session.GetString(SessionKeyUsuario);
             ArticuloContro = new ArticuloController();
-            string Autores = "";
-            InformacionArticulo = ArticuloContro.RetornarDatos(artId);
-            Autor = ArticuloContro.RetornarAutor(artId);
-            for (int index = 0; index < Autor.Count; index++)
+            autores = "";
+            informacionArticulo = ArticuloContro.RetornarDatos(artId);
+            autor = ArticuloContro.RetornarAutor(artId);
+            for (int index = 0; index < autor.Count; index++)
             {
-                if(index != 0)
+                if (index != 0)
                 {
-                    Autores += " , ";
+                    autores += " , ";
                 }
-                Autores += Autor[index] + " " ;
+                autores += autor[index] + " ";
             }
 
 
@@ -51,9 +52,6 @@ namespace Iteracion_2.Pages.Articulos
 
             return Page();
         }
-
-
-
 
         public IActionResult OnPost(string artId)
         {
@@ -64,10 +62,11 @@ namespace Iteracion_2.Pages.Articulos
             string forma = Request.Form["Forma"].ToString();
             string observaciones = "" + Request.Form["comentarios"].ToString();
 
-           if (opinion.Equals("") || contribucion.Equals("") || forma.Equals("")) {
+            if (opinion.Equals("") || contribucion.Equals("") || forma.Equals(""))
+            {
 
                 Message = "No ha seleccionado todas las calificaciones";
-                return RedirectToPage("/Articulos/FormularioRevision");
+                return RedirectToPage("FormularioRevision", new { artId = artId });
             }
 
 
@@ -76,15 +75,13 @@ namespace Iteracion_2.Pages.Articulos
             int formaInt = Int16.Parse(forma);
 
 
-            
-            ArticuloID = artId; 
-            
-            
+
+            ArticuloID = artId;
+
+
 
             FormularioContro = new FormularioRevisionController();
             FormularioContro.ProcesarFormulario(opinionInt, contribucionInt, formaInt, observaciones, UsuarioActual, ArticuloID);
-
-            
 
             return RedirectToPage("/Articulos/Revision");
 
