@@ -52,10 +52,7 @@ namespace Iteracion_2.Models
                     cmd.Parameters.AddWithValue("@estado", "solicitado");
                     cmd.ExecuteNonQuery();
                     cmd.Parameters.Clear();
-
-
                 }
-
             }
             con.Close();
 

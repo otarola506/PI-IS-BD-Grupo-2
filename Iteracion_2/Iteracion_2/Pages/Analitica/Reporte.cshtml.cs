@@ -14,23 +14,15 @@ using System.Text.Json.Serialization;
 
 namespace Iteracion_2.Pages.Analitica
 {
-    public class Chart
-    {
-        public object[] cols { get; set; }
-        public object[] rows { get; set; }
-    }
-
     public class ReporteModel : PageModel
     {
-
         public List<List<string>> ValoresGrafica { set; get; }
 
-        DistribucionMiembroController ControladorDistribucion { get; set; }
+        ReporteController ControladorDistribucion { get; set; }
 
         public ActionResult OnGetOpciones(string Seleccion)
         {
-            
-            ControladorDistribucion = new DistribucionMiembroController();
+            ControladorDistribucion = new ReporteController();
             string reporte = ControladorDistribucion.ComunicarSeleccion(Seleccion);
             string jsonString;
             jsonString = JsonSerializer.Serialize(reporte);
@@ -45,7 +37,7 @@ namespace Iteracion_2.Pages.Analitica
             if (entrada == null)
             {
                 string[] seleccion = { "tipo" };
-                ControladorDistribucion = new DistribucionMiembroController();
+                ControladorDistribucion = new ReporteController();
 
                 var reporte = ControladorDistribucion.ComunicarDatosDistrubucion(seleccion);
 
@@ -56,13 +48,10 @@ namespace Iteracion_2.Pages.Analitica
                         .GetJson();
             }
             else {
-
-                
                 string FiltrosSeleccionados = entrada.TrimEnd(new Char[] { ',' });
-
-                
                 string[] Selecciones = FiltrosSeleccionados.Split(',');
-                ControladorDistribucion = new DistribucionMiembroController();
+
+                ControladorDistribucion = new ReporteController();
 
                 var reporte = ControladorDistribucion.ComunicarDatosDistrubucion(Selecciones);
 

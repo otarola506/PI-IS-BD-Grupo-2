@@ -18,7 +18,7 @@ namespace Iteracion_2.Models
 
     }
 
-    public class DistribucionMiembroModel
+    public class ReporteModel
     {
         ConexionModel ConexionBD { get; set; }
         private SqlConnection con;
