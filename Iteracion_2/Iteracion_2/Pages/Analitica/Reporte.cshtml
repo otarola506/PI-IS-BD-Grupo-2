@@ -22,6 +22,14 @@
 
         
     </select>
+
+
+    <select id="rellenarInfo">
+
+
+    </select>
+
+
     <div>
         <label for="GG">Prueba</label>
 
@@ -63,16 +71,60 @@
             var $lista = []
             var $filtros = ""
 
-            $('select').on('change', function (e) {
+            
+            
+
+
+
+            $("#configuracion").on('change', function (e) {
                 var optionSelected = $("option:selected", this);
 
                 var valueSelected = this.value;
+                var opciones;
 
+                console.log("Length lista ",$lista.length)
                 if ($lista.length < 2) {
+                    console.log($lista.length)
                     $filtros += valueSelected + ","
                     $lista.push(valueSelected)
-
+                    console.log("Despues ", $lista.length)
                     $("#datos").val($filtros)
+
+
+
+
+                    if ($lista.length === 2) {
+                        console.log("Dos selecciones ")
+                        var jsonData = $.ajax({
+                            url: "/Analitica/Reporte?handler=Opciones&Seleccion=" + $lista[1],
+                            dataType: "string",
+                            async: false
+                        }).responseText;
+
+                        console.log(jsonData)
+
+                        jsonData = jsonData.substring(0, jsonData.length - 1)
+                        console.log(jsonData);
+                        opciones = jsonData.split(',')
+                        for (var i = 0; i < opciones.length; i++) {
+                            var o = new Option(opciones[i], "value");
+                            /// jquerify the DOM object 'o' so we can use the html method
+                            $(o).html(opciones[i]);
+                            $("#rellenarInfo").append(o);
+                        }
+
+
+                    }
+
+
+                } else {
+
+                    $("#rellenarInfo").empty();
+                    $("#datos").val("")
+                    $lista = []
+                    $filtros = valueSelected + ","
+                    $("#datos").val($filtros)
+                    $lista.push(valueSelected)
                 }
 
                 console.log(optionSelected)
@@ -80,7 +132,19 @@
             });
 
             $('#realizarBusqueda').click(function () {
-                console.log("hola")
+                console.log("hola en el click")
+
+
+                var valueSelected = $('#rellenarInfo option:selected').html()
+
+                console.log("VS = ", valueSelected)
+
+                if (valueSelected != "") {
+
+                    $filtros += valueSelected
+                }
+
+
                 if ($filtros != "") {
                     var jsonData = $.ajax({
                         url: "/Analitica/Reporte?handler=ChartData&entrada=" + $filtros,
@@ -94,11 +158,14 @@
                         'height': 650
                     };
 
-                    if ($cantidadSelecciones.length === 1) {
+                    if ($lista.length === 1) {
                         var chart = new google.visualization.PieChart(document.getElementById('chart'));
+                        console.log($lista)
                         chart.draw(data, options);
                     } else {
+
                         var chart = new google.visualization.BarChart(document.getElementById('chart'));
+                        console.log($lista)
                         chart.draw(data, options);
                     }
 

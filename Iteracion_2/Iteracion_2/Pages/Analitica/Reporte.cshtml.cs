@@ -8,6 +8,9 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Google.DataTable.Net.Wrapper.Extension;
 using Google.DataTable.Net.Wrapper;
 using Iteracion_2.Controllers;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+
 
 namespace Iteracion_2.Pages.Analitica
 {
@@ -24,7 +27,16 @@ namespace Iteracion_2.Pages.Analitica
 
         DistribucionMiembroController ControladorDistribucion { get; set; }
 
-        public void OnGet() { }
+        public ActionResult OnGetOpciones(string Seleccion)
+        {
+            
+            ControladorDistribucion = new DistribucionMiembroController();
+            string reporte = ControladorDistribucion.ComunicarSeleccion(Seleccion);
+            string jsonString;
+            jsonString = JsonSerializer.Serialize(reporte);
+
+            return Content(reporte);
+        }
 
         public ActionResult OnGetChartData(string entrada)
         {
@@ -57,8 +69,6 @@ namespace Iteracion_2.Pages.Analitica
                 json = reporte.ToGoogleDataTable()
                         .NewColumn(new Column(ColumnType.String, "Paises"), x => x.Entrada)
                         .NewColumn(new Column(ColumnType.Number, "Cantidad"), x => x.Cantidad)
-                        .NewColumn(new Column(ColumnType.String, "Paises1"), x => x.Entrada2)
-                        .NewColumn(new Column(ColumnType.Number, "Cantidad1"), x => x.Cantidad2)
                         .Build()
                         .GetJson();
             }

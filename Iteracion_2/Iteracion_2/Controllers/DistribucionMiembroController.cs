@@ -19,5 +19,13 @@ namespace Iteracion_2.Controllers
         }
 
 
+        public string ComunicarSeleccion(string Seleccion)
+        {
+            ModeloDistribucion = new DistribucionMiembroModel();
+
+            return ModeloDistribucion.OptenerValoresSeleccion(Seleccion);
+        }
+
+
     }
 }
