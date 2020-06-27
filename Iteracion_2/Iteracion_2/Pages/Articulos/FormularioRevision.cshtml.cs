@@ -26,31 +26,38 @@ namespace Iteracion_2.Pages.Articulos
         public List<string> autor { get; private set; }
 
         const string SessionKeyUsuario = "UsuarioActual";
-        string SessionKeyPesoUsuario = "PesoActual";
+        const string SessionKeyPesoUsuario = "PesoActual";
 
         public string ArticuloID { get; private set; }
 
         public IActionResult OnGet(string artId)
         {
             string UsuarioActual = HttpContext.Session.GetString(SessionKeyUsuario);
-            ArticuloContro = new ArticuloController();
-            autores = "";
-            informacionArticulo = ArticuloContro.RetornarDatos(artId);
-            autor = ArticuloContro.RetornarAutor(artId);
-            for (int index = 0; index < autor.Count; index++)
+            string PesoActual = HttpContext.Session.GetString(SessionKeyPesoUsuario);
+
+            if(PesoActual == "5" && artId != null)
             {
-                if (index != 0)
+                ArticuloContro = new ArticuloController();
+                autores = "";
+                informacionArticulo = ArticuloContro.RetornarDatos(artId);
+                autor = ArticuloContro.RetornarAutor(artId);
+                for (int index = 0; index < autor.Count; index++)
                 {
-                    autores += " , ";
+                    if (index != 0)
+                    {
+                        autores += " , ";
+                    }
+                    autores += autor[index] + " ";
                 }
-                autores += autor[index] + " ";
+
+
+                ArticuloID = artId;
+
+
+                return Page();
             }
+            return RedirectToPage("/Cuenta/Ingresar", new { Mensaje = "Permisos insuficientes" });
 
-
-            ArticuloID = artId;
-
-
-            return Page();
         }
 
         public IActionResult OnPost(string artId)
