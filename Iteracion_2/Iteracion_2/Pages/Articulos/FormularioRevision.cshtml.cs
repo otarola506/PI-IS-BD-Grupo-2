@@ -15,31 +15,30 @@ namespace Iteracion_2.Pages.Articulos
 
         ArticuloController ArticuloContro { get; set; }
 
-        public string[] informacionArticulo { get; private set; }
+        public string[] InformacionArticulo { get; private set; }
 
-        public string autores { get; set; }
+        public string Autores { get; set; }
 
-        public List<string> autor { get; private set; }
+        public List<string> Autor { get; private set; }
 
         const string SessionKeyUsuario = "UsuarioActual";
-        string SessionKeyPesoUsuario = "PesoActual";
 
          public string ArticuloID { get;  private set; }
 
-        public IActionResult OnGet( string artId)
+        public IActionResult OnGet(string artId)
         {
             string UsuarioActual = HttpContext.Session.GetString(SessionKeyUsuario);
             ArticuloContro = new ArticuloController();
-            autores = "";
-            informacionArticulo = ArticuloContro.retornarDatos(1);
-            autor = ArticuloContro.retornarAutor(1);
-            for (int index = 0; index < autor.Count; index++)
+            Autores = "";
+            InformacionArticulo = ArticuloContro.RetornarDatos(artId);
+            Autor = ArticuloContro.RetornarAutor(artId);
+            for (int index = 0; index < Autor.Count; index++)
             {
                 if(index != 0)
                 {
-                    autores += " , ";
+                    Autores += " , ";
                 }
-                autores += autor[index] + " " ;
+                Autores += Autor[index] + " " ;
             }
 
 
