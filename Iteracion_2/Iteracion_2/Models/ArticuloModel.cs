@@ -75,8 +75,7 @@ namespace Iteracion_2.Models
 
                 if (reader.Read()) {
                     info[0] = reader["titulo"].ToString();
-                    byte[] bytesResumen = (byte[])reader["resumen"];
-                    info[1] = Encoding.UTF8.GetString(bytesResumen);
+                    info[1] = reader["resumen"].ToString();
                 }
             }
 

@@ -67,7 +67,7 @@ namespace Iteracion_2.Pages.Articulos
             ResultadoSolicitud = ArticuloController.RetornarResultadoSolicitud(articuloId);
         }
 
-        public async Task<IActionResult> OnPost()
+        public IActionResult OnPost()
         {
             UsuarioActual = HttpContext.Session.GetString(SessionKeyUsuario);
             int id = Int32.Parse(Request.Form["artID"]);

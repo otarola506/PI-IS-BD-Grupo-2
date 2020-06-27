@@ -134,12 +134,12 @@ namespace Iteracion_2.Models
 
             switch (tipo) {
                 case "asignacion":
-                    asunto = "Asignación de revisión: "+ titulo;
+                    asunto = "Asignación de revisión: '"+ titulo+"'";
                     mensaje = "Estimado(s) miembro(s) núcleo, se le ha asignado para su revisión el artículo titulado '" + titulo + "'. Por favor revisarlo lo más antes posible.";
                     break;
                 case "solicitud":
-                    asunto = "Colaboración en el artículo " + titulo;
-                    mensaje = "Estimados miembros núcleo, se le solicita la colaboración en el proceso de revisión del artículo " + titulo;
+                    asunto = "Colaboración en el artículo '" + titulo+"'";
+                    mensaje = "Estimados miembros núcleo, se le solicita la colaboración en el proceso de revisión del artículo '" + titulo+ "'.";
                     break;
             }
 

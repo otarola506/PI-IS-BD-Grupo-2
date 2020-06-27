@@ -17,13 +17,13 @@ namespace Iteracion_2.Pages.Articulos
 
         ArticuloController ArticuloContro { get; set; }
 
-        public string[] informacionArticulo { get; private set; }
+        public string[] InformacionArticulo { get; private set; }
 
-        public string autores { get; set; }
+        public string Autores { get; set; }
         [TempData]
         public string Message { get; set; }
 
-        public List<string> autor { get; private set; }
+        public List<string> Autor { get; private set; }
 
         const string SessionKeyUsuario = "UsuarioActual";
         const string SessionKeyPesoUsuario = "PesoActual";
@@ -38,16 +38,16 @@ namespace Iteracion_2.Pages.Articulos
             if(PesoActual == "5" && artId != null)
             {
                 ArticuloContro = new ArticuloController();
-                autores = "";
-                informacionArticulo = ArticuloContro.RetornarDatos(artId);
-                autor = ArticuloContro.RetornarAutor(artId);
-                for (int index = 0; index < autor.Count; index++)
+                Autores = "";
+                InformacionArticulo = ArticuloContro.RetornarDatos(artId);
+                Autor = ArticuloContro.RetornarAutor(artId);
+                for (int index = 0; index < Autor.Count; index++)
                 {
                     if (index != 0)
                     {
-                        autores += " , ";
+                        Autores += " , ";
                     }
-                    autores += autor[index] + " ";
+                    Autores += Autor[index] + " ";
                 }
 
 
@@ -73,7 +73,7 @@ namespace Iteracion_2.Pages.Articulos
             {
 
                 Message = "No ha seleccionado todas las calificaciones";
-                return RedirectToPage("FormularioRevision", new { artId = artId });
+                return RedirectToPage("FormularioRevision", new { artId });
             }
 
 
@@ -95,7 +95,7 @@ namespace Iteracion_2.Pages.Articulos
             }
             else {
                 Message = "Intentar de nuevo.";
-                return RedirectToPage("FormularioRevision", new { artId = artId });
+                return RedirectToPage("FormularioRevision", new { artId });
 
             }
 
