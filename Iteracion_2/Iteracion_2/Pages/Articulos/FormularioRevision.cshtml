@@ -1,46 +1,42 @@
-﻿
-
-@page
+﻿@page
 @using Microsoft.AspNetCore.Http;
 @model Iteracion_2.Pages.Articulos.FormularioRevisionModel
 @{
     ViewData["Title"] = "FormularioRevision";
 }
 
-
 <head>
     <link rel="stylesheet" href="~/css/border-radius.css" />
 </head>
-
 
 <h2>Formulario de Revision</h2>
 
 <div class="container">
     @if ((HttpContext.Session.GetString("PesoActual") == "5") || ((HttpContext.Session.GetString("PesoActual") == "5")))
     {
-        <label for="inputName" style="color:red;"> @ViewData["Message"] </label>
+        <label for="inputName" style="color:red;">@TempData["Message"] </label>
         <div class="row">
             <br />
-            <div class="col-md-7   " >
-                <div class="col-lg-10 " style=" background-color:#E3E4E5;border-radius:9px 9px 9px 9px; height:600px; border-style:solid;" >
-             
-                    <h4><b>@Model.InformacionArticulo[0]</b></h4>
+            <div class="col-md-7 no-float">
+                <div class="col-lg-10 " style="background-color:#b3bfb5; border-radius:3px 3px; height:600px">
+                    <h3>Datos del articulo</h3>
+                    <br>
+                    <h4><b>Titulo</b></h4>
+                    <p>@Model.informacionArticulo[0]</p>
                     <br>
                     <h4><b>Autores</b></h4>
-                    
-                    <p>@Model.Autores</p>
+
+                    <p>@Model.autores</p>
                     <br>
                     <h4><b>Resumen</b></h4>
-                    <p>@Model.InformacionArticulo[1] </p>
+                    <p>@Model.informacionArticulo[1] </p>
                 </div>
-            
-            
             </div>
-            <div class="col-md-5 col-lg-offset-0" >
-                <div class="col-lg-11 " style="background-color:#3B83BD; border-style:solid; border-radius:9px 9px 9px 9px; height:600px;"  >
-                    <h3><b>Formulario de Revision</b></h3>
+            <div class="col-md-5 no-float">
+                <div class="col-lg-11" style="background-color:#b5eaf4; border-radius:3px 3px; height:600px">
+                    <h3>Formulario de Revision</h3>
                     <br>
-                    
+                    <br>
                     <form method="post">
                         <div class="row">
                             <div class="col-lg-4 col-lg-offset-1">
@@ -61,11 +57,9 @@
                         <br>
                         <br>
                         <br>
-
                         <div class="row">
                             <div class="col-lg-4 col-lg-offset-1">
                                 <label for="Contribucion">Contribución</label>
-
                             </div>
                             <div class="col-lg-5 col-lg-offset-1">
                                 <select class="form-control" id="sel2" name="Contribucion">
@@ -82,7 +76,6 @@
                         <br>
                         <br>
                         <br>
-
                         <div class="row">
                             <div class="col-lg-4 col-lg-offset-1">
                                 <label for="Forma">Forma del articulo</label>
@@ -101,9 +94,6 @@
                             </div>
                         </div>
                         <br>
-
-
-
                         <br>
 
                         <div class="row">
@@ -119,15 +109,11 @@
 
                         <div class="row">
                             <div class="col-lg-4 col-lg-offset-1">
-                                <button type="submit" class="btn btn-success" onclick="retroalimentacion()">Enviar</button>
+                                <button type="submit" class="btn btn-primary">Enviar</button>
 
                             </div>
 
                         </div>
-
-                        
-
-
 
                     </form>
                 </div>
@@ -140,7 +126,6 @@
             <h3>Usted no tiene el rango requerido para esta accion.</h3>
         </div>
 
-
     }
     else
     {
@@ -152,8 +137,4 @@
 
 
 
-<script>
-    function retroalimentacion() {
-        alert("Se envio su revision.");
-    }
-</script>
+

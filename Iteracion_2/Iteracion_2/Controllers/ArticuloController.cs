@@ -18,6 +18,13 @@ namespace Iteracion_2.Controllers
             return ArticuloModel.RetornarArticulosPendientes(nombreUsuarioActual, estado);
         }
 
+        public List<List<string>> RetornarRevisados ()
+        {
+            ArticuloModel = new ArticuloModel();
+
+            return ArticuloModel.RetornarRevisados();
+        }
+
         public string[] RetornarDatos(string artId) {
             ArticuloModel = new ArticuloModel();
             return ArticuloModel.RetornarDatos(artId);
@@ -51,6 +58,12 @@ namespace Iteracion_2.Controllers
         {
             ArticuloModel = new ArticuloModel();
             ArticuloModel.ModificarEstadoSolicitud(artID, nombreUsuarioActual, estadoSolicitud);
+        }
+
+        public void ModificarEstadoArticulo(int artID, string estadoRevision)
+        {
+            ArticuloModel = new ArticuloModel();
+            ArticuloModel.ModificarEstadoArticulo(artID, estadoRevision);
         }
     }
 }
