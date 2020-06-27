@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Iteracion_2.Controllers;
 using Microsoft.AspNetCore.Http;
+using System.Windows;
+
 
 namespace Iteracion_2.Pages.Articulos
 {
@@ -17,7 +19,9 @@ namespace Iteracion_2.Pages.Articulos
 
         public string[] InformacionArticulo { get; private set; }
 
-        public string Autores { get; set; }
+        public string autores { get; set; }
+        [TempData]
+        public string Message { get; set; }
 
         public List<string> Autor { get; private set; }
 
@@ -60,10 +64,11 @@ namespace Iteracion_2.Pages.Articulos
             string forma = Request.Form["Forma"].ToString();
             string observaciones = "" + Request.Form["comentarios"].ToString();
 
-           /* if (opinion.Equals("") || contribucion.Equals("") || forma.Equals("")) {
-                ViewData["Message"] = "No completo todo";
+           if (opinion.Equals("") || contribucion.Equals("") || forma.Equals("")) {
+
+                Message = "No ha seleccionado todas las calificaciones";
                 return RedirectToPage("/Articulos/FormularioRevision");
-            }*/
+            }
 
 
             int opinionInt = Int16.Parse(opinion);
@@ -72,16 +77,16 @@ namespace Iteracion_2.Pages.Articulos
 
 
             
-            ArticuloID = artId; // ojo si se cae es por esto
+            ArticuloID = artId; 
             
             
 
             FormularioContro = new FormularioRevisionController();
             FormularioContro.ProcesarFormulario(opinionInt, contribucionInt, formaInt, observaciones, UsuarioActual, ArticuloID);
 
-            //Redireccion
+            
 
-            return RedirectToPage("/Perfil/Perfil");//Hay que redireccionar hacia articulos pendientes de revision
+            return RedirectToPage("/Articulos/Revision");
 
         }
     }
