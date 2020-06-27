@@ -29,8 +29,10 @@ namespace Iteracion_2.Models
             mm.To.Add(destinatario);
             mm.Subject = asunto;
             AlternateView imgview = AlternateView.CreateAlternateViewFromString(contenido + "<br/><img src=cid:imgpath height=200 width=400>", null, "text/html");
-            LinkedResource lr = new LinkedResource(@"Images/shieldship.jpg", MediaTypeNames.Image.Jpeg);
-            lr.ContentId = "imgpath";
+            LinkedResource lr = new LinkedResource(@"Images/shieldship.jpg", MediaTypeNames.Image.Jpeg)
+            {
+                ContentId = "imgpath"
+            };
             imgview.LinkedResources.Add(lr);
             mm.AlternateViews.Add(imgview);
             mm.Body = lr.ContentId;
@@ -43,11 +45,13 @@ namespace Iteracion_2.Models
             }
             mm.IsBodyHtml = true;
             mm.From = new MailAddress("comunidadshieldship@gmail.com");
-            SmtpClient smtp = new SmtpClient("smtp.gmail.com");
-            smtp.Port = 587;
-            smtp.UseDefaultCredentials = true;
-            smtp.EnableSsl = true;
-            smtp.Credentials = new System.Net.NetworkCredential("comunidadshieldship@gmail.com", "BASESdatos176");
+            SmtpClient smtp = new SmtpClient("smtp.gmail.com")
+            {
+                Port = 587,
+                UseDefaultCredentials = true,
+                EnableSsl = true,
+                Credentials = new System.Net.NetworkCredential("comunidadshieldship@gmail.com", "BASESdatos176")
+            };
             await smtp.SendMailAsync(mm);
 
         }
@@ -100,49 +104,78 @@ namespace Iteracion_2.Models
 
         public async Task EnviarAsignacion(string titulo, string[] usuarios)
         {
-            List<List<String>> CorreosNucleo = new List<List<string>>();
+            List<List<string>> CorreosNucleo = new List<List<string>>();
             for (int index=0; index<usuarios.Length; index++) {
                 CorreosNucleo.Add(RecuperarCorreos(2,usuarios[index])[0]);
             }
 
-            for (int index = 0; index < CorreosNucleo.Count; index++)
-            {
-                await CorreoDefault(CorreosNucleo[index][1],
-                 "Asignación de revisión.",
-                 "Estimado " + CorreosNucleo[index][0] + ", se le ha asignado para su revisión el artículo titulado '"+titulo+"'. Por favor revisarlo lo más antes posible.");
-            }
+            await EnviarCorreos("asignacion", titulo, CorreosNucleo);
         }
 
-        public async Task EnviarSolicitudNucleo(string titulo) {
-            List<List<String>> CorreosNucleo = RecuperarCorreos(1,null);
-            for (int index = 0; index < CorreosNucleo.Count; index++)
-            {
-                await CorreoDefault(CorreosNucleo[index][1],
-                 "Colaboración en el artículo " + titulo,
-                 "Estimado "+ CorreosNucleo[index][0]+" se le solicita la colaboración en el proceso de revisión del artículo "+titulo);
-            }
-
-        }
-
-        public async Task CorreoDefault(string correo, string asunto, string mensaje)
+        public async Task EnviarSolicitudNucleo(string titulo)
         {
-            MailMessage mm = new MailMessage();
-            mm.To.Add(correo);
-            mm.Subject = asunto;
+            List<List<String>> CorreosNucleo = RecuperarCorreos(1, null);
+
+            await EnviarCorreos("solicitud", titulo, CorreosNucleo);
+        }
+
+        private async Task EnviarCorreos(string tipo, string titulo, List<List<string>> CorreosNucleo) {
+            string correos= "";
+
+            for (int index = 0; index < CorreosNucleo.Count; index++)
+            {
+                correos += CorreosNucleo[index][1]+";";
+            }
+
+            correos = correos.TrimEnd(new Char[] { ';' });
+
+            string asunto= "";
+            string mensaje = "";
+
+            switch (tipo) {
+                case "asignacion":
+                    asunto = "Asignación de revisión: "+ titulo;
+                    mensaje = "Estimado(s) miembro(s) núcleo, se le ha asignado para su revisión el artículo titulado '" + titulo + "'. Por favor revisarlo lo más antes posible.";
+                    break;
+                case "solicitud":
+                    asunto = "Colaboración en el artículo " + titulo;
+                    mensaje = "Estimados miembros núcleo, se le solicita la colaboración en el proceso de revisión del artículo " + titulo;
+                    break;
+            }
+
+            await CorreoDefault(correos, asunto, mensaje);
+        }
+
+        
+
+        public async Task CorreoDefault(string correos, string asunto, string mensaje)
+        {
+            MailMessage mailMessage = new MailMessage();
+
+            foreach (var address in correos.Split(new[] { ";" }, StringSplitOptions.RemoveEmptyEntries))
+            {
+                mailMessage.To.Add(address);
+            }
+
+            mailMessage.Subject = asunto;
             AlternateView imgview = AlternateView.CreateAlternateViewFromString(mensaje + "<br/><br/><img src=cid:imgpath height=200 width=400>", null, "text/html");
-            LinkedResource lr = new LinkedResource(@"Images/shieldship.jpg", MediaTypeNames.Image.Jpeg);
-            lr.ContentId = "imgpath";
+            LinkedResource lr = new LinkedResource(@"Images/shieldship.jpg", MediaTypeNames.Image.Jpeg)
+            {
+                ContentId = "imgpath"
+            };
             imgview.LinkedResources.Add(lr);
-            mm.AlternateViews.Add(imgview);
-            mm.Body = lr.ContentId;
-            mm.IsBodyHtml = false;
-            mm.From = new MailAddress("comunidadshieldship@gmail.com");
-            SmtpClient smtp = new SmtpClient("smtp.gmail.com");
-            smtp.Port = 587;
-            smtp.UseDefaultCredentials = true;
-            smtp.EnableSsl = true;
-            smtp.Credentials = new System.Net.NetworkCredential("comunidadshieldship@gmail.com", "BASESdatos176");
-            await smtp.SendMailAsync(mm);
+            mailMessage.AlternateViews.Add(imgview);
+            mailMessage.Body = lr.ContentId;
+            mailMessage.IsBodyHtml = false;
+            mailMessage.From = new MailAddress("comunidadshieldship@gmail.com");
+            SmtpClient smtp = new SmtpClient("smtp.gmail.com")
+            {
+                Port = 587,
+                UseDefaultCredentials = true,
+                EnableSsl = true,
+                Credentials = new System.Net.NetworkCredential("comunidadshieldship@gmail.com", "BASESdatos176")
+            };
+            await smtp.SendMailAsync(mailMessage);
         }
 
         public async Task CorreoACoordinadores(string titulo, string estadoSolicitud, string nombreUsuario)
