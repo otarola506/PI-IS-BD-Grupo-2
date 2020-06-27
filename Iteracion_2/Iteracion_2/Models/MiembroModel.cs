@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Data;
+using System.Text;
 using System.Data.SqlClient;
 using Iteracion_2.Models;
 
@@ -88,27 +89,40 @@ namespace Iteracion_2.Models
             return miembrosComunidad;
         }
 
+        public bool ValidarUsuario(string NombreUsuario)
+        {
+            bool retorno = false;
+            var regexInt = new System.Text.RegularExpressions.Regex(@"^[a-zA-Z0-9]*$");
+            if (regexInt.IsMatch(NombreUsuario)) {
+                retorno = true;
+            }
+            return retorno;
+
+        }
 
         public bool IngresarCuenta(string NombreUsuario)
         {
             // En este momento solo nos importaba validar el nombre de usuario, en un futuro deberemos de validar la contraseña
-            Connection();
-            string verificacion = "";
             bool Existe = false;
-            SqlCommand cmd = new SqlCommand("VerificarNombreUsuario", con);
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.Add("@nombreUsuario", SqlDbType.VarChar).Value = NombreUsuario;
-            SqlDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())
+            if (ValidarUsuario(NombreUsuario))
             {
-                verificacion = reader[0].ToString();
-            }
+                Connection();
+                string verificacion = "";
+                SqlCommand cmd = new SqlCommand("VerificarNombreUsuario", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add("@nombreUsuario", SqlDbType.VarChar).Value = NombreUsuario;
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    verificacion = reader[0].ToString();
+                }
 
-            if (verificacion.Equals("1"))
-            {
-                Existe = true;
+                if (verificacion.Equals("1"))
+                {
+                    Existe = true;
+                }
+                con.Close();
             }
-            con.Close();
             return Existe;
         }
 
