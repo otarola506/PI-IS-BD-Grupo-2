@@ -18,7 +18,7 @@ CREATE TABLE Miembro(
 CREATE TABLE Articulo(
 	artIdPK INTEGER NOT NULL PRIMARY KEY IDENTITY (1,1),
 	titulo VARCHAR(max) NOT NULL,
-	resumen VARBINARY(max) NOT NULL,
+	resumen VARCHAR(max) NOT NULL,
 	contenido VARBINARY(max) NOT NULL,
 	puntuacionInicial INTEGER,
 	visitas INTEGER,
