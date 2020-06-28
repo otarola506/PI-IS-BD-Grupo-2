@@ -62,11 +62,11 @@
                     Revisado por: <a href="~/Perfil/Perfil?UsuarioURL=@Model.ArticulosRevisados[index][7]">@Model.ArticulosRevisados[index][6]</a>
                     <br />
                     <br />
-                    <a href="#modalRevisionFinal" type="button" class="read-more openModal" data-toggle="modal" data-target="#modalRevisionFinal" data-articulo="@artIDPk" data-titulo="@titulo" data-estado="cambios" data-autoresString="@autoresString">Aceptar con cambios</a>
+                    <a href="#modalRevisionFinal" type="button" class="read-more openModal" data-toggle="modal" data-target="#modalRevisionFinal" data-articulo="@artIDPk" data-titulo="@titulo" data-estado="cambios" data-autores="@autoresString">Aceptar con cambios</a>
                     <br />
                     <br />
-                    <a href="#modalRevisionFinal" type="button" class="read-more openModal" data-toggle="modal" data-target="#modalRevisionFinal" data-articulo="@artIDPk" data-titulo="@titulo" data-estado="aceptado" data-autoresString="@autoresString">Aceptar</a>
-                    <a href="#modalRevisionFinal" type="button" class="read-more openModal" data-toggle="modal" data-target="#modalRevisionFinal" data-articulo="@artIDPk" data-titulo="@titulo" data-autoresString="@autoresString">Rechazar</a>
+                    <a href="#modalRevisionFinal" type="button" class="read-more openModal" data-toggle="modal" data-target="#modalRevisionFinal" data-articulo="@artIDPk" data-titulo="@titulo" data-estado="aceptado" data-autores="@autoresString">Aceptar</a>
+                    <a href="#modalRevisionFinal" type="button" class="read-more openModal" data-toggle="modal" data-target="#modalRevisionFinal" data-articulo="@artIDPk" data-titulo="@titulo" data-estado="rechazado" data-autores="@autoresString">Rechazar</a>
 
                     <div class="modal fade" id="modalRevisionFinal" tabindex="-1" role="dialog" aria-labelledby="modalRevisionFinalLabel" aria-hidden="true">
                         <div class="modal-dialog">
@@ -81,9 +81,9 @@
                                 <form asp-page-handler="send" method="post">
                                     <div class="modal-body">
                                         <input id="artId" type="hidden" name="artID" runat="server" />
-                                        <input id="titulo" name="titulo" runat="server" />
-                                        <input id="estado" name="estado" runat="server" />
-                                        <input id="autoresString" name="autoresString" runat="server" />
+                                        <input id="titulo" type="hidden" name="titulo" runat="server" />
+                                        <input id="estado" type="hidden" name="estado" runat="server" />
+                                        <input id="autoresString" type="hidden" name="autoresString" runat="server" />
                                     </div>
 
                                     <div class="modal-footer">

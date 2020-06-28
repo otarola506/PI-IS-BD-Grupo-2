@@ -33,10 +33,11 @@ $('#modalRevisionFinal').on('show.bs.modal', function (event) {
     var artId = button.data('articulo') // Extract info from data-* attributes
     var titulo = button.data('titulo') // Extract info from data-* attributes
     var estado = button.data('estado') // Extract info from data-* attributes
-    var autoresString = button.data('autoresString') // Extract info from data-* attributes
+    var autoresString = button.data('autores') // Extract info from data-* attributes
     // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
     // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
     var modal = $(this)
+
     modal.find('.modal-body #artId').val(artId)
     modal.find('.modal-body #titulo').val(titulo)
     modal.find('.modal-body #estado').val(estado)
