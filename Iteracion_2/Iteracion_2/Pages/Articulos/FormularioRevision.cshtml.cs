@@ -60,18 +60,18 @@ namespace Iteracion_2.Pages.Articulos
 
         }
 
+        
         public IActionResult OnPost(string artId)
         {
-
+            FormularioContro = new FormularioRevisionController();
             string UsuarioActual = HttpContext.Session.GetString(SessionKeyUsuario);
             string opinion = Request.Form["Opinion"].ToString();
             string contribucion = Request.Form["Contribucion"].ToString();
             string forma = Request.Form["Forma"].ToString();
             string observaciones = "" + Request.Form["comentarios"].ToString();
 
-            if (opinion.Equals("") || contribucion.Equals("") || forma.Equals(""))
+            if (!FormularioContro.ValidarEntradas(opinion, contribucion, forma))
             {
-
                 Message = "No ha seleccionado todas las calificaciones";
                 return RedirectToPage("FormularioRevision", new { artId });
             }
@@ -87,7 +87,7 @@ namespace Iteracion_2.Pages.Articulos
 
 
 
-            FormularioContro = new FormularioRevisionController();
+           
             bool validado = FormularioContro.ProcesarFormulario(opinionInt, contribucionInt, formaInt, observaciones, UsuarioActual, ArticuloID);
             if (validado)
             {
