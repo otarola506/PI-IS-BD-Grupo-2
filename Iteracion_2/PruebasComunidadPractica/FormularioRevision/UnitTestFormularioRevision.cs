@@ -3,7 +3,7 @@ using Iteracion_2.Controllers;
 using Iteracion_2.Models;
 
 
-namespace PruebasComunidadPractica
+namespace PruebasComunidadPractica.FormularioRevision
 {
     [TestClass]
     public class UnitTestFormularioRevision
@@ -19,8 +19,6 @@ namespace PruebasComunidadPractica
             Assert.IsTrue(resultado, "Entradas invalidas");
 
             
-          
-
         }
         [TestMethod]
         public void ValidarEntradasSinContribucion()

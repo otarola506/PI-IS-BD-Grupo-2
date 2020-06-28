@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace PruebasComunidadPractica
+namespace PruebasComunidadPractica.Ingresar
 {
     public class MiembroModelT
     {

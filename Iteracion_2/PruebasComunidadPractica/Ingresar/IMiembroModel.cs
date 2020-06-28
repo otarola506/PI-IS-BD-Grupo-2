@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace PruebasComunidadPractica
+namespace PruebasComunidadPractica.Ingresar
 {
     public interface IMiembroModel
     {
-        bool VerificarNombreUsuario(string nombreUsuario);
+        bool VerificarNombreUsuario(string NombreUsuario);
     }
 }

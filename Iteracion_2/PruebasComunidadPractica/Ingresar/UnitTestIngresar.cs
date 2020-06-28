@@ -3,7 +3,7 @@ using Iteracion_2.Models;
 using Iteracion_2.Controllers;
 using Moq;
 
-namespace PruebasComunidadPractica
+namespace PruebasComunidadPractica.Ingresar
 {
     [TestClass]
     public class UnitTestIngresar
@@ -27,7 +27,7 @@ namespace PruebasComunidadPractica
             Assert.IsFalse(resultado, "Caracteres aceptados");
         }
 
-        [TestMethod] // Esta es la prueba que usa el interface se creo una clase MiembroModelT
+        [TestMethod] // Esta es la prueba que usa el interface se creo una clase MiembroModelT en donde esta defino
         public void ValidarNombreUsuarioDB()
         {
 
