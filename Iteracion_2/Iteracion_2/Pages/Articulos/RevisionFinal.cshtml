@@ -31,17 +31,14 @@
             <li id="@index">
                 <div>
                     <h2>@Model.ArticulosRevisados[index][1]</h2>
-                    <br />
-                    Puntuación: @Model.ArticulosRevisados[index][4]
-                    <br />
-                    Comentarios:
-                    @Model.ArticulosRevisados[index][5]
+
                     <span>
                         <br />
                         por
                         @{
                             int artIDPk = Int32.Parse(Model.ArticulosRevisados[index][0]);
                             string titulo = Model.ArticulosRevisados[index][1];
+                            string autoresString = Model.ArticulosRevisados[index][2];
                             string[] autores = Model.ArticulosRevisados[index][2].Split(',');
                             string[] usuarios = Model.ArticulosRevisados[index][3].Split(',');
                             int puntuacion = Int32.Parse(Model.ArticulosRevisados[index][4]);
@@ -56,30 +53,37 @@
                     </span>
                     <br />
                     <br />
+                    <h4>Resumen de la revisión</h4>
+                    Puntuación: @Model.ArticulosRevisados[index][4]
+                    <br />
+                    Comentarios:
+                    @Model.ArticulosRevisados[index][5]
+                    <br />
                     Revisado por: <a href="~/Perfil/Perfil?UsuarioURL=@Model.ArticulosRevisados[index][7]">@Model.ArticulosRevisados[index][6]</a>
                     <br />
                     <br />
-                    <a href="#modalAceptarRechazar" type="button" class="read-more openModal" data-toggle="modal" data-target="#modalAceptarRechazar" data-articulo="@artIDPk" data-titulo="@titulo" data-estado="cambios">Aceptar con cambios</a>
+                    <a href="#modalRevisionFinal" type="button" class="read-more openModal" data-toggle="modal" data-target="#modalRevisionFinal" data-articulo="@artIDPk" data-titulo="@titulo" data-estado="cambios" data-autoresString="@autoresString">Aceptar con cambios</a>
                     <br />
                     <br />
-                    <a href="#modalAceptarRechazar" type="button" class="read-more openModal" data-toggle="modal" data-target="#modalAceptarRechazar" data-articulo="@artIDPk" data-titulo="@titulo" data-estado="aceptado">Aceptar</a>
-                    <a href="#modalAceptarRechazar" type="button" class="read-more openModal" data-toggle="modal" data-target="#modalAceptarRechazar" data-articulo="@artIDPk" data-titulo="@titulo" data-estado="rechazado">Rechazar</a>
+                    <a href="#modalRevisionFinal" type="button" class="read-more openModal" data-toggle="modal" data-target="#modalRevisionFinal" data-articulo="@artIDPk" data-titulo="@titulo" data-estado="aceptado" data-autoresString="@autoresString">Aceptar</a>
+                    <a href="#modalRevisionFinal" type="button" class="read-more openModal" data-toggle="modal" data-target="#modalRevisionFinal" data-articulo="@artIDPk" data-titulo="@titulo" data-autoresString="@autoresString">Rechazar</a>
 
-                    <div class="modal fade" id="modalAceptarRechazar" tabindex="-1" role="dialog" aria-labelledby="modalAceptarRechazarLabel" aria-hidden="true">
+                    <div class="modal fade" id="modalRevisionFinal" tabindex="-1" role="dialog" aria-labelledby="modalRevisionFinalLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
-                                    <h4 class="modal-title" id="modalAceptarRechazarLabel">¿Seguro que desea elegir esta opción como revisión a este artículo?</h4>
+                                    <h4 class="modal-title" id="modalRevisionFinalLabel">¿Seguro que desea elegir esta opción como revisión a este artículo?</h4>
 
                                 </div>
                                 <form asp-page-handler="send" method="post">
                                     <div class="modal-body">
                                         <input id="artId" type="hidden" name="artID" runat="server" />
-                                        <input id="titulo" type="hidden" name="titulo" runat="server" />
-                                        <input id="estado" type="hidden" name="estado" runat="server" />
+                                        <input id="titulo" name="titulo" runat="server" />
+                                        <input id="estado" name="estado" runat="server" />
+                                        <input id="autoresString" name="autoresString" runat="server" />
                                     </div>
 
                                     <div class="modal-footer">

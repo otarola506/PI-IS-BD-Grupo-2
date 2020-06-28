@@ -348,6 +348,19 @@ namespace Iteracion_2.Models
                 cmd.ExecuteNonQuery();
                 cmd.Parameters.Clear();
             }
+
+            if(estadoRevision == "cambios")
+            {
+                query = "UPDATE Nucleo_Revisa_Articulo SET estadoRevision = @estado WHERE artIdFK = @articuloId";
+                using (SqlCommand cmd = new SqlCommand(query, con))
+                {
+                    cmd.Parameters.AddWithValue("@articuloId", artID);
+                    cmd.Parameters.AddWithValue("@estado", estadoRevision);
+                    cmd.ExecuteNonQuery();
+                    cmd.Parameters.Clear();
+                }
+            }
+            con.Close();
         }
     }
 }
