@@ -36,7 +36,7 @@ namespace Iteracion_2.Models
         }
 
 
-        public Boolean VerificarNombreUsuario(string nombreUsuario)
+        public virtual Boolean VerificarNombreUsuario(string nombreUsuario)
         {
             Connection();
             string verificacion = "";
@@ -89,7 +89,7 @@ namespace Iteracion_2.Models
             return miembrosComunidad;
         }
 
-        public bool ValidarUsuario(string NombreUsuario)
+        public bool ValidarUsuarioInyeccion(string NombreUsuario)
         {
             bool retorno = false;
             var regexInt = new System.Text.RegularExpressions.Regex(@"^[a-zA-Z0-9]*$");
@@ -104,7 +104,7 @@ namespace Iteracion_2.Models
         {
             // En este momento solo nos importaba validar el nombre de usuario, en un futuro deberemos de validar la contraseña
             bool Existe = false;
-            if (ValidarUsuario(NombreUsuario))
+            if (ValidarUsuarioInyeccion(NombreUsuario))
             {
                 Connection();
                 string verificacion = "";
