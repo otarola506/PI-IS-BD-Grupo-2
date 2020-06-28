@@ -61,7 +61,26 @@ namespace Iteracion_2.Models
             Connection();
             if (valores.Length > 1)
             {
-                var query = "SELECT "+valores[0]+" ,COUNT(*) FROM Miembro  WHERE "+valores[1]+" = '"+valores[2]+"' GROUP BY ("+valores[0]+")";
+                string query = "";
+                if (tipo == "simple")
+                {
+                    query = "SELECT " + valores[0] + " ,COUNT(*) FROM Miembro  WHERE " + valores[1] + " = '" + valores[2] + "' GROUP BY (" + valores[0] + ")";
+
+                    
+                }else
+                {
+                    string condicion = "";
+                    if (valores[0] == "accesos")
+                    {
+                        condicion = "AVG(A.visitas) AS 'visitas por topico' ";
+
+                    } else if (valores[0] == "topico")
+                    {
+                        condicion = "Count(T.nombre) as' Cantidad por topico'";
+                    }
+                    query = "SELECT  M.tipo, " + condicion + " FROM Miembro M ,Articulo A, Miembro_Articulo MA, Art_Topico ArT, Topico t WHERE M.nombreUsuarioPK  = MA.nombreUsuarioFK AND MA.artIdFK = A.artIdPK AND A.artIdPK = ArT.artIdFK AND ArT.topicoIdFK = T.topicoIdPK AND T.nombre = '" + valores[1] + "'  GROUP BY M.tipo";
+                }
+
 
                 SqlCommand cmd = new SqlCommand(query, con)
                 {
@@ -77,6 +96,7 @@ namespace Iteracion_2.Models
                     }
                 }
 
+
             }
             else if (valores.Length == 1) //Busqueda por un unico valor
             {
@@ -89,10 +109,11 @@ namespace Iteracion_2.Models
                 }else
                 {
                     string condicion = "";
-                    if (valores[0] != "cantidad articulos")
+                    if (valores[0] == "cantidad articulos")
                         condicion = "COUNT(M.tipo) AS'Cantidad'";
-                    else
+                    else if (valores[0] == "puntaje promedio")
                         condicion = "AVG(A.puntuacionInicial) AS'Puntuacion Promedio'";
+
                     query = "SELECT M.tipo, " + condicion + " FROM Miembro M ,Articulo A, Miembro_Articulo MA WHERE M.nombreUsuarioPK  = MA.nombreUsuarioFK AND MA.artIdFK = A.artIdPK GROUP BY M.tipo";
 
                 }

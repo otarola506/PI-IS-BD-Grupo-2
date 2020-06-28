@@ -74,7 +74,7 @@
                 }).responseText;
 
                 var jsonDataAvanzado = $.ajax({
-                    url: "/Analitica/Reporte?handler=ChartData&entrada=cantidad&tipo=avanzada",
+                    url: "/Analitica/Reporte?handler=ChartData&entrada=cantidad articulos&tipo=avanzada",
                     dataType: "json",
                     async: false
                 }).responseText;
@@ -92,6 +92,9 @@
                     'title': 'Cantidad de artículos por tipo de miembro',
                     'width': 850,
                     'height': 650,
+                    
+                    colors: ['#2B69DE'],
+                    
                     chartArea: { left: 0, top: 100, width: "40%", height: "40%" }
                 };
 
@@ -198,6 +201,7 @@
                 } else {
                     $filtroAvanzado = "";
                     $listaAvanzada.empty();
+                    $listaAvanzada.push(valueSelected);
                     $filtroAvanzado = valueSelected
                 }
                 $("#datos2").val($filtroAvanzado)
@@ -233,7 +237,7 @@
                 var valueSelected = $('#rellenarInfo2 option:selected').html()
 
                 if (valueSelected != null) {
-                    $filtroAvanzado += valueSelected
+                    $filtroAvanzado += "," +valueSelected
                     $listaAvanzada.push(valueSelected)
                 }
 
@@ -254,7 +258,7 @@
                     };
 
                     if ($listaAvanzada.length === 1) {
-                        var chart2 = new google.visualization.PieChart(document.getElementById('chart2'));
+                        var chart2 = new google.visualization.BarChart(document.getElementById('chart2'));
                         chart2.draw(data, options);
                     } else {
                         var chart2 = new google.visualization.BarChart(document.getElementById('chart2'));
@@ -265,8 +269,8 @@
                     $("#realizarBusqueda2").prop("disabled", true);
                     $("#rellenarInfo2").empty();
                     $("#datos2").val("")
-                    $lista = []
-                    $filtros = ""
+                    $listaAvanzada = []
+                    $filtroAvanzado = ""
                     $("#configuracion2").val("default2")
                 } else {
                     drawChart();
