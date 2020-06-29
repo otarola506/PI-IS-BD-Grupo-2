@@ -24,42 +24,24 @@ namespace Iteracion_2.Pages.Analitica
         {
             ControladorDistribucion = new ReporteController();
             string reporte = ControladorDistribucion.ComunicarSeleccion(seleccion, tipo);
-            string jsonString;
-            jsonString = JsonSerializer.Serialize(reporte);
+            string jsonString = JsonSerializer.Serialize(reporte);
 
             return Content(reporte);
         }
 
         public ActionResult OnGetChartData(string entrada, string tipo)
         {
-            var json = "";
+            ControladorDistribucion = new ReporteController();
+            string FiltrosSeleccionados = entrada.TrimEnd(new Char[] { ',' });
+            string[] selecciones = FiltrosSeleccionados.Split(',');
 
-            if (entrada == null)//onget
-            {
-                ControladorDistribucion = new ReporteController();
+            var reporte = ControladorDistribucion.ComunicarDatosDistrubucion(selecciones, tipo);
 
-                var reporte = ControladorDistribucion.ComunicarDatosDistrubucion(entrada.Split(","), tipo);
-
-                json = reporte.ToGoogleDataTable()
-                        .NewColumn(new Column(ColumnType.String, "Tipo Miembro"), x => x.Entrada)
-                        .NewColumn(new Column(ColumnType.Number, "Cantidad"), x => x.Cantidad)
-                        .Build()
-                        .GetJson();
-            }
-            else {
-                string FiltrosSeleccionados = entrada.TrimEnd(new Char[] { ',' });
-                string[] selecciones = FiltrosSeleccionados.Split(',');
-
-                ControladorDistribucion = new ReporteController();
-
-                var reporte = ControladorDistribucion.ComunicarDatosDistrubucion(selecciones, tipo);
-
-                json = reporte.ToGoogleDataTable()
-                        .NewColumn(new Column(ColumnType.String,"Tipo"), x => x.Entrada)
-                        .NewColumn(new Column(ColumnType.Number,"Cantidad"), x => x.Cantidad)
-                        .Build()
-                        .GetJson();
-            }
+            var json = reporte.ToGoogleDataTable()
+                    .NewColumn(new Column(ColumnType.String, "Tipo"), x => x.Entrada)
+                    .NewColumn(new Column(ColumnType.Number, "Cantidad"), x => x.Cantidad)
+                    .Build()
+                    .GetJson();
 
             return Content(json);
         }
