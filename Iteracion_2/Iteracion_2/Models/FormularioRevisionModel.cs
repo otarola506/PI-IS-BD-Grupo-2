@@ -11,7 +11,17 @@ namespace Iteracion_2.Models
     {
         ConexionModel ConexionBD { get; set; }
 
+        public bool ValidarEntradas(string opinion, string contribucion, string forma)
+        {
+            bool validado = true;
+            if (opinion.Equals("") || contribucion.Equals("") || forma.Equals(""))
+            {
+                validado = false;
 
+            }
+            return validado;
+
+        }
         public bool ValidarObservaciones(string observaciones)
         {
             bool retorno = true;

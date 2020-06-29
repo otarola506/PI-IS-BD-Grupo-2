@@ -1,5 +1,4 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Iteracion_2.Controllers;
 using Iteracion_2.Models;
 
 
@@ -12,19 +11,20 @@ namespace PruebasComunidadPractica.FormularioRevision
         [TestMethod]
         public void ValidarTodasEntradasUsuario()
         {
-            FormularioRevisionController form;
-            form = new FormularioRevisionController();
+            FormularioRevisionModel form;
+            form = new FormularioRevisionModel();
             bool resultado = form.ValidarEntradas("2","2","2");
 
             Assert.IsTrue(resultado, "Entradas invalidas");
 
             
         }
+
         [TestMethod]
         public void ValidarEntradasSinContribucion()
         {
-            FormularioRevisionController form;
-            form = new FormularioRevisionController();
+            FormularioRevisionModel form;
+            form = new FormularioRevisionModel();
             bool resultado = form.ValidarEntradas("2", "", "2");
 
             Assert.IsFalse(resultado, "Entradas aceptadas");

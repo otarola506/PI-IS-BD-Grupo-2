@@ -10,16 +10,11 @@ namespace Iteracion_2.Controllers
     {
 
         FormularioRevisionModel FormularioMod { get; set; }
+        
         public bool ValidarEntradas(string opinion, string contribucion, string forma)
         {
-            bool validado = true;
-            if (opinion.Equals("") || contribucion.Equals("") || forma.Equals(""))
-            {
-                validado = false;
-
-            }
-            return validado;
-
+            FormularioMod = new FormularioRevisionModel();
+            return FormularioMod.ValidarEntradas(opinion, contribucion, forma);
         }
 
         public bool ProcesarFormulario(int opinion, int contribucion, int forma, string observaciones, string miembroID, string artID)
