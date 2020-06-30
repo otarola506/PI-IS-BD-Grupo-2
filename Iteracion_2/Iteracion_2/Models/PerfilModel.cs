@@ -21,19 +21,17 @@ namespace Iteracion_2.Models
 
         public List<String> RetornarDatosPerfil(string nombreUsuario)
         {
+
+
             List<String> informacionPersonal = new List<String>();
 
-            string query = "SELECT M.nombre,M.apellido, M.pesoMiembro, M.informacionLaboral, M.informacionBiografica, M.telefono, M.correo, M.merito, M.pais, M.habilidades, M.idiomas, M.hobbies FROM dbo.Miembro M WHERE M.nombreUsuarioPK = @nombreUsuario";
+            //string query = "SELECT M.nombre,M.apellido, M.pesoMiembro, M.informacionLaboral, M.informacionBiografica, M.telefono, M.correo, M.merito, M.pais, M.habilidades, M.idiomas, M.hobbies FROM dbo.Miembro M WHERE M.nombreUsuarioPK = @nombreUsuario";
 
             Connection();
 
-            SqlCommand command = new SqlCommand(query, con)
-            {
-                CommandType = CommandType.Text
-                
-            };
-
-            command.Parameters.AddWithValue("@nombreUsuario", nombreUsuario);
+            SqlCommand command = new SqlCommand("USP_RecuperarDatosPerfil", con);
+            command.CommandType = CommandType.StoredProcedure;
+            command.Parameters.Add("@nombreUsuario", SqlDbType.VarChar).Value = nombreUsuario;
 
             using (SqlDataReader reader = command.ExecuteReader())
             {
