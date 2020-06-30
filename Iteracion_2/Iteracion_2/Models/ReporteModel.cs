@@ -28,9 +28,9 @@ namespace Iteracion_2.Models
         {
             string query = "";
 
-            if (tipo == "1")
+            if (tipo == "simple")
                 query = "SELECT DISTINCT " + seleccion + " FROM Miembro";
-            else
+            else if ( tipo == "avanzado")
                 query = "SELECT nombre FROM Topico";
 
             string listaOpciones = "";
@@ -56,7 +56,8 @@ namespace Iteracion_2.Models
             {
                 query = RetornarSimple(valores);
             }
-            else {
+            else if (tipo == "avanzado")
+            {
                 query = RetornarAvanzado(valores);
             }
 
@@ -86,7 +87,7 @@ namespace Iteracion_2.Models
 
             if (valores.Length > 1)
             {
-                query = "SELECT " + valores[0] + " ,COUNT(*) FROM Miembro  WHERE " + valores[1] + " = '" + valores[2] + "' GROUP BY (" + valores[0] + ")";
+                query = "SELECT " + valores[0] + " ,COUNT(*) FROM Miembro  WHERE " + valores[1] + " LIKE '%" + valores[2] + "%' GROUP BY (" + valores[0] + ")";
             }
             else {
                 query = "SELECT " + valores[0] + ", COUNT(*)   FROM Miembro GROUP BY " + valores[0] + "";

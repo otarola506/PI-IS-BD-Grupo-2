@@ -74,7 +74,7 @@
                 }).responseText;
 
                 var jsonDataAvanzado = $.ajax({
-                    url: "/Analitica/Reporte?handler=ChartData&entrada=cantidad articulos&tipo=avanzada",
+                    url: "/Analitica/Reporte?handler=ChartData&entrada=cantidad articulos&tipo=avanzado",
                     dataType: "json",
                     async: false
                 }).responseText;
@@ -109,7 +109,8 @@
                 $("#realizarBusqueda").prop("disabled", false);
 
                 var valueSelected = this.value;
-                var opciones;
+                var opcionesTemp
+                var opciones = []
 
                 if ($lista.length < 2) {
                     $filtros += valueSelected + ","
@@ -119,13 +120,19 @@
                     if ($lista.length === 2) {
                         $('#rellenarInfo').show();
                         var jsonData = $.ajax({
-                            url: "/Analitica/Reporte?handler=Opciones&Seleccion=" + $lista[1]+"&tipo=1",
+                            url: "/Analitica/Reporte?handler=Opciones&Seleccion=" + $lista[1] + "&tipo=simple",
                             dataType: "string",
                             async: false
                         }).responseText;
 
                         jsonData = jsonData.substring(0, jsonData.length - 1)
-                        opciones = jsonData.split(',')
+                        opcionesTemp = jsonData.split(',')
+                        for (var i = 0; i < opcionesTemp.length; i++) {
+                            if (!(opciones.includes(opcionesTemp[i].normalize('NFD').replace(/[\u0300-\u036f]/g, "")))) {
+                                opciones.push(opcionesTemp[i].normalize('NFD').replace(/[\u0300-\u036f]/g, ""))
+                            }
+                        }
+
                         for (var i = 0; i < opciones.length; i++) {
                             var o = new Option(opciones[i], "value");
                             $(o).html(opciones[i]);
@@ -151,7 +158,7 @@
 
                 if ($filtros != "") {
                     var jsonData = $.ajax({
-                        url: "/Analitica/Reporte?handler=ChartData&entrada=" + $filtros+"&tipo=simple",
+                        url: "/Analitica/Reporte?handler=ChartData&entrada=" + $filtros + "&tipo=simple",
                         dataType: "json",
                         async: false
                     }).responseText;
@@ -167,7 +174,7 @@
                         var chart = new google.visualization.PieChart(document.getElementById('chart'));
                         chart.draw(data, options);
                     } else {
-                        var chart = new google.visualization.PieChart(document.getElementById('chart'));
+                        var chart = new google.visualization.BarChart(document.getElementById('chart'));
                         chart.draw(data, options);
                     }
 
@@ -194,7 +201,7 @@
                 var valueSelected = this.value;
                 $filtroAvanzado = valueSelected
                 if ($listaAvanzada.length < 2) {
-                    
+
                 } else {
                     $filtroAvanzado = "";
                     $listaAvanzada.empty();
@@ -206,7 +213,7 @@
 
                 if (valueSelected === "topico" || valueSelected === "accesos") {
                     var jsonData = $.ajax({
-                        url: "/Analitica/Reporte?handler=Opciones&Seleccion=" + valueSelected + "&tipo=2",
+                        url: "/Analitica/Reporte?handler=Opciones&Seleccion=" + valueSelected + "&tipo=avanzado",
                         dataType: "string",
                         async: false
                     }).responseText;
@@ -220,13 +227,13 @@
                     }
                     $('#rellenarInfo2').show();
                     console.log(opciones)
-                    
+
                 } else {
                     $("#rellenarInfo2").empty();
                     $('#rellenarInfo2').hide();
                     console.log("aun no")
                 }
-                
+
             });
 
             $('#realizarBusqueda2').click(function () {
@@ -234,7 +241,7 @@
                 var valueSelected = $('#rellenarInfo2 option:selected').html()
 
                 if (valueSelected != null) {
-                    $filtroAvanzado += "," +valueSelected
+                    $filtroAvanzado += "," + valueSelected
                     $listaAvanzada.push(valueSelected)
                 }
 
@@ -242,7 +249,7 @@
 
                 if ($filtroAvanzado != "") {
                     var jsonData = $.ajax({
-                        url: "/Analitica/Reporte?handler=ChartData&entrada=" + $filtroAvanzado+"&tipo=avanzada",
+                        url: "/Analitica/Reporte?handler=ChartData&entrada=" + $filtroAvanzado + "&tipo=avanzado",
                         dataType: "json",
                         async: false
                     }).responseText;
@@ -276,5 +283,3 @@
         </script>
     }
 </body>
-
-
