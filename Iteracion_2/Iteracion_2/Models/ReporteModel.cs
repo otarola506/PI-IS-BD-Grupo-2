@@ -16,6 +16,8 @@ namespace Iteracion_2.Models
     {
         ConexionModel ConexionBD { get; set; }
         private SqlConnection con;
+        private SqlCommand command;
+        private SqlDataReader reader;
 
         public void Connection()
         {
@@ -35,8 +37,8 @@ namespace Iteracion_2.Models
 
             string listaOpciones = "";
             Connection();
-            SqlCommand command = new SqlCommand(query, con);
-            SqlDataReader reader = command.ExecuteReader();
+            command = new SqlCommand(query, con);
+            reader = command.ExecuteReader();
             while (reader.Read())
             {
                 listaOpciones += reader[0].ToString() +",";
@@ -61,12 +63,12 @@ namespace Iteracion_2.Models
                 query = RetornarAvanzado(valores);
             }
 
-            SqlCommand cmd = new SqlCommand(query, con)
+            command = new SqlCommand(query, con)
             {
                 CommandType = CommandType.Text
             };
 
-            using (SqlDataReader reader = cmd.ExecuteReader())
+            using ( reader = command.ExecuteReader())
             {
                 while (reader.Read())
                 {
