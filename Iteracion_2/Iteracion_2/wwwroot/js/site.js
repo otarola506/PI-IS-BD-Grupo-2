@@ -55,9 +55,13 @@ $(document).ready(function () {
 
         $(this).closest("ul").remove();
 
+        if ($('.cantidad #todo ul').length < 3) {
+            $(document.getElementById('finalizar').disabled = true)
+            
+        }
         $listaAsignados.pop()
-
         console.log($fila)
+        console.log($listaAsignados)
     });
 });
 
