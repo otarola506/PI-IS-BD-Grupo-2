@@ -68,7 +68,7 @@ namespace Iteracion_2.Models
                     // Despues se guardan la nota y los comentarios con un estado de Revisado
                     ConexionBD = new ConexionModel();
                     SqlConnection con2 = ConexionBD.Connection();
-                    SqlCommand cmd = new SqlCommand("UPDATE Nucleo_Revisa_Articulo SET estadoRevision= 'revisado',puntuacion=  " + Puntuacion + ", comentarios = '" + observaciones + "' WHERE nombreUsuarioFK = '" + miembroID + "'AND artIdFK = '" + artID + "'", con2);
+                    SqlCommand cmd = new SqlCommand("UPDATE Nucleo_Revisa_Articulo SET estadoRevision= 'revisado',puntuacion=  " + Puntuacion + ", comentarios = '" + observaciones + "', opinion = "+opinion+",forma = "+forma+", contribucion ="+contribucion+"   WHERE nombreUsuarioFK = '" + miembroID + "'AND artIdFK = '" + artID + "'", con2);
                     cmd.ExecuteNonQuery();
                     con2.Close();
                 } else
@@ -76,7 +76,7 @@ namespace Iteracion_2.Models
                     // Despues se guardan la nota y los comentarios con un estado de Revisado
                     ConexionBD = new ConexionModel();
                     SqlConnection con2 = ConexionBD.Connection();
-                    SqlCommand cmd = new SqlCommand("INSERT INTO  Nucleo_Revisa_Articulo VALUES ('" + miembroID + "','" + artID + "', 'revisado'," + Puntuacion + ", '" + observaciones + "'  )", con2);
+                    SqlCommand cmd = new SqlCommand("INSERT INTO  Nucleo_Revisa_Articulo VALUES ('" + miembroID + "','" + artID + "', 'revisado'," + Puntuacion + ", '" + observaciones + "', "+opinion+", "+contribucion+","+forma+"  )", con2);
                     cmd.ExecuteNonQuery();
                     cmd = new SqlCommand("UPDATE Articulo SET estado = 'revision' WHERE artIdPK =" + artID, con2);
                     cmd.ExecuteNonQuery();
