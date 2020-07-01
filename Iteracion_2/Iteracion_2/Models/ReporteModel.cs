@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Iteracion_2.Models
@@ -68,12 +69,46 @@ namespace Iteracion_2.Models
                 CommandType = CommandType.Text
             };
 
+
+            List<string> resultadosTemp = new List<string>();
+            List<int> cantidadTemp = new List<int>();
             using ( reader = command.ExecuteReader())
             {
                 while (reader.Read())
                 {
-                    var reporte = new ReporteConfigurable { Entrada = reader[0].ToString(), Cantidad = reader[1].ToString() };
-                    Retorno.Add(reporte);
+                    if (tipo == "simple")
+                    {
+                        string dato = Regex.Replace(reader[0].ToString(), @"\s+", "");
+                        string[] datosUsuario = dato.Split(",");
+                        for (int i = 0; i < datosUsuario.Length; i++)
+                        {
+                            if (!(resultadosTemp.Contains(datosUsuario[i])))
+                            {
+                                resultadosTemp.Add(datosUsuario[i]); // Metemos el nuevo valor 
+                                cantidadTemp.Add(1); // comezamos la cuenta
+                            }
+                            else if (resultadosTemp.Contains(datosUsuario[i]))
+                            {
+                                int index = resultadosTemp.FindIndex(x => x.Contains(datosUsuario[i])); // revisar 
+                                                                                                        //Si encontro el valor entonces aumentamos la cantidad
+                                cantidadTemp[index]++;
+
+                            }
+                        }
+                    } else if (tipo == "avanzado") {
+                        var reporte = new ReporteConfigurable { Entrada = reader[0].ToString(), Cantidad = reader[1].ToString() };
+                        Retorno.Add(reporte);
+                    }
+
+                }
+
+                if (tipo == "simple")
+                {
+                    for (int i = 0; i < resultadosTemp.Count; i++)
+                    {
+                        var reporte = new ReporteConfigurable { Entrada = resultadosTemp[i].ToString(), Cantidad = cantidadTemp[i].ToString() };
+                        Retorno.Add(reporte);
+                    }
                 }
             }
 

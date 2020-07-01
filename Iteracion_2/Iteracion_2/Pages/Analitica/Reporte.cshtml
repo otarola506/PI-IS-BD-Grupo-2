@@ -174,10 +174,13 @@
                         chartArea: { left: 0, top: 100, width: "40%", height: "40%" }
                     };
 
+                    var datosGraficar 
+
                     if ($lista.length === 1) {
                         var chart = new google.visualization.PieChart(document.getElementById('chart'));
                         chart.draw(data, options);
                     } else {
+
                         var chart = new google.visualization.BarChart(document.getElementById('chart'));
                         chart.draw(data, options);
                     }
