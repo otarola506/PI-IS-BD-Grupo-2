@@ -126,6 +126,17 @@ namespace Iteracion_2.Models
             await EnviarCorreos(estado, titulo, CorreosAutores);
         }
 
+        public async Task EnviarNotificacionRevisionCambios(string titulo, string estado, string[] usuarios, string observaciones)
+        {
+            List<List<string>> CorreosAutores = new List<List<string>>();
+            for (int index = 0; index < usuarios.Length; index++)
+            {
+                CorreosAutores.Add(RecuperarCorreos(4, usuarios[index])[0]);
+            }
+
+            await EnviarCorreosCambios(estado, titulo, CorreosAutores, observaciones);
+        }
+
         public async Task EnviarSolicitudNucleo(string titulo)
         {
             List<List<String>> CorreosNucleo = RecuperarCorreos(1, null);
@@ -172,7 +183,30 @@ namespace Iteracion_2.Models
             await CorreoDefault(correos, asunto, mensaje);
         }
 
-        
+        private async Task EnviarCorreosCambios(string tipo, string titulo, List<List<string>> ListaCorreos, string observaciones)
+        {
+            string correos = "";
+
+            for (int index = 0; index < ListaCorreos.Count; index++)
+            {
+                correos += ListaCorreos[index][1] + ";";
+            }
+
+            correos = correos.TrimEnd(new Char[] { ';' });
+
+            string asunto = "Revisión del artículo '" + titulo + "'";
+            string mensaje = "";
+            if(observaciones != null)
+            {
+                mensaje = "Estimados miembros autores, se les notifica que su artículo '" + titulo + "' fue aceptado pero con la condición de que se realicen algunos cambios. Las observaciones realizadas por los revisores y que se deben tomar en cuenta para los cambios son las siguientes: " + observaciones;
+            }
+            else
+            {
+                mensaje = "Estimados miembros autores, se les notifica que su artículo '" + titulo + "' fue aceptado pero con la condición de que se realicen algunos cambios. Posteriormente se le notificarán los cambios que debe realizar.";
+            }
+            
+            await CorreoDefault(correos, asunto, mensaje);
+        }
 
         public async Task CorreoDefault(string correos, string asunto, string mensaje)
         {

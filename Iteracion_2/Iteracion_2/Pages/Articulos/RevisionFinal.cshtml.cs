@@ -73,6 +73,7 @@ namespace Iteracion_2.Pages.Articulos
             int id = Int32.Parse(Request.Form["artID"]);
             string titulo = Request.Form["titulo"];
             string estado = Request.Form["estado"];
+            string observaciones = Request.Form["comentarios"];
 
             string temp = Request.Form["autoresString"];
             string getListaAutores = temp.TrimEnd(new Char[] { ',' });
@@ -90,7 +91,7 @@ namespace Iteracion_2.Pages.Articulos
             else if (estado == "cambios")
             {
                 ArticuloController.ModificarEstadoArticulo(id, "cambios");
-                await EmailController.CorreoAutores(titulo, "cambios", autores);
+                await EmailController.CorreoCambiosAutores(titulo, "cambios", autores, observaciones);
                 TempData["resultadoSolicitud"] = "El artículo " + titulo + " fue aceptado con cambios exitosamente";
             }
             else
