@@ -278,7 +278,7 @@ namespace Iteracion_2.Models
         public List<List<string>> RetornarRevisados()
         {
             List<List<string>> ArticulosRevisados = new List<List<string>>();
-            string queryString = "SELECT DISTINCT A.artIdPK,A.titulo,A.resumen,M.nombre+' '+M.apellido AS [Nombre Autor],M.nombreUsuarioPK AS 'Username Autor',NR.puntuacion,NR.comentarios,M2.nombre+' '+M2.apellido AS 'Nombre Revisor',M2.nombreUsuarioPK AS 'Username Revisor' FROM Articulo A JOIN Miembro_Articulo MA ON A.artIdPK = MA.artIdFK JOIN Miembro M ON M.nombreUsuarioPK = MA.nombreUsuarioFK JOIN Nucleo_Revisa_Articulo NR ON A.artIdPK = NR.artIdFK JOIN Miembro M2 ON M2.nombreUsuarioPK = NR.nombreUsuarioFK WHERE NR.estadoRevision = 'revisado' ORDER BY A.artIdPK";
+            string queryString = "SELECT DISTINCT A.artIdPK,A.titulo,A.resumen,M.nombre+' '+M.apellido AS [Nombre Autor],M.nombreUsuarioPK AS 'Username Autor',NR.puntuacion,NR.comentarios,M2.nombre+' '+M2.apellido AS 'Nombre Revisor',M2.nombreUsuarioPK  FROM Articulo A JOIN Miembro_Articulo MA ON A.artIdPK = MA.artIdFK JOIN Miembro M ON M.nombreUsuarioPK = MA.nombreUsuarioFK JOIN Nucleo_Revisa_Articulo NR ON A.artIdPK = NR.artIdFK JOIN Miembro M2 ON M2.nombreUsuarioPK = NR.nombreUsuarioFK WHERE NR.estadoRevision = 'revisado' ORDER BY A.artIdPK";
 
             Connection();
 
@@ -295,15 +295,18 @@ namespace Iteracion_2.Models
             {
                 string idAnterior = "";
                 string idActual = dTable.Rows[index][0].ToString(); //ardIdPK actual
+                string userRAnterior = "";
+                string userRActual = dTable.Rows[index][8].ToString(); //userName actual
 
                 if (index > 0)
                 {
                     idAnterior = dTable.Rows[index - 1][0].ToString(); //ardIdPK de la iteración pasada
+                    userRAnterior = dTable.Rows[index - 1][8].ToString();
                 }
 
-                if (idActual != idAnterior)
+                if ((idActual != idAnterior) || (idActual == idAnterior && userRActual != userRAnterior) )
                 {
-                    DataRow[] datosDeArticulo = dTable.Select("artIdPK = " + idActual); // devuelve los autores con ese artIdPK
+                    DataRow[] datosDeArticulo = dTable.Select("artIdPK = " + idActual + " AND nombreUsuarioPK = '" + dTable.Rows[index][8].ToString() + "'"); // devuelve los autores con ese artIdPK
 
                     string autores = "";
                     string usuarios = "";
