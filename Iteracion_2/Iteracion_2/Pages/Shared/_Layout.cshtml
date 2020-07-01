@@ -51,9 +51,12 @@
                 @{
                     var miembroSession = new Byte[20];
                     var pesoSession = new Byte[20];
+                    var tipoSession = new Byte[20];
+                    
+                   
                     bool nameOK = Context.Session.TryGetValue("UsuarioActual", out miembroSession);
                     bool pesoOK = Context.Session.TryGetValue("PesoActual", out pesoSession);
-                    bool tipoOK = Context.Session.TryGetValue("TipoActual", out miembroSession);
+                    bool tipoOK = Context.Session.TryGetValue("TipoActual", out tipoSession);
                     string miembroActual = "";
                     string pesoActual = "";
                     string tipoActual = "";
@@ -61,7 +64,7 @@
                     {
                         miembroActual = System.Text.Encoding.UTF8.GetString(miembroSession);
                         pesoActual = System.Text.Encoding.UTF8.GetString(pesoSession);
-                        tipoActual = System.Text.Encoding.UTF8.GetString(miembroSession);
+                        tipoActual = System.Text.Encoding.UTF8.GetString(tipoSession);
                     }
                 }
 
