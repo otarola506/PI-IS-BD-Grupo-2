@@ -128,7 +128,13 @@
                         jsonData = jsonData.substring(0, jsonData.length - 1)
                         opcionesTemp = jsonData.split(',')
                         for (var i = 0; i < opcionesTemp.length; i++) {
-                            var str = opcionesTemp[i].normalize('NFD').replace(/[\u0300-\u036f]/g, "")
+                            var str = "";
+                            if (opcionesTemp[i] != "Español") {
+                                str = opcionesTemp[i].normalize('NFD').replace(/[\u0300-\u036f]/g, "")
+                            } else {
+                                str = opcionesTemp[i]
+                            }
+                            
 
                             str = str.replace(/\s/g, ''); 
                             if (!(opciones.includes(str))) {
