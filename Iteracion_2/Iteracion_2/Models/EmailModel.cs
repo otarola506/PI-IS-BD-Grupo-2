@@ -77,6 +77,9 @@ namespace Iteracion_2.Models
                 case 3:
                     query = "SELECT nombreUsuarioPK,correo FROM Miembro WHERE pesoMiembro = 5 AND tipo = 'coordinador'";
                     break;
+                case 4:
+                    query = "SELECT nombreUsuarioPK,correo FROM Miembro WHERE nombreUsuarioPK='" + usuario + "'";
+                    break;
                 default:
                     break;
 
@@ -117,7 +120,7 @@ namespace Iteracion_2.Models
             List<List<string>> CorreosAutores = new List<List<string>>();
             for (int index = 0; index < usuarios.Length; index++)
             {
-                CorreosAutores.Add(RecuperarCorreos(2, usuarios[index])[0]);
+                CorreosAutores.Add(RecuperarCorreos(4, usuarios[index])[0]);
             }
 
             await EnviarCorreos(estado, titulo, CorreosAutores);
