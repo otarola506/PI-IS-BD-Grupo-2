@@ -112,6 +112,17 @@ namespace Iteracion_2.Models
             await EnviarCorreos("asignacion", titulo, CorreosNucleo);
         }
 
+        public async Task EnviarNotificacionRevision(string titulo, string estado, string[] usuarios)
+        {
+            List<List<string>> CorreosAutores = new List<List<string>>();
+            for (int index = 0; index < usuarios.Length; index++)
+            {
+                CorreosAutores.Add(RecuperarCorreos(2, usuarios[index])[0]);
+            }
+
+            await EnviarCorreos(estado, titulo, CorreosAutores);
+        }
+
         public async Task EnviarSolicitudNucleo(string titulo)
         {
             List<List<String>> CorreosNucleo = RecuperarCorreos(1, null);
@@ -119,12 +130,12 @@ namespace Iteracion_2.Models
             await EnviarCorreos("solicitud", titulo, CorreosNucleo);
         }
 
-        private async Task EnviarCorreos(string tipo, string titulo, List<List<string>> CorreosNucleo) {
+        private async Task EnviarCorreos(string tipo, string titulo, List<List<string>> ListaCorreos) {
             string correos= "";
 
-            for (int index = 0; index < CorreosNucleo.Count; index++)
+            for (int index = 0; index < ListaCorreos.Count; index++)
             {
-                correos += CorreosNucleo[index][1]+";";
+                correos += ListaCorreos[index][1]+";";
             }
 
             correos = correos.TrimEnd(new Char[] { ';' });
@@ -140,6 +151,18 @@ namespace Iteracion_2.Models
                 case "solicitud":
                     asunto = "Colaboración en el artículo '" + titulo+"'";
                     mensaje = "Estimados miembros núcleo, se le solicita la colaboración en el proceso de revisión del artículo '" + titulo+ "'.";
+                    break;
+                case "aceptado":
+                    asunto = "Revisión del artículo '" + titulo + "'";
+                    mensaje = "Estimados miembros autores, se les notifica que su artículo '" + titulo + "' fue aceptado.";
+                    break;
+                case "rechazado":
+                    asunto = "Revisión del artículo '" + titulo + "'";
+                    mensaje = "Estimados miembros autores, se les notifica que su artículo '" + titulo + "' fue rechazado.";
+                    break;
+                case "cambios":
+                    asunto = "Revisión del artículo '" + titulo + "'";
+                    mensaje = "Estimados miembros autores, se les notifica que su artículo '" + titulo + "' fue aceptado pero con la condición de que se realicen algunos cambios.";
                     break;
             }
 
