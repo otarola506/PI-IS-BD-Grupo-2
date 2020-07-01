@@ -65,5 +65,12 @@ namespace Iteracion_2.Controllers
             Correo = new EmailModel();
             await Correo.CorreoACoordinadores(titulo, estado, nombreUsuario);
         }
+
+        public async Task CorreoAutores(string titulo, string estado, string[] usuarios)
+        {
+            Correo = new EmailModel();
+            await Correo.EnviarNotificacionRevision(titulo, estado, usuarios);
+        }
+
     }
 }

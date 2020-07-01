@@ -28,6 +28,22 @@ $('#modalAceptarRechazar').on('show.bs.modal', function (event) {
     modal.find('.modal-body #estado').val(estado)
 })
 
+$('#modalRevisionFinal').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget) // Button that triggered the modal
+    var artId = button.data('articulo') // Extract info from data-* attributes
+    var titulo = button.data('titulo') // Extract info from data-* attributes
+    var estado = button.data('estado') // Extract info from data-* attributes
+    var autoresString = button.data('autores') // Extract info from data-* attributes
+    // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+    // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+    var modal = $(this)
+
+    modal.find('.modal-body #artId').val(artId)
+    modal.find('.modal-body #titulo').val(titulo)
+    modal.find('.modal-body #estado').val(estado)
+    modal.find('.modal-body #autoresString').val(autoresString)
+})
+
 $(document).ready(function () {
     $("body").on('click', '#todo a', function () {
         var $fila = $(this).closest("ul");   
