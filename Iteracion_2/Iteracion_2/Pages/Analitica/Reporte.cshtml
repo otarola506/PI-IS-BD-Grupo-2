@@ -128,8 +128,12 @@
                         jsonData = jsonData.substring(0, jsonData.length - 1)
                         opcionesTemp = jsonData.split(',')
                         for (var i = 0; i < opcionesTemp.length; i++) {
-                            if (!(opciones.includes(opcionesTemp[i].normalize('NFD').replace(/[\u0300-\u036f]/g, "")))) {
-                                opciones.push(opcionesTemp[i].normalize('NFD').replace(/[\u0300-\u036f]/g, ""))
+                            var str = opcionesTemp[i].normalize('NFD').replace(/[\u0300-\u036f]/g, "")
+
+                            str = str.replace(/\s/g, ''); 
+                            if (!(opciones.includes(str))) {
+                                console.log(opcionesTemp[i])
+                                opciones.push(str)
                             }
                         }
 
