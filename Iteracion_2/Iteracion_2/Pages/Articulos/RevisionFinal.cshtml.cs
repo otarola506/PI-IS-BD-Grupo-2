@@ -73,7 +73,6 @@ namespace Iteracion_2.Pages.Articulos
             int id = Int32.Parse(Request.Form["artID"]);
             string titulo = Request.Form["titulo"];
             string estado = Request.Form["estado"];
-            //string[] autores = Request.Form["autores"];
 
             string temp = Request.Form["autoresString"];
             string getListaAutores = temp.TrimEnd(new Char[] { ',' });
@@ -81,24 +80,24 @@ namespace Iteracion_2.Pages.Articulos
 
             ArticuloController = new ArticuloController();
             EmailController = new EmailController();
-            TempData["resultadoSolicitud"] = "La decisión fue ejecutada exitosamente";
 
             if (estado == "aceptado")
             {
                 ArticuloController.ModificarEstadoArticulo(id, "aceptado");
-                //await EmailController.CorreoACoordinadores(titulo, "aceptado", UsuarioActual);
                 await EmailController.CorreoAutores(titulo, "aceptado", autores);
+                TempData["resultadoSolicitud"] = "El artículo " + titulo + " fue aceptado exitosamente";
             }
             else if (estado == "cambios")
             {
                 ArticuloController.ModificarEstadoArticulo(id, "cambios");
                 await EmailController.CorreoAutores(titulo, "cambios", autores);
+                TempData["resultadoSolicitud"] = "El artículo " + titulo + " fue aceptado con cambios exitosamente";
             }
             else
             {
                 ArticuloController.ModificarEstadoArticulo(id, "rechazado");
-                //await EmailController.CorreoACoordinadores(titulo, "rechazado", UsuarioActual);
                 await EmailController.CorreoAutores(titulo, "rechazado", autores);
+                TempData["resultadoSolicitud"] = "El artículo " + titulo + " fue rechazado exitosamente";
             }
 
             return RedirectToPage("/Articulos/RevisionFinal");

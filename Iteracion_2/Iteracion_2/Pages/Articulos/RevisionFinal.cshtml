@@ -38,7 +38,7 @@
                         @{
                             int artIDPk = Int32.Parse(Model.ArticulosRevisados[index][0]);
                             string titulo = Model.ArticulosRevisados[index][1];
-                            string autoresString = Model.ArticulosRevisados[index][2];
+                            string autoresString = Model.ArticulosRevisados[index][3];
                             string[] autores = Model.ArticulosRevisados[index][2].Split(',');
                             string[] usuarios = Model.ArticulosRevisados[index][3].Split(',');
                             int puntuacion = Int32.Parse(Model.ArticulosRevisados[index][4]);
