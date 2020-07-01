@@ -337,13 +337,14 @@ namespace Iteracion_2.Models
             return ArticulosRevisados;
         }
 
-        public void ModificarEstadoArticulo(int artID, string estadoRevision)
+        public void ModificarEstadoArticulo(int artID, string estadoRevision,int puntuacion)
         {
             Connection();
-            string query = "UPDATE Articulo SET estado = @estado WHERE artIdPK = @articuloId";
+            string query = "UPDATE Articulo SET estado = @estado, puntuacionInicial = @puntos WHERE artIdPK = @articuloId";
             using (SqlCommand cmd = new SqlCommand(query, con))
             {
                 cmd.Parameters.AddWithValue("@articuloId", artID);
+                cmd.Parameters.AddWithValue("@puntos", puntuacion);
                 cmd.Parameters.AddWithValue("@estado", estadoRevision);
                 cmd.ExecuteNonQuery();
                 cmd.Parameters.Clear();
