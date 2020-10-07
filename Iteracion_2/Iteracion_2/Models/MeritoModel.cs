@@ -15,11 +15,11 @@ namespace Iteracion_2.Models
     public class MeritoModel
     {
         private SqlConnection con;
+        private ConexionModel connectionString { get; set; }
         public void connection()
         {
-            string conString = @"Server=172.16.202.75;Database=BD_Grupo2;persist security info=True;MultipleActiveResultSets=True;User ID=Grupo2;Password=grupo2.";
-            con = new SqlConnection(conString);
-
+            connectionString = new ConexionModel();
+            con = connectionString.Connection();
         }
 
 
@@ -27,7 +27,7 @@ namespace Iteracion_2.Models
         //Parametro: El artID del articulo el cual se quiere revisar
         public string revisarEstadoArticulo(int artID)
         {
-            con.Open();
+            connection();
             string valor = "";
             SqlCommand cmd = new SqlCommand("RecuperarEstadoArticulo", con);
             cmd.CommandType = CommandType.StoredProcedure;
@@ -45,7 +45,7 @@ namespace Iteracion_2.Models
 
         public void modificarMeritoAutores(int artId, float puntuacion)
         {
-            con.Open();
+            connection();
             string miembroID = "";
             SqlCommand cmd2 = new SqlCommand("RecuperarAutores", con);
             cmd2.CommandType = CommandType.StoredProcedure;
@@ -159,7 +159,6 @@ namespace Iteracion_2.Models
             //Primero ocupo encontrar el correo del miembro
             connection();
             string correoDestinatario = "";
-            con.Open();
             SqlCommand cmd = new SqlCommand("ObtenerCorreo", con);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.Add("@NombreUsuario", SqlDbType.VarChar).Value = Usuario;
@@ -169,7 +168,7 @@ namespace Iteracion_2.Models
             {
                 correoDestinatario = reader[0].ToString();
             }
-
+            
             reader.Close();
             con.Close();
 
@@ -205,17 +204,13 @@ namespace Iteracion_2.Models
             connection();
 
             // Se resta el actual 
-            con.Open();
             SqlCommand cmd = new SqlCommand("DisminuirMeritoAutor", con);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.Add("@nombreUsuario", SqlDbType.VarChar).Value = NombreUsuario;
             cmd.Parameters.Add("@aumento", SqlDbType.Int).Value = pesoActual;
             cmd.ExecuteNonQuery();
 
-            con.Close();
-
             //Se suma el nuevo
-            con.Open();
             SqlCommand cmd1 = new SqlCommand("AumentarMeritoAutor", con);
             cmd1.CommandType = CommandType.StoredProcedure;
             cmd1.Parameters.Add("@nombreUsuario", SqlDbType.VarChar).Value = NombreUsuario;
@@ -229,7 +224,6 @@ namespace Iteracion_2.Models
         {
             // Este metodo se puede utilizar para subir de rango o para bajar de rango(Peso)
             connection();
-            con.Open();
             SqlCommand cmd = new SqlCommand("ModificarPeso", con);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.Add("@nombreUsuario", SqlDbType.VarChar).Value = NombreUsuario;
@@ -244,7 +238,6 @@ namespace Iteracion_2.Models
         {
             connection();
             int PesoMiembro = 0;
-            con.Open();
             SqlCommand cmd = new SqlCommand("RecuperarPesoMiembro", con);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.Add("@NombreUsuario", SqlDbType.VarChar).Value = NombreUsuario;

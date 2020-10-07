@@ -12,7 +12,7 @@ namespace Iteracion_2.Models
         public SqlConnection Connection()
         {
             SqlConnection con;
-            string conString = @"Server=172.16.202.75;Database=BD_Grupo2;persist security info=True;MultipleActiveResultSets=True;User ID=Grupo2;Password=grupo2.";
+            string conString = @"Data Source=IVANJ;Initial Catalog=BD_Calidad;Integrated Security=True";
             con = new SqlConnection(conString);
             con.Open();
             return con;
